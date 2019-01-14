@@ -1,4 +1,10 @@
-#type Example @entity {
-#    id: ID!
-#    example: Bytes!
-#}
+type Factory @entity {
+    id: ID! # Factory Address
+    tokenCount: Int!
+}
+
+type Exchange @entity {
+    id: ID! # Exchange address
+    tokenAddress: Bytes!
+    tokenName: Bytes!
+}
