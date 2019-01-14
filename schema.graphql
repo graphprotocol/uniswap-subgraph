@@ -6,5 +6,5 @@ type Factory @entity {
 type Exchange @entity {
     id: ID! # Exchange address
     tokenAddress: Bytes!
-    tokenName: Bytes!
+    tokenSymbol: String!
 }

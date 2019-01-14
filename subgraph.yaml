@@ -23,3 +23,23 @@ dataSources:
       eventHandlers:
         - event: NewExchange(address,address) # token, exchange in that order
           handler: handleNewExchange
+  - kind: ethereum/contract
+    name: ERC20Detailed
+    network: mainnet
+    source:
+      address: '0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359' # fake storing DAI
+      abi: ERC20Detailed
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.1
+      language: wasm/assemblyscript
+      file: ./src/mappings/factory.ts
+      entities:
+        - Factory
+      abis:
+        - name: ERC20Detailed
+          file: ./abis/erc20detailed.json
+      eventHandlers:
+        - event: Transfer(address,address,uint256)
+          handler: handleFakeTransfe # i.e. this is not used
+
