@@ -13,6 +13,7 @@ import {
   TrackedExchange,
   User,
   UserExchangeTokenBalance,
+  Transaction
 } from '../types/schema'
 
 
@@ -23,6 +24,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
   trackedExchange.totalEth = trackedExchange.totalEth.plus(event.params.eth_sold)
   trackedExchange.totalToken = trackedExchange.totalToken.minus(event.params.tokens_bought)
+  trackedExchange.rate = trackedExchange.totalToken.div(trackedExchange.totalEth) // TODO: weird that div() rounds up to a full number for BAT at 1019. need to check out
   trackedExchange.tokenAddress = event.address
 
   let userID = event.params.buyer.toHex()
@@ -33,6 +35,8 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
   user.save()
   let userUniTokenID = trackedExchange.tokenTicker.concat('-').concat(event.params.buyer.toHex())
+  let fee = event.params.eth_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%
+
 
   let userExchangeTokenBalance = UserExchangeTokenBalance.load(userUniTokenID)
   if (userExchangeTokenBalance == null) {
@@ -42,6 +46,8 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     userExchangeTokenBalance.uniTokensOwned = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.buyer
     userExchangeTokenBalance.tokenAddress = event.address
+    userExchangeTokenBalance.totalEthFees = BigInt.fromI32(0)
+    userExchangeTokenBalance.totalTokenFees = BigInt.fromI32(0)
     trackedExchange.totalUsers = trackedExchange.totalUsers + 1
   }
 
@@ -49,8 +55,18 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
   userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.plus(event.params.eth_sold)
   userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.minus(event.params.tokens_bought)
+  userExchangeTokenBalance.totalEthFees = userExchangeTokenBalance.totalEthFees.plus(fee)
 
   userExchangeTokenBalance.save()
+
+  let transaction = new Transaction(event.transaction.hash.toHex())
+  transaction.eventType = "Token Purchase"
+  transaction.block = event.block.number
+  transaction.userAddress = event.params.buyer
+  transaction.ethMoved = event.params.eth_sold
+  transaction.tokenMoved = event.params.tokens_bought
+  transaction.providerFee = event.params.eth_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%
+  transaction.save()
 }
 
 // It is conceivable that user does not exist yet here
@@ -60,6 +76,7 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   trackedExchange.totalEth = trackedExchange.totalEth.minus(event.params.eth_bought)
   trackedExchange.totalToken = trackedExchange.totalToken.plus(event.params.tokens_sold)
+  trackedExchange.rate = trackedExchange.totalToken.div(trackedExchange.totalEth)
   trackedExchange.tokenAddress = event.address
 
   let userID = event.params.buyer.toHex()
@@ -71,6 +88,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   user.save()
 
   let userUniTokenID = trackedExchange.tokenTicker.concat('-').concat(event.params.buyer.toHex())
+  let fee = event.params.tokens_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%
 
   let userExchangeTokenBalance = UserExchangeTokenBalance.load(userUniTokenID)
   if (userExchangeTokenBalance == null) {
@@ -80,6 +98,8 @@ export function handleEthPurchase(event: EthPurchase): void {
     userExchangeTokenBalance.uniTokensOwned = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.buyer
     userExchangeTokenBalance.tokenAddress = event.address
+    userExchangeTokenBalance.totalEthFees = BigInt.fromI32(0)
+    userExchangeTokenBalance.totalTokenFees = BigInt.fromI32(0)
     trackedExchange.totalUsers = trackedExchange.totalUsers + 1
   }
 
@@ -88,11 +108,19 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.minus(event.params.eth_bought)
   userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.plus(event.params.tokens_sold)
+  userExchangeTokenBalance.totalTokenFees = userExchangeTokenBalance.totalTokenFees.plus(fee)
 
   userExchangeTokenBalance.save()
-  //so orignally he deposited like 7400 BAT. so he woulda got some amount of ether
-  // but then he withdrew 9096 BAT, meaning he has a NEGATIVE BALANCE :)
-  // he originally deposited 1 ether, he got back 8.17 , and so he positively paid in 1.83 ETH
+
+  let transaction = new Transaction(event.transaction.hash.toHex())
+  transaction.eventType = "Eth Purchase"
+  transaction.block = event.block.number
+  transaction.userAddress = event.params.buyer
+  transaction.ethMoved = event.params.eth_bought
+  transaction.tokenMoved = event.params.tokens_sold
+  transaction.providerFee = fee
+  transaction.save()
+
 }
 
 // Will be handled First, so user , and its token balance may not exist
@@ -108,11 +136,13 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     trackedExchange.totalToken = BigInt.fromI32(0)
     trackedExchange.totalUniToken = BigInt.fromI32(0)
     trackedExchange.totalUsers = 0
+    trackedExchange.rate = BigInt.fromI32(0)
   }
 
   trackedExchange.totalEth = trackedExchange.totalEth.plus(event.params.eth_amount)
   trackedExchange.totalToken = trackedExchange.totalToken.plus(event.params.token_amount)
   trackedExchange.tokenAddress = event.address
+  trackedExchange.rate = trackedExchange.totalToken.div(trackedExchange.totalEth)
 
   // Because 'token' is not a public getter, we need to derive the name based on the event.address being emitted, so an // if else statement
   let contractAddress = event.address.toHex()
@@ -157,6 +187,8 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     userExchangeTokenBalance.uniTokensOwned = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.provider
     userExchangeTokenBalance.tokenAddress = event.address
+    userExchangeTokenBalance.totalEthFees = BigInt.fromI32(0)
+    userExchangeTokenBalance.totalTokenFees = BigInt.fromI32(0)
     trackedExchange.totalUsers = trackedExchange.totalUsers + 1
 
   }
@@ -167,6 +199,14 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.plus(event.params.token_amount)
 
   userExchangeTokenBalance.save()
+
+  let transaction = new Transaction(event.transaction.hash.toHex())
+  transaction.eventType = "Add Liquidity"
+  transaction.block = event.block.number
+  transaction.userAddress = event.params.provider
+  transaction.ethMoved = event.params.eth_amount
+  transaction.tokenMoved = event.params.token_amount
+  transaction.save()
 }
 
 // the exchange must exist if you are trying to remove liquidity. same with user and its uniTokenBalance
@@ -177,6 +217,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
 
   trackedExchange.totalEth = trackedExchange.totalEth.minus(event.params.eth_amount)
   trackedExchange.totalToken = trackedExchange.totalToken.minus(event.params.token_amount)
+  trackedExchange.rate = trackedExchange.totalToken.div(trackedExchange.totalEth)
   trackedExchange.tokenAddress = event.address
   trackedExchange.save()
 
@@ -189,6 +230,14 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.minus(event.params.token_amount)
 
   userExchangeTokenBalance.save()
+
+  let transaction = new Transaction(event.transaction.hash.toHex())
+  transaction.eventType = "Remove Liquidity"
+  transaction.block = event.block.number
+  transaction.userAddress = event.params.provider
+  transaction.ethMoved = event.params.eth_amount.times(BigInt.fromI32(-1))
+  transaction.tokenMoved = event.params.token_amount.times(BigInt.fromI32(-1))
+  transaction.save()
 }
 
 
@@ -218,6 +267,8 @@ export function handleTransfer(event: Transfer): void {
       userTo.ethsDeposited = BigInt.fromI32(0)
       userTo.tokensDeposited = BigInt.fromI32(0)
       userTo.uniTokensOwned = BigInt.fromI32(0)
+      userTo.totalTokenFees = BigInt.fromI32(0)
+      userTo.totalEthFees = BigInt.fromI32(0)
       userTo.userAddress = event.params._from
       userTo.tokenAddress = event.address
       trackedExchange.totalUsers = trackedExchange.totalUsers + 1

@@ -24,6 +24,7 @@ type TrackedExchange @entity {
     tokenTicker: String!
     totalUniToken: BigInt!
     totalUsers: Int!
+    rate: BigInt!
     tokenHolders: [UserExchangeTokenBalance!]! @derivedFrom(field: "userAddress")
 }
 
@@ -40,4 +41,16 @@ type UserExchangeTokenBalance @entity {
     uniTokensOwned: BigInt!
     userAddress: Bytes!         # used for @derivedFrom of User
     tokenAddress: Bytes!        # used for @derivedFrom of TrackedExchange
+    totalEthFees: BigInt!
+    totalTokenFees: BigInt!
+}
+
+type Transaction @entity {
+    id: ID!             # Transaction Hash
+    eventType: String!
+    block: BigInt!
+    userAddress: Bytes!
+    ethMoved: BigInt!   # where negative means you sold eth to buy tokens
+    tokenMoved: BigInt! # where negative means you sold tokens to buy eth
+    providerFee: BigInt # not !, because Add and Remove Liquidity don't have fee
 }
