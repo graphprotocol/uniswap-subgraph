@@ -21,8 +21,8 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   let exchangeID = event.address.toHex()
   let trackedExchange = TrackedExchange.load(exchangeID)
 
-  trackedExchange.totalEth = trackedExchange.totalEth.minus(event.params.eth_sold)
-  trackedExchange.totalToken = trackedExchange.totalToken.plus(event.params.tokens_bought)
+  trackedExchange.totalEth = trackedExchange.totalEth.plus(event.params.eth_sold)
+  trackedExchange.totalToken = trackedExchange.totalToken.minus(event.params.tokens_bought)
   trackedExchange.tokenAddress = event.address
 
   let userID = event.params.buyer.toHex()
@@ -47,8 +47,8 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
   trackedExchange.save()
 
-  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.minus(event.params.eth_sold)
-  userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.plus(event.params.tokens_bought)
+  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.plus(event.params.eth_sold)
+  userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.minus(event.params.tokens_bought)
 
   userExchangeTokenBalance.save()
 }
@@ -58,8 +58,8 @@ export function handleEthPurchase(event: EthPurchase): void {
   let exchangeID = event.address.toHex()
   let trackedExchange = TrackedExchange.load(exchangeID)
 
-  trackedExchange.totalEth = trackedExchange.totalEth.plus(event.params.eth_bought)
-  trackedExchange.totalToken = trackedExchange.totalToken.minus(event.params.tokens_sold)
+  trackedExchange.totalEth = trackedExchange.totalEth.minus(event.params.eth_bought)
+  trackedExchange.totalToken = trackedExchange.totalToken.plus(event.params.tokens_sold)
   trackedExchange.tokenAddress = event.address
 
   let userID = event.params.buyer.toHex()
@@ -86,10 +86,13 @@ export function handleEthPurchase(event: EthPurchase): void {
   trackedExchange.save()
 
 
-  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.plus(event.params.eth_bought)
-  userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.minus(event.params.tokens_sold)
+  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.minus(event.params.eth_bought)
+  userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.plus(event.params.tokens_sold)
 
   userExchangeTokenBalance.save()
+  //so orignally he deposited like 7400 BAT. so he woulda got some amount of ether
+  // but then he withdrew 9096 BAT, meaning he has a NEGATIVE BALANCE :)
+  // he originally deposited 1 ether, he got back 8.17 , and so he positively paid in 1.83 ETH
 }
 
 // Will be handled First, so user , and its token balance may not exist
@@ -166,7 +169,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   userExchangeTokenBalance.save()
 }
 
-// the exchange must exist if you are trying to remove liquidity. same with user and its uniToenBalance
+// the exchange must exist if you are trying to remove liquidity. same with user and its uniTokenBalance
 // def removeLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
 export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let exchangeID = event.address.toHex()
@@ -182,8 +185,8 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let userExchangeTokenBalance = UserExchangeTokenBalance.load(userUniTokenID)
 
 
-  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.plus(event.params.eth_amount)
-  userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.plus(event.params.token_amount)
+  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.minus(event.params.eth_amount)
+  userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.minus(event.params.token_amount)
 
   userExchangeTokenBalance.save()
 }
@@ -194,7 +197,6 @@ export function handleTransfer(event: Transfer): void {
   let trackedExchange = TrackedExchange.load(exchangeID)
   let userToID = trackedExchange.tokenTicker.concat('-').concat(event.params._to.toHex())
   let userFromID = trackedExchange.tokenTicker.concat('-').concat(event.params._from.toHex())
-
 
   if (event.params._from.toHex() == '0x0000000000000000000000000000000000000000') {
     trackedExchange.totalUniToken = trackedExchange.totalUniToken.plus(event.params._value)

@@ -35,8 +35,8 @@ type User @entity {
 # Left out allowance for now, because handleApprove never gets called
 type UserExchangeTokenBalance @entity {
     id: ID!                     # ID is concatenation of token and addr. i.e. DAI-0xkashkd34....
-    ethsDeposited: BigInt!
-    tokensDeposited: BigInt!
+    ethsDeposited: BigInt!      # where negative means eth was exchanged for tokens
+    tokensDeposited: BigInt!    # where negative means tokens were exchanged for eth
     uniTokensOwned: BigInt!
     userAddress: Bytes!         # used for @derivedFrom of User
     tokenAddress: Bytes!        # used for @derivedFrom of TrackedExchange
