@@ -1,3 +1,5 @@
+
+######## factory.ts Entities below ########
 type Factory @entity {
     id: ID! # Factory Address
     tokenCount: Int!
@@ -11,6 +13,8 @@ type Exchange @entity {
 #   tokenSymbol: String, # There is no good way to do this, since not all contracts follow erc20.
 }
 
+######## exchange.ts Entities below ########
+
 # These are the top 6 exchanges, which are hard coded to be tracked in the subgraph manifest
 type TrackedExchange @entity {
     id: ID!
@@ -20,16 +24,16 @@ type TrackedExchange @entity {
     tokenTicker: String!
     totalUniToken: BigInt!
     totalUsers: Int!
-    tokenHolders: [UserUniTokenBalance!]! @derivedFrom(field: "userAddress")
+    tokenHolders: [UserExchangeTokenBalance!]! @derivedFrom(field: "userAddress")
 }
 
 type User @entity {
     id: ID! # user eth adddress
-    uniTokens: [UserUniTokenBalance!]!  @derivedFrom(field: "userAddress")
+    uniTokens: [UserExchangeTokenBalance!]!  @derivedFrom(field: "userAddress")
 }
 
 # Left out allowance for now
-type UserUniTokenBalance @entity {
+type UserExchangeTokenBalance @entity {
     id: ID!                     # ID is concatenation of token and addr. i.e. DAI-0xkashkd34....
     ethsDeposited: BigInt!
     tokensDeposited: BigInt!

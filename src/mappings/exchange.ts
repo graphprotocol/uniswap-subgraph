@@ -1,40 +1,111 @@
-import {} from '@graphprotocol/graph-ts'
+import {BigInt} from '@graphprotocol/graph-ts'
 import {
-  Transfer,
   TokenPurchase,
   EthPurchase,
   AddLiquidity,
   RemoveLiquidity,
+  Transfer,
   Approval,
 } from '../types/Exchange-BAT/Exchange'
 
 
 import {
   TrackedExchange,
+  User,
+  UserExchangeTokenBalance,
 } from '../types/schema'
 
 
+export function handleTokenPurchase(event: TokenPurchase): void {
+  let exchangeID = event.address.toHex()
+  let trackedExchange = TrackedExchange.load(exchangeID)
 
-export function handleTransfer(event: Transfer): void {
-  // let id = event.params.exchange.toHex()
-  // let exchange = new TrackedExchange(id)
-//   exchange.tokenAddress = event.params.token
-//
-//   // Get the token ticker from calling into the contract,
-//   // (token must share ERC20 interface that supports the symbol as public getter)
-//   // let tokenContract = ERC20Detailed.bind(event.params.token)
-//   // exchange.tokenSymbol = tokenContract.symbol()
-//
-//   exchange.save()
-//
-//   let factory = Factory.load("1")
-//   if (factory == null){
-//     factory = new Factory("1")
-//     factory.tokenCount = 0
-//   }
-//   factory.tokenCount = factory.tokenCount + 1
-//
-//   factory.save()
+  if (trackedExchange == null){
+    trackedExchange = new TrackedExchange(exchangeID)
+    trackedExchange.totalEth = BigInt.fromI32(0)
+    trackedExchange.totalToken = BigInt.fromI32(0)
+    trackedExchange.totalEth = BigInt.fromI32(0)
+    trackedExchange.totalUniToken = BigInt.fromI32(0)
+    trackedExchange.totalUsers = 0
+  }
+
+  trackedExchange.totalEth = trackedExchange.totalEth.minus(event.params.eth_sold)
+  trackedExchange.totalToken = trackedExchange.totalToken.plus(event.params.tokens_bought)
+  trackedExchange.tokenAddress = event.address
+
+  // Because 'token' is not a public getter, we need to derive the name based on the event.address being emitted, so an // if else statement
+  let contractAddress = event.address.toHex()
+  let userUniTokenID: string
+  if (contractAddress == '0x2e642b8d59b45a1d8c5aef716a84ff44ea665914'){
+    trackedExchange.tokenTicker = "BAT"
+    userUniTokenID = trackedExchange.tokenTicker.concat('-').concat(contractAddress)
+  } else if (contractAddress == '0x2c4bd064b998838076fa341a83d007fc2fa50957'){
+    trackedExchange.tokenTicker = "MKR"
+    userUniTokenID = trackedExchange.tokenTicker.concat('-').concat(contractAddress)
+  } else if (contractAddress == '0xae76c84c9262cdb9abc0c2c8888e62db8e22a0bf'){
+    trackedExchange.tokenTicker = "ZRX"
+    userUniTokenID = trackedExchange.tokenTicker.concat('-').concat(contractAddress)
+  } else if (contractAddress == '0x09cabec1ead1c0ba254b09efb3ee13841712be14'){
+    trackedExchange.tokenTicker = "DAI"
+    userUniTokenID = trackedExchange.tokenTicker.concat('-').concat(contractAddress)
+  } else if (contractAddress == '0x4e395304655f0796bc3bc63709db72173b9ddf98'){
+    trackedExchange.tokenTicker = "SPANK"
+    userUniTokenID = trackedExchange.tokenTicker.concat('-').concat(contractAddress)
+  } else if (contractAddress == '0x077d52b047735976dfda76fef74d4d988ac25196'){
+    trackedExchange.tokenTicker = "ANT"
+    userUniTokenID = trackedExchange.tokenTicker.concat('-').concat(contractAddress)
+  } else {
+    trackedExchange.tokenTicker = "UNKNOWN"
+    userUniTokenID = trackedExchange.tokenTicker.concat('-').concat(contractAddress)
+  }
+
+  let userID = event.params.buyer.toHex()
+  let user = User.load(userID)
+  if (user == null){
+    user = new User(userID)
+    trackedExchange.totalUsers = trackedExchange.totalUsers + 1
+  }
+
+  user.save()
+  trackedExchange.save()
+
+  let userExchangeTokenBalance = UserExchangeTokenBalance.load(userUniTokenID)
+  if (userExchangeTokenBalance == null){
+    userExchangeTokenBalance = new UserExchangeTokenBalance(userUniTokenID)
+    userExchangeTokenBalance.ethsDeposited = BigInt.fromI32(0)
+    userExchangeTokenBalance.tokensDeposited = BigInt.fromI32(0)
+    userExchangeTokenBalance.uniTokensOwned = BigInt.fromI32(0)
+    userExchangeTokenBalance.userAddress = event.params.buyer
+    userExchangeTokenBalance.tokenAddress = event.address
+  }
+
+  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.minus(event.params.eth_sold)
+  userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.plus(event.params.tokens_bought)
+
+  userExchangeTokenBalance.save()
 }
 
+export function handleEthPurchase(event: EthPurchase): void {
+
+}
+
+// will be handled First, so user , and its token balance may not exist
+// def addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
+export function handleAddLiquidity(event: AddLiquidity): void {
+
+}
+
+// the exchange must exist if you are trying to remove liquidity. same with user and its uniToenBalance
+// def removeLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
+export function handleRemoveLiquidity(event: RemoveLiquidity): void {
+
+}
+
+
 export function handleTransfer(event: Transfer): void {
+
+}
+
+export function handleApprove(event: Approval): void {
+
+}
