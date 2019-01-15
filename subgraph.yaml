@@ -43,7 +43,7 @@ dataSources:
         - event: TokenPurchase(address,uint256,uint256)
           handler: handleTokenPurchase
         - event: EthPurchase(address,uint256,uint256)
-          handler: handleEthPurchase(address,uint256,uint256)
+          handler: handleEthPurchase
         - event: AddLiquidity(address,uint256,uint256)
           handler: handleAddLiquidity
         - event: RemoveLiquidity(address,uint256,uint256)
