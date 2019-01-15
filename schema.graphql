@@ -32,7 +32,7 @@ type User @entity {
     uniTokens: [UserExchangeTokenBalance!]!  @derivedFrom(field: "userAddress")
 }
 
-# Left out allowance for now
+# Left out allowance for now, because handleApprove never gets called
 type UserExchangeTokenBalance @entity {
     id: ID!                     # ID is concatenation of token and addr. i.e. DAI-0xkashkd34....
     ethsDeposited: BigInt!
