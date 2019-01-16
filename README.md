@@ -76,7 +76,7 @@ The query below shows all the information that is possible to query, but is limi
 
 ```
 {
-  factories {
+  factories(first: 5) {
     id
     tokenCount
     exchanges {
@@ -94,14 +94,14 @@ The query below shows all the information that is possible to query, but is limi
     totalUniToken
     totalUsers
     rate
-    tokenHolders {
-      id
-      ethsDeposited
-      tokensDeposited
-      uniTokensOwned
-      userAddress
-      tokenAddress
-    }
+    # tokenHolders {
+    #   id
+    #   ethsDeposited
+    #   tokensDeposited
+    #   uniTokensOwned
+    #   userAddress
+    #   exchangeAddress
+    # }
   }
   users(first: 10) {
     id
@@ -111,7 +111,7 @@ The query below shows all the information that is possible to query, but is limi
       tokensDeposited
       uniTokensOwned
       userAddress
-      tokenAddress
+      exchangeAddress
       totalEthFees
       totalTokenFees
     }
@@ -126,6 +126,7 @@ The query below shows all the information that is possible to query, but is limi
     providerFee
   }
 }
+
 
 ```
 The command above can be copy pasted into the Graphiql interface in your browser at `127.0.0.1:8000`.
