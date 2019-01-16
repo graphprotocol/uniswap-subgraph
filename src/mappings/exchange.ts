@@ -6,7 +6,7 @@ import {
   RemoveLiquidity,
   Transfer,
   Approval,
-} from '../types/Exchange-BAT/Exchange'
+} from '../types/Exchange-BAT/Exchange' // Although imported from BAT, these can be used for all exchanges
 
 
 import {
