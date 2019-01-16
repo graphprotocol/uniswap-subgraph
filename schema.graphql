@@ -25,7 +25,7 @@ type TrackedExchange @entity {
     totalUniToken: BigInt!
     totalUsers: Int!
     rate: BigInt!
-    tokenHolders: [UserExchangeTokenBalance!]! @derivedFrom(field: "userAddress")
+    tokenHolders: [UserExchangeTokenBalance!]! @derivedFrom(field: "exchangeAddress")
 }
 
 type User @entity {
@@ -40,7 +40,7 @@ type UserExchangeTokenBalance @entity {
     tokensDeposited: BigInt!    # where negative means tokens were exchanged for eth
     uniTokensOwned: BigInt!
     userAddress: Bytes!         # used for @derivedFrom of User
-    tokenAddress: Bytes!        # used for @derivedFrom of TrackedExchange
+    exchangeAddress: Bytes!        # used for @derivedFrom of TrackedExchange
     totalEthFees: BigInt!
     totalTokenFees: BigInt!
 }

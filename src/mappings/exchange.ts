@@ -24,7 +24,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
   trackedExchange.totalEth = trackedExchange.totalEth.plus(event.params.eth_sold)
   trackedExchange.totalToken = trackedExchange.totalToken.minus(event.params.tokens_bought)
-  trackedExchange.rate = trackedExchange.totalToken.div(trackedExchange.totalEth) // TODO: weird that div() rounds up to a full number for BAT at 1019. need to check out
+  trackedExchange.rate = trackedExchange.totalToken.div(trackedExchange.totalEth) // TODO: this returns 0 when we have a fractional rate. we need BigInt fraction functionality
   trackedExchange.tokenAddress = event.address
 
   let userID = event.params.buyer.toHex()
@@ -45,7 +45,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     userExchangeTokenBalance.tokensDeposited = BigInt.fromI32(0)
     userExchangeTokenBalance.uniTokensOwned = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.buyer
-    userExchangeTokenBalance.tokenAddress = event.address
+    userExchangeTokenBalance.exchangeAddress = event.address
     userExchangeTokenBalance.totalEthFees = BigInt.fromI32(0)
     userExchangeTokenBalance.totalTokenFees = BigInt.fromI32(0)
     trackedExchange.totalUsers = trackedExchange.totalUsers + 1
@@ -97,7 +97,7 @@ export function handleEthPurchase(event: EthPurchase): void {
     userExchangeTokenBalance.tokensDeposited = BigInt.fromI32(0)
     userExchangeTokenBalance.uniTokensOwned = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.buyer
-    userExchangeTokenBalance.tokenAddress = event.address
+    userExchangeTokenBalance.exchangeAddress = event.address
     userExchangeTokenBalance.totalEthFees = BigInt.fromI32(0)
     userExchangeTokenBalance.totalTokenFees = BigInt.fromI32(0)
     trackedExchange.totalUsers = trackedExchange.totalUsers + 1
@@ -186,7 +186,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     userExchangeTokenBalance.tokensDeposited = BigInt.fromI32(0)
     userExchangeTokenBalance.uniTokensOwned = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.provider
-    userExchangeTokenBalance.tokenAddress = event.address
+    userExchangeTokenBalance.exchangeAddress = event.address
     userExchangeTokenBalance.totalEthFees = BigInt.fromI32(0)
     userExchangeTokenBalance.totalTokenFees = BigInt.fromI32(0)
     trackedExchange.totalUsers = trackedExchange.totalUsers + 1
@@ -270,7 +270,7 @@ export function handleTransfer(event: Transfer): void {
       userTo.totalTokenFees = BigInt.fromI32(0)
       userTo.totalEthFees = BigInt.fromI32(0)
       userTo.userAddress = event.params._from
-      userTo.tokenAddress = event.address
+      userTo.exchangeAddress = event.address
       trackedExchange.totalUsers = trackedExchange.totalUsers + 1
       trackedExchange.save()
     }
