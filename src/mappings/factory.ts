@@ -4,7 +4,7 @@ import {
 } from '../types/Factory/Factory'
 
 import {
-  Factory,
+  Directory,
   Exchange,
 } from '../types/schema'
 
@@ -15,9 +15,9 @@ export function handleNewExchange(event: NewExchange): void {
   exchange.factoryID = '1'
   exchange.save()
 
-  let factory = Factory.load("1")
+  let factory = Directory.load("1")
   if (factory == null){
-    factory = new Factory("1")
+    factory = new Directory("1")
     factory.tokenCount = 0
   }
   factory.tokenCount = factory.tokenCount + 1

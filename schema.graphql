@@ -1,30 +1,51 @@
-
-######## factory.ts Entities below ########
-type Factory @entity {
+# Directory is created by sourcing each time the factory creates a uniswap contract
+type Directory @entity {
     id: ID! # Factory Address
     tokenCount: Int!
     exchanges: [Exchange!]! @derivedFrom(field: "factoryID")
 }
 
 type Exchange @entity {
-    id: ID!                 # Exchange address
+    # These Five represent /api/v1/directory
+    id: ID!                         # Exchange address
     tokenAddress: Bytes!
-    factoryID: String!      # used for @derivedFrom of Factory
-#   tokenSymbol: String, # There is no good way to do this, since not all contracts follow erc20.
-}
+    # There is no good way to get these, since not all contracts follow erc20.
+    tokenSymbol: String
+    tokenName: String
+    tokenDecimals: Int
 
-######## exchange.ts Entities below ########
+    # Below is data gathered from having the current Uniwap contracts tracked.
+    # They need to be hardcoded until we support dynamic contract adding
+    # The top 6 are hardcoded. See subgraph.yaml
 
-# These are the top 6 exchanges, which are hard coded to be tracked in the subgraph manifest
-type TrackedExchange @entity {
-    id: ID!
-    totalEth: BigInt!
-    totalToken: BigInt!
-    tokenAddress: Bytes!
-    tokenTicker: String!
+    # These, along with the top 5, represent api/v1/exchange
+    price: BigInt!                  # pretty sure this was RATE
+    fee: Int!                       # make sure you get percentage
+    version: Int!
+    ethLiquidity: BigInt!
+    ethDecimals: Int!
+    tokenLiquidity: BigInt!
+
+    # These represent fields for api/v1/ticker
+    startTime: BigInt!
+    endTime: BigInt
+    highPrice: BigInt
+    lowPrice: BigInt
+    weightedAvgPrice: BigInt
+    priceChange: BigInt # watch out for fraction
+    priceChangePercent: BigInt
+    lastTradePrice: BigInt
+    lastTradeEthQty: BigInt
+    lastTradeErc20Qty: BigInt
+    tradeVolume: BigInt!
+    tradeCount: BigInt!
+
+    # Extra Fields ontop of provided api
     totalUniToken: BigInt!
     totalUsers: Int!
-    rate: BigInt!
+
+    # Fields used to help derived relationship
+    factoryID: String!              # used for @derivedFrom of Factory
     tokenHolders: [UserExchangeTokenBalance!]! @derivedFrom(field: "exchangeAddress")
 }
 

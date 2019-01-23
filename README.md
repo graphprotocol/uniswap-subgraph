@@ -16,7 +16,7 @@ This subgraph can be used for Uniswap on the mainnet, and all testnets. In order
 testnet, the `subgraph.yaml` file will need to have the contract addresses changed to point to the 
 correct address for each respective network.
 
-The subgraph takes less than 10 minutes to sync. 
+The subgraph takes less than 15 minutes to sync. 
 
 ## Brief Description of The Graph Node Setup
 
