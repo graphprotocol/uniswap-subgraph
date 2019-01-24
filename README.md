@@ -63,7 +63,9 @@ We have provided a quick guide on how to start up the Uniswap-Subgraph graph nod
 
 ```
   
- 7. Now deploy the uniswap-subgraph to The Graph Node with `yarn deploy --verbosity debug`. You should see a lot of blocks being skipped in the `graph-node` terminal, and then it will start ingesting events from the moment the contracts were uploaded to the network. 
+ 7. Now create the subgraph locally on The Graph Node with `yarn create-subgraph`. On The Graph Hosted service, creating the subgraph is done in the web broswer. 
+
+ 8. Now deploy the dydx-Subgraph to The Graph Node with `yarn deploy --verbosity debug`. You should see a lot of blocks being skipped in the `graph-node` terminal, and then it will start ingesting events from the moment the contracts were uploaded to the network. 
 
 Now that you have subgraph is running you may open a [Graphiql](https://github.com/graphql/graphiql) browser at `127.0.0.1:8000` and get started with querying.
 
@@ -76,58 +78,40 @@ The query below shows all the information that is possible to query, but is limi
 
 ```
 {
-  factories(first: 5) {
+  exchange(id: "0x077d52b047735976dfda76fef74d4d988ac25196") {
     id
-    tokenCount
-    exchanges {
-      id
-      tokenAddress
-      factoryID
-    }
+    tokenSymbol
+    startTime
+    endTime
+    price
+    highPrice
+    lowPrice
+    weightedAvgPrice
+    priceChange
+    priceChangePercent
+    ethLiquidity
+    tokenLiquidity
+    lastTradePrice
+    lastTradeEthQty
+    lastTradeErc20Qty
+    tradeVolume
+    tradeCount
   }
-  trackedExchanges {
-    id
-    totalEth
-    totalToken
-    tokenAddress
-    tokenTicker
-    totalUniToken
-    totalUsers
-    rate
-    # tokenHolders {
-    #   id
-    #   ethsDeposited
-    #   tokensDeposited
-    #   uniTokensOwned
-    #   userAddress
-    #   exchangeAddress
-    # }
+  exchanges(where: {tokenSymbol: "DAI"}) {
+    price
+    tokenSymbol
   }
-  users(first: 10) {
+  transactions(where: {timeStamp_gt: 1544832000}) {
     id
-    uniTokens {
-      id
-      ethsDeposited
-      tokensDeposited
-      uniTokensOwned
-      userAddress
-      exchangeAddress
-      totalEthFees
-      totalTokenFees
-    }
-  }
-  transactions(first: 5) {
-    id
-    eventType
-    block
     userAddress
-    ethMoved
-    tokenMoved
-    providerFee
+    block
+    ethAmount
+    tokenAmount
+    fee
+    event
+    timeStamp
   }
 }
-
-
 ```
 The command above can be copy pasted into the Graphiql interface in your browser at `127.0.0.1:8000`.
 

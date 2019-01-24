@@ -29,8 +29,8 @@ type Exchange @entity {
     # These represent fields for api/v1/ticker
     startTime: BigInt!
     endTime: BigInt
-    highPrice: BigInt!
-    lowPrice: BigInt!
+    highPrice: BigInt                   # NOTE - high price and low price don't always correlate with data from coinmarketcap. someone can make a lopsided swap
+    lowPrice: BigInt
     weightedAvgPrice: BigInt
     priceChange: BigInt! # watch out for fraction
     priceChangePercent: BigInt!
@@ -42,37 +42,40 @@ type Exchange @entity {
 
     # Extra Fields ontop of provided api
     totalUniToken: BigInt!
-    totalUsers: Int!
 
     # Fields used to help derived relationship
     factoryID: String!              # used for @derivedFrom of Factory
-    tokenHolders: [UserExchangeTokenBalance!]! @derivedFrom(field: "exchangeAddress")
+    tokenHolders: [UserExchangeBalance!]! @derivedFrom(field: "exchangeAddress")
+    txs: [Transaction!]!  @derivedFrom(field: "exchangeAddress")
+
 }
 
 type User @entity {
     id: ID! # user eth adddress
-    uniTokens: [UserExchangeTokenBalance!]!  @derivedFrom(field: "userAddress")
+    uniTokens: [UserExchangeBalance!]!  @derivedFrom(field: "userAddress")
+    txs: [Transaction!]!  @derivedFrom(field: "userAddress")
 }
 
 # Left out allowance for now, because handleApprove never gets called
-type UserExchangeTokenBalance @entity {
+type UserExchangeBalance @entity {
     id: ID!                     # ID is concatenation of token and addr. i.e. DAI-0xkashkd34....
     ethsDeposited: BigInt!      # where negative means eth was exchanged for tokens
     tokensDeposited: BigInt!    # where negative means tokens were exchanged for eth
-    uniTokensOwned: BigInt!
+    uniTokens: BigInt!
     userAddress: Bytes!         # used for @derivedFrom of User
     exchangeAddress: Bytes!        # used for @derivedFrom of TrackedExchange
     totalEthFees: BigInt!
     totalTokenFees: BigInt!
 }
 
-# TODO - timestamp
 type Transaction @entity {
     id: ID!             # Transaction Hash
-    eventType: String!
+    event: String!
     block: BigInt!
+    timeStamp: Int!
+    exchangeAddress: Bytes!
     userAddress: Bytes!
-    ethMoved: BigInt!   # where negative means you sold eth to buy tokens
-    tokenMoved: BigInt! # where negative means you sold tokens to buy eth
-    providerFee: BigInt # not !, because Add and Remove Liquidity don't have fee
+    ethAmount: BigInt!   # where negative means you sold eth to buy tokens
+    tokenAmount: BigInt! # where negative means you sold tokens to buy eth
+    fee: BigInt # not !, because Add and Remove Liquidity don't have fee
 }

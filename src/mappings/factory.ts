@@ -20,13 +20,10 @@ export function handleNewExchange(event: NewExchange): void {
   exchange.tradeVolume = BigInt.fromI32(0)
   exchange.tradeCount = 0
   exchange.totalUniToken = BigInt.fromI32(0)
-  exchange.totalUsers = 0
-  exchange.highPrice = 0
-  exchange.lowPrice = 0
-  exchange.lastTradePrice = 0
-  exchange.priceChange = 0
-  exchange.priceChangePercent = 0
-  exchange.price = 0
+  exchange.lastTradePrice = BigInt.fromI32(0)
+  exchange.priceChange = BigInt.fromI32(0)
+  exchange.priceChangePercent = BigInt.fromI32(0)
+  exchange.price = BigInt.fromI32(0)
   exchange.lastTradeErc20Qty = BigInt.fromI32(0)
   exchange.lastTradeEthQty = BigInt.fromI32(0)
 
