@@ -1,13 +1,13 @@
 # Directory is created by sourcing each time the factory creates a uniswap contract
 type Directory @entity {
     id: ID! # Factory Address
-    tokenCount: Int!
+    exchangeCount: Int!
     exchanges: [Exchange!]! @derivedFrom(field: "factoryID")
 }
 
 type Exchange @entity {
     # These Five represent /api/v1/directory
-    id: ID!                         # Exchange address
+    id: ID!                         # Uniswap Exchange address
     tokenAddress: Bytes!
     # There is no good way to get these, since not all contracts follow erc20.
     tokenSymbol: String
@@ -19,8 +19,8 @@ type Exchange @entity {
     # The top 6 are hardcoded. See subgraph.yaml
 
     # These, along with the top 5, represent api/v1/exchange
-    price: BigInt!                  # pretty sure this was RATE
-    fee: Int!                       # make sure you get percentage
+    price: BigInt                      # price is the ratio of eth/token, i.e. NOT USD
+    fee: String!                       # storing as string until we get fractional BigInts
     version: Int!
     ethLiquidity: BigInt!
     ethDecimals: Int!
@@ -66,6 +66,7 @@ type UserExchangeTokenBalance @entity {
     totalTokenFees: BigInt!
 }
 
+# TODO - timestamp
 type Transaction @entity {
     id: ID!             # Transaction Hash
     eventType: String!

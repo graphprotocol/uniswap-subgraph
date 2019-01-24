@@ -6,8 +6,8 @@ import {
   RemoveLiquidity,
   Transfer,
   Approval,
+  Exchange as ExchangeContract
 } from '../types/Exchange-BAT/Exchange' // Although imported from BAT, these can be used for all exchanges
-
 
 import {
   User,
@@ -16,8 +16,8 @@ import {
   Exchange
 } from '../types/schema'
 
+// TODO - get rid of BigDiv math, deal without 18 decimal everywhere
 
-// It is conceivable that user does not exist yet here
 export function handleTokenPurchase(event: TokenPurchase): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
@@ -25,17 +25,45 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.ethLiquidity = exchange.ethLiquidity.plus(event.params.eth_sold)
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(event.params.tokens_bought)
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity) // TODO: this returns 0 when we have a fractional rate (i.e. MKR). we need BigInt fraction functionality
-  exchange.tokenAddress = event.address
 
+  // TODO - weightedAverage
+  // TODO - trade Volume
+
+  // Math Calculations below
+  // NOTE - BigInt comparison not possible, must convert to I32, and lower by 10^18. Can break if token doesn't have 18 decimals. But no other way right now
+  if (exchange.highPrice == null || changeToI32(exchange.highPrice as BigInt) > changeToI32(exchange.price as BigInt)) {
+    exchange.highPrice = exchange.price
+  }
+  if (exchange.lowPrice == null || changeToI32(exchange.lowPrice as BigInt) < changeToI32(exchange.price as BigInt)) {
+    exchange.lowPrice = exchange.price
+  }
+
+  if (exchange.lastTradePrice == null) {
+    exchange.lastTradePrice = exchange.price
+    exchange.lastTradeEthQty = event.params.eth_sold
+    exchange.lastTradeErc20Qty = event.params.tokens_bought
+    exchange.priceChange = BigInt.fromI32(0)
+    exchange.priceChangePercent = BigInt.fromI32(0)
+
+  } else {
+    let lastTradePrice = exchange.lastTradePrice as BigInt
+    exchange.priceChange = exchange.price.minus(lastTradePrice)
+    // exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(lastTradePrice)
+    exchange.lastTradePrice = exchange.price
+  }
+
+  exchange.tradeCount = exchange.tradeCount.plus(BigInt.fromI32(1))
+
+  // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
   let user = User.load(userID)
   if (user == null) {
     user = new User(userID)
   }
-
   user.save()
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.buyer.toHex())
-  let fee = event.params.eth_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%
+
+  let fee = event.params.eth_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%, for V1
 
 
   let userExchangeTokenBalance = UserExchangeTokenBalance.load(userUniTokenID)
@@ -77,8 +105,36 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.ethLiquidity = exchange.ethLiquidity.minus(event.params.eth_bought)
   exchange.tokenLiquidity = exchange.tokenLiquidity.plus(event.params.tokens_sold)
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
-  exchange.tokenAddress = event.address
 
+  // TODO - weightedAverage
+  // TODO - trade Volume
+
+  // Math Calculations below
+  // NOTE - BigInt comparison not possible, must convert to I32, and lower by 10^18. Can break if token doesn't have 18 decimals. But no other way right now
+  if (exchange.highPrice == null || changeToI32(exchange.highPrice as BigInt) > changeToI32(exchange.price as BigInt)) {
+    exchange.highPrice = exchange.price
+  }
+  if (exchange.lowPrice == null || changeToI32(exchange.lowPrice as BigInt) < changeToI32(exchange.price as BigInt)) {
+    exchange.lowPrice = exchange.price
+  }
+
+  if (exchange.lastTradePrice == null) {
+    exchange.lastTradePrice = exchange.price
+    exchange.lastTradeEthQty = event.params.eth_bought
+    exchange.lastTradeErc20Qty = event.params.tokens_sold
+    exchange.priceChange = BigInt.fromI32(0)
+    exchange.priceChangePercent = BigInt.fromI32(0)
+
+  } else {
+    let lastTradePrice = exchange.lastTradePrice as BigInt
+    exchange.priceChange = exchange.price.minus(lastTradePrice)
+    // exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(lastTradePrice)
+    exchange.lastTradePrice = exchange.price
+  }
+
+  exchange.tradeCount = exchange.tradeCount.plus(BigInt.fromI32(1))
+
+  // User handling below
   let userID = event.params.buyer.toHex()
   let user = User.load(userID)
   if (user == null) {
@@ -86,6 +142,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   }
 
   user.save()
+
 
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.buyer.toHex())
   let fee = event.params.tokens_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%
@@ -123,25 +180,14 @@ export function handleEthPurchase(event: EthPurchase): void {
 
 }
 
-// Will be handled First, so user , and its token balance may not exist
 // def addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
 // This event must create the exchange, as adding liquidity is the first thing to be done
 export function handleAddLiquidity(event: AddLiquidity): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
 
-  if (exchange == null) {
-    exchange = new Exchange(exchangeID)
-    exchange.ethLiquidity = BigInt.fromI32(0)
-    exchange.tokenLiquidity = BigInt.fromI32(0)
-    exchange.totalUniToken = BigInt.fromI32(0)
-    exchange.totalUsers = 0
-    exchange.price = BigInt.fromI32(0)
-  }
-
   exchange.ethLiquidity = exchange.ethLiquidity.plus(event.params.eth_amount)
   exchange.tokenLiquidity = exchange.tokenLiquidity.plus(event.params.token_amount)
-  exchange.tokenAddress = event.address
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
 
   // Because 'token' is not a public getter, we need to derive the name based on the event.address being emitted, so an // if else statement
@@ -150,21 +196,33 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let userUniTokenID: string
   if (contractAddress == '0x2e642b8d59b45a1d8c5aef716a84ff44ea665914') {
     exchange.tokenSymbol = "BAT"
+    exchange.tokenName = "Basic Attention Token"
+    exchange.tokenDecimals = 18
     userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
   } else if (contractAddress == '0x2c4bd064b998838076fa341a83d007fc2fa50957') {
     exchange.tokenSymbol = "MKR"
+    exchange.tokenName = "Maker"
+    exchange.tokenDecimals = 18
     userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
   } else if (contractAddress == '0xae76c84c9262cdb9abc0c2c8888e62db8e22a0bf') {
     exchange.tokenSymbol = "ZRX"
+    exchange.tokenName = "0x"
+    exchange.tokenDecimals = 18
     userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
   } else if (contractAddress == '0x09cabec1ead1c0ba254b09efb3ee13841712be14') {
     exchange.tokenSymbol = "DAI"
+    exchange.tokenName = "DAI Stablecoin"
+    exchange.tokenDecimals = 18
     userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
   } else if (contractAddress == '0x4e395304655f0796bc3bc63709db72173b9ddf98') {
     exchange.tokenSymbol = "SPANK"
+    exchange.tokenName = "Spank Chain"
+    exchange.tokenDecimals = 18
     userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
   } else if (contractAddress == '0x077d52b047735976dfda76fef74d4d988ac25196') {
     exchange.tokenSymbol = "ANT"
+    exchange.tokenName = "Aragon"
+    exchange.tokenDecimals = 18
     userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
   } else {
     exchange.tokenSymbol = "UNKNOWN"
@@ -189,7 +247,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     userExchangeTokenBalance.exchangeAddress = event.address
     userExchangeTokenBalance.totalEthFees = BigInt.fromI32(0)
     userExchangeTokenBalance.totalTokenFees = BigInt.fromI32(0)
-    exchange.totalUsers = exchange.totalUsers + 1
+    exchange.totalUsers = exchange.totalUsers + 1 // TODO - remove, transfers make this not true
 
   }
 
@@ -218,7 +276,6 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   exchange.ethLiquidity = exchange.ethLiquidity.minus(event.params.eth_amount)
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(event.params.token_amount)
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
-  exchange.tokenAddress = event.address
   exchange.save()
 
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.provider.toHex())
@@ -293,4 +350,11 @@ export function handleTransfer(event: Transfer): void {
 // NEVER EMITTED ON MAINNET YET (not much real use for it when you think about it)
 export function handleApprove(event: Approval): void {
 
+}
+
+
+function changeToI32(a: BigInt): i32 {
+  let decimals = 1000000000
+  let integer: i32 = a.div(BigInt.fromI32(decimals)).div(BigInt.fromI32(decimals)).toI32()
+  return integer
 }
