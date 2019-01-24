@@ -18,9 +18,18 @@ export function handleNewExchange(event: NewExchange): void {
   exchange.tokenLiquidity = BigInt.fromI32(0)
   exchange.startTime = event.block.timestamp
   exchange.tradeVolume = BigInt.fromI32(0)
-  exchange.tradeCount = BigInt.fromI32(0)
+  exchange.tradeCount = 0
   exchange.totalUniToken = BigInt.fromI32(0)
   exchange.totalUsers = 0
+  exchange.highPrice = 0
+  exchange.lowPrice = 0
+  exchange.lastTradePrice = 0
+  exchange.priceChange = 0
+  exchange.priceChangePercent = 0
+  exchange.price = 0
+  exchange.lastTradeErc20Qty = BigInt.fromI32(0)
+  exchange.lastTradeEthQty = BigInt.fromI32(0)
+
 
   // hardcoded, but technically could change with upgrades to uniswap protocol
   exchange.version = 1
