@@ -19,7 +19,7 @@ type Exchange @entity {
     # The top 6 are hardcoded. See subgraph.yaml
 
     # These, along with the top 5, represent api/v1/exchange
-    price: Int!                      # price is the ratio of eth/token, i.e. NOT USD
+    price: BigInt!                      # price is the ratio of eth/token, i.e. NOT USD
     fee: String!                       # storing as string until we get fractional BigInts
     version: Int!
     ethLiquidity: BigInt!
@@ -29,12 +29,12 @@ type Exchange @entity {
     # These represent fields for api/v1/ticker
     startTime: BigInt!
     endTime: BigInt
-    highPrice: Int!
-    lowPrice: Int!
-    weightedAvgPrice: Int
-    priceChange: Int! # watch out for fraction
-    priceChangePercent: Int!
-    lastTradePrice: Int!
+    highPrice: BigInt!
+    lowPrice: BigInt!
+    weightedAvgPrice: BigInt
+    priceChange: BigInt! # watch out for fraction
+    priceChangePercent: BigInt!
+    lastTradePrice: BigInt!
     lastTradeEthQty: BigInt!
     lastTradeErc20Qty: BigInt!
     tradeVolume: BigInt!
