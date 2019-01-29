@@ -48,10 +48,11 @@ dataSources:
           handler: handleAddLiquidity
         - event: RemoveLiquidity(address,uint256,uint256)
           handler: handleRemoveLiquidity
-#        - event: Transfer(address,address,uint256)
-#          handler: handleTransfer
+        - event: Transfer(address,address,uint256)
+          handler: handleTransfer
 #        - event: Approval(address,address,uint256)
 #          handler: handleApproval
+# TODO - add in maker when we have fractions for BigInt
 #  - kind: ethereum/contract
 #    name: Exchange-MKR
 #    network: mainnet
@@ -197,5 +198,3 @@ dataSources:
           handler: handleTransfer
 #        - event: Approval(address,address,uint256)
 #          handler: handleApproval
-
-# TODO - add in maker when we have fractions for BigInt

@@ -101,8 +101,10 @@ The query below shows all the information that is possible to query, but is limi
     price
     tokenSymbol
   }
-  transactions(where: {timeStamp_gt: 1544832000}, first: 20) {
+  transactions(where: {timeStamp_gt: 1544832000, timeStamp_lt: 1545696000, 
+    tokenSymbol: "DAI", userAddress:"0x85c5c26dc2af5546341fc1988b9d178148b4838b"}, first: 10) {
     id
+    exchangeAddress
     userAddress
     block
     ethAmount

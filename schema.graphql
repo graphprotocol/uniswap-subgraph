@@ -75,6 +75,7 @@ type Transaction @entity {
     block: BigInt!
     timeStamp: Int!
     exchangeAddress: Bytes!
+    tokenSymbol: String!
     userAddress: Bytes!
     ethAmount: BigInt!   # where negative means you sold eth to buy tokens
     tokenAmount: BigInt! # where negative means you sold tokens to buy eth

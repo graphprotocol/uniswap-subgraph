@@ -80,7 +80,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
   userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.plus(event.params.eth_sold)
   userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.minus(event.params.tokens_bought)
-  userExchangeTokenBalance.totalEthFees = userExchangeTokenBalance.totalEthFees.plus(fee)
+  userExchangeTokenBalance.totalEthFees = userExchangeTokenBalance.totalEthFees.plus(fee) // TODO
 
   userExchangeTokenBalance.save()
 
@@ -89,6 +89,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   transaction.block = event.block.number
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
+  transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.buyer
   transaction.ethAmount = event.params.eth_sold
   transaction.tokenAmount = event.params.tokens_bought
@@ -140,7 +141,7 @@ export function handleEthPurchase(event: EthPurchase): void {
 
 
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.buyer.toHex())
-  let fee = event.params.tokens_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%
+  let fee = event.params.tokens_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3% TODO ensure right
 
   let userExchangeTokenBalance = UserExchangeBalance.load(userUniTokenID)
   if (userExchangeTokenBalance == null) {
@@ -159,7 +160,7 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.minus(event.params.eth_bought)
   userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.plus(event.params.tokens_sold)
-  userExchangeTokenBalance.totalTokenFees = userExchangeTokenBalance.totalTokenFees.plus(fee)
+  userExchangeTokenBalance.totalTokenFees = userExchangeTokenBalance.totalTokenFees.plus(fee) // todo
 
   userExchangeTokenBalance.save()
 
@@ -171,7 +172,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   transaction.userAddress = event.params.buyer
   transaction.ethAmount = event.params.eth_bought
   transaction.tokenAmount = event.params.tokens_sold
-  transaction.fee = fee
+  transaction.fee = fee //todo
   transaction.save()
 
 }
