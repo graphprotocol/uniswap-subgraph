@@ -31,13 +31,14 @@ type Exchange @entity {
     endTime: BigInt
     highPrice: BigInt                   # NOTE - high price and low price don't always correlate with data from coinmarketcap. someone can make a lopsided swap
     lowPrice: BigInt
-    weightedAvgPrice: BigInt
+    weightedAvgPrice: BigInt!
     priceChange: BigInt! # watch out for fraction
     priceChangePercent: BigInt!
     lastTradePrice: BigInt!
     lastTradeEthQty: BigInt!
     lastTradeErc20Qty: BigInt!
     tradeVolume: BigInt!
+    totalValue: BigInt!                 # totalValue is accumulation of trade price X trade volume, so that we can calculation weightedAvgPrice each trade
     tradeCount: Int!
 
     # Extra Fields ontop of provided api

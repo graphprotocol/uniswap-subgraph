@@ -24,11 +24,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.lastTradePrice = exchange.price
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity) // TODO: this returns 0 when we have a fractional rate (i.e. MKR). we need BigInt fraction functionality
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice as BigInt)
-  // exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(lastTradePrice) // TODO - fix divide bt zero error
-
-
-  // TODO - weightedAverage
-  // TODO - trade Volume
+  // exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(lastTradePrice) // TODO - fix divide bt zero errorq
 
   if (exchange.highPrice == null){
     exchange.highPrice = exchange.price
@@ -49,6 +45,13 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.lastTradeErc20Qty = event.params.tokens_bought
   exchange.tradeCount = exchange.tradeCount + 1
 
+  // weightedAvgPrice and totalVolume calcs
+  // totalVolume / (totalValue) = weightedAvgPrice
+  // totalValue = total price * total units purchased
+  exchange.tradeVolume = exchange.tradeVolume.plus(event.params.tokens_bought)
+  exchange.totalValue = exchange.totalValue.plus(event.params.tokens_bought.times(exchange.price))
+  exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume)
+
   // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
   let user = User.load(userID)
@@ -58,7 +61,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   user.save()
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.buyer.toHex())
 
-  let fee = event.params.eth_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%, for V1
+  let fee = event.params.eth_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%, for V1 //TODO ensure this is right
 
 
   let userExchangeTokenBalance = UserExchangeBalance.load(userUniTokenID)
@@ -105,7 +108,6 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice)
   // exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(lastTradePrice)
 
-  // TODO - weightedAverage
   // TODO - trade Volume
 
   if (exchange.highPrice == null){

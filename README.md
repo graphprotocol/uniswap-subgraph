@@ -101,7 +101,7 @@ The query below shows all the information that is possible to query, but is limi
     price
     tokenSymbol
   }
-  transactions(where: {timeStamp_gt: 1544832000}) {
+  transactions(where: {timeStamp_gt: 1544832000}, first: 20) {
     id
     userAddress
     block
@@ -112,6 +112,7 @@ The query below shows all the information that is possible to query, but is limi
     timeStamp
   }
 }
+
 ```
 The command above can be copy pasted into the Graphiql interface in your browser at `127.0.0.1:8000`.
 

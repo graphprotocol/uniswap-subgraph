@@ -10,7 +10,7 @@
     "build-ipfs": "graph build --ipfs /ip4/127.0.0.1/tcp/5001 subgraph.yaml",
     "build-wast": "graph build -t wast subgraph.yaml",
     "deploy": "graph deploy uniswap-subgraph --ipfs http://localhost:5001/api/v0/ --node http://127.0.0.1:8020",
-    "deploy-hosted": "graph deploy --debug graphprotocol/uniswap --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token <INSERT_TOKEN>",
+    "deploy-hosted": "graph deploy --debug graphprotocol/uniswap --ipfs https://api.thegraph.com/ipfs/api/v0/ --node https://api.thegraph.com/deploy/ --access-token <INSERT_TOKEN>",
     "deploy-staging": "graph deploy --debug davekaj/uniswap --ipfs https://api.staging.thegraph.com/ipfs/ --node https://api.staging.thegraph.com/deploy/ --access-token <INSERT_TOKEN>"
   },
   "devDependencies": {

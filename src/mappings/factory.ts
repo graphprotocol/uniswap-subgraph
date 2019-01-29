@@ -26,6 +26,8 @@ export function handleNewExchange(event: NewExchange): void {
   exchange.price = BigInt.fromI32(0)
   exchange.lastTradeErc20Qty = BigInt.fromI32(0)
   exchange.lastTradeEthQty = BigInt.fromI32(0)
+  exchange.weightedAvgPrice = BigInt.fromI32(0)
+  exchange.totalValue = BigInt.fromI32(0)
 
 
   // hardcoded, but technically could change with upgrades to uniswap protocol
