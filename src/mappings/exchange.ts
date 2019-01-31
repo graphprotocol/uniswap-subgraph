@@ -24,12 +24,18 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.lastTradePrice = exchange.price
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity) // TODO: this returns 0 when we have a fractional rate (i.e. MKR). we need BigInt fraction functionality
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice as BigInt)
-  // exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(lastTradePrice) // TODO - fix divide bt zero errorq
 
-  if (exchange.highPrice == null){
+  // TODO - this still doesn't give the right answer with maker, it will be zero
+  if (bigInt_b_GT_a(BigInt.fromI32(1), exchange.lastTradePrice) == true) {
+    exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(exchange.lastTradePrice)
+  } else {
+    exchange.priceChangePercent = BigInt.fromI32(0)
+  }
+
+  if (exchange.highPrice == null) {
     exchange.highPrice = exchange.price
   }
-  if (exchange.lowPrice == null){
+  if (exchange.lowPrice == null) {
     exchange.lowPrice = exchange.price
   }
 
@@ -61,26 +67,33 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   user.save()
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.buyer.toHex())
 
-  let fee = event.params.eth_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%, for V1 //TODO ensure this is right
-
-
   let userExchangeTokenBalance = UserExchangeBalance.load(userUniTokenID)
   if (userExchangeTokenBalance == null) {
     userExchangeTokenBalance = new UserExchangeBalance(userUniTokenID)
-    userExchangeTokenBalance.ethsDeposited = BigInt.fromI32(0)
+    userExchangeTokenBalance.ethDeposited = BigInt.fromI32(0)
     userExchangeTokenBalance.tokensDeposited = BigInt.fromI32(0)
-    userExchangeTokenBalance.uniTokens = BigInt.fromI32(0)
+    userExchangeTokenBalance.uniTokensMinted = BigInt.fromI32(0)
+    userExchangeTokenBalance.uniTokensBurned = BigInt.fromI32(0)
+    userExchangeTokenBalance.ethWithdrawn = BigInt.fromI32(0)
+    userExchangeTokenBalance.tokensWithdrawn = BigInt.fromI32(0)
+    userExchangeTokenBalance.currentEthProfit = BigInt.fromI32(0)
+    userExchangeTokenBalance.currentTokenProfit = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.buyer
     userExchangeTokenBalance.exchangeAddress = event.address
-    userExchangeTokenBalance.totalEthFees = BigInt.fromI32(0)
-    userExchangeTokenBalance.totalTokenFees = BigInt.fromI32(0)
+    userExchangeTokenBalance.ethBought = BigInt.fromI32(0)
+    userExchangeTokenBalance.tokensBought = BigInt.fromI32(0)
+    userExchangeTokenBalance.totalEthFeesPaid = BigInt.fromI32(0)
+    userExchangeTokenBalance.totalTokenFeesPaid = BigInt.fromI32(0)
   }
 
   exchange.save()
 
-  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.plus(event.params.eth_sold)
-  userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.minus(event.params.tokens_bought)
-  userExchangeTokenBalance.totalEthFees = userExchangeTokenBalance.totalEthFees.plus(fee) // TODO
+  userExchangeTokenBalance.ethBought = userExchangeTokenBalance.ethBought.minus(event.params.eth_sold)
+  userExchangeTokenBalance.tokensBought = userExchangeTokenBalance.tokensBought.plus(event.params.tokens_bought)
+
+  // Fee in ETH
+  let fee = event.params.eth_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%, for V1
+  userExchangeTokenBalance.totalEthFeesPaid = userExchangeTokenBalance.totalEthFeesPaid.plus(fee)
 
   userExchangeTokenBalance.save()
 
@@ -93,7 +106,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   transaction.userAddress = event.params.buyer
   transaction.ethAmount = event.params.eth_sold
   transaction.tokenAmount = event.params.tokens_bought
-  transaction.fee = event.params.eth_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%
+  transaction.fee = fee
   transaction.save()
 }
 
@@ -107,14 +120,18 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.lastTradePrice = exchange.price
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice)
-  // exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(lastTradePrice)
 
-  // TODO - trade Volume
+  // TODO - this still doesn't give the right answer with maker, it will be zero
+  if (bigInt_b_GT_a(BigInt.fromI32(1), exchange.lastTradePrice) == true) {
+    exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(exchange.lastTradePrice)
+  } else {
+    exchange.priceChangePercent = BigInt.fromI32(0)
+  }
 
-  if (exchange.highPrice == null){
+  if (exchange.highPrice == null) {
     exchange.highPrice = exchange.price
   }
-  if (exchange.lowPrice == null){
+  if (exchange.lowPrice == null) {
     exchange.lowPrice = exchange.price
   }
 
@@ -139,28 +156,35 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   user.save()
 
-
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.buyer.toHex())
-  let fee = event.params.tokens_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3% TODO ensure right
 
   let userExchangeTokenBalance = UserExchangeBalance.load(userUniTokenID)
   if (userExchangeTokenBalance == null) {
     userExchangeTokenBalance = new UserExchangeBalance(userUniTokenID)
-    userExchangeTokenBalance.ethsDeposited = BigInt.fromI32(0)
+    userExchangeTokenBalance.ethDeposited = BigInt.fromI32(0)
     userExchangeTokenBalance.tokensDeposited = BigInt.fromI32(0)
-    userExchangeTokenBalance.uniTokens = BigInt.fromI32(0)
+    userExchangeTokenBalance.uniTokensMinted = BigInt.fromI32(0)
+    userExchangeTokenBalance.uniTokensBurned = BigInt.fromI32(0)
+    userExchangeTokenBalance.ethWithdrawn = BigInt.fromI32(0)
+    userExchangeTokenBalance.tokensWithdrawn = BigInt.fromI32(0)
+    userExchangeTokenBalance.currentEthProfit = BigInt.fromI32(0)
+    userExchangeTokenBalance.currentTokenProfit = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.buyer
     userExchangeTokenBalance.exchangeAddress = event.address
-    userExchangeTokenBalance.totalEthFees = BigInt.fromI32(0)
-    userExchangeTokenBalance.totalTokenFees = BigInt.fromI32(0)
+    userExchangeTokenBalance.ethBought = BigInt.fromI32(0)
+    userExchangeTokenBalance.tokensBought = BigInt.fromI32(0)
+    userExchangeTokenBalance.totalEthFeesPaid = BigInt.fromI32(0)
+    userExchangeTokenBalance.totalTokenFeesPaid = BigInt.fromI32(0)
   }
 
   exchange.save()
 
+  userExchangeTokenBalance.ethBought = userExchangeTokenBalance.ethBought.plus(event.params.eth_bought)
+  userExchangeTokenBalance.tokensBought = userExchangeTokenBalance.tokensBought.minus(event.params.tokens_sold)
 
-  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.minus(event.params.eth_bought)
-  userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.plus(event.params.tokens_sold)
-  userExchangeTokenBalance.totalTokenFees = userExchangeTokenBalance.totalTokenFees.plus(fee) // todo
+  // Fee in ERC20
+  let fee = event.params.tokens_sold.times(BigInt.fromI32(3)).div(BigInt.fromI32(1000)) // should always equal 0.3%
+  userExchangeTokenBalance.totalTokenFeesPaid = userExchangeTokenBalance.totalTokenFeesPaid.plus(fee)
 
   userExchangeTokenBalance.save()
 
@@ -169,12 +193,12 @@ export function handleEthPurchase(event: EthPurchase): void {
   transaction.block = event.block.number
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
+  transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.buyer
   transaction.ethAmount = event.params.eth_bought
   transaction.tokenAmount = event.params.tokens_sold
-  transaction.fee = fee //todo
+  transaction.fee = fee
   transaction.save()
-
 }
 
 // def addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
@@ -237,21 +261,26 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let userExchangeTokenBalance = UserExchangeBalance.load(userUniTokenID)
   if (userExchangeTokenBalance == null) {
     userExchangeTokenBalance = new UserExchangeBalance(userUniTokenID)
-    userExchangeTokenBalance.ethsDeposited = BigInt.fromI32(0)
+    userExchangeTokenBalance.ethDeposited = BigInt.fromI32(0)
     userExchangeTokenBalance.tokensDeposited = BigInt.fromI32(0)
-    userExchangeTokenBalance.uniTokens = BigInt.fromI32(0)
+    userExchangeTokenBalance.uniTokensMinted = BigInt.fromI32(0)
+    userExchangeTokenBalance.uniTokensBurned = BigInt.fromI32(0)
+    userExchangeTokenBalance.ethWithdrawn = BigInt.fromI32(0)
+    userExchangeTokenBalance.tokensWithdrawn = BigInt.fromI32(0)
+    userExchangeTokenBalance.currentEthProfit = BigInt.fromI32(0)
+    userExchangeTokenBalance.currentTokenProfit = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.provider
     userExchangeTokenBalance.exchangeAddress = event.address
-    userExchangeTokenBalance.totalEthFees = BigInt.fromI32(0)
-    userExchangeTokenBalance.totalTokenFees = BigInt.fromI32(0)
-
+    userExchangeTokenBalance.ethBought = BigInt.fromI32(0)
+    userExchangeTokenBalance.tokensBought = BigInt.fromI32(0)
+    userExchangeTokenBalance.totalEthFeesPaid = BigInt.fromI32(0)
+    userExchangeTokenBalance.totalTokenFeesPaid = BigInt.fromI32(0)
   }
 
   exchange.save()
 
-  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.plus(event.params.eth_amount)
+  userExchangeTokenBalance.ethDeposited = userExchangeTokenBalance.ethDeposited.plus(event.params.eth_amount)
   userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.plus(event.params.token_amount)
-
   userExchangeTokenBalance.save()
 
   let transaction = new Transaction(event.transaction.hash.toHex())
@@ -259,13 +288,14 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   transaction.block = event.block.number
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
+  transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.provider
   transaction.ethAmount = event.params.eth_amount
   transaction.tokenAmount = event.params.token_amount
   transaction.save()
 }
 
-// the exchange must exist if you are trying to remove liquidity. same with user and its uniTokenBalance
+// The exchange must exist if you are trying to remove liquidity. same with user and its uniTokenBalance
 // def removeLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
 export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let exchangeID = event.address.toHex()
@@ -279,11 +309,8 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.provider.toHex())
 
   let userExchangeTokenBalance = UserExchangeBalance.load(userUniTokenID)
-
-
-  userExchangeTokenBalance.ethsDeposited = userExchangeTokenBalance.ethsDeposited.minus(event.params.eth_amount)
-  userExchangeTokenBalance.tokensDeposited = userExchangeTokenBalance.tokensDeposited.minus(event.params.token_amount)
-
+  userExchangeTokenBalance.ethWithdrawn = userExchangeTokenBalance.ethWithdrawn.plus(event.params.eth_amount)
+  userExchangeTokenBalance.tokensWithdrawn = userExchangeTokenBalance.tokensWithdrawn.plus(event.params.token_amount)
   userExchangeTokenBalance.save()
 
   let transaction = new Transaction(event.transaction.hash.toHex())
@@ -291,6 +318,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   transaction.block = event.block.number
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
+  transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.provider
   transaction.ethAmount = event.params.eth_amount.times(BigInt.fromI32(-1))
   transaction.tokenAmount = event.params.token_amount.times(BigInt.fromI32(-1))
@@ -307,25 +335,39 @@ export function handleTransfer(event: Transfer): void {
   if (event.params._from.toHex() == '0x0000000000000000000000000000000000000000') {
     exchange.totalUniToken = exchange.totalUniToken.plus(event.params._value)
     let userTo = UserExchangeBalance.load(userToID)
-    userTo.uniTokens = userTo.uniTokens.plus(event.params._value)
+    userTo.uniTokensMinted = userTo.uniTokensMinted.plus(event.params._value)
     exchange.save()
     userTo.save()
   } else if (event.params._to.toHex() == '0x0000000000000000000000000000000000000000') {
     exchange.totalUniToken = exchange.totalUniToken.minus(event.params._value)
     let userFrom = UserExchangeBalance.load(userFromID)
-    userFrom.uniTokens = userFrom.uniTokens.minus(event.params._value)
+    userFrom.uniTokensBurned = userFrom.uniTokensBurned.plus(event.params._value)
+
+    // TODO - these two lines need BigInt division to return fractions, then it will work
+    // This handle always gets ran after liquidity handlers, which is required, since we use deposited and withdrawn values
+    // userFrom.currentEthProfit = userFrom.ethWithdrawn.minus((userFrom.uniTokensBurned.div(userFrom.uniTokensMinted).times(userFrom.ethDeposited)))
+    // userFrom.currentTokenProfit = userFrom.tokensWithdrawn.minus(userFrom.uniTokensBurned.div(userFrom.uniTokensMinted).times(userFrom.tokensDeposited))
+
     exchange.save()
     userFrom.save()
+
   } else {
     let userTo = UserExchangeBalance.load(userToID)
     // It is possible the user doesn't exist, since it is just being sent through a transfer
     if (userTo == null) {
       userTo = new UserExchangeBalance(userToID)
-      userTo.ethsDeposited = BigInt.fromI32(0)
+      userTo.ethDeposited = BigInt.fromI32(0)
       userTo.tokensDeposited = BigInt.fromI32(0)
-      userTo.uniTokens = BigInt.fromI32(0)
-      userTo.totalTokenFees = BigInt.fromI32(0)
-      userTo.totalEthFees = BigInt.fromI32(0)
+      userTo.uniTokensMinted = BigInt.fromI32(0)
+      userTo.uniTokensBurned = BigInt.fromI32(0)
+      userTo.ethWithdrawn = BigInt.fromI32(0)
+      userTo.tokensWithdrawn = BigInt.fromI32(0)
+      userTo.currentEthProfit = BigInt.fromI32(0)
+      userTo.currentTokenProfit = BigInt.fromI32(0)
+      userTo.totalTokenFeesPaid = BigInt.fromI32(0)
+      userTo.totalEthFeesPaid = BigInt.fromI32(0)
+      userTo.ethBought = BigInt.fromI32(0)
+      userTo.tokensBought = BigInt.fromI32(0)
       userTo.userAddress = event.params._from
       userTo.exchangeAddress = event.address
       exchange.save()
@@ -338,9 +380,11 @@ export function handleTransfer(event: Transfer): void {
       user.save()
     }
 
+    // Will be hard to calculate this users profit / loss, since they never deposited
+    // And only got UNI from a transfer
     let userFrom = UserExchangeBalance.load(userFromID)
-    userTo.uniTokens = userTo.uniTokens.plus(event.params._value)
-    userFrom.uniTokens = userTo.uniTokens.minus(event.params._value)
+    userTo.uniTokensMinted = userTo.uniTokensMinted.plus(event.params._value)
+    userFrom.uniTokensMinted = userTo.uniTokensMinted.minus(event.params._value)
     userTo.save()
     userFrom.save()
   }
@@ -348,12 +392,11 @@ export function handleTransfer(event: Transfer): void {
 
 // NEVER EMITTED ON MAINNET YET (not much real use for it when you think about it)
 export function handleApprove(event: Approval): void {
-
 }
 
 function bigInt_b_GT_a(a: BigInt, b: BigInt): boolean {
   let remainder = a.div(b).toI32()
-  if (remainder == 0){ //i.e. b was bigger than a
+  if (remainder == 0) { //i.e. b was bigger than a
     return true
   }
   return false

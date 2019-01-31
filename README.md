@@ -71,12 +71,10 @@ Now that you have subgraph is running you may open a [Graphiql](https://github.c
 
 ## Getting started with querying 
 
-Below are a few ways to show how to query the uniswap-subgraph for data. 
+Below are a few ways to show how to query the uniswap-subgraph for data. The queries show most of the information that is queryable, but there are many other filtering options that can be used, just check out the [querying api](https://github.com/graphprotocol/graph-node/blob/master/docs/graphql-api.md).
 
-### Querying all possible data that is stored in the subgraph
-The query below shows all the information that is possible to query, but is limited to the first 5 instances. There are many other filtering options that can be used, just check out the [querying api](https://github.com/graphprotocol/graph-node/blob/master/docs/graphql-api.md).
-
-```
+### Querying a Uniswap Exchange
+```graphql
 {
   exchange(id: "0x077d52b047735976dfda76fef74d4d988ac25196") {
     id
@@ -101,6 +99,12 @@ The query below shows all the information that is possible to query, but is limi
     price
     tokenSymbol
   }
+}
+```
+
+### Querying User Transactions
+```graphql
+{
   transactions(where: {timeStamp_gt: 1544832000, timeStamp_lt: 1545696000, 
     tokenSymbol: "DAI", userAddress:"0x85c5c26dc2af5546341fc1988b9d178148b4838b"}, first: 10) {
     id
@@ -114,7 +118,28 @@ The query below shows all the information that is possible to query, but is limi
     timeStamp
   }
 }
-
 ```
-The command above can be copy pasted into the Graphiql interface in your browser at `127.0.0.1:8000`.
 
+### Querying User Balances and Liquidity Information
+```graphql
+{
+  users(first: 10){
+    id
+    exchangeBalances{
+      id
+      userAddress
+      exchangeAddress
+      ethDeposited
+      tokensDeposited
+      uniTokensMinted
+      uniTokensBurned
+      ethWithdrawn
+      tokensWithdrawn
+      currentEthProfit
+      currentTokenProfit
+      ethBought
+      tokensBought
+      totalEthFeesPaid
+      totalTokenFeesPaid
+    }
+```

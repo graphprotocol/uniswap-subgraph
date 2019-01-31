@@ -53,20 +53,31 @@ type Exchange @entity {
 
 type User @entity {
     id: ID! # user eth adddress
-    uniTokens: [UserExchangeBalance!]!  @derivedFrom(field: "userAddress")
+    exchangeBalances: [UserExchangeBalance!]!  @derivedFrom(field: "userAddress")
     txs: [Transaction!]!  @derivedFrom(field: "userAddress")
 }
 
 # Left out allowance for now, because handleApprove never gets called
 type UserExchangeBalance @entity {
     id: ID!                     # ID is concatenation of token and addr. i.e. DAI-0xkashkd34....
-    ethsDeposited: BigInt!      # where negative means eth was exchanged for tokens
-    tokensDeposited: BigInt!    # where negative means tokens were exchanged for eth
-    uniTokens: BigInt!
     userAddress: Bytes!         # used for @derivedFrom of User
     exchangeAddress: Bytes!        # used for @derivedFrom of TrackedExchange
-    totalEthFees: BigInt!
-    totalTokenFees: BigInt!
+
+    # Liquidity Provider Data
+    ethDeposited: BigInt!      # where negative means eth was exchanged for tokens
+    tokensDeposited: BigInt!    # where negative means tokens were exchanged for eth
+    uniTokensMinted: BigInt!
+    uniTokensBurned: BigInt!
+    ethWithdrawn: BigInt!
+    tokensWithdrawn: BigInt!
+    currentEthProfit: BigInt!
+    currentTokenProfit: BigInt!
+
+    # Trading Data
+    ethBought: BigInt!
+    tokensBought: BigInt!
+    totalEthFeesPaid: BigInt!
+    totalTokenFeesPaid: BigInt!
 }
 
 type Transaction @entity {
