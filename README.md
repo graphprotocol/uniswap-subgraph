@@ -33,8 +33,8 @@ We have provided a quick guide on how to start up the Uniswap-Subgraph graph nod
 
 ## Steps to get the Uniswap-Subgraph Running 
   1. Install IPFS and run `ipfs init` followed by `ipfs daemon`
-  2. Install PostgreSQL and run `initdb -D .postgres` followed by `pg_ctl -D .postgres start` and `createdb uniswap-subgraph-mainnet` (note this db name is used in the commands below for the mainnet examples)
-  3. If using Ubuntu, you may need to install additional packages: `sudo apt-get install -y clang libpq-dev libssl-dev pkg-config`
+  2. Install PostgreSQL and run `initdb -D .postgres` followed by `pg_ctl -D .postgres start` and `createdb uniswap-subgraph-mainnet` (note this db name is used in the commands below for the mainnet examples). If using Ubuntu the `initdb` and `pg_ctl` executables will be located in the `/usr/lib/postgresql/9.5/bin/` directory.
+  3. If using Ubuntu, you may also need to install additional packages: `sudo apt-get install -y clang libpq-dev libssl-dev pkg-config libsecret-1-dev`
   4. Clone this repository, and run the following:
      * `yarn`
      * `yarn codegen` 
