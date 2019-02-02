@@ -38,7 +38,7 @@ We have provided a quick guide on how to start up the Uniswap-Subgraph graph nod
   4. Clone this repository, and run the following:
      * `yarn`
      * `yarn codegen` 
-  5. Clone https://github.com/graphprotocol/graph-node from master and `cargo build` (this might take a while)
+  5. Clone https://github.com/graphprotocol/graph-node from master and `cargo build` (this might take a while). If using Ubuntu, you may need to install cargo `sudo apt-get install -y cargo` first
   6. a) Now that all the dependencies are running, you can run the following command to connect to Infura Mainnet (it may take a few minutes for Rust to compile). PASSWORD might be optional, it depends on your postrgres setup:
 
 ```
