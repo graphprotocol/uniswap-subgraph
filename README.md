@@ -43,21 +43,21 @@ We have provided a quick guide on how to start up the Uniswap-Subgraph graph nod
 
 ```
   cargo run -p graph-node --release -- \
-  --postgres-url postgresql://USERNAME:[PASSWORD]@localhost:5432/mainnet-uniswap-subgraph \
+  --postgres-url postgresql://USERNAME:[PASSWORD]@localhost:5432/uniswap-subgraph-mainnet \
   --ipfs 127.0.0.1:5001 \
   --ethereum-rpc mainnet-infura:https://mainnet.infura.io --debug
 ```
   6. b) Or Mainnet Local:
 ```
   cargo run -p graph-node --release -- \
-  --postgres-url postgresql://USERNAME:[PASSWORD]@localhost:5432/mainnet-uniswap-subgraph \
+  --postgres-url postgresql://USERNAME:[PASSWORD]@localhost:5432/uniswap-subgraph-mainnet \
   --ipfs 127.0.0.1:5001 \
   --ethereum-rpc mainnet-local:http://127.0.0.1:8545 
 ```
   6. c) Or Infura Rinkeby _(NOTE: Infura testnets are not reliable right now, we get inconsistent results returned. If Rinkeby data is needed, it is suggested to run your own Rinkeby node)_
 ```
     cargo run -p graph-node --release --   
-    --postgres-url postgresql://USERNAME:[PASSWORD]@localhost:5432/uniswap-rinkeby-subgraph 
+    --postgres-url postgresql://USERNAME:[PASSWORD]@localhost:5432/uniswap-subgraph-rinkeby 
     --ipfs 127.0.0.1:5001
     --ethereum-rpc rinkeby-infura:https://rinkeby.infura.io 
 
