@@ -56,9 +56,9 @@ We have provided a quick guide on how to start up the Uniswap-Subgraph graph nod
 ```
   6. c) Or Infura Rinkeby _(NOTE: Infura testnets are not reliable right now, we get inconsistent results returned. If Rinkeby data is needed, it is suggested to run your own Rinkeby node)_
 ```
-    cargo run -p graph-node --release --   
-    --postgres-url postgresql://USERNAME:[PASSWORD]@localhost:5432/uniswap-rinkeby-subgraph 
-    --ipfs 127.0.0.1:5001
+    cargo run -p graph-node --release --   \
+    --postgres-url postgresql://USERNAME:[PASSWORD]@localhost:5432/uniswap-rinkeby-subgraph \
+    --ipfs 127.0.0.1:5001 \
     --ethereum-rpc rinkeby-infura:https://rinkeby.infura.io 
 
 ```
