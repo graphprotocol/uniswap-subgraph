@@ -22,13 +22,12 @@ export function handleNewExchange(event: NewExchange): void {
   exchange.totalUniToken = BigInt.fromI32(0)
   exchange.lastTradePrice = BigInt.fromI32(0)
   exchange.priceChange = BigInt.fromI32(0)
-  exchange.priceChangePercent = BigInt.fromI32(0)
+  // exchange.priceChangePercent = BigInt.fromI32(0) - TODO - add this back in V2
   exchange.price = BigInt.fromI32(0)
   exchange.lastTradeErc20Qty = BigInt.fromI32(0)
   exchange.lastTradeEthQty = BigInt.fromI32(0)
   exchange.weightedAvgPrice = BigInt.fromI32(0)
   exchange.totalValue = BigInt.fromI32(0)
-
 
   // hardcoded, but technically could change with upgrades to uniswap protocol
   exchange.version = 1

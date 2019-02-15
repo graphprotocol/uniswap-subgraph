@@ -22,15 +22,15 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.ethLiquidity = exchange.ethLiquidity.plus(event.params.eth_sold)
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(event.params.tokens_bought)
   exchange.lastTradePrice = exchange.price
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity) // TODO: this returns 0 when we have a fractional rate (i.e. MKR). we need BigInt fraction functionality
+  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity.plus(BigInt.fromI32(1))) // TODO: this returns 0 when we have a fractional rate (i.e. MKR). we need BigInt fraction functionality
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice as BigInt)
 
-  // TODO - this still doesn't give the right answer with maker, it will be zero
-  if (bigInt_b_GT_a(BigInt.fromI32(1), exchange.lastTradePrice) == true) {
-    exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(exchange.lastTradePrice)
-  } else {
-    exchange.priceChangePercent = BigInt.fromI32(0)
-  }
+  // TODO - add this back in in V2
+  // if (bigInt_b_GT_a(BigInt.fromI32(1), exchange.lastTradePrice) == true) {
+  //   exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(exchange.lastTradePrice.plus(BigInt.fromI32(1)))
+  // } else {
+  //   exchange.priceChangePercent = BigInt.fromI32(0)
+  // }
 
   if (exchange.highPrice == null) {
     exchange.highPrice = exchange.price
@@ -56,7 +56,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   // totalValue = total price * total units purchased
   exchange.tradeVolume = exchange.tradeVolume.plus(event.params.tokens_bought)
   exchange.totalValue = exchange.totalValue.plus(event.params.tokens_bought.times(exchange.price))
-  exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume)
+  exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume.plus(BigInt.fromI32(1))) // must div by 1 to avoid 1st case where tradevolume is 0
 
   // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
@@ -76,8 +76,8 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     userExchangeTokenBalance.uniTokensBurned = BigInt.fromI32(0)
     userExchangeTokenBalance.ethWithdrawn = BigInt.fromI32(0)
     userExchangeTokenBalance.tokensWithdrawn = BigInt.fromI32(0)
-    userExchangeTokenBalance.currentEthProfit = BigInt.fromI32(0)
-    userExchangeTokenBalance.currentTokenProfit = BigInt.fromI32(0)
+    // userExchangeTokenBalance.currentEthProfit = BigInt.fromI32(0)
+    // userExchangeTokenBalance.currentTokenProfit = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.buyer
     userExchangeTokenBalance.exchangeAddress = event.address
     userExchangeTokenBalance.ethBought = BigInt.fromI32(0)
@@ -118,15 +118,15 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.ethLiquidity = exchange.ethLiquidity.minus(event.params.eth_bought)
   exchange.tokenLiquidity = exchange.tokenLiquidity.plus(event.params.tokens_sold)
   exchange.lastTradePrice = exchange.price
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
+  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity.plus(BigInt.fromI32(1)))
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice)
 
-  // TODO - this still doesn't give the right answer with maker, it will be zero
-  if (bigInt_b_GT_a(BigInt.fromI32(1), exchange.lastTradePrice) == true) {
-    exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(exchange.lastTradePrice)
-  } else {
-    exchange.priceChangePercent = BigInt.fromI32(0)
-  }
+  // TODO - add this back in in V2
+  // if (bigInt_b_GT_a(BigInt.fromI32(1), exchange.lastTradePrice) == true) {
+  //   exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(exchange.lastTradePrice.plus(BigInt.fromI32(1)))
+  // } else {
+  //   exchange.priceChangePercent = BigInt.fromI32(0)
+  // }
 
   if (exchange.highPrice == null) {
     exchange.highPrice = exchange.price
@@ -167,8 +167,8 @@ export function handleEthPurchase(event: EthPurchase): void {
     userExchangeTokenBalance.uniTokensBurned = BigInt.fromI32(0)
     userExchangeTokenBalance.ethWithdrawn = BigInt.fromI32(0)
     userExchangeTokenBalance.tokensWithdrawn = BigInt.fromI32(0)
-    userExchangeTokenBalance.currentEthProfit = BigInt.fromI32(0)
-    userExchangeTokenBalance.currentTokenProfit = BigInt.fromI32(0)
+    // userExchangeTokenBalance.currentEthProfit = BigInt.fromI32(0)
+    // userExchangeTokenBalance.currentTokenProfit = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.buyer
     userExchangeTokenBalance.exchangeAddress = event.address
     userExchangeTokenBalance.ethBought = BigInt.fromI32(0)
@@ -209,7 +209,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
 
   exchange.ethLiquidity = exchange.ethLiquidity.plus(event.params.eth_amount)
   exchange.tokenLiquidity = exchange.tokenLiquidity.plus(event.params.token_amount)
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
+  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity.plus(BigInt.fromI32(1)))
 
   // Because 'token' is not a public getter, we need to derive the name based on the event.address being emitted, so an // if else statement
   let contractAddress = event.address.toHex()
@@ -232,7 +232,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
   } else if (contractAddress == '0x09cabec1ead1c0ba254b09efb3ee13841712be14') {
     exchange.tokenSymbol = "DAI"
-    exchange.tokenName = "DAI Stablecoin"
+    exchange.tokenName = "Dai Stablecoin v1.0"
     exchange.tokenDecimals = 18
     userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
   } else if (contractAddress == '0x4e395304655f0796bc3bc63709db72173b9ddf98') {
@@ -243,6 +243,66 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   } else if (contractAddress == '0x077d52b047735976dfda76fef74d4d988ac25196') {
     exchange.tokenSymbol = "ANT"
     exchange.tokenName = "Aragon"
+    exchange.tokenDecimals = 18
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0x255e60c9d597dcaa66006a904ed36424f7b26286') {
+    exchange.tokenSymbol = "BNB"
+    exchange.tokenName = "Binance Coin"
+    exchange.tokenDecimals = 18
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0x97dec872013f6b5fb443861090ad931542878126') {
+    exchange.tokenSymbol = "USDC"
+    exchange.tokenName = "USD Coin"
+    exchange.tokenDecimals = 6
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0xddee242662323a3cff3f9aa139ffa496ac3c73b0') {
+    exchange.tokenSymbol = "OMG"
+    exchange.tokenName = "OmiseGo"
+    exchange.tokenDecimals = 18
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0xd4777e164c6c683e10593e08760b803d58529a8e') {
+    exchange.tokenSymbol = "HOT"
+    exchange.tokenName = "HoloToken"
+    exchange.tokenDecimals = 18
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0xf173214c720f58e03e194085b1db28b50acdeead') {
+    exchange.tokenSymbol = "LINK"
+    exchange.tokenName = "ChainLink token"
+    exchange.tokenDecimals = 18
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0x48b04d2a05b6b604d8d5223fd1984f191ded51af') {
+    exchange.tokenSymbol = "REP"
+    exchange.tokenName = "Augur Reputation"
+    exchange.tokenDecimals = 18
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0x7dc095a5cf7d6208cc680fa9866f80a53911041a') {
+    exchange.tokenSymbol = "ZIL"
+    exchange.tokenName = "Zilliqa"
+    exchange.tokenDecimals = 12
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0xc040d51b07aea5d94a89bc21e8078b77366fc6c7') {
+    exchange.tokenSymbol = "PAX"
+    exchange.tokenName = "Paxos Standard"
+    exchange.tokenDecimals = 18
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0xd883264737ed969d2696ee4b4caf529c2fc2a141') {
+    exchange.tokenSymbol = "GUSD"
+    exchange.tokenName = "Gemini Dollar"
+    exchange.tokenDecimals = 2
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0x6b4540f5ee32ddd5616c792f713435e6ee4f24ab') {
+    exchange.tokenSymbol = "THETA"
+    exchange.tokenName = "Theta Token"
+    exchange.tokenDecimals = 18
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0x1aec8f11a7e78dc22477e91ed924fab46e3a88fd') {
+    exchange.tokenSymbol = "SNT"
+    exchange.tokenName = "StatusNetwork"
+    exchange.tokenDecimals = 18
+    userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
+  } else if (contractAddress == '0x7d839eb463b121790c99e0f017c21f0189dcc167') {
+    exchange.tokenSymbol = "GNT"
+    exchange.tokenName = "Golem"
     exchange.tokenDecimals = 18
     userUniTokenID = exchange.tokenSymbol.concat('-').concat(provider)
   } else {
@@ -267,8 +327,8 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     userExchangeTokenBalance.uniTokensBurned = BigInt.fromI32(0)
     userExchangeTokenBalance.ethWithdrawn = BigInt.fromI32(0)
     userExchangeTokenBalance.tokensWithdrawn = BigInt.fromI32(0)
-    userExchangeTokenBalance.currentEthProfit = BigInt.fromI32(0)
-    userExchangeTokenBalance.currentTokenProfit = BigInt.fromI32(0)
+    // userExchangeTokenBalance.currentEthProfit = BigInt.fromI32(0)
+    // userExchangeTokenBalance.currentTokenProfit = BigInt.fromI32(0)
     userExchangeTokenBalance.userAddress = event.params.provider
     userExchangeTokenBalance.exchangeAddress = event.address
     userExchangeTokenBalance.ethBought = BigInt.fromI32(0)
@@ -303,7 +363,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
 
   exchange.ethLiquidity = exchange.ethLiquidity.minus(event.params.eth_amount)
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(event.params.token_amount)
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
+  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity.plus(BigInt.fromI32(1)))
   exchange.save()
 
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.provider.toHex())
@@ -362,8 +422,8 @@ export function handleTransfer(event: Transfer): void {
       userTo.uniTokensBurned = BigInt.fromI32(0)
       userTo.ethWithdrawn = BigInt.fromI32(0)
       userTo.tokensWithdrawn = BigInt.fromI32(0)
-      userTo.currentEthProfit = BigInt.fromI32(0)
-      userTo.currentTokenProfit = BigInt.fromI32(0)
+      // userTo.currentEthProfit = BigInt.fromI32(0)
+      // userTo.currentTokenProfit = BigInt.fromI32(0)
       userTo.totalTokenFeesPaid = BigInt.fromI32(0)
       userTo.totalEthFeesPaid = BigInt.fromI32(0)
       userTo.ethBought = BigInt.fromI32(0)
@@ -394,8 +454,10 @@ export function handleTransfer(event: Transfer): void {
 export function handleApprove(event: Approval): void {
 }
 
+// Must add 1 so we never divide by 0. makes for a minimal effect of change, since it is like 1 wei
+// TODO - when we have ability to check if BigInt is "0", then we can avoid this
 function bigInt_b_GT_a(a: BigInt, b: BigInt): boolean {
-  let remainder = a.div(b).toI32()
+  let remainder = a.div(b.plus(BigInt.fromI32(1))).toI32()
   if (remainder == 0) { //i.e. b was bigger than a
     return true
   }

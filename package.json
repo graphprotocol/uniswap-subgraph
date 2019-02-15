@@ -7,7 +7,7 @@
     "codegen": "graph codegen --output-dir src/types/",
     "create-local": "graph create graphprotocol/uniswap --node http://127.0.0.1:8020",
     "build": "graph build",
-    "deploy-local": "graph deploy graphprotocol/uniswap --debug --ipfs http://localhost:5001/api/v0/ --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy graphprotocol/uniswap --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
     "deploy": "graph deploy --debug graphprotocol/uniswap --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
     "watch-local": "graph deploy graphprotocol/uniswap --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
   },

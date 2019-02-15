@@ -32,12 +32,12 @@ type Exchange @entity {
     highPrice: BigInt                   # NOTE - high price and low price don't always correlate with data from coinmarketcap. someone can make a lopsided swap
     lowPrice: BigInt
     weightedAvgPrice: BigInt!
-    priceChange: BigInt! # watch out for fraction
-    priceChangePercent: BigInt!
+    priceChange: BigInt!
+#    priceChangePercent: BigInt!         # NOT IMPLEMENTED - will add V2
     lastTradePrice: BigInt!
     lastTradeEthQty: BigInt!
     lastTradeErc20Qty: BigInt!
-    tradeVolume: BigInt!
+    tradeVolume: BigInt!                # total tokens traded EVER
     totalValue: BigInt!                 # totalValue is accumulation of trade price X trade volume, so that we can calculation weightedAvgPrice each trade
     tradeCount: Int!
 
@@ -70,8 +70,8 @@ type UserExchangeBalance @entity {
     uniTokensBurned: BigInt!
     ethWithdrawn: BigInt!
     tokensWithdrawn: BigInt!
-    currentEthProfit: BigInt!
-    currentTokenProfit: BigInt!
+#    currentEthProfit: BigInt!      # NOT IMPLEMENTED - will add V2
+#    currentTokenProfit: BigInt!    # NOT IMPLEMENTED - will add V2
 
     # Trading Data
     ethBought: BigInt!

@@ -16,7 +16,7 @@ This subgraph can be used for Uniswap on the mainnet, and all testnets. In order
 testnet, the `subgraph.yaml` file will need to have the contract addresses changed to point to the 
 correct address for each respective network.
 
-The subgraph takes less than 15 minutes to sync. 
+The subgraph takes ~2 hours to sync. 
 
 ## Brief Description of The Graph Node Setup
 
@@ -76,26 +76,36 @@ This subgraph has already been deploy to the hosted service, and you can see it 
 Below are a few ways to show how to query the uniswap-subgraph for data. The queries show most of the information that is queryable, but there are many other filtering options that can be used, just check out the [querying api](https://github.com/graphprotocol/graph-node/blob/master/docs/graphql-api.md). These queries can be used locally or in The Graph Explorer playground.
 
 ### Querying a Uniswap Exchange
+This query fetches high level information on each uniswap exchange contract. 
 ```graphql
 {
   exchange(id: "0x077d52b047735976dfda76fef74d4d988ac25196") {
     id
+    tokenAddress
     tokenSymbol
+    tokenName
+    tokenDecimals
+    price
+    fee
+    version
+    ethLiquidity
+    ethDecimals
+    tokenLiquidity
     startTime
     endTime
-    price
     highPrice
     lowPrice
     weightedAvgPrice
-    priceChange
+    price
     priceChangePercent
-    ethLiquidity
-    tokenLiquidity
     lastTradePrice
     lastTradeEthQty
     lastTradeErc20Qty
     tradeVolume
+    totalValue
     tradeCount
+    totalUniToken
+    factoryID
   }
   exchanges(where: {tokenSymbol: "DAI"}) {
     price
@@ -105,6 +115,7 @@ Below are a few ways to show how to query the uniswap-subgraph for data. The que
 ```
 
 ### Querying User Transactions
+This query fetches a user trading Dai between two timestamps, and returns a maximum of ten of their transactions. 
 ```graphql
 {
   transactions(where: {timeStamp_gt: 1544832000, timeStamp_lt: 1545696000, 
@@ -123,6 +134,7 @@ Below are a few ways to show how to query the uniswap-subgraph for data. The que
 ```
 
 ### Querying User Balances and Liquidity Information
+This query fetches 10 users, and all of their uniswap exchange information (i.e. DAI, MKR, etc.). 
 ```graphql
 {
   users(first: 10){
@@ -137,8 +149,6 @@ Below are a few ways to show how to query the uniswap-subgraph for data. The que
       uniTokensBurned
       ethWithdrawn
       tokensWithdrawn
-      currentEthProfit
-      currentTokenProfit
       ethBought
       tokensBought
       totalEthFeesPaid
