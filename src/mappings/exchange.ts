@@ -22,7 +22,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.ethLiquidity = exchange.ethLiquidity.plus(event.params.eth_sold)
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(event.params.tokens_bought)
   exchange.lastTradePrice = exchange.price
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity.plus(BigInt.fromI32(1))) // TODO: this returns 0 when we have a fractional rate (i.e. MKR). we need BigInt fraction functionality
+  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity.plus(BigInt.fromI32(1))) // TODO: this returns 0 when we have a fractional rate (i.e. MKR). we need BigInt fraction functionality. same with all other instances of this in each handler
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice as BigInt)
 
   // TODO - add this back in in V2

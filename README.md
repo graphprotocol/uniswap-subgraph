@@ -1,6 +1,3 @@
-
-
-
 # Uniswap-subgraph
 [Uniswap](https://uniswap.io/) is a decentralized protocol for automated token exchange on Ethereum.
 
