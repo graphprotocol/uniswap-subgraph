@@ -1,10 +1,10 @@
-import {BigInt} from '@graphprotocol/graph-ts'
+import {BigInt, BigDecimal} from '@graphprotocol/graph-ts'
 import {
   NewExchange
 } from '../types/Factory/Factory'
 
 import {
-  Directory,
+  Uniswap,
   Exchange,
 } from '../types/schema'
 
@@ -13,31 +13,30 @@ export function handleNewExchange(event: NewExchange): void {
   let exchange = new Exchange(id)
   exchange.tokenAddress = event.params.token
   exchange.factoryID = '1'
-  exchange.ethLiquidity = BigInt.fromI32(0)
-  exchange.ethDecimals = 18
-  exchange.tokenLiquidity = BigInt.fromI32(0)
+  exchange.ethLiquidity = BigDecimal.fromString("1")
+  exchange.tokenLiquidity = BigDecimal.fromString("1")
   exchange.startTime = event.block.timestamp
-  exchange.tradeVolume = BigInt.fromI32(0)
+  exchange.tradeVolume = BigDecimal.fromString("1")
   exchange.tradeCount = 0
   exchange.totalUniToken = BigInt.fromI32(0)
-  exchange.lastTradePrice = BigInt.fromI32(0)
-  exchange.priceChange = BigInt.fromI32(0)
+  exchange.lastTradePrice = BigDecimal.fromString("1")
+  exchange.priceChange = BigDecimal.fromString("1")
   // exchange.priceChangePercent = BigInt.fromI32(0) - TODO - add this back in V2
-  exchange.price = BigInt.fromI32(0)
-  exchange.lastTradeErc20Qty = BigInt.fromI32(0)
-  exchange.lastTradeEthQty = BigInt.fromI32(0)
-  exchange.weightedAvgPrice = BigInt.fromI32(0)
-  exchange.totalValue = BigInt.fromI32(0)
+  exchange.price = BigDecimal.fromString("1")
+  exchange.lastTradeErc20Qty = BigDecimal.fromString("1")
+  exchange.lastTradeEthQty = BigDecimal.fromString("1")
+  exchange.weightedAvgPrice = BigDecimal.fromString("1")
+  exchange.totalValue = BigDecimal.fromString("1")
 
   // hardcoded, but technically could change with upgrades to uniswap protocol
   exchange.version = 1
-  exchange.fee = "0.3%"
+  exchange.fee = BigDecimal.fromString("0.3")
 
   exchange.save()
 
-  let factory = Directory.load("1")
+  let factory = Uniswap.load("1")
   if (factory == null){
-    factory = new Directory("1")
+    factory = new Uniswap("1")
     factory.exchangeCount = 0
   }
   factory.exchangeCount = factory.exchangeCount + 1

@@ -12,7 +12,7 @@ dataSources:
       abi: Factory
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.1
+      apiVersion: 0.0.2
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:
@@ -31,7 +31,7 @@ dataSources:
       abi: Exchange
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.1
+      apiVersion: 0.0.2
       language: wasm/assemblyscript
       file: ./src/mappings/exchange.ts
       entities:
@@ -61,7 +61,7 @@ dataSources:
 #      abi: Exchange
 #    mapping:
 #      kind: ethereum/events
-#      apiVersion: 0.0.1
+#      apiVersion: 0.0.2
 #      language: wasm/assemblyscript
 #      file: ./src/mappings/exchange.ts
 #      entities:
@@ -90,7 +90,7 @@ dataSources:
       abi: Exchange
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.1
+      apiVersion: 0.0.2
       language: wasm/assemblyscript
       file: ./src/mappings/exchange.ts
       entities:
@@ -119,7 +119,7 @@ dataSources:
       abi: Exchange
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.1
+      apiVersion: 0.0.2
       language: wasm/assemblyscript
       file: ./src/mappings/exchange.ts
       entities:
@@ -148,7 +148,7 @@ dataSources:
       abi: Exchange
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.1
+      apiVersion: 0.0.2
       language: wasm/assemblyscript
       file: ./src/mappings/exchange.ts
       entities:
@@ -177,7 +177,7 @@ dataSources:
       abi: Exchange
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.1
+      apiVersion: 0.0.2
       language: wasm/assemblyscript
       file: ./src/mappings/exchange.ts
       entities:
@@ -206,7 +206,7 @@ dataSources:
       abi: Exchange
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.1
+      apiVersion: 0.0.2
       language: wasm/assemblyscript
       file: ./src/mappings/exchange.ts
       entities:
@@ -235,7 +235,7 @@ dataSources:
       abi: Exchange
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.1
+      apiVersion: 0.0.2
       language: wasm/assemblyscript
       file: ./src/mappings/exchange.ts
       entities:

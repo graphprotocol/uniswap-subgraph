@@ -12,7 +12,7 @@
     "watch-local": "graph deploy graphprotocol/uniswap --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.7.1",
-    "@graphprotocol/graph-ts": "^0.5.1"
+    "@graphprotocol/graph-cli": "^0.8.0",
+    "@graphprotocol/graph-ts": "^0.6.0"
   }
 }

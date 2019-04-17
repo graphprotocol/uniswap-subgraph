@@ -1,8 +1,17 @@
-# Directory is created by sourcing each time the factory creates a uniswap contract
-type Directory @entity {
+# Uniswap entity stores values from the Factory contract
+type Uniswap @entity {
     id: ID! # Factory Address
     exchangeCount: Int!
     exchanges: [Exchange!]! @derivedFrom(field: "factoryID")
+
+    # derived values
+    totalVolume: BigDecimal
+    totalDepositedLiquidity: BigDecimal
+    totalRemovedLiquidity: BigDecimal
+    totalVolumeUSD: BigDecimal                  # accumulate at each trade, not just calculated off whatever totalVolume is. making it more accurate for USD
+    totalDepositedLiquidityUSD: BigDecimal
+    totalRemovedLiquidityUSD: BigDecimal
+    totalSwaps: BigInt
 }
 
 type Exchange @entity {
@@ -19,30 +28,47 @@ type Exchange @entity {
     # The top 6 are hardcoded. See subgraph.yaml
 
     # These, along with the top 5, represent api/v1/exchange
-    price: BigInt!                      # price is the ratio of eth/token, i.e. NOT USD
-    fee: String!                       # storing as string until we get fractional BigInts
+    price: BigDecimal!                      # price is the ratio of eth/token
+    usdPrice: BigDecimal!                   # USD / token
+    fee: BigDecimal!                        # storing as string until we get fractional BigInts
     version: Int!
-    ethLiquidity: BigInt!
-    ethDecimals: Int!
-    tokenLiquidity: BigInt!
+    ethLiquidity: BigDecimal!               # In Eth, i.e. incorporates 10^-18 to get rid of pricing in wei
+    tokenLiquidity: BigDecimal!             # must factor in the decimals of tokens, which can be various
 
     # These represent fields for api/v1/ticker
     startTime: BigInt!
     endTime: BigInt
-    highPrice: BigInt                   # NOTE - high price and low price don't always correlate with data from coinmarketcap. someone can make a lopsided swap
-    lowPrice: BigInt
-    weightedAvgPrice: BigInt!
-    priceChange: BigInt!
-#    priceChangePercent: BigInt!         # NOT IMPLEMENTED - will add V2
-    lastTradePrice: BigInt!
-    lastTradeEthQty: BigInt!
-    lastTradeErc20Qty: BigInt!
-    tradeVolume: BigInt!                # total tokens traded EVER
-    totalValue: BigInt!                 # totalValue is accumulation of trade price X trade volume, so that we can calculation weightedAvgPrice each trade
+
+    highPrice: BigDecimal                   # NOTE - high price and low price don't always correlate with data from coinmarketcap. someone can make a lopsided swap
+    lowPrice: BigDecimal
+    weightedAvgPrice: BigDecimal!
+    priceChange: BigDecimal!
+#    priceChangePercent: BigDecimal!         # NOT IMPLEMENTED - will add V2
+    lastTradePrice: BigDecimal!
+    lastTradeEthQty: BigDecimal!
+    lastTradeErc20Qty: BigDecimal!
+    tradeVolume: BigDecimal!                # total tokens traded EVER
+    totalValue: BigDecimal!                 # totalValue is accumulation of trade price X trade volume, so that we can calculation weightedAvgPrice each trade
     tradeCount: Int!
+
+    highPriceUSD: BigDecimal                   # NOTE - high price and low price don't always correlate with data from coinmarketcap. someone can make a lopsided swap
+    lowPriceUSD: BigDecimal
+    weightedAvgPriceUSD: BigDecimal
+    priceChangeUSD: BigDecimal
+    #    priceChangePercentUSD: BigDecimal!         # NOT IMPLEMENTED - will add V2
+    lastTradePriceUSD: BigDecimal
+    lastTradeEthQtyUSD: BigDecimal
+    lastTradeErc20QtyUSD: BigDecimal
+    tradeVolumeUSD: BigDecimal                # total tokens traded EVER
+    totalValueUSD: BigDecimal                 # totalValue is accumulation of trade price X trade volume, so that we can calculation weightedAvgPrice each trade
 
     # Extra Fields ontop of provided api
     totalUniToken: BigInt!
+
+    # Fields from Uniswap.rocks to include
+    sellTrades: BigInt!
+    buyTrades: BigInt!
+    percentTokenLocked: BigDecimal      # of all possible tokens in the protocol
 
     # Fields used to help derived relationship
     factoryID: String!              # used for @derivedFrom of Factory
@@ -64,20 +90,22 @@ type UserExchangeBalance @entity {
     exchangeAddress: Bytes!        # used for @derivedFrom of TrackedExchange
 
     # Liquidity Provider Data
-    ethDeposited: BigInt!      # where negative means eth was exchanged for tokens
-    tokensDeposited: BigInt!    # where negative means tokens were exchanged for eth
+    ethDeposited: BigDecimal!      # where negative means eth was exchanged for tokens
+    tokensDeposited: BigDecimal!    # where negative means tokens were exchanged for eth
     uniTokensMinted: BigInt!
     uniTokensBurned: BigInt!
-    ethWithdrawn: BigInt!
-    tokensWithdrawn: BigInt!
-#    currentEthProfit: BigInt!      # NOT IMPLEMENTED - will add V2
-#    currentTokenProfit: BigInt!    # NOT IMPLEMENTED - will add V2
+    ethWithdrawn: BigDecimal!
+    tokensWithdrawn: BigDecimal!
+#    currentEthProfit: BigDecimal!      # NOT IMPLEMENTED - will add V2
+#    currentTokenProfit: BigDecimal!    # NOT IMPLEMENTED - will add V2
 
     # Trading Data
-    ethBought: BigInt!
-    tokensBought: BigInt!
-    totalEthFeesPaid: BigInt!
-    totalTokenFeesPaid: BigInt!
+    ethBought: BigDecimal!
+    tokensBought: BigDecimal!
+    totalEthFeesPaid: BigDecimal!
+    totalTokenFeesPaid: BigDecimal!
+
+    # TODO - Add in USD for the UserExchangebalance
 }
 
 type Transaction @entity {
@@ -90,5 +118,5 @@ type Transaction @entity {
     userAddress: Bytes!
     ethAmount: BigInt!   # where negative means you sold eth to buy tokens
     tokenAmount: BigInt! # where negative means you sold tokens to buy eth
-    fee: BigInt # not !, because Add and Remove Liquidity don't have fee
+    fee: BigDecimal! # not !, because Add and Remove Liquidity don't have fee TODO - make it zero, instead of null
 }
