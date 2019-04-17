@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@graphprotocol/graph-cli@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-cli/-/graph-cli-0.8.0.tgz#313b913e37f5d7e4608fb160b98a4feb53510a9b"
-  integrity sha512-pESQfz6KAXtR4e+Y/+ILWITMp5elSIrWbHKv0+eTbgO12llb+/5KdoRXqmP0eIy9J7XNe4K1nLJBUqOyTDhU2g==
+"@graphprotocol/graph-cli@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-cli/-/graph-cli-0.9.0.tgz#0d0c0b7f23d07708a9f0df816a086ae85ef54b56"
+  integrity sha512-sl+TfWVmKd0gw9aHWJMDa4bRh75eDm+PhsdolDGBAQKARjxsOE7na3pJFOnimyk+0K/7yob8YzGgwkbuSmY7Xg==
   dependencies:
     assemblyscript "https://github.com/AssemblyScript/assemblyscript#ced01216f88a3037d0657a45255dc6df646ff10c"
     chalk "^2.4.1"
@@ -25,10 +25,9 @@
     prettier "^1.13.5"
     request "^2.88.0"
 
-"@graphprotocol/graph-ts@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-ts/-/graph-ts-0.6.0.tgz#e5a37d5cfaa6653ecb6e710853ebdcf88074a202"
-  integrity sha512-dA3iIo2lg4qW6Ghf5S+kbBFXJuKnBP/fNFvtJ32Xvv8nZOJjXSWEfoMOZFpB0YJYhQJPUxDARnhOlVidpG26Dw==
+"@graphprotocol/graph-ts@http://github.com/graphprotocol/graph-ts#dave/truncate-big-decimal":
+  version "0.9.0"
+  resolved "http://github.com/graphprotocol/graph-ts#ae86f5804a58dfedb9e0ff79b8b999cc26c78a61"
   dependencies:
     assemblyscript "https://github.com/AssemblyScript/assemblyscript#ced01216f88a3037d0657a45255dc6df646ff10c"
 
@@ -1112,6 +1111,13 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
+git@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/git/-/git-0.1.5.tgz#9ef62df93f851c27542143bf52d1c68b1017ca15"
+  integrity sha1-nvYt+T+FHCdUIUO/UtHGixAXyhU=
+  dependencies:
+    mime "1.2.9"
+
 github-from-package@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/github-from-package/-/github-from-package-0.0.0.tgz#97fb5d96bfde8973313f20e8288ef9a167fa64ce"
@@ -1958,6 +1964,11 @@ mime-types@^2.1.12, mime-types@~2.1.19:
   integrity sha512-3iL6DbwpyLzjR3xHSFNFeb9Nz/M8WDkX33t1GFQnFOllWk8pOrh/LSrB5OXlnlW5P9LH73X6loW/eogc+F5lJg==
   dependencies:
     mime-db "~1.37.0"
+
+mime@1.2.9:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-1.2.9.tgz#009cd40867bd35de521b3b966f04e2f8d4d13d09"
+  integrity sha1-AJzUCGe9Nd5SGzuWbwTi+NTRPQk=
 
 mimic-fn@^1.0.0:
   version "1.2.0"

@@ -9,6 +9,8 @@ import {
 } from '../types/schema'
 
 export function handleNewExchange(event: NewExchange): void {
+
+  // Instantiate them all with 1, to avoid divide by zero
   let id = event.params.exchange.toHex()
   let exchange = new Exchange(id)
   exchange.tokenAddress = event.params.token

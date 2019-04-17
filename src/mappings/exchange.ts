@@ -22,7 +22,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.ethLiquidity = exchange.ethLiquidity.plus(event.params.eth_sold.toBigDecimal())
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(event.params.tokens_bought.toBigDecimal())
   exchange.lastTradePrice = exchange.price
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity) // TODO: this returns 0 when we have a fractional rate (i.e. MKR). we need Bigdecimal
+  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice)
 
   // TODO - add this back in in V2
@@ -56,8 +56,12 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   // totalValue = total price * total units purchased
   exchange.tradeVolume = exchange.tradeVolume.plus(event.params.tokens_bought.toBigDecimal())
   exchange.totalValue = exchange.totalValue.plus(event.params.tokens_bought.toBigDecimal().times(exchange.price))
-  exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume.plus(BigDecimal.fromString("1"))) // must div by 1 to avoid 1st case where tradevolume is 0 TODO - fix this with an if statement
 
+  if (exchange.tradeVolume.equals(BigDecimal.fromString("0"))) {
+    exchange.weightedAvgPrice = BigDecimal.fromString("0")
+  } else {
+    exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume)
+  }
   // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
   let user = User.load(userID)
@@ -118,7 +122,12 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.ethLiquidity = exchange.ethLiquidity.minus(event.params.eth_bought.toBigDecimal())
   exchange.tokenLiquidity = exchange.tokenLiquidity.plus(event.params.tokens_sold.toBigDecimal())
   exchange.lastTradePrice = exchange.price
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity.plus(BigDecimal.fromString("1"))) // Todo - if statemente
+  if (exchange.ethLiquidity.equals(BigDecimal.fromString("0"))) {
+    exchange.price = BigDecimal.fromString("0")
+  } else {
+    exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
+  }
+
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice)
 
   // TODO - add this back in in V2
@@ -209,7 +218,12 @@ export function handleAddLiquidity(event: AddLiquidity): void {
 
   exchange.ethLiquidity = exchange.ethLiquidity.plus(event.params.eth_amount.toBigDecimal())
   exchange.tokenLiquidity = exchange.tokenLiquidity.plus(event.params.token_amount.toBigDecimal())
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity.plus(BigDecimal.fromString("1")))
+  if (exchange.ethLiquidity.equals(BigDecimal.fromString("0"))) {
+    exchange.price = BigDecimal.fromString("0")
+  } else {
+    exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
+  }
+
 
   // Because 'token' is not a public getter, we need to derive the name based on the event.address being emitted, so an // if else statement
   let contractAddress = event.address.toHex()
@@ -363,7 +377,11 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
 
   exchange.ethLiquidity = exchange.ethLiquidity.minus(event.params.eth_amount.toBigDecimal())
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(event.params.token_amount.toBigDecimal())
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity.plus(BigDecimal.fromString("1")))
+  if (exchange.ethLiquidity.equals(BigDecimal.fromString("0"))) {
+    exchange.price = BigDecimal.fromString("0")
+  } else {
+    exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
+  }
   exchange.save()
 
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.provider.toHex())
@@ -466,7 +484,7 @@ function bigInt_b_GT_a(a: BigInt, b: BigInt): boolean {
 
 function bigDecimal_b_greaterThan_a(a: BigDecimal, b: BigDecimal): boolean {
   // To prevent division by 0
-  if(b.equals(BigDecimal.fromString("0"))){
+  if (b.equals(BigDecimal.fromString("0"))) {
     return false
   }
 
@@ -476,7 +494,7 @@ function bigDecimal_b_greaterThan_a(a: BigDecimal, b: BigDecimal): boolean {
   let remainerDigits = remainder.digits.toString().length
   let remainderExp = remainder.exp.toI32()
   let digitsMinusExp = remainerDigits - remainderExp
-  if (digitsMinusExp >= 0){
+  if (digitsMinusExp >= 0) {
     return false
   } else {
     return true
