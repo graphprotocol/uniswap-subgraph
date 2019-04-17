@@ -10,7 +10,7 @@ import {
 
 export function handleNewExchange(event: NewExchange): void {
 
-  // Instantiate them all with 1, to avoid divide by zero
+  // Instantiate them all with 1, to avoid divide by zero - TODO - fix this, it isnt right way to do it
   let id = event.params.exchange.toHex()
   let exchange = new Exchange(id)
   exchange.tokenAddress = event.params.token
@@ -23,7 +23,7 @@ export function handleNewExchange(event: NewExchange): void {
   exchange.totalUniToken = BigInt.fromI32(0)
   exchange.lastTradePrice = BigDecimal.fromString("1")
   exchange.priceChange = BigDecimal.fromString("1")
-  // exchange.priceChangePercent = BigInt.fromI32(0) - TODO - add this back in V2
+  exchange.priceChangePercent = BigDecimal.fromString("1")
   exchange.price = BigDecimal.fromString("1")
   exchange.lastTradeErc20Qty = BigDecimal.fromString("1")
   exchange.lastTradeEthQty = BigDecimal.fromString("1")

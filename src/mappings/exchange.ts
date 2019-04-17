@@ -25,12 +25,11 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice)
 
-  // TODO - add this back in in V2
-  // if (bigInt_b_GT_a(BigInt.fromI32(1), exchange.lastTradePrice) == true) {
-  //   exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(exchange.lastTradePrice.plus(BigInt.fromI32(1)))
-  // } else {
-  //   exchange.priceChangePercent = BigInt.fromI32(0)
-  // }
+  if (bigDecimal_b_greaterThan_a(exchange.price as BigDecimal, exchange.lastTradePrice)) {
+    exchange.priceChangePercent = exchange.lastTradePrice.div(exchange.price).times(BigDecimal.fromString("-1"))
+  } else {
+    exchange.priceChangePercent = exchange.price.div(exchange.lastTradePrice)
+  }
 
   if (exchange.highPrice == null) {
     exchange.highPrice = exchange.price
@@ -130,12 +129,11 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice)
 
-  // TODO - add this back in in V2
-  // if (bigInt_b_GT_a(BigInt.fromI32(1), exchange.lastTradePrice) == true) {
-  //   exchange.priceChangePercent = exchange.priceChange.times(BigInt.fromI32(100)).div(exchange.lastTradePrice.plus(BigInt.fromI32(1)))
-  // } else {
-  //   exchange.priceChangePercent = BigInt.fromI32(0)
-  // }
+  if (bigDecimal_b_greaterThan_a(exchange.price as BigDecimal, exchange.lastTradePrice)) {
+    exchange.priceChangePercent = exchange.lastTradePrice.div(exchange.price).times(BigDecimal.fromString("-1"))
+  } else {
+    exchange.priceChangePercent = exchange.price.div(exchange.lastTradePrice)
+  }
 
   if (exchange.highPrice == null) {
     exchange.highPrice = exchange.price

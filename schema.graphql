@@ -43,7 +43,7 @@ type Exchange @entity {
     lowPrice: BigDecimal
     weightedAvgPrice: BigDecimal!
     priceChange: BigDecimal!
-#    priceChangePercent: BigDecimal!         # NOT IMPLEMENTED - will add V2
+    priceChangePercent: BigDecimal!         # NOT IMPLEMENTED - will add V2
     lastTradePrice: BigDecimal!
     lastTradeEthQty: BigDecimal!
     lastTradeErc20Qty: BigDecimal!
