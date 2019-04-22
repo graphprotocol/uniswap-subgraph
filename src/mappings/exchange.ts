@@ -22,13 +22,13 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.ethLiquidity = exchange.ethLiquidity.plus(event.params.eth_sold.toBigDecimal())
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(event.params.tokens_bought.toBigDecimal())
   exchange.lastTradePrice = exchange.price
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
-  exchange.priceChange = exchange.price.minus(exchange.lastTradePrice)
+  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
+  exchange.priceChange = exchange.price.minus(exchange.lastTradePrice).truncate(18)
 
   if (bigDecimal_b_greaterThan_a(exchange.price as BigDecimal, exchange.lastTradePrice)) {
-    exchange.priceChangePercent = exchange.lastTradePrice.div(exchange.price).times(BigDecimal.fromString("-1"))
+    exchange.priceChangePercent = exchange.lastTradePrice.div(exchange.price).times(BigDecimal.fromString("-1")).truncate(18)
   } else {
-    exchange.priceChangePercent = exchange.price.div(exchange.lastTradePrice)
+    exchange.priceChangePercent = exchange.price.div(exchange.lastTradePrice).truncate(18)
   }
 
   if (exchange.highPrice == null) {
@@ -59,7 +59,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   if (exchange.tradeVolume.equals(BigDecimal.fromString("0"))) {
     exchange.weightedAvgPrice = BigDecimal.fromString("0")
   } else {
-    exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume)
+    exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
   }
   // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
@@ -124,15 +124,15 @@ export function handleEthPurchase(event: EthPurchase): void {
   if (exchange.ethLiquidity.equals(BigDecimal.fromString("0"))) {
     exchange.price = BigDecimal.fromString("0")
   } else {
-    exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
+    exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
   }
 
   exchange.priceChange = exchange.price.minus(exchange.lastTradePrice)
 
   if (bigDecimal_b_greaterThan_a(exchange.price as BigDecimal, exchange.lastTradePrice)) {
-    exchange.priceChangePercent = exchange.lastTradePrice.div(exchange.price).times(BigDecimal.fromString("-1"))
+    exchange.priceChangePercent = exchange.lastTradePrice.div(exchange.price).times(BigDecimal.fromString("-1")).truncate(18)
   } else {
-    exchange.priceChangePercent = exchange.price.div(exchange.lastTradePrice)
+    exchange.priceChangePercent = exchange.price.div(exchange.lastTradePrice).truncate(18)
   }
 
   if (exchange.highPrice == null) {
@@ -219,7 +219,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   if (exchange.ethLiquidity.equals(BigDecimal.fromString("0"))) {
     exchange.price = BigDecimal.fromString("0")
   } else {
-    exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
+    exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
   }
 
 
@@ -378,7 +378,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   if (exchange.ethLiquidity.equals(BigDecimal.fromString("0"))) {
     exchange.price = BigDecimal.fromString("0")
   } else {
-    exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity)
+    exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
   }
   exchange.save()
 
@@ -466,8 +466,8 @@ export function handleTransfer(event: Transfer): void {
   }
 }
 
-// NEVER EMITTED ON MAINNET YET (not much real use for it when you think about it)
-export function handleApprove(event: Approval): void {
+// eventually emitted on mainnet TODO - decide if we should implement
+export function handleApproval(event: Approval): void {
 }
 
 // Must add 1 so we never divide by 0. makes for a minimal effect of change, since it is like 1 wei
@@ -491,7 +491,7 @@ function bigDecimal_b_greaterThan_a(a: BigDecimal, b: BigDecimal): boolean {
   // need to check if remainders digits is longer than its exponents, indicating a is a number above 1.0, thus return false
   let remainerDigits = remainder.digits.toString().length
   let remainderExp = remainder.exp.toI32()
-  let digitsMinusExp = remainerDigits - remainderExp
+  let digitsMinusExp = remainerDigits + remainderExp // exp is negative so add
   if (digitsMinusExp >= 0) {
     return false
   } else {

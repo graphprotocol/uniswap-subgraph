@@ -23,6 +23,8 @@ type Exchange @entity {
     tokenName: String
     tokenDecimals: Int
 
+
+
     # Below is data gathered from having the current Uniwap contracts tracked.
     # They need to be hardcoded until we support dynamic contract adding
     # The top 6 are hardcoded. See subgraph.yaml
