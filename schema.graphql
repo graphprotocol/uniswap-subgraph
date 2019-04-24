@@ -15,67 +15,40 @@ type Uniswap @entity {
 }
 
 type Exchange @entity {
-    # These Five represent /api/v1/directory
-    id: ID!                         # Uniswap Exchange address
-    tokenAddress: Bytes!
-    # There is no good way to get these, since not all contracts follow erc20.
-    tokenSymbol: String
-    tokenName: String
-    tokenDecimals: Int
+    id: ID!                                 # Uniswap Exchange address
+    tokenAddress: Bytes!                    # Token address
+    tokenSymbol: String!                     # TODO - change these from hardcoded when features exist
+    tokenName: String!                       # TODO - change these from hardcoded when features exist
+    tokenDecimals: Int!                      # TODO - change these from hardcoded when features exist
 
-
-
-    # Below is data gathered from having the current Uniwap contracts tracked.
-    # They need to be hardcoded until we support dynamic contract adding
-    # The top 6 are hardcoded. See subgraph.yaml
-
-    # These, along with the top 5, represent api/v1/exchange
-    price: BigDecimal!                      # price is the ratio of eth/token
-    usdPrice: BigDecimal!                   # USD / token
-    fee: BigDecimal!                        # storing as string until we get fractional BigInts
+    fee: BigDecimal!
     version: Int!
     ethLiquidity: BigDecimal!               # In Eth, i.e. incorporates 10^-18 to get rid of pricing in wei
     tokenLiquidity: BigDecimal!             # must factor in the decimals of tokens, which can be various
+    startTime: Int!                      # time exchange was created
+    endTime: BigInt                         # Time exchange is closed (such as an upgrade to uniswap contacts)
+    totalUniToken: BigInt!                  # Count of the unilying unitokens that represent ownership
+    sellTrades: BigInt!                     # count the number of times the tokens been sold
+    buyTrades: BigInt!                      # count the number of times the tokens been bought
 
-    # These represent fields for api/v1/ticker
-    startTime: BigInt!
-    endTime: BigInt
-
-    highPrice: BigDecimal                   # NOTE - high price and low price don't always correlate with data from coinmarketcap. someone can make a lopsided swap
-    lowPrice: BigDecimal
-    weightedAvgPrice: BigDecimal!
-    priceChange: BigDecimal!
-    priceChangePercent: BigDecimal!         # NOT IMPLEMENTED - will add V2
-    lastTradePrice: BigDecimal!
-    lastTradeEthQty: BigDecimal!
-    lastTradeErc20Qty: BigDecimal!
+    # Price values using eth
+    price: BigDecimal!                      # price is the ratio of eth/token
+    lastTradePrice: BigDecimal!             # the last trade price
     tradeVolume: BigDecimal!                # total tokens traded EVER
     totalValue: BigDecimal!                 # totalValue is accumulation of trade price X trade volume, so that we can calculation weightedAvgPrice each trade
-    tradeCount: Int!
+    weightedAvgPrice: BigDecimal!           # avg price of all trades since inception
 
-    highPriceUSD: BigDecimal                   # NOTE - high price and low price don't always correlate with data from coinmarketcap. someone can make a lopsided swap
-    lowPriceUSD: BigDecimal
-    weightedAvgPriceUSD: BigDecimal
-    priceChangeUSD: BigDecimal
-    #    priceChangePercentUSD: BigDecimal!         # NOT IMPLEMENTED - will add V2
-    lastTradePriceUSD: BigDecimal
-    lastTradeEthQtyUSD: BigDecimal
-    lastTradeErc20QtyUSD: BigDecimal
-    tradeVolumeUSD: BigDecimal                # total tokens traded EVER
-    totalValueUSD: BigDecimal                 # totalValue is accumulation of trade price X trade volume, so that we can calculation weightedAvgPrice each trade
-
-    # Extra Fields ontop of provided api
-    totalUniToken: BigInt!
-
-    # Fields from Uniswap.rocks to include
-    sellTrades: BigInt!
-    buyTrades: BigInt!
-    percentTokenLocked: BigDecimal      # of all possible tokens in the protocol
+    # Price values uing usd
+    usdPrice: BigDecimal!                   # USD / token
+    lastTradePriceUSD: BigDecimal           # the last trade price
+    tradeVolumeUSD: BigDecimal              # total tokens traded EVER
+    totalValueUSD: BigDecimal               # totalValue is accumulation of trade price X trade volume, so that we can calculation weightedAvgPrice each trade
+    weightedAvgPriceUSD: BigDecimal         # avg price of all trades since inception
 
     # Fields used to help derived relationship
-    factoryID: String!              # used for @derivedFrom of Factory
-    tokenHolders: [UserExchangeBalance!]! @derivedFrom(field: "exchangeAddress")
-    txs: [Transaction!]!  @derivedFrom(field: "exchangeAddress")
+    factoryID: String!                                                              # used for @derivedFrom of Factory
+    tokenHolders: [UserExchangeBalance!]! @derivedFrom(field: "exchangeAddress")    # Relationship to show all token holders on the exchange
+    txs: [Transaction!]! @derivedFrom(field: "exchangeAddress")                     # Relationship to show all txs on the exchange
 
 }
 

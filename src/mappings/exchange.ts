@@ -23,32 +23,6 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(event.params.tokens_bought.toBigDecimal())
   exchange.lastTradePrice = exchange.price
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
-  exchange.priceChange = exchange.price.minus(exchange.lastTradePrice).truncate(18)
-
-  if (bigDecimal_b_greaterThan_a(exchange.price as BigDecimal, exchange.lastTradePrice)) {
-    exchange.priceChangePercent = exchange.lastTradePrice.div(exchange.price).times(BigDecimal.fromString("-1")).truncate(18)
-  } else {
-    exchange.priceChangePercent = exchange.price.div(exchange.lastTradePrice).truncate(18)
-  }
-
-  if (exchange.highPrice == null) {
-    exchange.highPrice = exchange.price
-  }
-  if (exchange.lowPrice == null) {
-    exchange.lowPrice = exchange.price
-  }
-
-  // Math Calculations below
-  if (bigDecimal_b_greaterThan_a(exchange.highPrice as BigDecimal, exchange.price)) {
-    exchange.highPrice = exchange.price
-  }
-  if (bigDecimal_b_greaterThan_a(exchange.price, exchange.lowPrice as BigDecimal)) {
-    exchange.lowPrice = exchange.price
-  }
-
-  exchange.lastTradeEthQty = event.params.eth_sold.toBigDecimal()
-  exchange.lastTradeErc20Qty = event.params.tokens_bought.toBigDecimal()
-  exchange.tradeCount = exchange.tradeCount + 1
 
   // weightedAvgPrice and totalVolume calcs
   // totalVolume / (totalValue) = weightedAvgPrice
@@ -126,33 +100,6 @@ export function handleEthPurchase(event: EthPurchase): void {
   } else {
     exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
   }
-
-  exchange.priceChange = exchange.price.minus(exchange.lastTradePrice)
-
-  if (bigDecimal_b_greaterThan_a(exchange.price as BigDecimal, exchange.lastTradePrice)) {
-    exchange.priceChangePercent = exchange.lastTradePrice.div(exchange.price).times(BigDecimal.fromString("-1")).truncate(18)
-  } else {
-    exchange.priceChangePercent = exchange.price.div(exchange.lastTradePrice).truncate(18)
-  }
-
-  if (exchange.highPrice == null) {
-    exchange.highPrice = exchange.price
-  }
-  if (exchange.lowPrice == null) {
-    exchange.lowPrice = exchange.price
-  }
-
-  // Math Calculations below
-  if (bigDecimal_b_greaterThan_a(exchange.highPrice as BigDecimal, exchange.price)) {
-    exchange.highPrice = exchange.price
-  }
-  if (bigDecimal_b_greaterThan_a(exchange.price, exchange.lowPrice as BigDecimal)) {
-    exchange.lowPrice = exchange.price
-  }
-
-  exchange.lastTradeEthQty = event.params.eth_bought.toBigDecimal()
-  exchange.lastTradeErc20Qty = event.params.tokens_sold.toBigDecimal()
-  exchange.tradeCount = exchange.tradeCount + 1
 
   // User handling below
   let userID = event.params.buyer.toHex()
