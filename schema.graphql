@@ -17,30 +17,33 @@ type Uniswap @entity {
 type Exchange @entity {
     id: ID!                                 # Uniswap Exchange address
     tokenAddress: Bytes!                    # Token address
-    tokenSymbol: String!                     # TODO - change these from hardcoded when features exist
-    tokenName: String!                       # TODO - change these from hardcoded when features exist
-    tokenDecimals: Int!                      # TODO - change these from hardcoded when features exist
-
+    tokenSymbol: String!                    # TODO - change these from hardcoded when features exist
+    tokenName: String!                      # TODO - change these from hardcoded when features exist
+    tokenDecimals: Int!                     # TODO - change these from hardcoded when features exist
     fee: BigDecimal!
     version: Int!
-    ethLiquidity: BigDecimal!               # In Eth, i.e. incorporates 10^-18 to get rid of pricing in wei
-    tokenLiquidity: BigDecimal!             # must factor in the decimals of tokens, which can be various
     startTime: Int!                         # time exchange was created
     endTime: Int                            # Time exchange is closed (such as an upgrade to uniswap contacts)
+
+    ethLiquidity: BigDecimal!               # In Eth, i.e. incorporates 10^-18 to get rid of pricing in wei
+    tokenLiquidity: BigDecimal!             # must factor in the decimals of tokens, which can be various
+    addLiquidityCount: BigInt!              # count the number of times liquidity has been added
+    removeLiquidityCount: BigInt!           # count the number of times liquidity has been removed
+    sellTokenCount: BigInt!                 # count the number of times the tokens been sold
+    buyTokenCount: BigInt!                  # count the number of times the tokens been bought
     totalUniToken: BigInt!                  # Count of the unilying unitokens that represent ownership
-    sellTrades: BigInt!                     # count the number of times the tokens been sold
-    buyTrades: BigInt!                      # count the number of times the tokens been bought
+
 
     # Price values using eth
-    lastTradePrice: BigDecimal!             # the last trade price
+    lastPrice: BigDecimal!             # the last trade price
     price: BigDecimal!                      # price is the ratio of eth/token
     tradeVolume: BigDecimal!                # total tokens traded EVER
     totalValue: BigDecimal!                 # totalValue is accumulation of trade price X trade volume. TV = tokensSold * priceTokensSold
     weightedAvgPrice: BigDecimal!           # avg price of all trades since inception. WAP = totalValue / totalVolume
 
-    # Price values uing usd
-    lastTradePriceUSD: BigDecimal           # the last trade price
-    usdPrice: BigDecimal!                   # USD / token
+    # Price values uing usd TODO - get values from MKR usd oracle 
+    lastPriceUSD: BigDecimal           # the last trade price
+    priceUSD: BigDecimal!                   # USD / token
     tradeVolumeUSD: BigDecimal              # total tokens traded EVER
     totalValueUSD: BigDecimal               # totalValue is accumulation of trade price X trade volume. TV = tokensSold * priceTokensSold
     weightedAvgPriceUSD: BigDecimal         # avg price of all trades since inception. WAP = totalValue / totalVolume
