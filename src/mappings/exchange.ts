@@ -6,11 +6,12 @@ import {
   RemoveLiquidity,
   Transfer,
   Approval,
+  Exchange as ExchangeContract,
 } from '../types/Exchange-BAT/Exchange' // Although imported from BAT, these can be used for all exchanges
 
 import {
   User,
-  UserExchangeBalance,
+  UserExchangeData,
   Transaction,
   Exchange
 } from '../types/schema'
@@ -21,20 +22,21 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
   exchange.ethLiquidity = exchange.ethLiquidity.plus(event.params.eth_sold.toBigDecimal())
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(event.params.tokens_bought.toBigDecimal())
+  exchange.buyTrades = exchange.buyTrades.plus(BigInt.fromI32(1))
+
+  /* Price calculations Below
+      * weightedAvgPrice and totalVolume calcs
+      * totalVolume / (totalValue) = weightedAvgPrice
+      * totalValue = total price * total units purchased
+   */
   exchange.lastTradePrice = exchange.price
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
-
-  // weightedAvgPrice and totalVolume calcs
-  // totalVolume / (totalValue) = weightedAvgPrice
-  // totalValue = total price * total units purchased
   exchange.tradeVolume = exchange.tradeVolume.plus(event.params.tokens_bought.toBigDecimal())
   exchange.totalValue = exchange.totalValue.plus(event.params.tokens_bought.toBigDecimal().times(exchange.price))
+  exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
+  exchange.save()
 
-  if (exchange.tradeVolume.equals(BigDecimal.fromString("0"))) {
-    exchange.weightedAvgPrice = BigDecimal.fromString("0")
-  } else {
-    exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
-  }
+
   // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
   let user = User.load(userID)
@@ -44,9 +46,9 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   user.save()
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.buyer.toHex())
 
-  let userExchangeTokenBalance = UserExchangeBalance.load(userUniTokenID)
+  let userExchangeTokenBalance = UserExchangeData.load(userUniTokenID)
   if (userExchangeTokenBalance == null) {
-    userExchangeTokenBalance = new UserExchangeBalance(userUniTokenID)
+    userExchangeTokenBalance = new UserExchangeData(userUniTokenID)
     userExchangeTokenBalance.ethDeposited = BigDecimal.fromString("0")
     userExchangeTokenBalance.tokensDeposited = BigDecimal.fromString("0")
     userExchangeTokenBalance.uniTokensMinted = BigInt.fromI32(0)
@@ -63,7 +65,6 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     userExchangeTokenBalance.totalTokenFeesPaid = BigDecimal.fromString("0")
   }
 
-  exchange.save()
 
   userExchangeTokenBalance.ethBought = userExchangeTokenBalance.ethBought.minus(event.params.eth_sold.toBigDecimal())
   userExchangeTokenBalance.tokensBought = userExchangeTokenBalance.tokensBought.plus(event.params.tokens_bought.toBigDecimal())
@@ -94,12 +95,19 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   exchange.ethLiquidity = exchange.ethLiquidity.minus(event.params.eth_bought.toBigDecimal())
   exchange.tokenLiquidity = exchange.tokenLiquidity.plus(event.params.tokens_sold.toBigDecimal())
+  exchange.sellTrades = exchange.sellTrades.plus(BigInt.fromI32(1))
+
+  /* Price calculations Below
+      * weightedAvgPrice and totalVolume calcs
+      * totalVolume / (totalValue) = weightedAvgPrice
+      * totalValue = total price * total units purchased
+   */
   exchange.lastTradePrice = exchange.price
-  if (exchange.ethLiquidity.equals(BigDecimal.fromString("0"))) {
-    exchange.price = BigDecimal.fromString("0")
-  } else {
-    exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
-  }
+  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
+  exchange.tradeVolume = exchange.tradeVolume.plus(event.params.tokens_sold.toBigDecimal())
+  exchange.totalValue = exchange.totalValue.plus(event.params.tokens_sold.toBigDecimal().times(exchange.price))
+  exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
+  exchange.save()
 
   // User handling below
   let userID = event.params.buyer.toHex()
@@ -112,9 +120,9 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.buyer.toHex())
 
-  let userExchangeTokenBalance = UserExchangeBalance.load(userUniTokenID)
+  let userExchangeTokenBalance = UserExchangeData.load(userUniTokenID)
   if (userExchangeTokenBalance == null) {
-    userExchangeTokenBalance = new UserExchangeBalance(userUniTokenID)
+    userExchangeTokenBalance = new UserExchangeData(userUniTokenID)
     userExchangeTokenBalance.ethDeposited = BigDecimal.fromString("0")
     userExchangeTokenBalance.tokensDeposited = BigDecimal.fromString("0")
     userExchangeTokenBalance.uniTokensMinted = BigInt.fromI32(0)
@@ -131,7 +139,6 @@ export function handleEthPurchase(event: EthPurchase): void {
     userExchangeTokenBalance.totalTokenFeesPaid = BigDecimal.fromString("0")
   }
 
-  exchange.save()
 
   userExchangeTokenBalance.ethBought = userExchangeTokenBalance.ethBought.plus(event.params.eth_bought.toBigDecimal())
   userExchangeTokenBalance.tokensBought = userExchangeTokenBalance.tokensBought.minus(event.params.tokens_sold.toBigDecimal())
@@ -277,9 +284,9 @@ export function handleAddLiquidity(event: AddLiquidity): void {
 
   user.save()
 
-  let userExchangeTokenBalance = UserExchangeBalance.load(userUniTokenID)
+  let userExchangeTokenBalance = UserExchangeData.load(userUniTokenID)
   if (userExchangeTokenBalance == null) {
-    userExchangeTokenBalance = new UserExchangeBalance(userUniTokenID)
+    userExchangeTokenBalance = new UserExchangeData(userUniTokenID)
     userExchangeTokenBalance.ethDeposited = BigDecimal.fromString("0")
     userExchangeTokenBalance.tokensDeposited = BigDecimal.fromString("0")
     userExchangeTokenBalance.uniTokensMinted = BigInt.fromI32(0)
@@ -331,7 +338,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
 
   let userUniTokenID = exchange.tokenSymbol.concat('-').concat(event.params.provider.toHex())
 
-  let userExchangeTokenBalance = UserExchangeBalance.load(userUniTokenID)
+  let userExchangeTokenBalance = UserExchangeData.load(userUniTokenID)
   userExchangeTokenBalance.ethWithdrawn = userExchangeTokenBalance.ethWithdrawn.plus(event.params.eth_amount.toBigDecimal())
   userExchangeTokenBalance.tokensWithdrawn = userExchangeTokenBalance.tokensWithdrawn.plus(event.params.token_amount.toBigDecimal())
   userExchangeTokenBalance.save()
@@ -357,13 +364,13 @@ export function handleTransfer(event: Transfer): void {
 
   if (event.params._from.toHex() == '0x0000000000000000000000000000000000000000') {
     exchange.totalUniToken = exchange.totalUniToken.plus(event.params._value)
-    let userTo = UserExchangeBalance.load(userToID)
+    let userTo = UserExchangeData.load(userToID)
     userTo.uniTokensMinted = userTo.uniTokensMinted.plus(event.params._value)
     exchange.save()
     userTo.save()
   } else if (event.params._to.toHex() == '0x0000000000000000000000000000000000000000') {
     exchange.totalUniToken = exchange.totalUniToken.minus(event.params._value)
-    let userFrom = UserExchangeBalance.load(userFromID)
+    let userFrom = UserExchangeData.load(userFromID)
     userFrom.uniTokensBurned = userFrom.uniTokensBurned.plus(event.params._value)
 
     // TODO - these two lines need BigInt division to return fractions, then it will work
@@ -375,10 +382,10 @@ export function handleTransfer(event: Transfer): void {
     userFrom.save()
 
   } else {
-    let userTo = UserExchangeBalance.load(userToID)
+    let userTo = UserExchangeData.load(userToID)
     // It is possible the user doesn't exist, since it is just being sent through a transfer
     if (userTo == null) {
-      userTo = new UserExchangeBalance(userToID)
+      userTo = new UserExchangeData(userToID)
       userTo.ethDeposited = BigDecimal.fromString("0")
       userTo.tokensDeposited = BigDecimal.fromString("0")
       userTo.uniTokensMinted = BigInt.fromI32(0)
@@ -405,7 +412,7 @@ export function handleTransfer(event: Transfer): void {
 
     // Will be hard to calculate this users profit / loss, since they never deposited
     // And only got UNI from a transfer
-    let userFrom = UserExchangeBalance.load(userFromID)
+    let userFrom = UserExchangeData.load(userFromID)
     userTo.uniTokensMinted = userTo.uniTokensMinted.plus(event.params._value)
     userFrom.uniTokensMinted = userTo.uniTokensMinted.minus(event.params._value)
     userTo.save()
