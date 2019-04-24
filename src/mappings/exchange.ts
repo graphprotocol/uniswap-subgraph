@@ -56,20 +56,20 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     // userExchangeData.currentTokenProfit = BigInt.fromI32(0)
     userExchangeData.ethBought = BigDecimal.fromString("0")
     userExchangeData.tokensBought = BigDecimal.fromString("0")
-    userExchangeData.totalEthFeesPaid = BigDecimal.fromString("0")
-    userExchangeData.totalTokenFeesPaid = BigDecimal.fromString("0")
+    userExchangeData.ethFeesPaid = BigDecimal.fromString("0")
+    userExchangeData.tokenFeesPaid = BigDecimal.fromString("0")
   }
 
   userExchangeData.ethBought = userExchangeData.ethBought.minus(event.params.eth_sold.toBigDecimal())
   userExchangeData.tokensBought = userExchangeData.tokensBought.plus(event.params.tokens_bought.toBigDecimal())
   let fee = event.params.eth_sold.toBigDecimal().times(exchange.fee)
-  userExchangeData.totalEthFeesPaid = userExchangeData.totalEthFeesPaid.plus(fee)
+  userExchangeData.ethFeesPaid = userExchangeData.ethFeesPaid.plus(fee)
   userExchangeData.save()
 
   /****** Update Transaction ******/
   let transaction = new Transaction(event.transaction.hash.toHex())
   transaction.event = "TokenPurchase"
-  transaction.block = event.block.number
+  transaction.block = event.block.number.toI32()
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
   transaction.tokenSymbol = exchange.tokenSymbol
@@ -120,20 +120,20 @@ export function handleEthPurchase(event: EthPurchase): void {
     // userExchangeData.currentTokenProfit = BigInt.fromI32(0)
     userExchangeData.ethBought = BigDecimal.fromString("0")
     userExchangeData.tokensBought = BigDecimal.fromString("0")
-    userExchangeData.totalEthFeesPaid = BigDecimal.fromString("0")
-    userExchangeData.totalTokenFeesPaid = BigDecimal.fromString("0")
+    userExchangeData.ethFeesPaid = BigDecimal.fromString("0")
+    userExchangeData.tokenFeesPaid = BigDecimal.fromString("0")
   }
 
   userExchangeData.ethBought = userExchangeData.ethBought.plus(event.params.eth_bought.toBigDecimal())
   userExchangeData.tokensBought = userExchangeData.tokensBought.minus(event.params.tokens_sold.toBigDecimal())
   let fee = event.params.tokens_sold.toBigDecimal().times(exchange.fee)
-  userExchangeData.totalTokenFeesPaid = userExchangeData.totalTokenFeesPaid.plus(fee)
+  userExchangeData.tokenFeesPaid = userExchangeData.tokenFeesPaid.plus(fee)
   userExchangeData.save()
 
   /****** Update Transaction ******/
   let transaction = new Transaction(event.transaction.hash.toHex())
   transaction.event = "EthPurchase"
-  transaction.block = event.block.number
+  transaction.block = event.block.number.toI32()
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
   transaction.tokenSymbol = exchange.tokenSymbol
@@ -184,8 +184,8 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     // userExchangeData.currentTokenProfit = BigInt.fromI32(0)
     userExchangeData.ethBought = BigDecimal.fromString("0")
     userExchangeData.tokensBought = BigDecimal.fromString("0")
-    userExchangeData.totalEthFeesPaid = BigDecimal.fromString("0")
-    userExchangeData.totalTokenFeesPaid = BigDecimal.fromString("0")
+    userExchangeData.ethFeesPaid = BigDecimal.fromString("0")
+    userExchangeData.tokenFeesPaid = BigDecimal.fromString("0")
   }
 
   userExchangeData.ethDeposited = userExchangeData.ethDeposited.plus(event.params.eth_amount.toBigDecimal())
@@ -195,13 +195,14 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   /****** Update Transaction ******/
   let transaction = new Transaction(event.transaction.hash.toHex())
   transaction.event = "AddLiquidity"
-  transaction.block = event.block.number
+  transaction.block = event.block.number.toI32()
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.provider
   transaction.ethAmount = event.params.eth_amount
   transaction.tokenAmount = event.params.token_amount
+  transaction.fee = BigDecimal.fromString("0")
   transaction.save()
 }
 
@@ -232,13 +233,14 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   /****** Update Transaction ******/
   let transaction = new Transaction(event.transaction.hash.toHex())
   transaction.event = "RemoveLiquidity"
-  transaction.block = event.block.number
+  transaction.block = event.block.number.toI32()
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.provider
   transaction.ethAmount = event.params.eth_amount.times(BigInt.fromI32(-1))
   transaction.tokenAmount = event.params.token_amount.times(BigInt.fromI32(-1))
+  transaction.fee = BigDecimal.fromString("0")
   transaction.save()
 }
 
@@ -284,8 +286,8 @@ export function handleTransfer(event: Transfer): void {
       userTo.tokensWithdrawn = BigDecimal.fromString("0")
       // userTo.currentEthProfit = BigInt.fromI32(0)
       // userTo.currentTokenProfit = BigInt.fromI32(0)
-      userTo.totalTokenFeesPaid = BigDecimal.fromString("0")
-      userTo.totalEthFeesPaid = BigDecimal.fromString("0")
+      userTo.tokenFeesPaid = BigDecimal.fromString("0")
+      userTo.ethFeesPaid = BigDecimal.fromString("0")
       userTo.ethBought = BigDecimal.fromString("0")
       userTo.tokensBought = BigDecimal.fromString("0")
       userTo.save()

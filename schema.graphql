@@ -4,14 +4,19 @@ type Uniswap @entity {
     exchangeCount: Int!
     exchanges: [Exchange!]! @derivedFrom(field: "factoryID")
 
-    # derived values
+    # TODO - math for these 7 values
     totalVolume: BigDecimal
     totalDepositedLiquidity: BigDecimal
     totalRemovedLiquidity: BigDecimal
-    totalVolumeUSD: BigDecimal                  # accumulate at each trade, not just calculated off whatever totalVolume is. making it more accurate for USD
+
+    totalVolumeUSD: BigDecimal                                  # Accumulate at each trade, not just calculated off whatever totalVolume is. making it more accurate for USD
     totalDepositedLiquidityUSD: BigDecimal
     totalRemovedLiquidityUSD: BigDecimal
-    totalSwaps: BigInt
+
+    totalSells: BigInt                                          # Total events where tokens have been sold
+    totalBuys: BigInt                                           # Total events where tokens have been bought
+    totalAddLiquidity: BigInt                                   # Total events where liqidity has been added
+    totalRemoveLiquidity: BigInt                                # Total events where liquidity have been removed
 }
 
 type Exchange @entity {
@@ -20,19 +25,19 @@ type Exchange @entity {
     tokenSymbol: String!                    # TODO - change these from hardcoded when features exist
     tokenName: String!                      # TODO - change these from hardcoded when features exist
     tokenDecimals: Int!                     # TODO - change these from hardcoded when features exist
-    fee: BigDecimal!
-    version: Int!
+    fee: BigDecimal!                        # Always 0.3% for v1 uniswap
+    version: Int!                           # V1 only right now
     startTime: Int!                         # time exchange was created
     endTime: Int                            # Time exchange is closed (such as an upgrade to uniswap contacts)
 
     ethLiquidity: BigDecimal!               # In Eth, i.e. incorporates 10^-18 to get rid of pricing in wei
     tokenLiquidity: BigDecimal!             # must factor in the decimals of tokens, which can be various
+    # annualROI: BigDecimal!                # Annual ROI for the exchange liquidity providers as a whole TODO - is this current, or weighted average?
     addLiquidityCount: BigInt!              # count the number of times liquidity has been added
     removeLiquidityCount: BigInt!           # count the number of times liquidity has been removed
     sellTokenCount: BigInt!                 # count the number of times the tokens been sold
     buyTokenCount: BigInt!                  # count the number of times the tokens been bought
     totalUniToken: BigInt!                  # Count of the unilying unitokens that represent ownership
-
 
     # Price values using eth
     lastPrice: BigDecimal!             # the last trade price
@@ -41,7 +46,7 @@ type Exchange @entity {
     totalValue: BigDecimal!                 # totalValue is accumulation of trade price X trade volume. TV = tokensSold * priceTokensSold
     weightedAvgPrice: BigDecimal!           # avg price of all trades since inception. WAP = totalValue / totalVolume
 
-    # Price values uing usd TODO - get values from MKR usd oracle 
+    # Price values uing usd TODO - get values from MKR usd oracle
     lastPriceUSD: BigDecimal           # the last trade price
     priceUSD: BigDecimal!                   # USD / token
     tradeVolumeUSD: BigDecimal              # total tokens traded EVER
@@ -70,31 +75,39 @@ type UserExchangeData @entity {
     # Liquidity Provider Data
     ethDeposited: BigDecimal!      # where negative means eth was exchanged for tokens
     tokensDeposited: BigDecimal!    # where negative means tokens were exchanged for eth
-    uniTokensMinted: BigInt!
-    uniTokensBurned: BigInt!
     ethWithdrawn: BigDecimal!
     tokensWithdrawn: BigDecimal!
-#    currentEthProfit: BigDecimal!      # NOT IMPLEMENTED - will add V2
-#    currentTokenProfit: BigDecimal!    # NOT IMPLEMENTED - will add V2
+    depositedUSD: BigDecimal!           # eth + tokens combined and converted into USD
+    withdrawnUSD: BigDecimal!           # eth + tokens combined and converted into USD
+    uniTokensMinted: BigInt!
+    uniTokensBurned: BigInt!
+    # feeRevenue: BigDecimal!           # Revenue from fees shared by pool
+    # slippage: BigDecimal!             # Postive means you've made money, negative means you lost
+    # currentEthProfit: BigDecimal!     # slippage + feeRevenue
+    # currentTokenProfit: BigDecimal!   # slippage + fee revenue
 
     # Trading Data
     ethBought: BigDecimal!
+    ethSold: BigDecimal!
     tokensBought: BigDecimal!
-    totalEthFeesPaid: BigDecimal!
-    totalTokenFeesPaid: BigDecimal!
+    tokensSold: BigDecimal!
+    ethFeesPaid: BigDecimal!
+    tokenFeesPaid: BigDecimal!
+    totalFeesUSD: BigDecimal            # eth fees + tokens fees combined and converted into USD
 
     # TODO - Add in USD for the UserExchangebalance
 }
 
+# TODO - do I want to add in USD for transacitons?
 type Transaction @entity {
     id: ID!             # Transaction Hash
     event: String!
-    block: BigInt!
+    block: Int!
     timeStamp: Int!
     exchangeAddress: Bytes!
     tokenSymbol: String!
     userAddress: Bytes!
-    ethAmount: BigInt!   # where negative means you sold eth to buy tokens
-    tokenAmount: BigInt! # where negative means you sold tokens to buy eth
-    fee: BigDecimal! # not !, because Add and Remove Liquidity don't have fee TODO - make it zero, instead of null
+    ethAmount: BigInt!   # Trade Event: negative means sold eth. Liquidity Event: Negative = removed. Positive = added
+    tokenAmount: BigInt! # Trade Event: negative means sold eth. Liquidity Event: Negative = removed. Positive = added
+    fee: BigDecimal!
 }
