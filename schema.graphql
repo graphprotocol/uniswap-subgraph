@@ -25,41 +25,41 @@ type Exchange @entity {
     version: Int!
     ethLiquidity: BigDecimal!               # In Eth, i.e. incorporates 10^-18 to get rid of pricing in wei
     tokenLiquidity: BigDecimal!             # must factor in the decimals of tokens, which can be various
-    startTime: Int!                      # time exchange was created
-    endTime: BigInt                         # Time exchange is closed (such as an upgrade to uniswap contacts)
+    startTime: Int!                         # time exchange was created
+    endTime: Int                            # Time exchange is closed (such as an upgrade to uniswap contacts)
     totalUniToken: BigInt!                  # Count of the unilying unitokens that represent ownership
     sellTrades: BigInt!                     # count the number of times the tokens been sold
     buyTrades: BigInt!                      # count the number of times the tokens been bought
 
     # Price values using eth
-    price: BigDecimal!                      # price is the ratio of eth/token
     lastTradePrice: BigDecimal!             # the last trade price
+    price: BigDecimal!                      # price is the ratio of eth/token
     tradeVolume: BigDecimal!                # total tokens traded EVER
-    totalValue: BigDecimal!                 # totalValue is accumulation of trade price X trade volume, so that we can calculation weightedAvgPrice each trade
-    weightedAvgPrice: BigDecimal!           # avg price of all trades since inception
+    totalValue: BigDecimal!                 # totalValue is accumulation of trade price X trade volume. TV = tokensSold * priceTokensSold
+    weightedAvgPrice: BigDecimal!           # avg price of all trades since inception. WAP = totalValue / totalVolume
 
     # Price values uing usd
-    usdPrice: BigDecimal!                   # USD / token
     lastTradePriceUSD: BigDecimal           # the last trade price
+    usdPrice: BigDecimal!                   # USD / token
     tradeVolumeUSD: BigDecimal              # total tokens traded EVER
-    totalValueUSD: BigDecimal               # totalValue is accumulation of trade price X trade volume, so that we can calculation weightedAvgPrice each trade
-    weightedAvgPriceUSD: BigDecimal         # avg price of all trades since inception
+    totalValueUSD: BigDecimal               # totalValue is accumulation of trade price X trade volume. TV = tokensSold * priceTokensSold
+    weightedAvgPriceUSD: BigDecimal         # avg price of all trades since inception. WAP = totalValue / totalVolume
 
     # Fields used to help derived relationship
     factoryID: String!                                                              # used for @derivedFrom of Factory
-    tokenHolders: [UserExchangeBalance!]! @derivedFrom(field: "exchangeAddress")    # Relationship to show all token holders on the exchange
+    tokenHolders: [UserExchangeData!]! @derivedFrom(field: "exchangeAddress")       # Relationship to show all token holders on the exchange
     txs: [Transaction!]! @derivedFrom(field: "exchangeAddress")                     # Relationship to show all txs on the exchange
 
 }
 
 type User @entity {
     id: ID! # user eth adddress
-    exchangeBalances: [UserExchangeBalance!]!  @derivedFrom(field: "userAddress")
+    exchangeBalances: [UserExchangeData!]!  @derivedFrom(field: "userAddress")
     txs: [Transaction!]!  @derivedFrom(field: "userAddress")
 }
 
 # Left out allowance for now, because handleApprove never gets called
-type UserExchangeBalance @entity {
+type UserExchangeData @entity {
     id: ID!                     # ID is concatenation of token and addr. i.e. DAI-0xkashkd34....
     userAddress: Bytes!         # used for @derivedFrom of User
     exchangeAddress: Bytes!        # used for @derivedFrom of TrackedExchange
