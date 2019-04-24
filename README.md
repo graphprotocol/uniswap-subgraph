@@ -151,4 +151,6 @@ This query fetches 10 users, and all of their uniswap exchange information (i.e.
       totalEthFeesPaid
       totalTokenFeesPaid
     }
+  }
+}
 ```
