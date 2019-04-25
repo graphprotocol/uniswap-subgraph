@@ -1,4 +1,4 @@
-import {BigInt, BigDecimal} from '@graphprotocol/graph-ts'
+import {BigInt, BigDecimal, Address} from '@graphprotocol/graph-ts'
 import {
   TokenPurchase,
   EthPurchase,
@@ -8,6 +8,8 @@ import {
   Approval,
   Exchange as ExchangeContract,
 } from '../types/Exchange-BAT/Exchange' // Although imported from BAT, these can be used for all exchanges
+
+import {Oracle} from "../types/Exchange-BAT/Oracle";
 
 import {
   User,
@@ -28,10 +30,24 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.tradeVolume = exchange.tradeVolume.plus(event.params.tokens_bought.toBigDecimal())
   exchange.totalValue = exchange.totalValue.plus(event.params.tokens_bought.toBigDecimal().times(exchange.price))
   exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
+
+  /****** Get ETH in USD from Compound Oracle ******/ // TODO - update to MKR price oracle when we can handle BigInts in bytes format
+  if (event.block.number.toI32() > 6747538) {
+    let oracle = Oracle.bind(Address.fromString("0x02557a5e05defeffd4cae6d83ea3d173b272c904"))
+    let oneDaiInEth = oracle.getPrice(Address.fromString("0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359"))
+    if (oneDaiInEth.equals(BigInt.fromI32(0))) {
+      // do nothing, dai price oracle has not been set yet in the compound contract
+    } else {
+      exchange.lastPriceUSD = exchange.priceUSD
+      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth.toBigDecimal()).div(exchange.price)
+      exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth.toBigDecimal()).div(exchange.weightedAvgPrice)
+    }
+  }
+
   exchange.save()
 
   /****** Update User ******/
-  // It is conceivable that user does not exist yet here
+    // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
   let user = User.load(userID)
   if (user == null) {
@@ -95,7 +111,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.save()
 
   /****** Update User ******/
-  // It is conceivable that user does not exist yet here
+    // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
   let user = User.load(userID)
   if (user == null) {

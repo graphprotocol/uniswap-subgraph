@@ -39,6 +39,8 @@ dataSources:
       abis:
         - name: Exchange
           file: ./abis/exchange.json
+        - name: Oracle
+          file: ./abis/compoundPriceOracle.json
       eventHandlers:
         - event: TokenPurchase(address,uint256,uint256)
           handler: handleTokenPurchase

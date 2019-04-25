@@ -1,3 +1,6 @@
+# NOTE  - all USD values are calculated at the moment an event updates, and the conversion of ETH/USD at that time
+#         As opposed to calculating USD at each moment, and running a tally of USD each time an event is triggered
+
 # Uniswap entity stores values from the Factory contract
 type Uniswap @entity {
     id: ID! # Factory Address
@@ -40,20 +43,21 @@ type Exchange @entity {
     totalUniToken: BigInt!                  # Count of the unilying unitokens that represent ownership
 
     # Price values using eth
-    lastPrice: BigDecimal!             # the last trade price
-    price: BigDecimal!                      # price is the ratio of eth/token
+    lastPrice: BigDecimal!                  # the last trade price
+    price: BigDecimal!                      # price is the total amount of tokens that equal one ETH
     tradeVolume: BigDecimal!                # total tokens traded EVER
     totalValue: BigDecimal!                 # totalValue is accumulation of trade price X trade volume. TV = tokensSold * priceTokensSold
     weightedAvgPrice: BigDecimal!           # avg price of all trades since inception. WAP = totalValue / totalVolume
 
     # Price values uing usd TODO - get values from MKR usd oracle
-    lastPriceUSD: BigDecimal           # the last trade price
+    lastPriceUSD: BigDecimal!           # the last trade price
     priceUSD: BigDecimal!                   # USD / token
-    tradeVolumeUSD: BigDecimal              # total tokens traded EVER
-    totalValueUSD: BigDecimal               # totalValue is accumulation of trade price X trade volume. TV = tokensSold * priceTokensSold
-    weightedAvgPriceUSD: BigDecimal         # avg price of all trades since inception. WAP = totalValue / totalVolume
+#    tradeVolumeUSD: BigDecimal!              # total tokens traded EVER TODO - delete, pretty sure it isnt needed
+#    totalValueUSD: BigDecimal!               # totalValue is accumulation of trade price X trade volume. TV = tokensSold * priceTokensSold  TODO - delete, pretty sure it isnt needed
+    weightedAvgPriceUSD: BigDecimal!         # avg price of all trades since inception. WAP = totalValue / totalVolume
 
     # Fields used to help derived relationship
+
     factoryID: String!                                                              # used for @derivedFrom of Factory
     tokenHolders: [UserExchangeData!]! @derivedFrom(field: "exchangeAddress")       # Relationship to show all token holders on the exchange
     txs: [Transaction!]! @derivedFrom(field: "exchangeAddress")                     # Relationship to show all txs on the exchange
@@ -65,6 +69,7 @@ type User @entity {
     exchangeBalances: [UserExchangeData!]!  @derivedFrom(field: "userAddress")
     txs: [Transaction!]!  @derivedFrom(field: "userAddress")
 }
+
 
 # Left out allowance for now, because handleApprove never gets called
 type UserExchangeData @entity {
@@ -85,6 +90,7 @@ type UserExchangeData @entity {
     # slippage: BigDecimal!             # Postive means you've made money, negative means you lost
     # currentEthProfit: BigDecimal!     # slippage + feeRevenue
     # currentTokenProfit: BigDecimal!   # slippage + fee revenue
+    # currentUSDProfit: BigDecimal!     # ethProfit + tokenProfit , in USD
 
     # Trading Data
     ethBought: BigDecimal!
