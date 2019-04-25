@@ -39,8 +39,8 @@ export function handleTokenPurchase(event: TokenPurchase): void {
       // do nothing, dai price oracle has not been set yet in the compound contract
     } else {
       exchange.lastPriceUSD = exchange.priceUSD
-      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth.toBigDecimal()).div(exchange.price)
-      exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth.toBigDecimal()).div(exchange.weightedAvgPrice)
+      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth.toBigDecimal()).div(exchange.price).truncate(4)
+      exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth.toBigDecimal()).div(exchange.weightedAvgPrice).truncate(4)
     }
   }
 

@@ -57,11 +57,9 @@ type Exchange @entity {
     weightedAvgPriceUSD: BigDecimal!         # avg price of all trades since inception. WAP = totalValue / totalVolume
 
     # Fields used to help derived relationship
-
     factoryID: String!                                                              # used for @derivedFrom of Factory
     tokenHolders: [UserExchangeData!]! @derivedFrom(field: "exchangeAddress")       # Relationship to show all token holders on the exchange
     txs: [Transaction!]! @derivedFrom(field: "exchangeAddress")                     # Relationship to show all txs on the exchange
-
 }
 
 type User @entity {
@@ -69,7 +67,6 @@ type User @entity {
     exchangeBalances: [UserExchangeData!]!  @derivedFrom(field: "userAddress")
     txs: [Transaction!]!  @derivedFrom(field: "userAddress")
 }
-
 
 # Left out allowance for now, because handleApprove never gets called
 type UserExchangeData @entity {
@@ -82,8 +79,8 @@ type UserExchangeData @entity {
     tokensDeposited: BigDecimal!    # where negative means tokens were exchanged for eth
     ethWithdrawn: BigDecimal!
     tokensWithdrawn: BigDecimal!
-    depositedUSD: BigDecimal!           # eth + tokens combined and converted into USD
-    withdrawnUSD: BigDecimal!           # eth + tokens combined and converted into USD
+    depositedUSDCombined: BigDecimal!           # eth + tokens combined and converted into USD
+    withdrawnUSDCombined: BigDecimal!           # eth + tokens combined and converted into USD
     uniTokensMinted: BigInt!
     uniTokensBurned: BigInt!
     # feeRevenue: BigDecimal!           # Revenue from fees shared by pool
@@ -99,7 +96,7 @@ type UserExchangeData @entity {
     tokensSold: BigDecimal!
     ethFeesPaid: BigDecimal!
     tokenFeesPaid: BigDecimal!
-    totalFeesUSD: BigDecimal            # eth fees + tokens fees combined and converted into USD
+    totalFeesUSDCombined: BigDecimal            # eth fees + tokens fees combined and converted into USD
 
     # TODO - Add in USD for the UserExchangebalance
 }
