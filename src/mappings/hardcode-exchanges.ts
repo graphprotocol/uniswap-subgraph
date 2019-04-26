@@ -9,8 +9,8 @@ export function hardcodeExchange(exchangeAddress: string, tokenAddress: Address,
   exchange.version = 1
   exchange.ethLiquidity = BigDecimal.fromString("0")
   exchange.tokenLiquidity = BigDecimal.fromString("0")
-  exchange.ethBalance = BigDecimal.fromString("0")
-  exchange.tokenBalance = BigDecimal.fromString("0")
+  exchange.ethTemp = BigDecimal.fromString("0")
+  exchange.tokenTemp = BigDecimal.fromString("0")
   exchange.annualROI = BigDecimal.fromString("0")
   exchange.startTime = timestamp
   exchange.addLiquidityCount = BigInt.fromI32(0)

@@ -24,11 +24,11 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_sold.toBigDecimal().div(exponentToBigDecimal(18))
   let tokenAmount = event.params.tokens_bought.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
-  exchange.ethLiquidity = exchange.ethLiquidity.plus(ethAmount)
-  exchange.tokenLiquidity = exchange.tokenLiquidity.minus(tokenAmount)
+  exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
+  exchange.tokenBalance = exchange.tokenBalance.minus(tokenAmount)
   exchange.buyTokenCount = exchange.buyTokenCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
+  exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
   exchange.tradeVolume = exchange.tradeVolume.plus(tokenAmount)
   exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
   exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
@@ -71,7 +71,6 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   userExchangeData.tokensBought = userExchangeData.tokensBought.plus(tokenAmount)
   let fee = ethAmount.times(exchange.fee)
   userExchangeData.ethFeesPaid = userExchangeData.ethFeesPaid.plus(fee)
-  exchange.ethBalance = exchange.ethBalance.plus(fee)
 
   // /****** Get ETH in USD from Compound Oracle ******/ // TODO - update to MKR price oracle when we can handle BigInts in bytes format
   if (event.block.number.toI32() > 6747538) {
@@ -88,12 +87,11 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     }
   }
 
-  // annualROI calculations
-  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  let totalTokensToEth2 = exchange.tokenBalance.div(exchange.price)
+  let liquidityTokensToEth2 = exchange.tokenLiquidity.div(exchange.price)
+  let totalBalanceValue2 = totalTokensToEth2.plus(exchange.ethBalance)
+  let totalLiquidityValue2 = liquidityTokensToEth2.plus(exchange.ethLiquidity)
+  exchange.annualROI2 = totalBalanceValue2.div(totalLiquidityValue2).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -118,11 +116,11 @@ export function handleEthPurchase(event: EthPurchase): void {
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_bought.toBigDecimal().div(exponentToBigDecimal(18))
   let tokenAmount = event.params.tokens_sold.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
-  exchange.ethLiquidity = exchange.ethLiquidity.minus(ethAmount)
-  exchange.tokenLiquidity = exchange.tokenLiquidity.plus(tokenAmount)
+  exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
+  exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
   exchange.sellTokenCount = exchange.sellTokenCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
+  exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
   exchange.tradeVolume = exchange.tradeVolume.plus(tokenAmount)
   exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
   exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
@@ -182,12 +180,6 @@ export function handleEthPurchase(event: EthPurchase): void {
     }
   }
 
-  // annualROI calculations
-  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -213,13 +205,13 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
   let tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
-  exchange.ethLiquidity = exchange.ethLiquidity.plus(ethAmount)
-  exchange.tokenLiquidity = exchange.tokenLiquidity.plus(tokenAmount)
   exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
+  exchange.ethLiquidity = exchange.ethLiquidity.plus(ethAmount)
+  exchange.tokenLiquidity = exchange.tokenLiquidity.plus(tokenAmount)
   exchange.addLiquidityCount = exchange.addLiquidityCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
+  exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
 
   /****** Update User ******/
   let userID = event.params.provider.toHex()
@@ -269,13 +261,6 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     }
   }
 
-  // annualROI calculations
-  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
-
   exchange.save()
   userExchangeData.save()
 
@@ -300,13 +285,13 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
   let tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
-  exchange.ethLiquidity = exchange.ethLiquidity.minus(ethAmount)
-  exchange.tokenLiquidity = exchange.tokenLiquidity.minus(tokenAmount)
   exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.minus(tokenAmount)
+  exchange.ethLiquidity = exchange.ethLiquidity.minus(ethAmount)
+  exchange.tokenLiquidity = exchange.tokenLiquidity.minus(tokenAmount)
   exchange.removeLiquidityCount = exchange.removeLiquidityCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
-  exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
+  exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
 
 
   /****** Update UserExchangeData ******/
@@ -327,13 +312,6 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
       exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
     }
   }
-
-  // annualROI calculations
-  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -370,11 +348,6 @@ export function handleTransfer(event: Transfer): void {
     exchange.totalUniToken = exchange.totalUniToken.minus(uniTokens)
     let userFrom = UserExchangeData.load(userFromID)
     userFrom.uniTokensBurned = userFrom.uniTokensBurned.plus(uniTokens)
-
-    // TODO - these two lines need BigInt division to return fractions, then it will work
-    // This handle always gets ran after liquidity handlers, which is required, since we use deposited and withdrawn values
-    // userFrom.currentEthProfit = userFrom.ethWithdrawn.minus((userFrom.uniTokensBurned.div(userFrom.uniTokensMinted).times(userFrom.ethDeposited)))
-    // userFrom.currentTokenProfit = userFrom.tokensWithdrawn.minus(userFrom.uniTokensBurned.div(userFrom.uniTokensMinted).times(userFrom.tokensDeposited))
 
     exchange.save()
     userFrom.save()
