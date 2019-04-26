@@ -90,6 +90,7 @@ type UserExchangeData @entity {
     # currentUSDProfit: BigDecimal!     # ethProfit + tokenProfit , in USD
 
     # Trading Data
+    # Fee is always charged in what the user is paying with. i.e. you buy eth by paying in token. Fee is in tokenn  TODO - is this the style we want. Think about it for a bit
     ethBought: BigDecimal!
     ethSold: BigDecimal!
     tokensBought: BigDecimal!

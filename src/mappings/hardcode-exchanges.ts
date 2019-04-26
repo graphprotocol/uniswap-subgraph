@@ -5,7 +5,7 @@ export function hardcodeExchange(exchangeAddress: string, tokenAddress: Address,
   let exchange = new Exchange(exchangeAddress)
   exchange.tokenAddress = tokenAddress
 
-  exchange.fee = BigDecimal.fromString("0.3")
+  exchange.fee = BigDecimal.fromString("0.003")
   exchange.version = 1
   exchange.ethLiquidity = BigDecimal.fromString("0")
   exchange.tokenLiquidity = BigDecimal.fromString("0")
