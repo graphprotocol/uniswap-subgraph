@@ -35,7 +35,9 @@ type Exchange @entity {
 
     ethLiquidity: BigDecimal!               # In Eth, i.e. incorporates 10^-18 to get rid of pricing in wei
     tokenLiquidity: BigDecimal!             # must factor in the decimals of tokens, which can be various
-    # annualROI: BigDecimal!                # Annual ROI for the exchange liquidity providers as a whole TODO - is this current, or weighted average?
+    ethBalance: BigDecimal!                 # The true balance of the exchange in ETH. This is ethLiquidity + eth fees accumulated
+    tokenBalance: BigDecimal!               # The true balance of the exhcanges tokens. This is tokenLiquidty + token fees accumulated
+    annualROI: BigDecimal!                  # Annual ROI for the exchange liquidity providers as a whole
     addLiquidityCount: BigInt!              # count the number of times liquidity has been added
     removeLiquidityCount: BigInt!           # count the number of times liquidity has been removed
     sellTokenCount: BigInt!                 # count the number of times the tokens been sold

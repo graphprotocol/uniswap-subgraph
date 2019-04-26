@@ -71,6 +71,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   userExchangeData.tokensBought = userExchangeData.tokensBought.plus(tokenAmount)
   let fee = ethAmount.times(exchange.fee)
   userExchangeData.ethFeesPaid = userExchangeData.ethFeesPaid.plus(fee)
+  exchange.ethBalance = exchange.ethBalance.plus(fee)
 
   // /****** Get ETH in USD from Compound Oracle ******/ // TODO - update to MKR price oracle when we can handle BigInts in bytes format
   if (event.block.number.toI32() > 6747538) {
@@ -86,6 +87,13 @@ export function handleTokenPurchase(event: TokenPurchase): void {
       userExchangeData.ethFeesInUSD = BigDecimal.fromString("1000000000000000000").times(userExchangeData.ethFeesPaid).div(oneDaiInEth).truncate(4)
     }
   }
+
+  // annualROI calculations
+  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -157,6 +165,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   userExchangeData.tokensSold = userExchangeData.tokensSold.plus(tokenAmount)
   let fee = tokenAmount.times(exchange.fee)
   userExchangeData.tokenFeesPaid = userExchangeData.tokenFeesPaid.plus(fee)
+  exchange.tokenBalance = exchange.tokenBalance.plus(fee)
 
   /****** Get ETH in USD from Compound Oracle ******/
   if (event.block.number.toI32() > 6747538) {
@@ -172,6 +181,13 @@ export function handleEthPurchase(event: EthPurchase): void {
       userExchangeData.tokenFeesInUSD = BigDecimal.fromString("1000000000000000000").times(userExchangeData.tokenFeesPaid).div(oneDaiInEth).div(exchange.price).truncate(4)
     }
   }
+
+  // annualROI calculations
+  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -199,13 +215,11 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
   exchange.ethLiquidity = exchange.ethLiquidity.plus(ethAmount)
   exchange.tokenLiquidity = exchange.tokenLiquidity.plus(tokenAmount)
+  exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
+  exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
   exchange.addLiquidityCount = exchange.addLiquidityCount.plus(BigInt.fromI32(1))
-  // // if (exchange.ethLiquidity.equals(BigDecimal.fromString("0"))) {
-  //   exchange.price = BigDecimal.fromString("0")
-  // } else {
   exchange.lastPrice = exchange.price
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
-  // }
 
   /****** Update User ******/
   let userID = event.params.provider.toHex()
@@ -255,6 +269,13 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     }
   }
 
+  // annualROI calculations
+  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+
   exchange.save()
   userExchangeData.save()
 
@@ -281,11 +302,9 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
   exchange.ethLiquidity = exchange.ethLiquidity.minus(ethAmount)
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(tokenAmount)
+  exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
+  exchange.tokenBalance = exchange.tokenBalance.minus(tokenAmount)
   exchange.removeLiquidityCount = exchange.removeLiquidityCount.plus(BigInt.fromI32(1))
-
-  // if (exchange.ethLiquidity.equals(BigDecimal.fromString("0"))) {
-  //   exchange.price = BigDecimal.fromString("0")
-  // } else {
   exchange.lastPrice = exchange.price
   exchange.price = exchange.tokenLiquidity.div(exchange.ethLiquidity).truncate(18)
 
@@ -308,6 +327,13 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
       exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
     }
   }
+
+  // annualROI calculations
+  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -401,37 +427,6 @@ export function handleTransfer(event: Transfer): void {
 export function handleApproval(event: Approval): void {
 
 }
-
-// // Must add 1 so we never divide by 0. makes for a minimal effect of change, since it is like 1 wei
-// // TODO - when we have ability to check if BigInt is "0", then we can avoid this
-// function bigInt_b_GT_a(a: BigInt, b: BigInt): boolean {
-//   let remainder = a.div(b.plus(BigInt.fromI32(1))).toI32()
-//   if (remainder == 0) { //i.e. b was bigger than a
-//     return true
-//   }
-//   return false
-// }
-//
-// function bigDecimal_b_greaterThan_a(a: BigDecimal, b: BigDecimal): boolean {
-//   // To prevent division by 0
-//   if (b.equals(BigDecimal.fromString("0"))) {
-//     return false
-//   }
-//
-//   let remainder = a.div(b)
-//
-//   // need to check if remainders digits is longer than its exponents, indicating a is a number above 1.0, thus return false
-//   let remainerDigits = remainder.digits.toString().length
-//   let remainderExp = remainder.exp.toI32()
-//   let digitsMinusExp = remainerDigits + remainderExp // exp is negative so add
-//   if (digitsMinusExp >= 0) {
-//     return false
-//   } else {
-//     return true
-//   }
-// }
-
-// }
 
 function exponentToBigDecimal(decimals: i32): BigDecimal {
   let bd = BigDecimal.fromString("1")
