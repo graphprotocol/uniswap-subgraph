@@ -40,7 +40,7 @@ type Exchange @entity {
     removeLiquidityCount: BigInt!           # count the number of times liquidity has been removed
     sellTokenCount: BigInt!                 # count the number of times the tokens been sold
     buyTokenCount: BigInt!                  # count the number of times the tokens been bought
-    totalUniToken: BigInt!                  # Count of the unilying unitokens that represent ownership
+    totalUniToken: BigDecimal!                  # Count of the unilying unitokens that represent ownership
 
     # Price values using eth
     lastPrice: BigDecimal!                  # the last trade price
@@ -81,8 +81,8 @@ type UserExchangeData @entity {
     tokensWithdrawn: BigDecimal!
     depositedUSDCombined: BigDecimal!           # eth + tokens combined and converted into USD
     withdrawnUSDCombined: BigDecimal!           # eth + tokens combined and converted into USD
-    uniTokensMinted: BigInt!
-    uniTokensBurned: BigInt!
+    uniTokensMinted: BigDecimal!
+    uniTokensBurned: BigDecimal!
     # feeRevenue: BigDecimal!           # Revenue from fees shared by pool
     # slippage: BigDecimal!             # Postive means you've made money, negative means you lost
     # currentEthProfit: BigDecimal!     # slippage + feeRevenue
@@ -96,9 +96,8 @@ type UserExchangeData @entity {
     tokensSold: BigDecimal!
     ethFeesPaid: BigDecimal!
     tokenFeesPaid: BigDecimal!
-    totalFeesUSDCombined: BigDecimal            # eth fees + tokens fees combined and converted into USD
-
-    # TODO - Add in USD for the UserExchangebalance
+    ethFeesInUSD: BigDecimal!
+    tokenFeesInUSD: BigDecimal!
 }
 
 # TODO - do I want to add in USD for transacitons?

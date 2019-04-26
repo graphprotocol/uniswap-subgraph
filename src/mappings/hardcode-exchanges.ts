@@ -14,7 +14,7 @@ export function hardcodeExchange(exchangeAddress: string, tokenAddress: Address,
   exchange.removeLiquidityCount = BigInt.fromI32(0)
   exchange.sellTokenCount = BigInt.fromI32(0)
   exchange.buyTokenCount = BigInt.fromI32(0)
-  exchange.totalUniToken = BigInt.fromI32(0)
+  exchange.totalUniToken = BigDecimal.fromString("0")
 
   exchange.price = BigDecimal.fromString("0")
   exchange.lastPrice = BigDecimal.fromString("0")
