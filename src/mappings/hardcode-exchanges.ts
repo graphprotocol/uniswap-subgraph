@@ -7,28 +7,30 @@ export function hardcodeExchange(exchangeAddress: string, tokenAddress: Address,
 
   exchange.fee = BigDecimal.fromString("0.003")
   exchange.version = 1
+  exchange.startTime = timestamp
+
   exchange.ethLiquidity = BigDecimal.fromString("0")
   exchange.tokenLiquidity = BigDecimal.fromString("0")
-  exchange.ethTemp = BigDecimal.fromString("0")
-  exchange.tokenTemp = BigDecimal.fromString("0")
+  exchange.ethBalance = BigDecimal.fromString("0")
+  exchange.tokenBalance = BigDecimal.fromString("0")
+  exchange.combinedBalanceInEth = BigDecimal.fromString("0")
+  exchange.combinedBalanceInUSD = BigDecimal.fromString("0")
   exchange.annualROI = BigDecimal.fromString("0")
-  exchange.startTime = timestamp
+  exchange.totalUniToken = BigDecimal.fromString("0")
+
   exchange.addLiquidityCount = BigInt.fromI32(0)
   exchange.removeLiquidityCount = BigInt.fromI32(0)
   exchange.sellTokenCount = BigInt.fromI32(0)
   exchange.buyTokenCount = BigInt.fromI32(0)
-  exchange.totalUniToken = BigDecimal.fromString("0")
 
-  exchange.price = BigDecimal.fromString("0")
   exchange.lastPrice = BigDecimal.fromString("0")
+  exchange.price = BigDecimal.fromString("0")
   exchange.tradeVolume = BigDecimal.fromString("0")
   exchange.totalValue = BigDecimal.fromString("0")
   exchange.weightedAvgPrice = BigDecimal.fromString("0")
 
   exchange.priceUSD = BigDecimal.fromString("0")
   exchange.lastPriceUSD = BigDecimal.fromString("0")
-  // exchange.tradeVolumeUSD = BigDecimal.fromString("0")
-  // exchange.totalValueUSD = BigDecimal.fromString("0")
   exchange.weightedAvgPriceUSD = BigDecimal.fromString("0")
 
   exchange.factoryID = "1"

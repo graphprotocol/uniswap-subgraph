@@ -25,9 +25,9 @@ type Uniswap @entity {
 type Exchange @entity {
     id: ID!                                 # Uniswap Exchange address
     tokenAddress: Bytes!                    # Token address
-    tokenSymbol: String!                    # TODO - change these from hardcoded when features exist
-    tokenName: String!                      # TODO - change these from hardcoded when features exist
-    tokenDecimals: Int!                     # TODO - change these from hardcoded when features exist
+    tokenSymbol: String                     # TODO - make sure we handle these null nicely
+    tokenName: String                       # TODO - make sure we handle these null nicely
+    tokenDecimals: Int                      # TODO - make sure we handle these null nicely
     fee: BigDecimal!                        # Always 0.3% for v1 uniswap
     version: Int!                           # V1 only right now
     startTime: Int!                         # time exchange was created
@@ -35,14 +35,14 @@ type Exchange @entity {
 
     ethLiquidity: BigDecimal!               # In Eth, i.e. incorporates 10^-18 to get rid of pricing in wei
     tokenLiquidity: BigDecimal!             # must factor in the decimals of tokens, which can be various
-    ethTemp: BigDecimal!
-    tokenTemp: BigDecimal!
-    ethBalance: BigDecimal
+#    ethTemp: BigDecimal!
+#    tokenTemp: BigDecimal!
+    ethBalance: BigDecimal!
     tokenBalance: BigDecimal!
-    combinedBalanceInEth: BigDecimal!       # Equal to ethBalance + (tokenBalance/price). Stored to simplify users calculating their own personal return
+    combinedBalanceInEth: BigDecimal!       # Equal to ethBalance + (tokenBalance/price). Stored to simplify users calculating their own personal return. because the ratio may have changes a lot in one direction
     combinedBalanceInUSD: BigDecimal!       # Equal to combinedBalanceInUSD * DAI/ETH
     annualROI: BigDecimal!                  # Annual ROI for the exchange liquidity providers as a whole
-    annualROI2: BigDecimal!
+#    annualROI2: BigDecimal!
     totalUniToken: BigDecimal!              # Count of the unilying unitokens that represent ownership
 
     # Counting Events
@@ -58,7 +58,7 @@ type Exchange @entity {
     totalValue: BigDecimal!                 # totalValue is accumulation of trade price X trade volume. TV = tokensSold * priceTokensSold
     weightedAvgPrice: BigDecimal!           # avg price of all trades since inception. WAP = totalValue / totalVolume
 
-    # Price values uing usd TODO - get values from MKR usd oracle when functionality is possible
+    # Price values uing usd TODO - get values from MKR usd oracle when functionality is possible. (IT MIGHT BE POSSIBLE NOW. SEE CHANGETYPE AND BIGINT
     lastPriceUSD: BigDecimal!               # the last trade price
     priceUSD: BigDecimal!                   # USD / token
     weightedAvgPriceUSD: BigDecimal!         # avg price of all trades since inception. WAP = totalValue / totalVolume. Based on WAP of Ether and ether/usd at the time of calculation
@@ -77,7 +77,7 @@ type User @entity {
 
 # Left out allowance for now, because handleApprove never gets called
 type UserExchangeData @entity {
-    id: ID!                     # ID is concatenation of token and user addr. i.e. DAI-0xkashkd34.... # TODO - handle multiple unknowns - they are probably overlapping right now
+    id: ID!                     # ID is concatenation of token and user addr. i.e. DAI-0xkashkd34.... # TODO - handle multiple unknowns - they are probably overlapping right now. note we are okay without collisions, because DAI is hardcoded, not read from contract
     userAddress: Bytes!         # used for @derivedFrom of User
     exchangeAddress: Bytes!        # used for @derivedFrom of TrackedExchange
 
@@ -103,7 +103,6 @@ type UserExchangeData @entity {
     tokenFeesInUSD: BigDecimal!
 }
 
-# TODO - do I want to add in USD for transacitons?
 type Transaction @entity {
     id: ID!             # Transaction Hash
     event: String!
