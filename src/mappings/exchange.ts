@@ -26,10 +26,10 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   let tokenAmount = event.params.tokens_bought.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
   exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.minus(tokenAmount)
-  exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price))
   exchange.buyTokenCount = exchange.buyTokenCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
   exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
+  exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
   exchange.tradeVolume = exchange.tradeVolume.plus(tokenAmount)
   exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
   exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
@@ -82,7 +82,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     } else {
       exchange.lastPriceUSD = exchange.priceUSD
       exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
-      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
       exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.weightedAvgPrice).truncate(4)
 
       userExchangeData.ethFeesInUSD = BigDecimal.fromString("1000000000000000000").times(userExchangeData.ethFeesPaid).div(oneDaiInEth).truncate(4)
@@ -121,10 +121,10 @@ export function handleEthPurchase(event: EthPurchase): void {
   let tokenAmount = event.params.tokens_sold.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
   exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
-  exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price))
   exchange.sellTokenCount = exchange.sellTokenCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
   exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
+  exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
   exchange.tradeVolume = exchange.tradeVolume.plus(tokenAmount)
   exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
   exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
@@ -167,7 +167,9 @@ export function handleEthPurchase(event: EthPurchase): void {
   userExchangeData.tokensSold = userExchangeData.tokensSold.plus(tokenAmount)
   let fee = tokenAmount.times(exchange.fee)
   userExchangeData.tokenFeesPaid = userExchangeData.tokenFeesPaid.plus(fee)
-  exchange.tokenBalance = exchange.tokenBalance.plus(fee)
+  // exchange.tokenBalance = exchange.tokenBalance.plus(fee) seems like a typo , delete !
+  userExchangeData.tokenFeesPaid = userExchangeData.tokenFeesPaid.plus(fee)
+
 
   /****** Get ETH in USD from Compound Oracle ******/
   if (event.block.number.toI32() > 6747538) {
@@ -178,7 +180,7 @@ export function handleEthPurchase(event: EthPurchase): void {
     } else {
       exchange.lastPriceUSD = exchange.priceUSD
       exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
-      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
       exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.weightedAvgPrice).truncate(4)
 
       userExchangeData.tokenFeesInUSD = BigDecimal.fromString("1000000000000000000").times(userExchangeData.tokenFeesPaid).div(oneDaiInEth).div(exchange.price).truncate(4)
@@ -218,12 +220,13 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
   exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
-  exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price))
   exchange.ethLiquidity = exchange.ethLiquidity.plus(ethAmount)
   exchange.tokenLiquidity = exchange.tokenLiquidity.plus(tokenAmount)
   exchange.addLiquidityCount = exchange.addLiquidityCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
   exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
+  exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+
 
   /****** Update User ******/
   let userID = event.params.provider.toHex()
@@ -270,6 +273,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     } else {
       exchange.lastPriceUSD = exchange.priceUSD
       exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
     }
   }
 
@@ -306,13 +310,12 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
   exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.minus(tokenAmount)
-  exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price))
   exchange.ethLiquidity = exchange.ethLiquidity.minus(ethAmount)
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(tokenAmount)
   exchange.removeLiquidityCount = exchange.removeLiquidityCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
   exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
-
+  exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
 
   /****** Update UserExchangeData ******/
   let userExchangeID = exchange.tokenSymbol.concat('-').concat(event.params.provider.toHex())
@@ -330,6 +333,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     } else {
       exchange.lastPriceUSD = exchange.priceUSD
       exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
     }
   }
 
