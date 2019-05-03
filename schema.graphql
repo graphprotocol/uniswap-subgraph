@@ -39,7 +39,7 @@ type Exchange @entity {
     tokenBalance: BigDecimal!
     combinedBalanceInEth: BigDecimal!       # Equal to ethBalance + (tokenBalance/price). Stored to simplify users calculating their own personal return. because the ratio may have changes a lot in one direction
     combinedBalanceInUSD: BigDecimal!       # Equal to combinedBalanceInUSD * DAI/ETH
-    ROI: BigDecimal!                  # Annual ROI for the exchange liquidity providers as a whole
+    ROI: BigDecimal!                        # ROI for the exchange liquidity providers as a whole
     totalUniToken: BigDecimal!              # Count of the unilying unitokens that represent ownership
 
     # Counting Events
@@ -74,13 +74,13 @@ type User @entity {
 
 # Left out allowance for now, because handleApprove never gets called
 type UserExchangeData @entity {
-    id: ID!                     # ID is concatenation of token and user addr. i.e. DAI-0xkashkd34.... # TODO - handle multiple unknowns - they are probably overlapping right now. note we are okay without collisions, because DAI is hardcoded, not read from contract
+    id: ID!                     # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34.... #todo - change to 2 address concatenation
     userAddress: Bytes!         # used for @derivedFrom of User
     exchangeAddress: Bytes!        # used for @derivedFrom of TrackedExchange
 
     # Liquidity Provider Data
-    ethDeposited: BigDecimal!      # where negative means eth was exchanged for tokens
-    tokensDeposited: BigDecimal!    # where negative means tokens were exchanged for eth
+    ethDeposited: BigDecimal!                   # where negative means eth was exchanged for tokens
+    tokensDeposited: BigDecimal!                # where negative means tokens were exchanged for eth
     ethWithdrawn: BigDecimal!
     tokensWithdrawn: BigDecimal!
     depositedUSDCombined: BigDecimal!           # eth + tokens combined and converted into USD
@@ -89,7 +89,7 @@ type UserExchangeData @entity {
     uniTokensBurned: BigDecimal!
 
     # Trading Data
-    # Fee is always charged in what the user is paying with. i.e. you buy eth by paying in token. Fee is in tokenn  TODO - is this the style we want. Think about it for a bit
+    # Note - Fee is always charged in what the user is paying with. i.e. you buy eth by paying in token. Fee is in tokenn
     ethBought: BigDecimal!
     ethSold: BigDecimal!
     tokensBought: BigDecimal!
@@ -106,7 +106,8 @@ type Transaction @entity {
     block: Int!
     timeStamp: Int!
     exchangeAddress: Bytes!
-    tokenSymbol: String!
+    tokenAddress: Bytes!
+    tokenSymbol: String
     userAddress: Bytes!
     ethAmount: BigInt!   # Trade Event: negative means sold eth. Liquidity Event: Negative = removed. Positive = added
     tokenAmount: BigInt! # Trade Event: negative means sold eth. Liquidity Event: Negative = removed. Positive = added

@@ -23,7 +23,12 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_sold.toBigDecimal().div(exponentToBigDecimal(18))
-  let tokenAmount = event.params.tokens_bought.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  let tokenAmount
+  if (exchange.tokenDecimals == null) {
+    tokenAmount = event.params.tokens_bought.toBigDecimal()
+  } else {
+    tokenAmount = event.params.tokens_bought.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  }
   exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.minus(tokenAmount)
   exchange.buyTokenCount = exchange.buyTokenCount.plus(BigInt.fromI32(1))
@@ -44,7 +49,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   }
 
   /****** Update UserExchangeData ******/
-  let userExchangeID = exchange.tokenSymbol.concat('-').concat(event.params.buyer.toHex())
+  let userExchangeID = exchange.tokenAddress.toHexString().concat('-').concat(event.params.buyer.toHex())
   let userExchangeData = UserExchangeData.load(userExchangeID)
   if (userExchangeData == null) {
     userExchangeData = new UserExchangeData(userExchangeID)
@@ -107,6 +112,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   transaction.block = event.block.number.toI32()
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
+  transaction.tokenAddress = exchange.tokenAddress
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.buyer
   transaction.ethAmount = event.params.eth_sold
@@ -120,7 +126,12 @@ export function handleEthPurchase(event: EthPurchase): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_bought.toBigDecimal().div(exponentToBigDecimal(18))
-  let tokenAmount = event.params.tokens_sold.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  let tokenAmount
+  if (exchange.tokenDecimals == null) {
+    tokenAmount = event.params.tokens_sold.toBigDecimal()
+  } else {
+    tokenAmount = event.params.tokens_sold.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  }
   exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
   exchange.sellTokenCount = exchange.sellTokenCount.plus(BigInt.fromI32(1))
@@ -141,7 +152,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   }
 
   /****** Update UserExchangeData ******/
-  let userExchangeID = exchange.tokenSymbol.concat('-').concat(event.params.buyer.toHex())
+  let userExchangeID = exchange.tokenAddress.toHexString().concat('-').concat(event.params.buyer.toHex())
   let userExchangeData = UserExchangeData.load(userExchangeID)
   if (userExchangeData == null) {
     userExchangeData = new UserExchangeData(userExchangeID)
@@ -172,7 +183,6 @@ export function handleEthPurchase(event: EthPurchase): void {
   let originalTokenValue = tokenAmount.div(BigDecimal.fromString("1").minus(exchange.fee))
   let fee = originalTokenValue.minus(tokenAmount).truncate(18)
   userExchangeData.tokenFeesPaid = userExchangeData.tokenFeesPaid.plus(fee)
-
 
 
   /****** Get ETH in USD from Compound Oracle ******/
@@ -207,6 +217,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   transaction.block = event.block.number.toI32()
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
+  transaction.tokenAddress = exchange.tokenAddress
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.buyer
   transaction.ethAmount = event.params.eth_bought
@@ -221,7 +232,12 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-  let tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  let tokenAmount
+  if (exchange.tokenDecimals == null) {
+    tokenAmount = event.params.token_amount.toBigDecimal()
+  } else {
+    tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  }
   exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
   exchange.ethLiquidity = exchange.ethLiquidity.plus(ethAmount)
@@ -241,7 +257,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   }
 
   /****** Update UserExchangeData ******/
-  let userExchangeID = exchange.tokenSymbol.concat('-').concat(event.params.provider.toHexString())
+  let userExchangeID = exchange.tokenAddress.toHexString().concat('-').concat(event.params.provider.toHexString())
   let userExchangeData = UserExchangeData.load(userExchangeID)
   if (userExchangeData == null) {
     userExchangeData = new UserExchangeData(userExchangeID)
@@ -297,6 +313,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   transaction.block = event.block.number.toI32()
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
+  transaction.tokenAddress = exchange.tokenAddress
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.provider
   transaction.ethAmount = event.params.eth_amount
@@ -311,7 +328,12 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-  let tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  let tokenAmount
+  if (exchange.tokenDecimals == null) {
+    tokenAmount = event.params.token_amount.toBigDecimal()
+  } else {
+    tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  }
   exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.minus(tokenAmount)
   exchange.ethLiquidity = exchange.ethLiquidity.minus(ethAmount)
@@ -322,7 +344,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
 
   /****** Update UserExchangeData ******/
-  let userExchangeID = exchange.tokenSymbol.concat('-').concat(event.params.provider.toHex())
+  let userExchangeID = exchange.tokenAddress.toHexString().concat('-').concat(event.params.provider.toHex())
   let userExchangeData = UserExchangeData.load(userExchangeID)
 
   userExchangeData.ethWithdrawn = userExchangeData.ethWithdrawn.plus(ethAmount)
@@ -357,6 +379,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   transaction.block = event.block.number.toI32()
   transaction.timeStamp = event.block.timestamp.toI32()
   transaction.exchangeAddress = event.address
+  transaction.tokenAddress = exchange.tokenAddress
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.provider
   transaction.ethAmount = event.params.eth_amount.times(BigInt.fromI32(-1))
@@ -369,8 +392,8 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
 export function handleTransfer(event: Transfer): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
-  let userToID = exchange.tokenSymbol.concat('-').concat(event.params._to.toHex())
-  let userFromID = exchange.tokenSymbol.concat('-').concat(event.params._from.toHex())
+  let userToID = exchange.tokenAddress.toHexString().concat('-').concat(event.params._to.toHex())
+  let userFromID = exchange.tokenAddress.toHexString().concat('-').concat(event.params._from.toHex())
   let uniTokens = event.params._value.toBigDecimal().div(exponentToBigDecimal(18))
 
   if (event.params._from.toHex() == '0x0000000000000000000000000000000000000000') {

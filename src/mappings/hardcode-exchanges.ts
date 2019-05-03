@@ -227,9 +227,9 @@ export function hardcodeExchange(exchangeAddress: string, tokenAddress: Address,
     exchange.tokenName = "Wrapped BTC"
     exchange.tokenDecimals = 8
   } else {
-    exchange.tokenSymbol = "UNKNOWN"
-    exchange.tokenName = "UNKNOWN"
-    exchange.tokenDecimals = 0
+    exchange.tokenSymbol = null
+    exchange.tokenName = null
+    exchange.tokenDecimals = null
   }
   exchange.save()
 }
