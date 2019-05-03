@@ -15,7 +15,7 @@ export function hardcodeExchange(exchangeAddress: string, tokenAddress: Address,
   exchange.tokenBalance = BigDecimal.fromString("0")
   exchange.combinedBalanceInEth = BigDecimal.fromString("0")
   exchange.combinedBalanceInUSD = BigDecimal.fromString("0")
-  exchange.annualROI = BigDecimal.fromString("0")
+  exchange.ROI = BigDecimal.fromString("0")
   exchange.totalUniToken = BigDecimal.fromString("0")
 
   exchange.addLiquidityCount = BigInt.fromI32(0)

@@ -70,7 +70,9 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
   userExchangeData.ethSold = userExchangeData.ethSold.plus(ethAmount)
   userExchangeData.tokensBought = userExchangeData.tokensBought.plus(tokenAmount)
-  let fee = ethAmount.times(exchange.fee)
+
+  let originalEthValue = ethAmount.div(BigDecimal.fromString("1").minus(exchange.fee))
+  let fee = originalEthValue.minus(ethAmount).truncate(18)
   userExchangeData.ethFeesPaid = userExchangeData.ethFeesPaid.plus(fee)
 
   // /****** Get ETH in USD from Compound Oracle ******/ // TODO - update to MKR price oracle when we can handle BigInts in bytes format
@@ -89,12 +91,12 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     }
   }
 
-  // annual ROI calculations
+  // ROI calculations
   let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
   let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
   let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
   let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -165,10 +167,12 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   userExchangeData.ethBought = userExchangeData.ethBought.plus(ethAmount)
   userExchangeData.tokensSold = userExchangeData.tokensSold.plus(tokenAmount)
-  let fee = tokenAmount.times(exchange.fee)
+
+  // Fee Calculations
+  let originalTokenValue = tokenAmount.div(BigDecimal.fromString("1").minus(exchange.fee))
+  let fee = originalTokenValue.minus(tokenAmount).truncate(18)
   userExchangeData.tokenFeesPaid = userExchangeData.tokenFeesPaid.plus(fee)
-  // exchange.tokenBalance = exchange.tokenBalance.plus(fee) seems like a typo , delete !
-  userExchangeData.tokenFeesPaid = userExchangeData.tokenFeesPaid.plus(fee)
+
 
 
   /****** Get ETH in USD from Compound Oracle ******/
@@ -187,12 +191,12 @@ export function handleEthPurchase(event: EthPurchase): void {
     }
   }
 
-  // annual ROI calculations
+  // ROI calculations
   let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
   let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
   let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
   let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -277,12 +281,12 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     }
   }
 
-  // annual ROI calculations
+  //  ROI calculations
   let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
   let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
   let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
   let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -337,12 +341,12 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     }
   }
 
-  // annual ROI calculations
+  // ROI calculations
   let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
   let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
   let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
   let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.annualROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()

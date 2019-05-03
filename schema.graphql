@@ -35,14 +35,11 @@ type Exchange @entity {
 
     ethLiquidity: BigDecimal!               # In Eth, i.e. incorporates 10^-18 to get rid of pricing in wei
     tokenLiquidity: BigDecimal!             # must factor in the decimals of tokens, which can be various
-#    ethTemp: BigDecimal!
-#    tokenTemp: BigDecimal!
     ethBalance: BigDecimal!
     tokenBalance: BigDecimal!
     combinedBalanceInEth: BigDecimal!       # Equal to ethBalance + (tokenBalance/price). Stored to simplify users calculating their own personal return. because the ratio may have changes a lot in one direction
     combinedBalanceInUSD: BigDecimal!       # Equal to combinedBalanceInUSD * DAI/ETH
-    annualROI: BigDecimal!                  # Annual ROI for the exchange liquidity providers as a whole
-#    annualROI2: BigDecimal!
+    ROI: BigDecimal!                  # Annual ROI for the exchange liquidity providers as a whole
     totalUniToken: BigDecimal!              # Count of the unilying unitokens that represent ownership
 
     # Counting Events
