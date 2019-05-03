@@ -7,27 +7,23 @@ type Uniswap @entity {
     exchangeCount: Int!
     exchanges: [Exchange!]! @derivedFrom(field: "factoryID")
 
-    # TODO - math for these 7 values
-    totalVolume: BigDecimal
-    totalDepositedLiquidity: BigDecimal
-    totalRemovedLiquidity: BigDecimal
+totalVolumeInEth: BigDecimal!                                    # volume just on eth -i.e. we dont double count volume
+    totalLiquidityInEth: BigDecimal!                             # 2 * SUM(exchanges.ethLiquidity)
+    totalVolumeUSD: BigDecimal!                                  # Accumulate at each trade, not just calculated off whatever totalVolume is. making it more accurate as it is a live conversion
+    totalLiquidityUSD: BigDecimal!
 
-    totalVolumeUSD: BigDecimal                                  # Accumulate at each trade, not just calculated off whatever totalVolume is. making it more accurate for USD
-    totalDepositedLiquidityUSD: BigDecimal
-    totalRemovedLiquidityUSD: BigDecimal
-
-    totalSells: BigInt                                          # Total events where tokens have been sold
-    totalBuys: BigInt                                           # Total events where tokens have been bought
-    totalAddLiquidity: BigInt                                   # Total events where liqidity has been added
-    totalRemoveLiquidity: BigInt                                # Total events where liquidity have been removed
+    totalTokenSells: BigInt!                                          # Total events where tokens have been sold
+    totalTokenBuys: BigInt!                                           # Total events where tokens have been bought
+    totalAddLiquidity: BigInt!                                   # Total events where liqidity has been added
+    totalRemoveLiquidity: BigInt!                                # Total events where liquidity have been removed
 }
 
 type Exchange @entity {
     id: ID!                                 # Uniswap Exchange address
     tokenAddress: Bytes!                    # Token address
-    tokenSymbol: String                     # TODO - make sure we handle these null nicely
-    tokenName: String                       # TODO - make sure we handle these null nicely
-    tokenDecimals: Int                      # TODO - make sure we handle these null nicely
+    tokenSymbol: String                     # can't always get this, since any contract can be a uniswap contract (no erc20 interface)
+    tokenName: String                       # can't always get this, since any contract can be a uniswap contract (no erc20 interface)
+    tokenDecimals: Int                      # can't always get this, since any contract can be a uniswap contract (no erc20 interface)
     fee: BigDecimal!                        # Always 0.3% for v1 uniswap
     version: Int!                           # V1 only right now
     startTime: Int!                         # time exchange was created
@@ -51,7 +47,8 @@ type Exchange @entity {
     # Price values using eth
     lastPrice: BigDecimal!                  # the last trade price
     price: BigDecimal!                      # price is the total amount of tokens that equal one ETH
-    tradeVolume: BigDecimal!                # total tokens traded EVER
+    tradeVolumeToken: BigDecimal!           # total tokens traded EVER
+    tradeVolumeEth: BigDecimal!             # total eth traded EVER
     totalValue: BigDecimal!                 # totalValue is accumulation of trade price X trade volume. TV = tokensSold * priceTokensSold
     weightedAvgPrice: BigDecimal!           # avg price of all trades since inception. WAP = totalValue / totalVolume
 

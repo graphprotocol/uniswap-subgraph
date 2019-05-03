@@ -25,7 +25,8 @@ export function hardcodeExchange(exchangeAddress: string, tokenAddress: Address,
 
   exchange.lastPrice = BigDecimal.fromString("0")
   exchange.price = BigDecimal.fromString("0")
-  exchange.tradeVolume = BigDecimal.fromString("0")
+  exchange.tradeVolumeToken = BigDecimal.fromString("0")
+  exchange.tradeVolumeEth = BigDecimal.fromString("0")
   exchange.totalValue = BigDecimal.fromString("0")
   exchange.weightedAvgPrice = BigDecimal.fromString("0")
 

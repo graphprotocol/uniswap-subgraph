@@ -23,37 +23,37 @@ dataSources:
       eventHandlers:
         - event: NewExchange(address,address) # token, exchange in that order
           handler: handleNewExchange
-#  - kind: ethereum/contract
-#    name: Exchange-BAT
-#    network: mainnet
-#    source:
-#      address: '0x2e642b8d59b45a1d8c5aef716a84ff44ea665914'
-#      abi: Exchange
-#    mapping:
-#      kind: ethereum/events
-#      apiVersion: 0.0.2
-#      language: wasm/assemblyscript
-#      file: ./src/mappings/exchange.ts
-#      entities:
-#        - TrackedExchange
-#      abis:
-#        - name: Exchange
-#          file: ./abis/exchange.json
-#        - name: Oracle
-#          file: ./abis/compoundPriceOracle.json
-#      eventHandlers:
-#        - event: TokenPurchase(address,uint256,uint256)
-#          handler: handleTokenPurchase
-#        - event: EthPurchase(address,uint256,uint256)
-#          handler: handleEthPurchase
-#        - event: AddLiquidity(address,uint256,uint256)
-#          handler: handleAddLiquidity
-#        - event: RemoveLiquidity(address,uint256,uint256)
-#          handler: handleRemoveLiquidity
-#        - event: Transfer(address,address,uint256)
-#          handler: handleTransfer
-##        - event: Approval(address,address,uint256)
-##          handler: handleApproval
+  - kind: ethereum/contract
+    name: Exchange-BAT
+    network: mainnet
+    source:
+      address: '0x2e642b8d59b45a1d8c5aef716a84ff44ea665914'
+      abi: Exchange
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      file: ./src/mappings/exchange.ts
+      entities:
+        - TrackedExchange
+      abis:
+        - name: Exchange
+          file: ./abis/exchange.json
+        - name: Oracle
+          file: ./abis/compoundPriceOracle.json
+      eventHandlers:
+        - event: TokenPurchase(address,uint256,uint256)
+          handler: handleTokenPurchase
+        - event: EthPurchase(address,uint256,uint256)
+          handler: handleEthPurchase
+        - event: AddLiquidity(address,uint256,uint256)
+          handler: handleAddLiquidity
+        - event: RemoveLiquidity(address,uint256,uint256)
+          handler: handleRemoveLiquidity
+        - event: Transfer(address,address,uint256)
+          handler: handleTransfer
+#        - event: Approval(address,address,uint256)
+#          handler: handleApproval
 #  - kind: ethereum/contract
 #    name: Exchange-MKR
 #    network: mainnet

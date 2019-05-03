@@ -15,7 +15,8 @@ import {
   User,
   UserExchangeData,
   Transaction,
-  Exchange
+  Exchange,
+  Uniswap
 } from '../types/schema'
 
 export function handleTokenPurchase(event: TokenPurchase): void {
@@ -23,7 +24,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_sold.toBigDecimal().div(exponentToBigDecimal(18))
-  let tokenAmount
+  let tokenAmount: BigDecimal
   if (exchange.tokenDecimals == null) {
     tokenAmount = event.params.tokens_bought.toBigDecimal()
   } else {
@@ -35,9 +36,10 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.lastPrice = exchange.price
   exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
   exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
-  exchange.tradeVolume = exchange.tradeVolume.plus(tokenAmount)
+  exchange.tradeVolumeToken = exchange.tradeVolumeToken.plus(tokenAmount)
+  exchange.tradeVolumeEth = exchange.tradeVolumeEth.plus(ethAmount)
   exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
-  exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
+  exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
 
   /****** Update User ******/
     // It is conceivable that user does not exist yet here
@@ -106,6 +108,13 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.save()
   userExchangeData.save()
 
+  /****** Update Global Values ******/
+  let uniswap = Uniswap.load('1')
+  uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
+  uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD)
+  uniswap.totalTokenBuys = uniswap.totalTokenBuys.plus(BigInt.fromI32(1))
+  uniswap.save()
+
   /****** Update Transaction ******/
   let transaction = new Transaction(event.transaction.hash.toHex())
   transaction.event = "TokenPurchase"
@@ -126,7 +135,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_bought.toBigDecimal().div(exponentToBigDecimal(18))
-  let tokenAmount
+  let tokenAmount: BigDecimal
   if (exchange.tokenDecimals == null) {
     tokenAmount = event.params.tokens_sold.toBigDecimal()
   } else {
@@ -138,9 +147,11 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.lastPrice = exchange.price
   exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
   exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
-  exchange.tradeVolume = exchange.tradeVolume.plus(tokenAmount)
+  exchange.tradeVolumeToken = exchange.tradeVolumeToken.plus(tokenAmount)
+  exchange.tradeVolumeEth = exchange.tradeVolumeEth.plus(ethAmount)
+
   exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
-  exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolume).truncate(18)
+  exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
 
   /****** Update User ******/
     // It is conceivable that user does not exist yet here
@@ -211,6 +222,13 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.save()
   userExchangeData.save()
 
+  /****** Update Global Values ******/
+  let uniswap = Uniswap.load('1')
+  uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
+  uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD)
+  uniswap.totalTokenSells = uniswap.totalTokenSells.plus(BigInt.fromI32(1))
+  uniswap.save()
+
   /****** Update Transaction ******/
   let transaction = new Transaction(event.transaction.hash.toHex())
   transaction.event = "EthPurchase"
@@ -232,7 +250,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-  let tokenAmount
+  let tokenAmount: BigDecimal
   if (exchange.tokenDecimals == null) {
     tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
@@ -307,6 +325,14 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   exchange.save()
   userExchangeData.save()
 
+  /****** Update Global Values ******/
+  let uniswap = Uniswap.load('1')
+  // times 2, because equal eth and tokens are always added or removed for liquidity
+  uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(ethAmount.times(BigDecimal.fromString("2")))
+  uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+  uniswap.totalAddLiquidity = uniswap.totalAddLiquidity.plus(BigInt.fromI32(1))
+  uniswap.save()
+
   /****** Update Transaction ******/
   let transaction = new Transaction(event.transaction.hash.toHex())
   transaction.event = "AddLiquidity"
@@ -328,7 +354,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let exchangeID = event.address.toHex()
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-  let tokenAmount
+  let tokenAmount: BigDecimal
   if (exchange.tokenDecimals == null) {
     tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
@@ -372,6 +398,14 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
 
   exchange.save()
   userExchangeData.save()
+
+  /****** Update Global Values ******/
+  let uniswap = Uniswap.load('1')
+  // times 2, because equal eth and tokens are always added or removed for liquidity
+  uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(ethAmount.times(BigDecimal.fromString("2")))
+  uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+  uniswap.totalRemoveLiquidity = uniswap.totalRemoveLiquidity.plus(BigInt.fromI32(1))
+  uniswap.save()
 
   /****** Update Transaction ******/
   let transaction = new Transaction(event.transaction.hash.toHex())
