@@ -2,6 +2,7 @@ import {hardcodeExchange} from "./hardcode-exchanges";
 import { NewExchange } from '../types/Factory/Factory'
 import { Uniswap } from '../types/schema'
 import {BigInt, BigDecimal} from '@graphprotocol/graph-ts'
+import {Exchange} from "../types/Factory/templates"
 
 export function handleNewExchange(event: NewExchange): void {
   let factory = Uniswap.load("1")
@@ -21,5 +22,7 @@ export function handleNewExchange(event: NewExchange): void {
   factory.save()
 
   hardcodeExchange(event.params.exchange.toHexString(), event.params.token, event.block.timestamp.toI32())   // TODO - don't hard code, after we have the fix
+
+  Exchange.create(event.params.exchange)
 }
 

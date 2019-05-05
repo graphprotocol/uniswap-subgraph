@@ -16,304 +16,45 @@ dataSources:
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:
-        - Factory
+        - Uniswap
       abis:
         - name: Factory
           file: ./abis/factory.json
       eventHandlers:
-        - event: NewExchange(address,address) # token, exchange in that order
+        - event: NewExchange(address,address)
           handler: handleNewExchange
-  - kind: ethereum/contract
-    name: Exchange-BAT
-    network: mainnet
-    source:
-      address: '0x2e642b8d59b45a1d8c5aef716a84ff44ea665914'
-      abi: Exchange
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.2
-      language: wasm/assemblyscript
-      file: ./src/mappings/exchange.ts
-      entities:
-        - TrackedExchange
-      abis:
-        - name: Exchange
-          file: ./abis/exchange.json
-        - name: Oracle
-          file: ./abis/compoundPriceOracle.json
-      eventHandlers:
-        - event: TokenPurchase(address,uint256,uint256)
-          handler: handleTokenPurchase
-        - event: EthPurchase(address,uint256,uint256)
-          handler: handleEthPurchase
-        - event: AddLiquidity(address,uint256,uint256)
-          handler: handleAddLiquidity
-        - event: RemoveLiquidity(address,uint256,uint256)
-          handler: handleRemoveLiquidity
-        - event: Transfer(address,address,uint256)
-          handler: handleTransfer
-#        - event: Approval(address,address,uint256)
-#          handler: handleApproval
-#  - kind: ethereum/contract
-#    name: Exchange-MKR
-#    network: mainnet
-#    source:
-#      address: '0x2c4bd064b998838076fa341a83d007fc2fa50957'
-#      abi: Exchange
-#    mapping:
-#      kind: ethereum/events
-#      apiVersion: 0.0.2
-#      language: wasm/assemblyscript
-#      file: ./src/mappings/exchange.ts
-#      entities:
-#        - TrackedExchange
-#      abis:
-#        - name: Exchange
-#          file: ./abis/exchange.json
-#      eventHandlers:
-#        - event: TokenPurchase(address,uint256,uint256)
-#          handler: handleTokenPurchase
-#        - event: EthPurchase(address,uint256,uint256)
-#          handler: handleEthPurchase
-#        - event: AddLiquidity(address,uint256,uint256)
-#          handler: handleAddLiquidity
-#        - event: RemoveLiquidity(address,uint256,uint256)
-#          handler: handleRemoveLiquidity
-#        - event: Transfer(address,address,uint256)
-#          handler: handleTransfer
-#        - event: Approval(address,address,uint256)
-#          handler: handleApproval
-#  - kind: ethereum/contract
-#    name: Exchange-ZRX
-#    network: mainnet
-#    source:
-#      address: '0xae76c84c9262cdb9abc0c2c8888e62db8e22a0bf'
-#      abi: Exchange
-#    mapping:
-#      kind: ethereum/events
-#      apiVersion: 0.0.2
-#      language: wasm/assemblyscript
-#      file: ./src/mappings/exchange.ts
-#      entities:
-#        - TrackedExchange
-#      abis:
-#        - name: Exchange
-#          file: ./abis/exchange.json
-#      eventHandlers:
-#        - event: TokenPurchase(address,uint256,uint256)
-#          handler: handleTokenPurchase
-#        - event: EthPurchase(address,uint256,uint256)
-#          handler: handleEthPurchase
-#        - event: AddLiquidity(address,uint256,uint256)
-#          handler: handleAddLiquidity
-#        - event: RemoveLiquidity(address,uint256,uint256)
-#          handler: handleRemoveLiquidity
-#        - event: Transfer(address,address,uint256)
-#          handler: handleTransfer
-##        - event: Approval(address,address,uint256)
-##          handler: handleApproval
-#  - kind: ethereum/contract
-#    name: Exchange-DAI
-#    network: mainnet
-#    source:
-#      address: '0x09cabec1ead1c0ba254b09efb3ee13841712be14'
-#      abi: Exchange
-#    mapping:
-#      kind: ethereum/events
-#      apiVersion: 0.0.2
-#      language: wasm/assemblyscript
-#      file: ./src/mappings/exchange.ts
-#      entities:
-#        - TrackedExchange
-#      abis:
-#        - name: Exchange
-#          file: ./abis/exchange.json
-#      eventHandlers:
-#        - event: TokenPurchase(address,uint256,uint256)
-#          handler: handleTokenPurchase
-#        - event: EthPurchase(address,uint256,uint256)
-#          handler: handleEthPurchase
-#        - event: AddLiquidity(address,uint256,uint256)
-#          handler: handleAddLiquidity
-#        - event: RemoveLiquidity(address,uint256,uint256)
-#          handler: handleRemoveLiquidity
-#        - event: Transfer(address,address,uint256)
-#          handler: handleTransfer
-##        - event: Approval(address,address,uint256)
-##          handler: handleApproval
-#  - kind: ethereum/contract
-#    name: Exchange-SPANK
-#    network: mainnet
-#    source:
-#      address: '0x4e395304655f0796bc3bc63709db72173b9ddf98'
-#      abi: Exchange
-#    mapping:
-#      kind: ethereum/events
-#      apiVersion: 0.0.2
-#      language: wasm/assemblyscript
-#      file: ./src/mappings/exchange.ts
-#      entities:
-#        - TrackedExchange
-#      abis:
-#        - name: Exchange
-#          file: ./abis/exchange.json
-#      eventHandlers:
-#        - event: TokenPurchase(address,uint256,uint256)
-#          handler: handleTokenPurchase
-#        - event: EthPurchase(address,uint256,uint256)
-#          handler: handleEthPurchase
-#        - event: AddLiquidity(address,uint256,uint256)
-#          handler: handleAddLiquidity
-#        - event: RemoveLiquidity(address,uint256,uint256)
-#          handler: handleRemoveLiquidity
-#        - event: Transfer(address,address,uint256)
-#          handler: handleTransfer
-##        - event: Approval(address,address,uint256)
-##          handler: handleApproval
-  - kind: ethereum/contract
-    name: Exchange-ANT
-    network: mainnet
-    source:
-      address: '0x077d52b047735976dfda76fef74d4d988ac25196'
-      abi: Exchange
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.2
-      language: wasm/assemblyscript
-      file: ./src/mappings/exchange.ts
-      entities:
-        - TrackedExchange
-      abis:
-        - name: Exchange
-          file: ./abis/exchange.json
-        - name: Oracle
-          file: ./abis/compoundPriceOracle.json
-      eventHandlers:
-        - event: TokenPurchase(address,uint256,uint256)
-          handler: handleTokenPurchase
-        - event: EthPurchase(address,uint256,uint256)
-          handler: handleEthPurchase
-        - event: AddLiquidity(address,uint256,uint256)
-          handler: handleAddLiquidity
-        - event: RemoveLiquidity(address,uint256,uint256)
-          handler: handleRemoveLiquidity
-        - event: Transfer(address,address,uint256)
-          handler: handleTransfer
-#        - event: Approval(address,address,uint256)
-#          handler: handleApproval
-#  - kind: ethereum/contract
-#    name: Exchange-BNB
-#    network: mainnet
-#    source:
-#      address: '0x255e60c9d597dcaa66006a904ed36424f7b26286'
-#      abi: Exchange
-#    mapping:
-#      kind: ethereum/events
-#      apiVersion: 0.0.2
-#      language: wasm/assemblyscript
-#      file: ./src/mappings/exchange.ts
-#      entities:
-#        - TrackedExchange
-#      abis:
-#        - name: Exchange
-#          file: ./abis/exchange.json
-#      eventHandlers:
-#        - event: TokenPurchase(address,uint256,uint256)
-#          handler: handleTokenPurchase
-#        - event: EthPurchase(address,uint256,uint256)
-#          handler: handleEthPurchase
-#        - event: AddLiquidity(address,uint256,uint256)
-#          handler: handleAddLiquidity
-#        - event: RemoveLiquidity(address,uint256,uint256)
-#          handler: handleRemoveLiquidity
-#        - event: Transfer(address,address,uint256)
-#          handler: handleTransfer
-##        - event: Approval(address,address,uint256)
-##          handler: handleApproval
-#  - kind: ethereum/contract
-#    name: Exchange-OMG
-#    network: mainnet
-#    source:
-#      address: '0xddee242662323a3cff3f9aa139ffa496ac3c73b0'
-#      abi: Exchange
-#    mapping:
-#      kind: ethereum/events
-#      apiVersion: 0.0.2
-#      language: wasm/assemblyscript
-#      file: ./src/mappings/exchange.ts
-#      entities:
-#        - TrackedExchange
-#      abis:
-#        - name: Exchange
-#          file: ./abis/exchange.json
-#      eventHandlers:
-#        - event: TokenPurchase(address,uint256,uint256)
-#          handler: handleTokenPurchase
-#        - event: EthPurchase(address,uint256,uint256)
-#          handler: handleEthPurchase
-#        - event: AddLiquidity(address,uint256,uint256)
-#          handler: handleAddLiquidity
-#        - event: RemoveLiquidity(address,uint256,uint256)
-#          handler: handleRemoveLiquidity
-#        - event: Transfer(address,address,uint256)
-#          handler: handleTransfer
-##        - event: Approval(address,address,uint256)
-##          handler: handleApproval
-#  - kind: ethereum/contract
-#    name: Exchange-LINK
-#    network: mainnet
-#    source:
-#      address: '0xf173214c720f58e03e194085b1db28b50acdeead'
-#      abi: Exchange
-#    mapping:
-#      kind: ethereum/events
-#      apiVersion: 0.0.2
-#      language: wasm/assemblyscript
-#      file: ./src/mappings/exchange.ts
-#      entities:
-#        - TrackedExchange
-#      abis:
-#        - name: Exchange
-#          file: ./abis/exchange.json
-#      eventHandlers:
-#        - event: TokenPurchase(address,uint256,uint256)
-#          handler: handleTokenPurchase
-#        - event: EthPurchase(address,uint256,uint256)
-#          handler: handleEthPurchase
-#        - event: AddLiquidity(address,uint256,uint256)
-#          handler: handleAddLiquidity
-#        - event: RemoveLiquidity(address,uint256,uint256)
-#          handler: handleRemoveLiquidity
-#        - event: Transfer(address,address,uint256)
-#          handler: handleTransfer
-##        - event: Approval(address,address,uint256)
-##          handler: handleApproval
-#  - kind: ethereum/contract
-#    name: Exchange-REP
-#    network: mainnet
-#    source:
-#      address: '0x48b04d2a05b6b604d8d5223fd1984f191ded51af'
-#      abi: Exchange
-#    mapping:
-#      kind: ethereum/events
-#      apiVersion: 0.0.2
-#      language: wasm/assemblyscript
-#      file: ./src/mappings/exchange.ts
-#      entities:
-#        - TrackedExchange
-#      abis:
-#        - name: Exchange
-#          file: ./abis/exchange.json
-#      eventHandlers:
-#        - event: TokenPurchase(address,uint256,uint256)
-#          handler: handleTokenPurchase
-#        - event: EthPurchase(address,uint256,uint256)
-#          handler: handleEthPurchase
-#        - event: AddLiquidity(address,uint256,uint256)
-#          handler: handleAddLiquidity
-#        - event: RemoveLiquidity(address,uint256,uint256)
-#          handler: handleRemoveLiquidity
-#        - event: Transfer(address,address,uint256)
-#          handler: handleTransfer
-##        - event: Approval(address,address,uint256)
-##          handler: handleApproval
+    templates:
+      - kind: ethereum/contract
+        name: Exchange
+        network: mainnet
+        source:
+          abi: Exchange
+        mapping:
+          kind: ethereum/events
+          apiVersion: 0.0.2
+          language: wasm/assemblyscript
+          file: ./src/mappings/exchange.ts
+          entities:
+            - Exchange
+            - Uniswap
+            - User
+            - UserExchangeData
+            - Transaction
+          abis:
+            - name: Exchange
+              file: ./abis/exchange.json
+            - name: Oracle
+              file: ./abis/compoundPriceOracle.json
+          eventHandlers:
+            - event: TokenPurchase(address,uint256,uint256)
+              handler: handleTokenPurchase
+            - event: EthPurchase(address,uint256,uint256)
+              handler: handleEthPurchase
+            - event: AddLiquidity(address,uint256,uint256)
+              handler: handleAddLiquidity
+            - event: RemoveLiquidity(address,uint256,uint256)
+              handler: handleRemoveLiquidity
+            - event: Transfer(address,address,uint256)
+              handler: handleTransfer
+    #        - event: Approval(address,address,uint256)
+    #          handler: handleApproval

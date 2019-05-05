@@ -71,7 +71,7 @@ type User @entity {
 
 # Left out allowance for now, because handleApprove never gets called
 type UserExchangeData @entity {
-    id: ID!                     # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34.... #todo - change to 2 address concatenation
+    id: ID!                     # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34....
     userAddress: Bytes!         # used for @derivedFrom of User
     exchangeAddress: Bytes!        # used for @derivedFrom of TrackedExchange
 
@@ -80,8 +80,8 @@ type UserExchangeData @entity {
     tokensDeposited: BigDecimal!                # where negative means tokens were exchanged for eth
     ethWithdrawn: BigDecimal!
     tokensWithdrawn: BigDecimal!
-    depositedUSDCombined: BigDecimal!           # eth + tokens combined and converted into USD
-    withdrawnUSDCombined: BigDecimal!           # eth + tokens combined and converted into USD
+#    depositedUSDCombined: BigDecimal!           # eth + tokens combined and converted into USD
+#    withdrawnUSDCombined: BigDecimal!           # eth + tokens combined and converted into USD
     uniTokensMinted: BigDecimal!
     uniTokensBurned: BigDecimal!
 
@@ -95,6 +95,8 @@ type UserExchangeData @entity {
     tokenFeesPaid: BigDecimal!
     ethFeesInUSD: BigDecimal!
     tokenFeesInUSD: BigDecimal!
+
+
 }
 
 type Transaction @entity {

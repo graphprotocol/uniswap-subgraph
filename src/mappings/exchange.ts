@@ -34,6 +34,8 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.tokenBalance = exchange.tokenBalance.minus(tokenAmount)
   exchange.buyTokenCount = exchange.buyTokenCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
+
+  // Don't need check to divide by zero here, token is the numerator
   exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
   exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
   exchange.tradeVolumeToken = exchange.tradeVolumeToken.plus(tokenAmount)
@@ -54,25 +56,8 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   let userExchangeID = exchange.tokenAddress.toHexString().concat('-').concat(event.params.buyer.toHex())
   let userExchangeData = UserExchangeData.load(userExchangeID)
   if (userExchangeData == null) {
-    userExchangeData = new UserExchangeData(userExchangeID)
-    userExchangeData.userAddress = event.params.buyer
-    userExchangeData.exchangeAddress = event.address
-    userExchangeData.ethDeposited = BigDecimal.fromString("0")
-    userExchangeData.tokensDeposited = BigDecimal.fromString("0")
-    userExchangeData.uniTokensMinted = BigDecimal.fromString("0")
-    userExchangeData.uniTokensBurned = BigDecimal.fromString("0")
-    userExchangeData.ethWithdrawn = BigDecimal.fromString("0")
-    userExchangeData.tokensWithdrawn = BigDecimal.fromString("0")
-    // userExchangeData.currentEthProfit = BigInt.fromI32(0)
-    // userExchangeData.currentTokenProfit = BigInt.fromI32(0)
-    userExchangeData.ethBought = BigDecimal.fromString("0")
-    userExchangeData.ethSold = BigDecimal.fromString("0")
-    userExchangeData.tokensBought = BigDecimal.fromString("0")
-    userExchangeData.tokensSold = BigDecimal.fromString("0")
-    userExchangeData.ethFeesPaid = BigDecimal.fromString("0")
-    userExchangeData.tokenFeesPaid = BigDecimal.fromString("0")
-    userExchangeData.ethFeesInUSD = BigDecimal.fromString("0")
-    userExchangeData.tokenFeesInUSD = BigDecimal.fromString("0")
+    createUserDataEntity(userExchangeID, event.params.buyer, event.address)
+    userExchangeData = UserExchangeData.load(userExchangeID) // reload here
   }
 
   userExchangeData.ethSold = userExchangeData.ethSold.plus(ethAmount)
@@ -99,11 +84,11 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   }
 
   // ROI calculations
-  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  // let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  // let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  // let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  // let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  // exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -145,8 +130,15 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
   exchange.sellTokenCount = exchange.sellTokenCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
-  exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
-  exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+
+  // Here we must handle div by zero, because someone could have bought all the eth or all the tokens
+  if (exchange.ethBalance.equals(BigDecimal.fromString("0"))) {
+    exchange.price = BigDecimal.fromString("0")
+  } else {
+    exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
+    exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+  }
+
   exchange.tradeVolumeToken = exchange.tradeVolumeToken.plus(tokenAmount)
   exchange.tradeVolumeEth = exchange.tradeVolumeEth.plus(ethAmount)
 
@@ -166,25 +158,8 @@ export function handleEthPurchase(event: EthPurchase): void {
   let userExchangeID = exchange.tokenAddress.toHexString().concat('-').concat(event.params.buyer.toHex())
   let userExchangeData = UserExchangeData.load(userExchangeID)
   if (userExchangeData == null) {
-    userExchangeData = new UserExchangeData(userExchangeID)
-    userExchangeData.userAddress = event.params.buyer
-    userExchangeData.exchangeAddress = event.address
-    userExchangeData.ethDeposited = BigDecimal.fromString("0")
-    userExchangeData.tokensDeposited = BigDecimal.fromString("0")
-    userExchangeData.uniTokensMinted = BigDecimal.fromString("0")
-    userExchangeData.uniTokensBurned = BigDecimal.fromString("0")
-    userExchangeData.ethWithdrawn = BigDecimal.fromString("0")
-    userExchangeData.tokensWithdrawn = BigDecimal.fromString("0")
-    // userExchangeData.currentEthProfit = BigInt.fromI32(0)
-    // userExchangeData.currentTokenProfit = BigInt.fromI32(0)
-    userExchangeData.ethBought = BigDecimal.fromString("0")
-    userExchangeData.ethSold = BigDecimal.fromString("0")
-    userExchangeData.tokensBought = BigDecimal.fromString("0")
-    userExchangeData.tokensSold = BigDecimal.fromString("0")
-    userExchangeData.ethFeesPaid = BigDecimal.fromString("0")
-    userExchangeData.tokenFeesPaid = BigDecimal.fromString("0")
-    userExchangeData.ethFeesInUSD = BigDecimal.fromString("0")
-    userExchangeData.tokenFeesInUSD = BigDecimal.fromString("0")
+    createUserDataEntity(userExchangeID, event.params.buyer, event.address)
+    userExchangeData = UserExchangeData.load(userExchangeID) // reload here
   }
 
   userExchangeData.ethBought = userExchangeData.ethBought.plus(ethAmount)
@@ -204,8 +179,12 @@ export function handleEthPurchase(event: EthPurchase): void {
       // do nothing, dai price oracle has not been set yet in the compound contract
     } else {
       exchange.lastPriceUSD = exchange.priceUSD
-      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
-      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
+      if (exchange.price.equals(BigDecimal.fromString("0"))) {
+        exchange.priceUSD = BigDecimal.fromString("0")
+      } else {
+        exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
+        exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
+      }
       exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.weightedAvgPrice).truncate(4)
 
       userExchangeData.tokenFeesInUSD = BigDecimal.fromString("1000000000000000000").times(userExchangeData.tokenFeesPaid).div(oneDaiInEth).div(exchange.price).truncate(4)
@@ -213,11 +192,11 @@ export function handleEthPurchase(event: EthPurchase): void {
   }
 
   // ROI calculations
-  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  // let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  // let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  // let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  // let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  // exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -262,6 +241,8 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   exchange.tokenLiquidity = exchange.tokenLiquidity.plus(tokenAmount)
   exchange.addLiquidityCount = exchange.addLiquidityCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
+
+  // Don't need check to divide by zero here, adding liquidity would make it impossible
   exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
   exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
 
@@ -278,25 +259,8 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let userExchangeID = exchange.tokenAddress.toHexString().concat('-').concat(event.params.provider.toHexString())
   let userExchangeData = UserExchangeData.load(userExchangeID)
   if (userExchangeData == null) {
-    userExchangeData = new UserExchangeData(userExchangeID)
-    userExchangeData.userAddress = event.params.provider
-    userExchangeData.exchangeAddress = event.address
-    userExchangeData.ethDeposited = BigDecimal.fromString("0")
-    userExchangeData.tokensDeposited = BigDecimal.fromString("0")
-    userExchangeData.uniTokensMinted = BigDecimal.fromString("0")
-    userExchangeData.uniTokensBurned = BigDecimal.fromString("0")
-    userExchangeData.ethWithdrawn = BigDecimal.fromString("0")
-    userExchangeData.tokensWithdrawn = BigDecimal.fromString("0")
-    // userExchangeData.currentEthProfit = BigInt.fromI32(0)
-    // userExchangeData.currentTokenProfit = BigInt.fromI32(0)
-    userExchangeData.ethBought = BigDecimal.fromString("0")
-    userExchangeData.ethSold = BigDecimal.fromString("0")
-    userExchangeData.tokensBought = BigDecimal.fromString("0")
-    userExchangeData.tokensSold = BigDecimal.fromString("0")
-    userExchangeData.ethFeesPaid = BigDecimal.fromString("0")
-    userExchangeData.tokenFeesPaid = BigDecimal.fromString("0")
-    userExchangeData.ethFeesInUSD = BigDecimal.fromString("0")
-    userExchangeData.tokenFeesInUSD = BigDecimal.fromString("0")
+    createUserDataEntity(userExchangeID, event.params.provider, event.address)
+    userExchangeData = UserExchangeData.load(userExchangeID) // reload here
   }
 
   userExchangeData.ethDeposited = userExchangeData.ethDeposited.plus(ethAmount)
@@ -316,11 +280,11 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   }
 
   //  ROI calculations
-  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  // let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  // let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  // let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  // let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  // exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -329,7 +293,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let uniswap = Uniswap.load('1')
   // times 2, because equal eth and tokens are always added or removed for liquidity
   uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(ethAmount.times(BigDecimal.fromString("2")))
-  uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+  // uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
   uniswap.totalAddLiquidity = uniswap.totalAddLiquidity.plus(BigInt.fromI32(1))
   uniswap.save()
 
@@ -355,7 +319,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let exchange = Exchange.load(exchangeID)
   let ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
   let tokenAmount: BigDecimal
-  if (exchange.tokenDecimals == null) {
+  if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
     tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
     tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
@@ -366,12 +330,22 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(tokenAmount)
   exchange.removeLiquidityCount = exchange.removeLiquidityCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
-  exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
-  exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+
+  // Here we must handle div by zero, because someone could have bought all the eth or all the tokens
+  if (exchange.ethBalance.equals(BigDecimal.fromString("0"))) {
+    exchange.price = BigDecimal.fromString("0")
+  } else {
+    exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
+    exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+  }
 
   /****** Update UserExchangeData ******/
   let userExchangeID = exchange.tokenAddress.toHexString().concat('-').concat(event.params.provider.toHex())
   let userExchangeData = UserExchangeData.load(userExchangeID)
+  if (userExchangeData == null) {
+    createUserDataEntity(userExchangeID, event.params.provider, event.address)
+    userExchangeData = UserExchangeData.load(userExchangeID) // reload here
+  }
 
   userExchangeData.ethWithdrawn = userExchangeData.ethWithdrawn.plus(ethAmount)
   userExchangeData.tokensWithdrawn = userExchangeData.tokensWithdrawn.plus(tokenAmount)
@@ -384,17 +358,21 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
       // do nothing, dai price oracle has not been set yet in the compound contract
     } else {
       exchange.lastPriceUSD = exchange.priceUSD
-      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
-      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
+      if (exchange.price.equals(BigDecimal.fromString("0"))) {
+        exchange.priceUSD = BigDecimal.fromString("0")
+      } else {
+        exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
+        exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
+      }
     }
   }
 
   // ROI calculations
-  let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  // let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  // let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  // let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  // let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  // exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
 
   exchange.save()
   userExchangeData.save()
@@ -433,58 +411,57 @@ export function handleTransfer(event: Transfer): void {
   if (event.params._from.toHex() == '0x0000000000000000000000000000000000000000') {
     exchange.totalUniToken = exchange.totalUniToken.plus(uniTokens)
     let userTo = UserExchangeData.load(userToID)
+    if (userTo == null) {
+      createUserDataEntity(userToID, event.params._to, event.address)
+      userTo = UserExchangeData.load(userToID)
+    }
     userTo.uniTokensMinted = userTo.uniTokensMinted.plus(uniTokens)
     exchange.save()
     userTo.save()
   } else if (event.params._to.toHex() == '0x0000000000000000000000000000000000000000') {
     exchange.totalUniToken = exchange.totalUniToken.minus(uniTokens)
     let userFrom = UserExchangeData.load(userFromID)
+    if (userFrom == null) {
+      createUserDataEntity(userFromID, event.params._from, event.address)
+      userFrom = UserExchangeData.load(userFromID)
+    }
     userFrom.uniTokensBurned = userFrom.uniTokensBurned.plus(uniTokens)
 
     exchange.save()
     userFrom.save()
 
-    // The else case is a normal transfer of uni tokens (i.e. not a mint or burn)
+    // The else case is a normal transfer of uni tokens (i.e. not a mint or burn), so work with both users
   } else {
+
     let userTo = UserExchangeData.load(userToID)
-    // It is possible the user doesn't exist, since it is just being sent through a transfer
     if (userTo == null) {
-      userTo = new UserExchangeData(userToID)
-      userTo.userAddress = event.params._from
-      userTo.exchangeAddress = event.address
-      userTo.ethDeposited = BigDecimal.fromString("0")
-      userTo.tokensDeposited = BigDecimal.fromString("0")
-      userTo.uniTokensMinted = BigDecimal.fromString("0")
-      userTo.uniTokensBurned = BigDecimal.fromString("0")
-      userTo.ethWithdrawn = BigDecimal.fromString("0")
-      userTo.tokensWithdrawn = BigDecimal.fromString("0")
-      // userTo.currentEthProfit = BigInt.fromI32(0)
-      // userTo.currentTokenProfit = BigInt.fromI32(0)
-      userTo.ethBought = BigDecimal.fromString("0")
-      userTo.ethSold = BigDecimal.fromString("0")
-      userTo.tokensBought = BigDecimal.fromString("0")
-      userTo.tokensSold = BigDecimal.fromString("0")
-      userTo.ethFeesPaid = BigDecimal.fromString("0")
-      userTo.tokenFeesPaid = BigDecimal.fromString("0")
-      userTo.ethFeesInUSD = BigDecimal.fromString("0")
-      userTo.tokenFeesInUSD = BigDecimal.fromString("0")
-      userTo.save()
+      createUserDataEntity(userToID, event.params._to, event.address)
+      userTo = UserExchangeData.load(userToID)
     }
 
-    let user = User.load(event.params._from.toHex())
-    // possible this entity also doesn't exist
-    if (user == null) {
-      user = new User(event.params._from.toHex())
-      user.save()
-    }
-
-    // Will be hard to calculate this users profit / loss, since they never deposited
-    // And only got UNI from a transfer
     let userFrom = UserExchangeData.load(userFromID)
+    if (userFrom == null) {
+      createUserDataEntity(userFromID, event.params._from, event.address)
+      userFrom = UserExchangeData.load(userFromID)
+    }
     userTo.uniTokensMinted = userTo.uniTokensMinted.plus(uniTokens)
     userFrom.uniTokensMinted = userTo.uniTokensMinted.minus(uniTokens)
     userTo.save()
     userFrom.save()
+  }
+
+  /****** Create User  Entities ******/
+  let userFromEntity = User.load(event.params._from.toHex())
+  // possible this entity also doesn't exist
+  if (userFromEntity == null) {
+    userFromEntity = new User(event.params._from.toHex())
+    userFromEntity.save()
+  }
+  let userToEntity = User.load(event.params._to.toHex())
+  // possible this entity also doesn't exist
+  if (userToEntity == null) {
+    userToEntity = new User(event.params._to.toHex())
+    userToEntity.save()
   }
 }
 
@@ -499,4 +476,27 @@ function exponentToBigDecimal(decimals: i32): BigDecimal {
     bd = bd.times(BigDecimal.fromString("10"))
   }
   return bd
+}
+
+function createUserDataEntity(id: string, user: Address, exchange: Address): void {
+  let userExchangeData = new UserExchangeData(id)
+  userExchangeData.userAddress = user
+  userExchangeData.exchangeAddress = exchange
+
+  userExchangeData.ethDeposited = BigDecimal.fromString("0")
+  userExchangeData.tokensDeposited = BigDecimal.fromString("0")
+  userExchangeData.ethWithdrawn = BigDecimal.fromString("0")
+  userExchangeData.tokensWithdrawn = BigDecimal.fromString("0")
+  userExchangeData.uniTokensMinted = BigDecimal.fromString("0")
+  userExchangeData.uniTokensBurned = BigDecimal.fromString("0")
+
+  userExchangeData.ethBought = BigDecimal.fromString("0")
+  userExchangeData.ethSold = BigDecimal.fromString("0")
+  userExchangeData.tokensBought = BigDecimal.fromString("0")
+  userExchangeData.tokensSold = BigDecimal.fromString("0")
+  userExchangeData.ethFeesPaid = BigDecimal.fromString("0")
+  userExchangeData.tokenFeesPaid = BigDecimal.fromString("0")
+  userExchangeData.ethFeesInUSD = BigDecimal.fromString("0")
+  userExchangeData.tokenFeesInUSD = BigDecimal.fromString("0")
+  userExchangeData.save()
 }
