@@ -1,15 +1,12 @@
 import {BigInt, BigDecimal, Address} from '@graphprotocol/graph-ts'
+import {Oracle} from "../types/Exchange-BAT/Oracle";
 import {
   TokenPurchase,
   EthPurchase,
   AddLiquidity,
   RemoveLiquidity,
   Transfer,
-  Approval,
-  Exchange as ExchangeContract,
 } from '../types/Exchange-BAT/Exchange' // Although imported from BAT, these can be used for all exchanges
-
-import {Oracle} from "../types/Exchange-BAT/Oracle";
 
 import {
   User,
@@ -44,7 +41,6 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
 
   /****** Update User ******/
-    // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
   let user = User.load(userID)
   if (user == null) {
@@ -59,7 +55,6 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     createUserDataEntity(userExchangeID, event.params.buyer, event.address)
     userExchangeData = UserExchangeData.load(userExchangeID) // reload here
   }
-
   userExchangeData.ethSold = userExchangeData.ethSold.plus(ethAmount)
   userExchangeData.tokensBought = userExchangeData.tokensBought.plus(tokenAmount)
 
@@ -67,7 +62,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   let fee = originalEthValue.minus(ethAmount).truncate(18)
   userExchangeData.ethFeesPaid = userExchangeData.ethFeesPaid.plus(fee)
 
-  // /****** Get ETH in USD from Compound Oracle ******/ // TODO - update to MKR price oracle when we can handle BigInts in bytes format
+  // /****** Get ETH in USD from Compound Oracle ******/
   if (event.block.number.toI32() > 6747538) {
     let oracle = Oracle.bind(Address.fromString("0x02557a5e05defeffd4cae6d83ea3d173b272c904"))
     let oneDaiInEth = (oracle.getPrice(Address.fromString("0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359"))).toBigDecimal()
@@ -78,7 +73,6 @@ export function handleTokenPurchase(event: TokenPurchase): void {
       exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
       exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
       exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.weightedAvgPrice).truncate(4)
-
       userExchangeData.ethFeesInUSD = BigDecimal.fromString("1000000000000000000").times(userExchangeData.ethFeesPaid).div(oneDaiInEth).truncate(4)
     }
   }
@@ -149,12 +143,11 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   exchange.tradeVolumeToken = exchange.tradeVolumeToken.plus(tokenAmount)
   exchange.tradeVolumeEth = exchange.tradeVolumeEth.plus(ethAmount)
-
   exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
   exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
 
   /****** Update User ******/
-    // It is conceivable that user does not exist yet here
+  // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
   let user = User.load(userID)
   if (user == null) {
@@ -239,7 +232,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   transaction.save()
 }
 
-// note - function addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
+// Note - function addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
 export function handleAddLiquidity(event: AddLiquidity): void {
   /****** Update Exchange ******/
   let exchangeID = event.address.toHex()
@@ -262,7 +255,6 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
   exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
 
-
   /****** Update User ******/
   let userID = event.params.provider.toHex()
   let user = User.load(userID)
@@ -278,7 +270,6 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     createUserDataEntity(userExchangeID, event.params.provider, event.address)
     userExchangeData = UserExchangeData.load(userExchangeID) // reload here
   }
-
   userExchangeData.ethDeposited = userExchangeData.ethDeposited.plus(ethAmount)
   userExchangeData.tokensDeposited = userExchangeData.tokensDeposited.plus(tokenAmount)
 
@@ -317,7 +308,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let uniswap = Uniswap.load('1')
   // times 2, because equal eth and tokens are always added or removed for liquidity
   uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(ethAmount.times(BigDecimal.fromString("2")))
-  // uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+  // uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD) // TODO - THIS SHOULDNT BE COMMENTED OUT! I think...
   uniswap.totalAddLiquidity = uniswap.totalAddLiquidity.plus(BigInt.fromI32(1))
   uniswap.save()
 
@@ -336,7 +327,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   transaction.save()
 }
 
-// note - function removeLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
+// Note - function removeLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
 export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   /****** Update Exchange ******/
   let exchangeID = event.address.toHex()
@@ -440,6 +431,7 @@ export function handleTransfer(event: Transfer): void {
   let userFromID = exchange.tokenAddress.toHexString().concat('-').concat(event.params._from.toHex())
   let uniTokens = event.params._value.toBigDecimal().div(exponentToBigDecimal(18))
 
+  // Handle Minting Case
   if (event.params._from.toHex() == '0x0000000000000000000000000000000000000000') {
     exchange.totalUniToken = exchange.totalUniToken.plus(uniTokens)
     let userTo = UserExchangeData.load(userToID)
@@ -450,6 +442,8 @@ export function handleTransfer(event: Transfer): void {
     userTo.uniTokensMinted = userTo.uniTokensMinted.plus(uniTokens)
     exchange.save()
     userTo.save()
+
+    // Handle Burning Case
   } else if (event.params._to.toHex() == '0x0000000000000000000000000000000000000000') {
     exchange.totalUniToken = exchange.totalUniToken.minus(uniTokens)
     let userFrom = UserExchangeData.load(userFromID)
@@ -462,7 +456,7 @@ export function handleTransfer(event: Transfer): void {
     exchange.save()
     userFrom.save()
 
-    // The else case is a normal transfer of uni tokens (i.e. not a mint or burn), so work with both users
+    // Handle normal transfer cases
   } else {
 
     let userTo = UserExchangeData.load(userToID)
@@ -484,23 +478,19 @@ export function handleTransfer(event: Transfer): void {
 
   /****** Create User  Entities ******/
   let userFromEntity = User.load(event.params._from.toHex())
-  // possible this entity also doesn't exist
   if (userFromEntity == null) {
     userFromEntity = new User(event.params._from.toHex())
     userFromEntity.save()
   }
   let userToEntity = User.load(event.params._to.toHex())
-  // possible this entity also doesn't exist
   if (userToEntity == null) {
     userToEntity = new User(event.params._to.toHex())
     userToEntity.save()
   }
 }
 
-// eventually emitted on mainnet TODO - decide if we should implement
-export function handleApproval(event: Approval): void {
 
-}
+/****** Helpers Below ******/
 
 function exponentToBigDecimal(decimals: i32): BigDecimal {
   let bd = BigDecimal.fromString("1")
