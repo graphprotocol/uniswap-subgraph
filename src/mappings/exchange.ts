@@ -84,11 +84,19 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   }
 
   // ROI calculations
-  // let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  // let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  // let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  // let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  // exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  if (exchange.price.equals(BigDecimal.fromString("0"))) {
+    // do nothing. it will cause a div by zero failure
+  } else {
+    let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+    let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+    let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+    let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+    if (totalLiquidityValue.equals(BigDecimal.fromString("0"))){
+      // do nothing. it would cause a div by zero failure
+    } else {
+      exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+    }
+  }
 
   exchange.save()
   userExchangeData.save()
@@ -192,11 +200,19 @@ export function handleEthPurchase(event: EthPurchase): void {
   }
 
   // ROI calculations
-  // let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  // let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  // let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  // let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  // exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  if (exchange.price.equals(BigDecimal.fromString("0"))) {
+    // do nothing. it will cause a div by zero failure
+  } else {
+    let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+    let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+    let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+    let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+    if (totalLiquidityValue.equals(BigDecimal.fromString("0"))){
+      // do nothing. it would cause a div by zero failure
+    } else {
+      exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+    }
+  }
 
   exchange.save()
   userExchangeData.save()
@@ -279,12 +295,20 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     }
   }
 
-  //  ROI calculations
-  // let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  // let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  // let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  // let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  // exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  // ROI calculations
+  if (exchange.price.equals(BigDecimal.fromString("0"))) {
+    // do nothing. it will cause a div by zero failure
+  } else {
+    let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+    let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+    let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+    let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+    if (totalLiquidityValue.equals(BigDecimal.fromString("0"))) {
+      // do nothing. it would cause a div by zero failure
+    } else {
+      exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+    }
+  }
 
   exchange.save()
   userExchangeData.save()
@@ -368,11 +392,19 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   }
 
   // ROI calculations
-  // let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-  // let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-  // let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-  // let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-  // exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  if (exchange.price.equals(BigDecimal.fromString("0"))) {
+    // do nothing. it will cause a div by zero failure
+  } else {
+    let totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+    let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+    let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+    let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+    if (totalLiquidityValue.equals(BigDecimal.fromString("0"))) {
+      // do nothing. it would cause a div by zero failure
+    } else {
+      exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+    }
+  }
 
   exchange.save()
   userExchangeData.save()
