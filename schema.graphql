@@ -92,7 +92,7 @@ type UserExchangeData @entity {
 }
 
 type Transaction @entity {
-    id: ID!             # Transaction Hash
+    id: ID!                         # Transaction Hash
     event: String!
     block: Int!
     timeStamp: Int!
@@ -100,7 +100,7 @@ type Transaction @entity {
     tokenAddress: Bytes!
     tokenSymbol: String
     userAddress: Bytes!
-    ethAmount: BigInt!   # Trade Event: negative means sold eth. Liquidity Event: Negative = removed. Positive = added
-    tokenAmount: BigInt! # Trade Event: negative means sold eth. Liquidity Event: Negative = removed. Positive = added
+    ethAmount: BigDecimal!
+    tokenAmount: BigDecimal!
     fee: BigDecimal!
 }

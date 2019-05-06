@@ -98,7 +98,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   /****** Update Global Values ******/
   let uniswap = Uniswap.load('1')
   uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
-  uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD)
+  uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD).truncate(4)
   uniswap.totalTokenBuys = uniswap.totalTokenBuys.plus(BigInt.fromI32(1))
   uniswap.save()
 
@@ -111,8 +111,12 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   transaction.tokenAddress = exchange.tokenAddress
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.buyer
-  transaction.ethAmount = event.params.eth_sold
-  transaction.tokenAmount = event.params.tokens_bought
+  transaction.ethAmount = event.params.eth_sold.toBigDecimal().div(exponentToBigDecimal(18))
+  if (exchange.tokenDecimals == null || 0){
+    transaction.tokenAmount = event.params.tokens_bought.toBigDecimal()
+  } else {
+    transaction.tokenAmount = event.params.tokens_bought.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  }
   transaction.fee = fee
   transaction.save()
 }
@@ -213,7 +217,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   /****** Update Global Values ******/
   let uniswap = Uniswap.load('1')
   uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
-  uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD)
+  uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD).truncate(4)
   uniswap.totalTokenSells = uniswap.totalTokenSells.plus(BigInt.fromI32(1))
   uniswap.save()
 
@@ -226,8 +230,12 @@ export function handleEthPurchase(event: EthPurchase): void {
   transaction.tokenAddress = exchange.tokenAddress
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.buyer
-  transaction.ethAmount = event.params.eth_bought
-  transaction.tokenAmount = event.params.tokens_sold
+  transaction.ethAmount = event.params.eth_bought.toBigDecimal().div(exponentToBigDecimal(18))
+  if (exchange.tokenDecimals == null || 0){
+    transaction.tokenAmount = event.params.tokens_sold.toBigDecimal()
+  } else {
+    transaction.tokenAmount = event.params.tokens_sold.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  }
   transaction.fee = fee
   transaction.save()
 }
@@ -308,7 +316,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   let uniswap = Uniswap.load('1')
   // times 2, because equal eth and tokens are always added or removed for liquidity
   uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(ethAmount.times(BigDecimal.fromString("2")))
-  // uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD) // TODO - THIS SHOULDNT BE COMMENTED OUT! I think...
+  uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD).truncate(4)
   uniswap.totalAddLiquidity = uniswap.totalAddLiquidity.plus(BigInt.fromI32(1))
   uniswap.save()
 
@@ -321,8 +329,12 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   transaction.tokenAddress = exchange.tokenAddress
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.provider
-  transaction.ethAmount = event.params.eth_amount
-  transaction.tokenAmount = event.params.token_amount
+  transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
+  if (exchange.tokenDecimals == null || 0){
+    transaction.tokenAmount = event.params.token_amount.toBigDecimal()
+  } else {
+    transaction.tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  }
   transaction.fee = BigDecimal.fromString("0")
   transaction.save()
 }
@@ -404,7 +416,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   let uniswap = Uniswap.load('1')
   // times 2, because equal eth and tokens are always added or removed for liquidity
   uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(ethAmount.times(BigDecimal.fromString("2")))
-  uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+  uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD).truncate(4)
   uniswap.totalRemoveLiquidity = uniswap.totalRemoveLiquidity.plus(BigInt.fromI32(1))
   uniswap.save()
 
@@ -417,8 +429,12 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   transaction.tokenAddress = exchange.tokenAddress
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.provider
-  transaction.ethAmount = event.params.eth_amount.times(BigInt.fromI32(-1))
-  transaction.tokenAmount = event.params.token_amount.times(BigInt.fromI32(-1))
+  transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
+  if (exchange.tokenDecimals == null || 0){
+    transaction.tokenAmount = event.params.token_amount.toBigDecimal()
+  } else {
+    transaction.tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+  }
   transaction.fee = BigDecimal.fromString("0")
   transaction.save()
 }
