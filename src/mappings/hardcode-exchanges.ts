@@ -111,7 +111,12 @@ export function hardcodeExchange(exchangeAddress: string, tokenAddress: Address,
     exchange.tokenSymbol = "GNT"
     exchange.tokenName = "Golem"
     exchange.tokenDecimals = 18
-  } else if (tokenAddressStringed == '0x0000000000085d4780b73119b644ae5ecd22b376') {
+
+    // note TUSD uses the old contract address https://blog.trusttoken.com/upgrade-80ba355f8960
+    // The new one, 0x0000000000085d4780b73119b644ae5ecd22b376, does not work
+    // This is because the transfers get forwarded, and still work, and uniswap
+    // was built with the old address
+  } else if (tokenAddressStringed == '0x8dd5fbce2f6a956c3022ba3663759011dd51e73e') {
     exchange.tokenSymbol = "TUSD"
     exchange.tokenName = "TrueUSD"
     exchange.tokenDecimals = 18
