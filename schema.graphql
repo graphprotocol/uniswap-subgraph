@@ -107,6 +107,15 @@ type Transaction @entity {
 
 ##### Below are entites specifically for uniswap historical data #####
 
+type ROI @entity {
+    # We make this the blocktime stamp.
+    #It is okay if two events are in the same block. They should have extremely similar ROI values
+    id: ID!
+    ROI: BigDecimal!
+    exchangeAddress: Bytes! # Uniswap exchange address
+    exchangeSymbol: String
+}
+
 # Note - No fee to provide liqidity
 type LiquidityEvent @entity {
     id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events

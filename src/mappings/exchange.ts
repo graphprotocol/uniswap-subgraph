@@ -13,7 +13,10 @@ import {
   UserExchangeData,
   Transaction,
   Exchange,
-  Uniswap, TradeEvent, LiquidityEvent
+  Uniswap,
+  TradeEvent,
+  LiquidityEvent,
+  ROI
 } from '../types/schema'
 
 export function handleTokenPurchase(event: TokenPurchase): void {
@@ -120,9 +123,9 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   transaction.fee = fee
   transaction.save()
 
-  /******************************
-   * Handle the historical data *
-   * ****************************/
+  /************************************
+   * Handle the historical data below *
+   ************************************/
 
   let tradeEventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
   let tradeEvent = new TradeEvent(tradeEventID.toString())
@@ -141,6 +144,12 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   tradeEvent.symbol = exchange.tokenSymbol
   tradeEvent.name = exchange.tokenName
   tradeEvent.save()
+
+  let roi = new ROI(event.block.timestamp.toString())
+  roi.exchangeSymbol = exchange.tokenSymbol
+  roi.exchangeAddress = event.address
+  roi.ROI = exchange.ROI
+  roi.save()
 }
 
 export function handleEthPurchase(event: EthPurchase): void {
@@ -261,9 +270,9 @@ export function handleEthPurchase(event: EthPurchase): void {
   transaction.fee = fee
   transaction.save()
 
-  /******************************
-   * Handle the historical data *
-   * ****************************/
+  /************************************
+   * Handle the historical data below *
+   ************************************/
 
   let tradeEventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
   let tradeEvent = new TradeEvent(tradeEventID.toString())
@@ -282,6 +291,12 @@ export function handleEthPurchase(event: EthPurchase): void {
   tradeEvent.symbol = exchange.tokenSymbol
   tradeEvent.name = exchange.tokenName
   tradeEvent.save()
+
+  let roi = new ROI(event.block.timestamp.toString())
+  roi.exchangeSymbol = exchange.tokenSymbol
+  roi.exchangeAddress = event.address
+  roi.ROI = exchange.ROI
+  roi.save()
 }
 
 // Note - function addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
@@ -382,9 +397,10 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   transaction.fee = BigDecimal.fromString("0")
   transaction.save()
 
-  /******************************
-   * Handle the historical data *
-   * ****************************/
+  /************************************
+   * Handle the historical data below *
+   ************************************/
+
   let liquidityEventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
   let liquidityEvent = new LiquidityEvent(liquidityEventID.toString())
   liquidityEvent.type = "AddLiquidity"
@@ -400,6 +416,12 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   liquidityEvent.symbol = exchange.tokenSymbol
   liquidityEvent.name = exchange.tokenName
   liquidityEvent.save()
+
+  let roi = new ROI(event.block.timestamp.toString())
+  roi.exchangeSymbol = exchange.tokenSymbol
+  roi.exchangeAddress = event.address
+  roi.ROI = exchange.ROI
+  roi.save()
 }
 
 // Note - function removeLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
@@ -501,9 +523,10 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   transaction.fee = BigDecimal.fromString("0")
   transaction.save()
 
-  /******************************
-   * Handle the historical data *
-   * ****************************/
+  /************************************
+   * Handle the historical data below *
+   ************************************/
+
   let liquidityEventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
   let liquidityEvent = new LiquidityEvent(liquidityEventID.toString())
   liquidityEvent.type = "RemoveLiquidity"
@@ -519,6 +542,12 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   liquidityEvent.symbol = exchange.tokenSymbol
   liquidityEvent.name = exchange.tokenName
   liquidityEvent.save()
+
+  let roi = new ROI(event.block.timestamp.toString())
+  roi.exchangeSymbol = exchange.tokenSymbol
+  roi.exchangeAddress = event.address
+  roi.ROI = exchange.ROI
+  roi.save()
 }
 
 
@@ -588,7 +617,9 @@ export function handleTransfer(event: Transfer): void {
 }
 
 
-/****** Helpers Below ******/
+/************************************
+ ********** Helpers below ***********
+ ************************************/
 
 function exponentToBigDecimal(decimals: i32): BigDecimal {
   let bd = BigDecimal.fromString("1")
