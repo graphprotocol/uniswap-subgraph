@@ -327,10 +327,11 @@ export function handleEthPurchase(event: EthPurchase): void {
   eh.tradeVolumeEth = exchange.tradeVolumeEth
   eh.feeInEth = fee
   if (exchange.price.equals(BigDecimal.fromString("0"))) {
-    eh.feeInEth = BigDecimal.fromString("0") // TODO Fee isn't actually zero here, but i don't know how to handle it 
+    eh.feeInEth = BigDecimal.fromString("0") // TODO Fee isn't actually zero here, but i don't know how to handle it
   } else {
     eh.feeInEth = fee.div(exchange.price)
-  eh.save()
+    eh.save()
+  }
 }
 
 // Note - function addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
