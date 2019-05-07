@@ -13,7 +13,7 @@ import {
   UserExchangeData,
   Transaction,
   Exchange,
-  Uniswap
+  Uniswap, TradeEvent, LiquidityEvent
 } from '../types/schema'
 
 export function handleTokenPurchase(event: TokenPurchase): void {
@@ -119,6 +119,28 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   }
   transaction.fee = fee
   transaction.save()
+
+  /******************************
+   * Handle the historical data *
+   * ****************************/
+
+  let tradeEventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
+  let tradeEvent = new TradeEvent(tradeEventID.toString())
+  tradeEvent.type = "TokenPurchase"
+  tradeEvent.buyer = event.params.buyer
+  tradeEvent.eth = ethAmount
+  tradeEvent.tokenAddress = exchange.tokenAddress
+  tradeEvent.exchangeAddress = event.address
+  tradeEvent.timestamp = event.block.timestamp.toI32()
+  tradeEvent.txhash = event.transaction.hash
+  tradeEvent.block = event.block.number.toI32()
+  tradeEvent.tokenFee = BigDecimal.fromString("0")
+  tradeEvent.ethFee = fee
+  tradeEvent.token = tokenAmount
+  tradeEvent.decimals = exchange.tokenDecimals
+  tradeEvent.symbol = exchange.tokenSymbol
+  tradeEvent.name = exchange.tokenName
+  tradeEvent.save()
 }
 
 export function handleEthPurchase(event: EthPurchase): void {
@@ -238,6 +260,28 @@ export function handleEthPurchase(event: EthPurchase): void {
   }
   transaction.fee = fee
   transaction.save()
+
+  /******************************
+   * Handle the historical data *
+   * ****************************/
+
+  let tradeEventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
+  let tradeEvent = new TradeEvent(tradeEventID.toString())
+  tradeEvent.type = "EthPurchase"
+  tradeEvent.buyer = event.params.buyer
+  tradeEvent.eth = ethAmount
+  tradeEvent.exchangeAddress = event.address
+  tradeEvent.tokenAddress = exchange.tokenAddress
+  tradeEvent.timestamp = event.block.timestamp.toI32()
+  tradeEvent.txhash = event.transaction.hash
+  tradeEvent.block = event.block.number.toI32()
+  tradeEvent.tokenFee = fee
+  tradeEvent.ethFee = BigDecimal.fromString("0")
+  tradeEvent.token = tokenAmount
+  tradeEvent.decimals = exchange.tokenDecimals
+  tradeEvent.symbol = exchange.tokenSymbol
+  tradeEvent.name = exchange.tokenName
+  tradeEvent.save()
 }
 
 // Note - function addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
@@ -337,6 +381,25 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   }
   transaction.fee = BigDecimal.fromString("0")
   transaction.save()
+
+  /******************************
+   * Handle the historical data *
+   * ****************************/
+  let liquidityEventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
+  let liquidityEvent = new LiquidityEvent(liquidityEventID.toString())
+  liquidityEvent.type = "AddLiquidity"
+  liquidityEvent.provider = event.params.provider
+  liquidityEvent.ethAmount = ethAmount
+  liquidityEvent.exchangeAddress = event.address
+  liquidityEvent.tokenAddress = exchange.tokenAddress
+  liquidityEvent.timestamp = event.block.timestamp.toI32()
+  liquidityEvent.txhash = event.transaction.hash
+  liquidityEvent.block = event.block.number.toI32()
+  liquidityEvent.tokenAmount = tokenAmount
+  liquidityEvent.decimals = exchange.tokenDecimals
+  liquidityEvent.symbol = exchange.tokenSymbol
+  liquidityEvent.name = exchange.tokenName
+  liquidityEvent.save()
 }
 
 // Note - function removeLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
@@ -437,6 +500,25 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   }
   transaction.fee = BigDecimal.fromString("0")
   transaction.save()
+
+  /******************************
+   * Handle the historical data *
+   * ****************************/
+  let liquidityEventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
+  let liquidityEvent = new LiquidityEvent(liquidityEventID.toString())
+  liquidityEvent.type = "RemoveLiquidity"
+  liquidityEvent.provider = event.params.provider
+  liquidityEvent.ethAmount = ethAmount
+  liquidityEvent.exchangeAddress = event.address
+  liquidityEvent.tokenAddress = exchange.tokenAddress
+  liquidityEvent.timestamp = event.block.timestamp.toI32()
+  liquidityEvent.txhash = event.transaction.hash
+  liquidityEvent.block = event.block.number.toI32()
+  liquidityEvent.tokenAmount = tokenAmount
+  liquidityEvent.decimals = exchange.tokenDecimals
+  liquidityEvent.symbol = exchange.tokenSymbol
+  liquidityEvent.name = exchange.tokenName
+  liquidityEvent.save()
 }
 
 
