@@ -104,3 +104,63 @@ type Transaction @entity {
     tokenAmount: BigDecimal!
     fee: BigDecimal!
 }
+
+##### Below are entites specifically for uniswap historical data #####
+
+# Note - No fee to provide liqidity
+type LiquidityEvent @entity {
+    id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
+    type: LiquidityType!
+    provider: Bytes!
+
+    # Monetary values
+    ethAmount: BigDecimal!
+    tokenAmount: BigDecimal!
+    # usdAmount: BigInt! not immediately clear
+
+    # Block data
+    timestamp: Int!
+    txhash: Bytes!
+    block: Int!
+
+    # Generic token info. Some can be null because ERC20 interface is not enforced
+    tokenAddress: Bytes!
+    exchangeAddress: Bytes!
+    symbol: String
+    decimals: Int
+    name: String
+}
+
+type TradeEvent @entity {
+    id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
+    type: TradeType!
+    buyer: Bytes!
+
+    # Monetary Values. Positive or negative determined by the TradeType
+    eth: BigDecimal!
+    token: BigDecimal!
+    tokenFee: BigDecimal!       # TODO - ensure fees are calculated correctly. i.e. the 0.3% is pre-removed
+    ethFee: BigDecimal!
+    # usdAmount: BigInt! not immediately clear how to get. To referecnce DAI, USDC, and TRUEUSD
+
+    # Block data
+    timestamp: Int!
+    txhash: Bytes!
+    block: Int!
+
+    # Generic token info. Some can be null because ERC20 interface is not enforced
+    tokenAddress: Bytes!
+    exchangeAddress: Bytes!
+    symbol: String
+    decimals: Int
+    name: String
+}
+
+enum LiquidityType {
+    AddLiquidity,
+    RemoveLiquidity
+}
+enum TradeType {
+    TokenPurchase,
+    EthPurchase
+}
