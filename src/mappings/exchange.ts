@@ -16,7 +16,7 @@ import {
   Uniswap,
   TradeEvent,
   LiquidityEvent,
-  ROI
+  ExchangeHistory
 } from '../types/schema'
 
 export function handleTokenPurchase(event: TokenPurchase): void {
@@ -103,6 +103,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
   uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD).truncate(4)
   uniswap.totalTokenBuys = uniswap.totalTokenBuys.plus(BigInt.fromI32(1))
+  uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
   uniswap.save()
 
   /****** Update Transaction ******/
@@ -145,11 +146,25 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   tradeEvent.name = exchange.tokenName
   tradeEvent.save()
 
-  let roi = new ROI(event.block.timestamp.toString())
-  roi.exchangeSymbol = exchange.tokenSymbol
-  roi.exchangeAddress = event.address
-  roi.ROI = exchange.ROI
-  roi.save()
+  let eh = new ExchangeHistory(uniswap.exchangeHistoryEntityCount.toString())
+  eh.exchangeAddress = event.address
+  eh.tokenSymbol = exchange.tokenSymbol
+  eh.tokenAddress = exchange.tokenAddress
+  eh.type = "TokenPurchase"
+  eh.ethLiquidity = exchange.ethLiquidity
+  eh.tokenLiquidity = exchange.tokenLiquidity
+  eh.ethBalance = exchange.ethBalance
+  eh.tokenBalance = exchange.tokenBalance
+  eh.combinedBalanceInEth = exchange.combinedBalanceInEth
+  eh.combinedBalanceInUSD = exchange.combinedBalanceInUSD
+  eh.ROI = exchange.ROI
+  eh.totalUniToken = exchange.totalUniToken
+  eh.priceUSD = exchange.priceUSD
+  eh.price = exchange.price
+  eh.tradeVolumeToken = exchange.tradeVolumeToken
+  eh.tradeVolumeEth = exchange.tradeVolumeEth
+  eh.feeInEth = fee
+  eh.save()
 }
 
 export function handleEthPurchase(event: EthPurchase): void {
@@ -250,6 +265,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
   uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD).truncate(4)
   uniswap.totalTokenSells = uniswap.totalTokenSells.plus(BigInt.fromI32(1))
+  uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
   uniswap.save()
 
   /****** Update Transaction ******/
@@ -292,11 +308,29 @@ export function handleEthPurchase(event: EthPurchase): void {
   tradeEvent.name = exchange.tokenName
   tradeEvent.save()
 
-  let roi = new ROI(event.block.timestamp.toString())
-  roi.exchangeSymbol = exchange.tokenSymbol
-  roi.exchangeAddress = event.address
-  roi.ROI = exchange.ROI
-  roi.save()
+  let eh = new ExchangeHistory(uniswap.exchangeHistoryEntityCount.toString())
+  eh.exchangeAddress = event.address
+  eh.tokenSymbol = exchange.tokenSymbol
+  eh.tokenAddress = exchange.tokenAddress
+  eh.type = "EthPurchase"
+  eh.ethLiquidity = exchange.ethLiquidity
+  eh.tokenLiquidity = exchange.tokenLiquidity
+  eh.ethBalance = exchange.ethBalance
+  eh.tokenBalance = exchange.tokenBalance
+  eh.combinedBalanceInEth = exchange.combinedBalanceInEth
+  eh.combinedBalanceInUSD = exchange.combinedBalanceInUSD
+  eh.ROI = exchange.ROI
+  eh.totalUniToken = exchange.totalUniToken
+  eh.priceUSD = exchange.priceUSD
+  eh.price = exchange.price
+  eh.tradeVolumeToken = exchange.tradeVolumeToken
+  eh.tradeVolumeEth = exchange.tradeVolumeEth
+  eh.feeInEth = fee
+  if (exchange.price.equals(BigDecimal.fromString("0"))) {
+    eh.feeInEth = BigDecimal.fromString("0") // TODO Fee isn't actually zero here, but i don't know how to handle it 
+  } else {
+    eh.feeInEth = fee.div(exchange.price)
+  eh.save()
 }
 
 // Note - function addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
@@ -377,6 +411,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(ethAmount.times(BigDecimal.fromString("2")))
   uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD).truncate(4)
   uniswap.totalAddLiquidity = uniswap.totalAddLiquidity.plus(BigInt.fromI32(1))
+  uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
   uniswap.save()
 
   /****** Update Transaction ******/
@@ -417,11 +452,24 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   liquidityEvent.name = exchange.tokenName
   liquidityEvent.save()
 
-  let roi = new ROI(event.block.timestamp.toString())
-  roi.exchangeSymbol = exchange.tokenSymbol
-  roi.exchangeAddress = event.address
-  roi.ROI = exchange.ROI
-  roi.save()
+  let eh = new ExchangeHistory(uniswap.exchangeHistoryEntityCount.toString())
+  eh.exchangeAddress = event.address
+  eh.tokenSymbol = exchange.tokenSymbol
+  eh.tokenAddress = exchange.tokenAddress
+  eh.type = "AddLiquidity"
+  eh.ethLiquidity = exchange.ethLiquidity
+  eh.tokenLiquidity = exchange.tokenLiquidity
+  eh.ethBalance = exchange.ethBalance
+  eh.tokenBalance = exchange.tokenBalance
+  eh.combinedBalanceInEth = exchange.combinedBalanceInEth
+  eh.combinedBalanceInUSD = exchange.combinedBalanceInUSD
+  eh.ROI = exchange.ROI
+  eh.totalUniToken = exchange.totalUniToken
+  eh.priceUSD = exchange.priceUSD
+  eh.price = exchange.price
+  eh.tradeVolumeToken = exchange.tradeVolumeToken
+  eh.tradeVolumeEth = exchange.tradeVolumeEth
+  eh.save()
 }
 
 // Note - function removeLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
@@ -503,6 +551,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(ethAmount.times(BigDecimal.fromString("2")))
   uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD).truncate(4)
   uniswap.totalRemoveLiquidity = uniswap.totalRemoveLiquidity.plus(BigInt.fromI32(1))
+  uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
   uniswap.save()
 
   /****** Update Transaction ******/
@@ -543,11 +592,24 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   liquidityEvent.name = exchange.tokenName
   liquidityEvent.save()
 
-  let roi = new ROI(event.block.timestamp.toString())
-  roi.exchangeSymbol = exchange.tokenSymbol
-  roi.exchangeAddress = event.address
-  roi.ROI = exchange.ROI
-  roi.save()
+  let eh = new ExchangeHistory(uniswap.exchangeHistoryEntityCount.toString())
+  eh.exchangeAddress = event.address
+  eh.tokenSymbol = exchange.tokenSymbol
+  eh.tokenAddress = exchange.tokenAddress
+  eh.type = "RemoveLiquidity"
+  eh.ethLiquidity = exchange.ethLiquidity
+  eh.tokenLiquidity = exchange.tokenLiquidity
+  eh.ethBalance = exchange.ethBalance
+  eh.tokenBalance = exchange.tokenBalance
+  eh.combinedBalanceInEth = exchange.combinedBalanceInEth
+  eh.combinedBalanceInUSD = exchange.combinedBalanceInUSD
+  eh.ROI = exchange.ROI
+  eh.totalUniToken = exchange.totalUniToken
+  eh.priceUSD = exchange.priceUSD
+  eh.price = exchange.price
+  eh.tradeVolumeToken = exchange.tradeVolumeToken
+  eh.tradeVolumeEth = exchange.tradeVolumeEth
+  eh.save()
 }
 
 
