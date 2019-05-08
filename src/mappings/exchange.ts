@@ -18,6 +18,7 @@ import {
   LiquidityEvent,
   ExchangeHistory
 } from '../types/schema'
+import {uniswapUSDOracle} from "./uniswapOracle";
 
 export function handleTokenPurchase(event: TokenPurchase): void {
   /****** Update Exchange ******/
@@ -65,22 +66,23 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   let fee = originalEthValue.minus(ethAmount).truncate(18)
   userExchangeData.ethFeesPaid = userExchangeData.ethFeesPaid.plus(fee)
 
-  // /****** Get ETH in USD from Compound Oracle ******/
-  if (event.block.number.toI32() > 6747538) {
-    let oracle = Oracle.bind(Address.fromString("0x02557a5e05defeffd4cae6d83ea3d173b272c904"))
-    let oneDaiInEth = (oracle.getPrice(Address.fromString("0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359"))).toBigDecimal()
-    if (oneDaiInEth.equals(BigDecimal.fromString("0"))) {
-      // do nothing, dai price oracle has not been set yet in the compound contract
+  /****** Get ETH in USD Uniswap USD Tokens ******/
+  let oneUSDInEth = uniswapUSDOracle(event.block.number)
+  if (oneUSDInEth.equals(BigDecimal.fromString("0"))) {
+    // do nothing, it is one of the first few blocks before dai token traded
+  } else {
+    exchange.lastPriceUSD = exchange.priceUSD
+    if (exchange.price.equals(BigDecimal.fromString("0"))) {
+      exchange.priceUSD = BigDecimal.fromString("0")
     } else {
-      exchange.lastPriceUSD = exchange.priceUSD
-      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
-      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
-      exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.weightedAvgPrice).truncate(4)
-      userExchangeData.ethFeesInUSD = BigDecimal.fromString("1000000000000000000").times(userExchangeData.ethFeesPaid).div(oneDaiInEth).truncate(4)
+      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.price).truncate(4)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
     }
+    exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.weightedAvgPrice).truncate(4)
+    userExchangeData.ethFeesInUSD = BigDecimal.fromString("1000000000000000000").times(userExchangeData.ethFeesPaid).div(oneUSDInEth).truncate(4)
   }
 
-  // ROI calculations
+// ROI calculations
   if (exchange.price.equals(BigDecimal.fromString("0"))) {
     // do nothing. it will cause a div by zero failure
   } else {
@@ -88,7 +90,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
     let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
     let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    if (totalLiquidityValue.equals(BigDecimal.fromString("0"))){
+    if (totalLiquidityValue.equals(BigDecimal.fromString("0"))) {
       // do nothing. it would cause a div by zero failure
     } else {
       exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
@@ -116,7 +118,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.buyer
   transaction.ethAmount = event.params.eth_sold.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || 0){
+  if (exchange.tokenDecimals == null || 0) {
     transaction.tokenAmount = event.params.tokens_bought.toBigDecimal()
   } else {
     transaction.tokenAmount = event.params.tokens_bought.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
@@ -150,6 +152,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   eh.exchangeAddress = event.address
   eh.tokenSymbol = exchange.tokenSymbol
   eh.tokenAddress = exchange.tokenAddress
+  eh.timestamp = event.block.timestamp.toI32()
   eh.type = "TokenPurchase"
   eh.ethLiquidity = exchange.ethLiquidity
   eh.tokenLiquidity = exchange.tokenLiquidity
@@ -197,7 +200,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
 
   /****** Update User ******/
-  // It is conceivable that user does not exist yet here
+    // It is conceivable that user does not exist yet here
   let userID = event.params.buyer.toHex()
   let user = User.load(userID)
   if (user == null) {
@@ -222,24 +225,20 @@ export function handleEthPurchase(event: EthPurchase): void {
   userExchangeData.tokenFeesPaid = userExchangeData.tokenFeesPaid.plus(fee)
 
 
-  /****** Get ETH in USD from Compound Oracle ******/
-  if (event.block.number.toI32() > 6747538) {
-    let oracle = Oracle.bind(Address.fromString("0x02557a5e05defeffd4cae6d83ea3d173b272c904"))
-    let oneDaiInEth = (oracle.getPrice(Address.fromString("0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359"))).toBigDecimal()
-    if (oneDaiInEth.equals(BigDecimal.fromString("0"))) {
-      // do nothing, dai price oracle has not been set yet in the compound contract
+  /****** Get ETH in USD Uniswap USD Tokens ******/
+  let oneUSDInEth = uniswapUSDOracle(event.block.number)
+  if (oneUSDInEth.equals(BigDecimal.fromString("0"))) {
+    // do nothing, dai price oracle has not been set yet in the compound contract
+  } else {
+    exchange.lastPriceUSD = exchange.priceUSD
+    if (exchange.price.equals(BigDecimal.fromString("0"))) {
+      exchange.priceUSD = BigDecimal.fromString("0")
     } else {
-      exchange.lastPriceUSD = exchange.priceUSD
-      if (exchange.price.equals(BigDecimal.fromString("0"))) {
-        exchange.priceUSD = BigDecimal.fromString("0")
-      } else {
-        exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
-        exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
-      }
-      exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.weightedAvgPrice).truncate(4)
-
-      userExchangeData.tokenFeesInUSD = BigDecimal.fromString("1000000000000000000").times(userExchangeData.tokenFeesPaid).div(oneDaiInEth).div(exchange.price).truncate(4)
+      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.price).truncate(4)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
     }
+    exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.weightedAvgPrice).truncate(4)
+    userExchangeData.tokenFeesInUSD = BigDecimal.fromString("1000000000000000000").times(userExchangeData.tokenFeesPaid).div(oneUSDInEth).div(exchange.price).truncate(4)
   }
 
   // ROI calculations
@@ -250,7 +249,7 @@ export function handleEthPurchase(event: EthPurchase): void {
     let liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
     let totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
     let totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    if (totalLiquidityValue.equals(BigDecimal.fromString("0"))){
+    if (totalLiquidityValue.equals(BigDecimal.fromString("0"))) {
       // do nothing. it would cause a div by zero failure
     } else {
       exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
@@ -278,7 +277,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.buyer
   transaction.ethAmount = event.params.eth_bought.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || 0){
+  if (exchange.tokenDecimals == null || 0) {
     transaction.tokenAmount = event.params.tokens_sold.toBigDecimal()
   } else {
     transaction.tokenAmount = event.params.tokens_sold.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
@@ -312,6 +311,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   eh.exchangeAddress = event.address
   eh.tokenSymbol = exchange.tokenSymbol
   eh.tokenAddress = exchange.tokenAddress
+  eh.timestamp = event.block.timestamp.toI32()
   eh.type = "EthPurchase"
   eh.ethLiquidity = exchange.ethLiquidity
   eh.tokenLiquidity = exchange.tokenLiquidity
@@ -375,16 +375,18 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   userExchangeData.ethDeposited = userExchangeData.ethDeposited.plus(ethAmount)
   userExchangeData.tokensDeposited = userExchangeData.tokensDeposited.plus(tokenAmount)
 
-  /****** Get ETH in USD from Compound Oracle ******/
-  if (event.block.number.toI32() > 6747538) {
-    let oracle = Oracle.bind(Address.fromString("0x02557a5e05defeffd4cae6d83ea3d173b272c904"))
-    let oneDaiInEth = oracle.getPrice(Address.fromString("0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359")).toBigDecimal()
-    if (oneDaiInEth.equals(BigDecimal.fromString("0"))) {
-      // do nothing, dai price oracle has not been set yet in the compound contract
+
+  /****** Get ETH in USD Uniswap USD Tokens ******/
+  let oneUSDInEth = uniswapUSDOracle(event.block.number)
+  if (oneUSDInEth.equals(BigDecimal.fromString("0"))) {
+    // do nothing, dai price oracle has not been set yet in the compound contract
+  } else {
+    exchange.lastPriceUSD = exchange.priceUSD
+    if (exchange.price.equals(BigDecimal.fromString("0"))) {
+      exchange.priceUSD = BigDecimal.fromString("0")
     } else {
-      exchange.lastPriceUSD = exchange.priceUSD
-      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
-      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
+      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.price).truncate(4)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
     }
   }
 
@@ -425,7 +427,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.provider
   transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || 0){
+  if (exchange.tokenDecimals == null || 0) {
     transaction.tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
     transaction.tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
@@ -457,6 +459,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   eh.exchangeAddress = event.address
   eh.tokenSymbol = exchange.tokenSymbol
   eh.tokenAddress = exchange.tokenAddress
+  eh.timestamp = event.block.timestamp.toI32()
   eh.type = "AddLiquidity"
   eh.ethLiquidity = exchange.ethLiquidity
   eh.tokenLiquidity = exchange.tokenLiquidity
@@ -511,22 +514,20 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   userExchangeData.ethWithdrawn = userExchangeData.ethWithdrawn.plus(ethAmount)
   userExchangeData.tokensWithdrawn = userExchangeData.tokensWithdrawn.plus(tokenAmount)
 
-  /****** Get ETH in USD from Compound Oracle ******/
-  if (event.block.number.toI32() > 6747538) {
-    let oracle = Oracle.bind(Address.fromString("0x02557a5e05defeffd4cae6d83ea3d173b272c904"))
-    let oneDaiInEth = oracle.getPrice(Address.fromString("0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359")).toBigDecimal()
-    if (oneDaiInEth.equals(BigDecimal.fromString("0"))) {
-      // do nothing, dai price oracle has not been set yet in the compound contract
+  /****** Get ETH in USD Uniswap USD Tokens ******/
+  let oneUSDInEth = uniswapUSDOracle(event.block.number)
+  if (oneUSDInEth.equals(BigDecimal.fromString("0"))) {
+    // do nothing, dai price oracle has not been set yet in the compound contract
+  } else {
+    exchange.lastPriceUSD = exchange.priceUSD
+    if (exchange.price.equals(BigDecimal.fromString("0"))) {
+      exchange.priceUSD = BigDecimal.fromString("0")
     } else {
-      exchange.lastPriceUSD = exchange.priceUSD
-      if (exchange.price.equals(BigDecimal.fromString("0"))) {
-        exchange.priceUSD = BigDecimal.fromString("0")
-      } else {
-        exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneDaiInEth).div(exchange.price).truncate(4)
-        exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneDaiInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
-      }
+      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.price).truncate(4)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
     }
   }
+
 
   // ROI calculations
   if (exchange.price.equals(BigDecimal.fromString("0"))) {
@@ -565,7 +566,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.userAddress = event.params.provider
   transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || 0){
+  if (exchange.tokenDecimals == null || 0) {
     transaction.tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
     transaction.tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
@@ -597,6 +598,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   eh.exchangeAddress = event.address
   eh.tokenSymbol = exchange.tokenSymbol
   eh.tokenAddress = exchange.tokenAddress
+  eh.timestamp = event.block.timestamp.toI32()
   eh.type = "RemoveLiquidity"
   eh.ethLiquidity = exchange.ethLiquidity
   eh.tokenLiquidity = exchange.tokenLiquidity
