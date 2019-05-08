@@ -16,6 +16,9 @@ This Subgraph dynamically tracks any exchange created by the uniswap factory. An
     - And `(tokenDeposited - tokenWithdrawn) * tokenPrice = totalTokensInEth`
     - Current Liquidity profit is:
         - `profit = totalWithdrawable - totalEth - totalTokensInEth`
+        
+        
+Currently only the top 50 coins have decimals incorporated into values. This is because not all uniswap exchanges created have proper ERC-20 interfaces, and calling decimals fails. So with dynamic contracts, we had to opt for hardcoding in the top 50 exchanges by volume. The others have tokens represented as the full large number. (i.e. 123456789123456789 instead of 1.23456789123456789). We are tracking this issue here: https://github.com/graphprotocol/graph-node/issues/892 
 
 ## Queries 
 Below are a few ways to show how to query the uniswap-subgraph for data. The queries show most of the information that is queryable, but there are many other filtering options that can be used, just check out the [querying api](https://thegraph.com/docs/graphql-api). These queries can be used locally or in The Graph Explorer playground.

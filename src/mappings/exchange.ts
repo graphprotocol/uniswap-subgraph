@@ -631,7 +631,7 @@ export function handleTransfer(event: Transfer): void {
       createUserDataEntity(userToID, event.params._to, event.address)
       userTo = UserExchangeData.load(userToID)
     }
-    userTo.uniTokensMinted = userTo.uniTokensMinted.plus(uniTokens)
+    userTo.uniTokenBalance = userTo.uniTokenBalance.plus(uniTokens)
     exchange.save()
     userTo.save()
 
@@ -643,13 +643,17 @@ export function handleTransfer(event: Transfer): void {
       createUserDataEntity(userFromID, event.params._from, event.address)
       userFrom = UserExchangeData.load(userFromID)
     }
-    userFrom.uniTokensBurned = userFrom.uniTokensBurned.plus(uniTokens)
+    userFrom.uniTokenBalance = userFrom.uniTokenBalance.minus(uniTokens)
 
     exchange.save()
     userFrom.save()
 
     // Handle normal transfer cases
   } else {
+    let ratio = event.params._value.toBigDecimal().div(exchange.totalUniToken)
+    let ethTransferred = ratio.times(exchange.ethBalance)
+    let tokenTransferred = ratio.times(exchange.tokenBalance)
+
 
     let userTo = UserExchangeData.load(userToID)
     if (userTo == null) {
@@ -662,8 +666,14 @@ export function handleTransfer(event: Transfer): void {
       createUserDataEntity(userFromID, event.params._from, event.address)
       userFrom = UserExchangeData.load(userFromID)
     }
-    userTo.uniTokensMinted = userTo.uniTokensMinted.plus(uniTokens)
-    userFrom.uniTokensMinted = userTo.uniTokensMinted.minus(uniTokens)
+
+    // Note - a transfer is considered a direct buy and sell of eth and tokens from 1 user to another
+    userTo.ethBought = userTo.ethBought.plus(ethTransferred)
+    userTo.tokensBought = userTo.tokensBought.plus(tokenTransferred)
+    userTo.uniTokenBalance = userTo.uniTokenBalance.plus(uniTokens)
+    userFrom.ethBought = userTo.ethBought.minus(ethTransferred)
+    userFrom.tokensBought = userTo.tokensBought.minus(tokenTransferred)
+    userFrom.uniTokenBalance = userTo.uniTokenBalance.minus(uniTokens)
     userTo.save()
     userFrom.save()
   }
@@ -703,8 +713,7 @@ function createUserDataEntity(id: string, user: Address, exchange: Address): voi
   userExchangeData.tokensDeposited = BigDecimal.fromString("0")
   userExchangeData.ethWithdrawn = BigDecimal.fromString("0")
   userExchangeData.tokensWithdrawn = BigDecimal.fromString("0")
-  userExchangeData.uniTokensMinted = BigDecimal.fromString("0")
-  userExchangeData.uniTokensBurned = BigDecimal.fromString("0")
+  userExchangeData.uniTokenBalance = BigDecimal.fromString("0")
 
   userExchangeData.ethBought = BigDecimal.fromString("0")
   userExchangeData.ethSold = BigDecimal.fromString("0")

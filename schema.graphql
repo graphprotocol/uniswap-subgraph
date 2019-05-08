@@ -78,11 +78,11 @@ type UserExchangeData @entity {
     tokensDeposited: BigDecimal!    # Where negative means tokens were exchanged for eth
     ethWithdrawn: BigDecimal!
     tokensWithdrawn: BigDecimal!
-    uniTokensMinted: BigDecimal!
-    uniTokensBurned: BigDecimal!
+    uniTokenBalance: BigDecimal!
 
     # Trading Data
     # Note - Fee is always charged in what the user is paying with. i.e. you buy eth by paying in token. Fee is in token
+    # Note - ethBought, ethSold, tokensBought, and tokensSold are effected by a basic Transfer
     ethBought: BigDecimal!
     ethSold: BigDecimal!
     tokensBought: BigDecimal!
