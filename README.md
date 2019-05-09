@@ -135,3 +135,70 @@ This query fetches a single user, and all their exchange balances.
   }
 }
 ```
+
+### Querying Historical Data
+#### ExchangeHistory
+This query fetches historical data for the MKR exchange, ordered by time:
+```graphql
+{
+  exchangeHistories(where: {tokenSymbol:"MKR"}, orderBy:timestamp, orderDirection: desc){
+    id
+    exchangeAddress
+    tokenSymbol
+    tokenAddress
+    type
+    timestamp
+    ethLiquidity
+    tokenLiquidity
+    ethBalance
+    tokenBalance
+    combinedBalanceInEth
+    combinedBalanceInUSD
+    ROI
+    totalUniToken
+    priceUSD
+    price
+    tradeVolumeToken
+    tradeVolumeEth
+    feeInEth
+  }
+}
+```
+
+These queries fetch historical data as the events that were emitted, split into trade events and liquidity events:
+```graphql
+{
+  liquidityEvents {
+    id
+    type
+    provider
+    ethAmount
+    tokenAmount
+    exchangeAddress
+    timestamp
+    txhash
+    block
+    tokenAddress
+    symbol
+    decimals
+    name
+  }
+  tradeEvents {
+    id
+    type
+    buyer
+    eth
+    token
+    exchangeAddress
+    timestamp
+    txhash
+    block
+    tokenFee
+    ethFee
+    tokenAddress
+    symbol
+    decimals
+    name
+  }
+  }
+```

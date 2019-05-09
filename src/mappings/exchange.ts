@@ -75,7 +75,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     if (exchange.price.equals(BigDecimal.fromString("0"))) {
       exchange.priceUSD = BigDecimal.fromString("0")
     } else {
-      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.price).truncate(4)
+      exchange.priceUSD = BigDecimal.fromString("1").div(oneUSDInEth).div(exchange.price).truncate(4)
       exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
     }
     exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.weightedAvgPrice).truncate(4)
@@ -234,7 +234,7 @@ export function handleEthPurchase(event: EthPurchase): void {
     if (exchange.price.equals(BigDecimal.fromString("0"))) {
       exchange.priceUSD = BigDecimal.fromString("0")
     } else {
-      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.price).truncate(4)
+      exchange.priceUSD = BigDecimal.fromString("1").div(oneUSDInEth).div(exchange.price).truncate(4)
       exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
     }
     exchange.weightedAvgPriceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.weightedAvgPrice).truncate(4)
@@ -327,7 +327,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   eh.tradeVolumeEth = exchange.tradeVolumeEth
   eh.feeInEth = fee
   if (exchange.price.equals(BigDecimal.fromString("0"))) {
-    eh.feeInEth = BigDecimal.fromString("0") // TODO Fee isn't actually zero here, but i don't know how to handle it
+    eh.feeInEth = BigDecimal.fromString("0") // TODO Fee isn't actually zero here, but its hard to calculate this value
   } else {
     eh.feeInEth = fee.div(exchange.price)
     eh.save()
@@ -385,7 +385,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     if (exchange.price.equals(BigDecimal.fromString("0"))) {
       exchange.priceUSD = BigDecimal.fromString("0")
     } else {
-      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.price).truncate(4)
+      exchange.priceUSD = BigDecimal.fromString("1").div(oneUSDInEth).div(exchange.price).truncate(4)
       exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
     }
   }
@@ -473,6 +473,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   eh.price = exchange.price
   eh.tradeVolumeToken = exchange.tradeVolumeToken
   eh.tradeVolumeEth = exchange.tradeVolumeEth
+  eh.feeInEth = BigDecimal.fromString("0")
   eh.save()
 }
 
@@ -523,7 +524,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     if (exchange.price.equals(BigDecimal.fromString("0"))) {
       exchange.priceUSD = BigDecimal.fromString("0")
     } else {
-      exchange.priceUSD = BigDecimal.fromString("1000000000000000000").div(oneUSDInEth).div(exchange.price).truncate(4)
+      exchange.priceUSD = BigDecimal.fromString("1").div(oneUSDInEth).div(exchange.price).truncate(4)
       exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).times(BigDecimal.fromString("1000000000000000000")).truncate(4)
     }
   }
@@ -612,6 +613,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   eh.price = exchange.price
   eh.tradeVolumeToken = exchange.tradeVolumeToken
   eh.tradeVolumeEth = exchange.tradeVolumeEth
+  eh.feeInEth = BigDecimal.fromString("0")
   eh.save()
 }
 
