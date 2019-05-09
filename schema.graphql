@@ -144,7 +144,6 @@ type LiquidityEvent @entity {
     # Monetary values
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
-    # usdAmount: BigInt! not immediately clear
 
     # Block data
     timestamp: Int!
@@ -167,9 +166,8 @@ type TradeEvent @entity {
     # Monetary Values. Positive or negative determined by the TradeType
     eth: BigDecimal!
     token: BigDecimal!
-    tokenFee: BigDecimal!       # TODO - ensure fees are calculated correctly. i.e. the 0.3% is pre-removed
+    tokenFee: BigDecimal!
     ethFee: BigDecimal!
-    # usdAmount: BigInt! not immediately clear how to get. To referecnce DAI, USDC, and TRUEUSD
 
     # Block data
     timestamp: Int!

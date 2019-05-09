@@ -1,5 +1,4 @@
 import {BigInt, BigDecimal, Address} from '@graphprotocol/graph-ts'
-import {Oracle} from "../types/Exchange-BAT/Oracle";
 import {
   TokenPurchase,
   EthPurchase,
@@ -327,7 +326,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   eh.tradeVolumeEth = exchange.tradeVolumeEth
   eh.feeInEth = fee
   if (exchange.price.equals(BigDecimal.fromString("0"))) {
-    eh.feeInEth = BigDecimal.fromString("0") // TODO Fee isn't actually zero here, but its hard to calculate this value
+    eh.feeInEth = BigDecimal.fromString("0") // Fee isn't actually zero here, but its hard to calculate this value
   } else {
     eh.feeInEth = fee.div(exchange.price)
     eh.save()
