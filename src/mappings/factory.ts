@@ -18,6 +18,7 @@ export function handleNewExchange(event: NewExchange): void {
     factory.totalAddLiquidity = BigInt.fromI32(0)
     factory.totalRemoveLiquidity = BigInt.fromI32(0)
     factory.exchangeHistoryEntityCount = BigInt.fromI32(0)
+    factory.txCount = BigInt.fromI32(0)
   }
   factory.exchangeCount = factory.exchangeCount + 1
   factory.save()

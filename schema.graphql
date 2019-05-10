@@ -15,6 +15,7 @@ type Uniswap @entity {
     totalRemoveLiquidity: BigInt!           # Total events where liquidity have been removed
 
     exchangeHistoryEntityCount: BigInt!
+    txCount: BigInt!
 }
 
 type Exchange @entity {
@@ -94,14 +95,15 @@ type UserExchangeData @entity {
 }
 
 type Transaction @entity {
-    id: ID!                         # Transaction Hash
+    id: ID!                         # 0,1,2,3, etc....
+    tx: Bytes!
     event: String!
     block: Int!
-    timeStamp: Int!
+    timestamp: Int!
     exchangeAddress: Bytes!
     tokenAddress: Bytes!
     tokenSymbol: String
-    userAddress: Bytes!
+    user: Bytes!
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
     fee: BigDecimal!
