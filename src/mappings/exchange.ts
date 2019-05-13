@@ -5,7 +5,7 @@ import {
   AddLiquidity,
   RemoveLiquidity,
   Transfer,
-} from '../types/Exchange-BAT/Exchange' // Although imported from BAT, these can be used for all exchanges
+} from '../types/Factory/templates/Exchange/Exchange'
 
 import {
   User,
