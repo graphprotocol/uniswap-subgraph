@@ -1,4 +1,4 @@
-import {hardcodeExchange} from "./hardcode-exchanges";
+import {hardcodeExchange} from "./hardcodeExchanges";
 import { NewExchange } from '../types/Factory/Factory'
 import { Uniswap } from '../types/schema'
 import {BigInt, BigDecimal} from '@graphprotocol/graph-ts'
