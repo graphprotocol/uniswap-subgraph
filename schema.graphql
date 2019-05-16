@@ -111,7 +111,8 @@ type Transaction @entity {
 
 ##### Below are entites specifically for uniswap historical data #####
 
-type ExchangeHistory @entity {
+# Historical data for each event of each exchange. Useful for creating graphs and data analysis
+type ExchangeHistoricalData @entity {
     id: ID!
     exchangeAddress: Bytes! # Uniswap exchange address
     tokenSymbol: String
@@ -128,7 +129,7 @@ type ExchangeHistory @entity {
     ROI: BigDecimal!                        # ROI for the exchanges lifetime.
     totalUniToken: BigDecimal!              # Count of the unilying unitokens that represent liquidity provided ownership
 
-    priceUSD: BigDecimal!                   # USD / token. USD price at time of transaction
+    tokenPriceUSD: BigDecimal!                   # USD / token. USD price at time of transaction
     price: BigDecimal!                      # Price is the total amount of tokens that equal one ETH. i.e. if ETH was 100 USD, price for DAI would be 100
 
     tradeVolumeToken: BigDecimal!           # Total tokens traded EVER. i.e. cumulative
@@ -137,7 +138,19 @@ type ExchangeHistory @entity {
     feeInEth: BigDecimal!
 }
 
-# Note - No fee to provide liqidity
+# Data accumulated and condensed into day stats for each exchange
+type ExchangeDayData @entity {
+    id: ID!                                 # token address concatenated with 0,1,2,3 etc. This way can check if it exists. 0 = nov 2nd 2018. 1 = nov 3 2018. etc.
+    date: Int!                              # starts on 1541116800 (Nov 2nd 2018 00:00:00). all dates must start on 00:00:00
+    ethBalance: BigDecimal!                 # Eth balance at last event within the day
+    tokenBalance: BigDecimal!               # Token balance at last event within the day
+    marginalEthRate: BigDecimal!            # tokenBalance / ethBalance
+    ethVolume: BigDecimal!                  # Cumulative volume throughout the day
+    ROI: BigDecimal!                        # ROI for the exchange at the last event within the day
+    tokenPriceUSD: BigDecimal!              # USD token price at last event within the day
+}
+
+    # Note - No fee to provide liqidity
 type LiquidityEvent @entity {
     id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
     type: EventType!

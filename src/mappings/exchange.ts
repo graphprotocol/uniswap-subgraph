@@ -15,7 +15,7 @@ import {
   Uniswap,
   TradeEvent,
   LiquidityEvent,
-  ExchangeHistory
+  ExchangeHistoricalData
 } from '../types/schema'
 import {uniswapUSDOracle} from "./uniswapOracle";
 
@@ -149,7 +149,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   tradeEvent.name = exchange.tokenName
   tradeEvent.save()
 
-  let eh = new ExchangeHistory(uniswap.exchangeHistoryEntityCount.toString())
+  let eh = new ExchangeHistoricalData(uniswap.exchangeHistoryEntityCount.toString())
   eh.exchangeAddress = event.address
   eh.tokenSymbol = exchange.tokenSymbol
   eh.tokenAddress = exchange.tokenAddress
@@ -163,7 +163,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   eh.combinedBalanceInUSD = exchange.combinedBalanceInUSD
   eh.ROI = exchange.ROI
   eh.totalUniToken = exchange.totalUniToken
-  eh.priceUSD = exchange.priceUSD
+  eh.tokenPriceUSD = exchange.priceUSD
   eh.price = exchange.price
   eh.tradeVolumeToken = exchange.tradeVolumeToken
   eh.tradeVolumeEth = exchange.tradeVolumeEth
@@ -310,7 +310,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   tradeEvent.name = exchange.tokenName
   tradeEvent.save()
 
-  let eh = new ExchangeHistory(uniswap.exchangeHistoryEntityCount.toString())
+  let eh = new ExchangeHistoricalData(uniswap.exchangeHistoryEntityCount.toString())
   eh.exchangeAddress = event.address
   eh.tokenSymbol = exchange.tokenSymbol
   eh.tokenAddress = exchange.tokenAddress
@@ -324,7 +324,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   eh.combinedBalanceInUSD = exchange.combinedBalanceInUSD
   eh.ROI = exchange.ROI
   eh.totalUniToken = exchange.totalUniToken
-  eh.priceUSD = exchange.priceUSD
+  eh.tokenPriceUSD = exchange.priceUSD
   eh.price = exchange.price
   eh.tradeVolumeToken = exchange.tradeVolumeToken
   eh.tradeVolumeEth = exchange.tradeVolumeEth
@@ -460,7 +460,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   liquidityEvent.name = exchange.tokenName
   liquidityEvent.save()
 
-  let eh = new ExchangeHistory(uniswap.exchangeHistoryEntityCount.toString())
+  let eh = new ExchangeHistoricalData(uniswap.exchangeHistoryEntityCount.toString())
   eh.exchangeAddress = event.address
   eh.tokenSymbol = exchange.tokenSymbol
   eh.tokenAddress = exchange.tokenAddress
@@ -474,7 +474,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   eh.combinedBalanceInUSD = exchange.combinedBalanceInUSD
   eh.ROI = exchange.ROI
   eh.totalUniToken = exchange.totalUniToken
-  eh.priceUSD = exchange.priceUSD
+  eh.tokenPriceUSD = exchange.priceUSD
   eh.price = exchange.price
   eh.tradeVolumeToken = exchange.tradeVolumeToken
   eh.tradeVolumeEth = exchange.tradeVolumeEth
@@ -602,7 +602,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   liquidityEvent.name = exchange.tokenName
   liquidityEvent.save()
 
-  let eh = new ExchangeHistory(uniswap.exchangeHistoryEntityCount.toString())
+  let eh = new ExchangeHistoricalData(uniswap.exchangeHistoryEntityCount.toString())
   eh.exchangeAddress = event.address
   eh.tokenSymbol = exchange.tokenSymbol
   eh.tokenAddress = exchange.tokenAddress
@@ -616,7 +616,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   eh.combinedBalanceInUSD = exchange.combinedBalanceInUSD
   eh.ROI = exchange.ROI
   eh.totalUniToken = exchange.totalUniToken
-  eh.priceUSD = exchange.priceUSD
+  eh.tokenPriceUSD = exchange.priceUSD
   eh.price = exchange.price
   eh.tradeVolumeToken = exchange.tradeVolumeToken
   eh.tradeVolumeEth = exchange.tradeVolumeEth
