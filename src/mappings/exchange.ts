@@ -332,7 +332,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   if (exchange.price.equals(BigDecimal.fromString("0"))) {
     eh.feeInEth = BigDecimal.fromString("0") // Fee isn't actually zero here, but its hard to calculate this value
   } else {
-    eh.feeInEth = fee.div(exchange.price)
+    eh.feeInEth = fee.div(exchange.price).truncate(18)
     eh.save()
   }
 }

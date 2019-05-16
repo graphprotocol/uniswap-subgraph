@@ -6,7 +6,7 @@ export class AS_Exchange {
   exchangeAddress: string
 }
 
-export let allExchanges: Array<AS_Exchange> = [
+export let hardcodedExchanges: Array<AS_Exchange> = [
   {
     "symbol": "MKR",
     "name": "Maker",
