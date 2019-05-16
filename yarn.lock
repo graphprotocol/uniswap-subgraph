@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@graphprotocol/graph-cli@^0.11.0":
-  version "0.11.2"
-  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-cli/-/graph-cli-0.11.2.tgz#e0f356873f023c71f4d3e9288fe82c5a3d2d92a3"
-  integrity sha512-3hWeo+HDJ73voolCaPmusgzSLNTgYSlD5tes8Lr2ciIjv8Nxu11zk34MCGWtaKDaMvRBL9H4irPmpPsk9ZUP6A==
+"@graphprotocol/graph-cli@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-cli/-/graph-cli-0.12.0.tgz#bd923afe8961a145987540c7d04b8509da33f57c"
+  integrity sha512-fUdBm06w7vGrxz/zmTsYKILPfowxxEoZwNB60QWEpEb8oGa3Wsm5UlQDN9mDgGN06HAWPO33C94JC6pukQRNPQ==
   dependencies:
     assemblyscript "https://github.com/AssemblyScript/assemblyscript#36040d5b5312f19a025782b5e36663823494c2f3"
     chalk "^2.4.1"
@@ -24,12 +24,12 @@
     prettier "^1.13.5"
     request "^2.88.0"
   optionalDependencies:
-    keytar "^4.3.0"
+    keytar "^4.6.0"
 
-"@graphprotocol/graph-ts@^0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-ts/-/graph-ts-0.11.0.tgz#a9f997497f766a7f178329dae649413fdd5c68f3"
-  integrity sha512-aDgXJcQy7VJcXS6nRs/Ur/yU0THi27uZGxnylo5We0W/n65SEvuPH1b4gARw1+1pZg58karwuWPeI9mzD8A+qw==
+"@graphprotocol/graph-ts@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-ts/-/graph-ts-0.12.0.tgz#b6d8a7d8ec4e8d69a8834064dd6867fb87b96966"
+  integrity sha512-1facmqAi/cKQVzK4g+DunpYQ+aDl8r6Ra87fBsQF0oNJfYAEPuk1QnxlZc8/uW9/SATesB+ljt9Bs/1+5AJRpg==
   dependencies:
     assemblyscript "https://github.com/AssemblyScript/assemblyscript#36040d5b5312f19a025782b5e36663823494c2f3"
 
@@ -37,28 +37,6 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
-
-"@shiftkey/prebuild-install@5.2.4":
-  version "5.2.4"
-  resolved "https://registry.yarnpkg.com/@shiftkey/prebuild-install/-/prebuild-install-5.2.4.tgz#5197ecda934e8b38e0f1609165413ffc2f722d98"
-  integrity sha512-42L/pSGD/+diCg8SwhZaXjDlkAWV10u42UozyG7rqDdyPW7HDp2/j/RYRZ3x0sXFf7hAUtLYvI9HdACWdjyfVw==
-  dependencies:
-    detect-libc "^1.0.3"
-    expand-template "^2.0.3"
-    github-from-package "0.0.0"
-    minimist "^1.2.0"
-    mkdirp "^0.5.1"
-    napi-build-utils "^1.0.1"
-    node-abi "^2.2.0"
-    noop-logger "^0.1.1"
-    npmlog "^4.0.1"
-    os-homedir "^1.0.1"
-    pump "^2.0.1"
-    rc "^1.2.7"
-    simple-get "^2.7.0"
-    tar-fs "^1.13.0"
-    tunnel-agent "^0.6.0"
-    which-pm-runs "^1.0.0"
 
 "@types/node@^10.3.5":
   version "10.12.26"
@@ -1736,13 +1714,13 @@ keypair@^1.0.1:
   resolved "https://registry.yarnpkg.com/keypair/-/keypair-1.0.1.tgz#7603719270afb6564ed38a22087a06fc9aa4ea1b"
   integrity sha1-dgNxknCvtlZO04oiCHoG/Jqk6hs=
 
-keytar@^4.3.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/keytar/-/keytar-4.4.0.tgz#5fa6627863dcc5b249b2266d6d6a2c62150006ca"
-  integrity sha512-IX6rvzrXVCWwQDGxf0FmF1IYDU2UuKsTPl1rhMCvoFfvkpRyKQYHYNqmKISwTseh/JVk4VPRlLsP4L3J25odBg==
+keytar@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/keytar/-/keytar-4.6.0.tgz#18b2e9d6ba68ed32e30ccc78b209b4f6cdc1cbbb"
+  integrity sha512-8wWWTC62QHvUvgW/QYyJv7X0GFZfp2Ykr5n3PuXKADro0Sv2RKvuYxbkzoZvsw33EDNAKnUTSA0/KLGN/MbwDw==
   dependencies:
-    "@shiftkey/prebuild-install" "5.2.4"
-    nan "2.12.1"
+    nan "2.13.2"
+    prebuild-install "5.3.0"
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
@@ -2088,7 +2066,12 @@ murmurhash3js@^3.0.1:
   resolved "https://registry.yarnpkg.com/murmurhash3js/-/murmurhash3js-3.0.1.tgz#3e983e5b47c2a06f43a713174e7e435ca044b998"
   integrity sha1-Ppg+W0fCoG9DpxMXTn5DXKBEuZg=
 
-nan@2.12.1, nan@^2.11.1, nan@^2.2.1, nan@^2.9.2:
+nan@2.13.2:
+  version "2.13.2"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.13.2.tgz#f51dc7ae66ba7d5d55e1e6d4d8092e802c9aefe7"
+  integrity sha512-TghvYc72wlMGMVMluVo9WRJc0mB8KxxF/gZ4YYFy7V2ZQX9l7rgbPg7vjS9mt6U5HXODVFVI2bOduCzwOMv/lw==
+
+nan@^2.11.1, nan@^2.2.1, nan@^2.9.2:
   version "2.12.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.12.1.tgz#7b1aa193e9aa86057e3c7bbd0ac448e770925552"
   integrity sha512-JY7V6lRkStKcKTvHO5NVSQRv+RV+FIL5pvDoLiAtSL9pKlC5x9PKQcZDsq7m4FO4d57mkhC6Z+QhAh3Jdk5JFw==
@@ -2139,10 +2122,10 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-node-abi@^2.2.0:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-2.7.1.tgz#a8997ae91176a5fbaa455b194976e32683cda643"
-  integrity sha512-OV8Bq1OrPh6z+Y4dqwo05HqrRL9YNF7QVMRfq1/pguwKLG+q9UB/Lk0x5qXjO23JjJg+/jqCHSTaG1P3tfKfuw==
+node-abi@^2.7.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-2.8.0.tgz#bd2e88dbe6a6871e6dd08553e0605779325737ec"
+  integrity sha512-1/aa2clS0pue0HjckL62CsbhWWU35HARvBDXcJtYKbYR7LnIutmpxmXbuDMV9kEviD2lP/wACOgWmmwljghHyQ==
   dependencies:
     semver "^5.4.1"
 
@@ -2413,6 +2396,28 @@ posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
+
+prebuild-install@5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-5.3.0.tgz#58b4d8344e03590990931ee088dd5401b03004c8"
+  integrity sha512-aaLVANlj4HgZweKttFNUVNRxDukytuIuxeK2boIMHjagNJCiVKWFsKF4tCE3ql3GbrD2tExPQ7/pwtEJcHNZeg==
+  dependencies:
+    detect-libc "^1.0.3"
+    expand-template "^2.0.3"
+    github-from-package "0.0.0"
+    minimist "^1.2.0"
+    mkdirp "^0.5.1"
+    napi-build-utils "^1.0.1"
+    node-abi "^2.7.0"
+    noop-logger "^0.1.1"
+    npmlog "^4.0.1"
+    os-homedir "^1.0.1"
+    pump "^2.0.1"
+    rc "^1.2.7"
+    simple-get "^2.7.0"
+    tar-fs "^1.13.0"
+    tunnel-agent "^0.6.0"
+    which-pm-runs "^1.0.0"
 
 prettier@^1.13.5:
   version "1.16.4"
