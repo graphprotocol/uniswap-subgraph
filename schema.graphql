@@ -142,12 +142,14 @@ type ExchangeHistoricalData @entity {
 type ExchangeDayData @entity {
     id: ID!                                 # token address concatenated with 0,1,2,3 etc. This way can check if it exists. 0 = nov 2nd 2018. 1 = nov 3 2018. etc.
     date: Int!                              # starts on 1541116800 (Nov 2nd 2018 00:00:00). all dates must start on 00:00:00
+    exchangeAddress: Bytes!
     ethBalance: BigDecimal!                 # Eth balance at last event within the day
     tokenBalance: BigDecimal!               # Token balance at last event within the day
     marginalEthRate: BigDecimal!            # tokenBalance / ethBalance
     ethVolume: BigDecimal!                  # Cumulative volume throughout the day
     ROI: BigDecimal!                        # ROI for the exchange at the last event within the day
     tokenPriceUSD: BigDecimal!              # USD token price at last event within the day
+    totalEvents: BigInt!
 }
 
     # Note - No fee to provide liqidity

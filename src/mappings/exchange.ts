@@ -15,7 +15,7 @@ import {
   Uniswap,
   TradeEvent,
   LiquidityEvent,
-  ExchangeHistoricalData
+  ExchangeHistoricalData, ExchangeDayData
 } from '../types/schema'
 import {uniswapUSDOracle} from "./uniswapOracle";
 
@@ -169,6 +169,39 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   eh.tradeVolumeEth = exchange.tradeVolumeEth
   eh.feeInEth = fee
   eh.save()
+
+  // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
+  // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
+  let timestamp = event.block.timestamp.toI32()
+  let dayID = timestamp / 86400 // presumably this should be rounded to an int
+  let dayStartTimestamp = dayID * 86400
+  let id = event.address.toHexString().concat('-').concat(BigInt.fromI32(dayID).toString())
+  let exchangeDayData = ExchangeDayData.load(id)
+  if (exchangeDayData == null) {
+    exchangeDayData = new ExchangeDayData(id)
+    exchangeDayData.date = dayStartTimestamp
+    exchangeDayData.exchangeAddress = event.address
+    exchangeDayData.ethBalance = BigDecimal.fromString("0")
+    exchangeDayData.tokenBalance = BigDecimal.fromString("0")
+    exchangeDayData.marginalEthRate = BigDecimal.fromString("0")
+    exchangeDayData.ethVolume = BigDecimal.fromString("0")
+    exchangeDayData.ROI = BigDecimal.fromString("0")
+    exchangeDayData.totalEvents = BigInt.fromI32(0)
+    exchangeDayData.tokenPriceUSD = BigDecimal.fromString("0")
+  }
+  exchangeDayData.ethBalance = exchange.ethBalance
+  exchangeDayData.tokenBalance = exchange.tokenBalance
+  if (exchange.ethBalance.equals(BigDecimal.fromString("0"))) {
+    // do nothing
+  } else {
+    exchangeDayData.marginalEthRate = exchange.tokenBalance.div(exchange.ethBalance).truncate(8)
+  }
+  exchangeDayData.ethVolume = exchangeDayData.ethVolume.plus(ethAmount)
+  exchangeDayData.ROI = exchange.ROI
+  exchangeDayData.tokenPriceUSD = exchange.priceUSD
+  exchangeDayData.totalEvents = exchangeDayData.totalEvents.plus(BigInt.fromI32(1))
+  exchangeDayData.save()
+
 }
 
 export function handleEthPurchase(event: EthPurchase): void {
@@ -335,6 +368,38 @@ export function handleEthPurchase(event: EthPurchase): void {
     eh.feeInEth = fee.div(exchange.price).truncate(18)
     eh.save()
   }
+
+  // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
+  // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
+  let timestamp = event.block.timestamp.toI32()
+  let dayID = timestamp / 86400 // presumably this should be rounded to an int
+  let dayStartTimestamp = dayID * 86400
+  let id = event.address.toHexString().concat('-').concat(BigInt.fromI32(dayID).toString())
+  let exchangeDayData = ExchangeDayData.load(id)
+  if (exchangeDayData == null) {
+    exchangeDayData = new ExchangeDayData(id)
+    exchangeDayData.date = dayStartTimestamp
+    exchangeDayData.exchangeAddress = event.address
+    exchangeDayData.ethBalance = BigDecimal.fromString("0")
+    exchangeDayData.tokenBalance = BigDecimal.fromString("0")
+    exchangeDayData.marginalEthRate = BigDecimal.fromString("0")
+    exchangeDayData.ethVolume = BigDecimal.fromString("0")
+    exchangeDayData.ROI = BigDecimal.fromString("0")
+    exchangeDayData.totalEvents = BigInt.fromI32(0)
+    exchangeDayData.tokenPriceUSD = BigDecimal.fromString("0")
+  }
+  exchangeDayData.ethBalance = exchange.ethBalance
+  exchangeDayData.tokenBalance = exchange.tokenBalance
+  if (exchange.ethBalance.equals(BigDecimal.fromString("0"))) {
+    // do nothing
+  } else {
+    exchangeDayData.marginalEthRate = exchange.tokenBalance.div(exchange.ethBalance).truncate(8)
+  }
+  exchangeDayData.ethVolume = exchangeDayData.ethVolume.plus(ethAmount)
+  exchangeDayData.ROI = exchange.ROI
+  exchangeDayData.tokenPriceUSD = exchange.priceUSD
+  exchangeDayData.totalEvents = exchangeDayData.totalEvents.plus(BigInt.fromI32(1))
+  exchangeDayData.save()
 }
 
 // Note - function addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
@@ -430,7 +495,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   transaction.exchangeAddress = event.address
   transaction.tokenAddress = exchange.tokenAddress
   transaction.tokenSymbol = exchange.tokenSymbol
-  transaction.user= event.params.provider
+  transaction.user = event.params.provider
   transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
   if (exchange.tokenDecimals == null || 0) {
     transaction.tokenAmount = event.params.token_amount.toBigDecimal()
@@ -480,6 +545,38 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   eh.tradeVolumeEth = exchange.tradeVolumeEth
   eh.feeInEth = BigDecimal.fromString("0")
   eh.save()
+
+  // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
+  // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
+  let timestamp = event.block.timestamp.toI32()
+  let dayID = timestamp / 86400 // presumably this should be rounded to an int
+  let dayStartTimestamp = dayID * 86400
+  let id = event.address.toHexString().concat('-').concat(BigInt.fromI32(dayID).toString())
+  let exchangeDayData = ExchangeDayData.load(id)
+  if (exchangeDayData == null) {
+    exchangeDayData = new ExchangeDayData(id)
+    exchangeDayData.date = dayStartTimestamp
+    exchangeDayData.exchangeAddress = event.address
+    exchangeDayData.ethBalance = BigDecimal.fromString("0")
+    exchangeDayData.tokenBalance = BigDecimal.fromString("0")
+    exchangeDayData.marginalEthRate = BigDecimal.fromString("0")
+    exchangeDayData.ethVolume = BigDecimal.fromString("0")
+    exchangeDayData.ROI = BigDecimal.fromString("0")
+    exchangeDayData.tokenPriceUSD = BigDecimal.fromString("0")
+    exchangeDayData.totalEvents = BigInt.fromI32(0)
+  }
+  exchangeDayData.ethBalance = exchange.ethBalance
+  exchangeDayData.tokenBalance = exchange.tokenBalance
+  if (exchange.ethBalance.equals(BigDecimal.fromString("0"))){
+    // do nothing
+  } else {
+    exchangeDayData.marginalEthRate = exchange.tokenBalance.div(exchange.ethBalance).truncate(8)
+  }
+  exchangeDayData.ethVolume = exchangeDayData.ethVolume.plus(ethAmount)
+  exchangeDayData.ROI = exchange.ROI
+  exchangeDayData.tokenPriceUSD = exchange.priceUSD
+  exchangeDayData.totalEvents = exchangeDayData.totalEvents.plus(BigInt.fromI32(1))
+  exchangeDayData.save()
 }
 
 // Note - function removeLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
@@ -622,6 +719,38 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   eh.tradeVolumeEth = exchange.tradeVolumeEth
   eh.feeInEth = BigDecimal.fromString("0")
   eh.save()
+
+  // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
+  // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
+  let timestamp = event.block.timestamp.toI32()
+  let dayID = timestamp / 86400 // presumably this should be rounded to an int
+  let dayStartTimestamp = dayID * 86400
+  let id = event.address.toHexString().concat('-').concat(BigInt.fromI32(dayID).toString())
+  let exchangeDayData = ExchangeDayData.load(id)
+  if (exchangeDayData == null) {
+    exchangeDayData = new ExchangeDayData(id)
+    exchangeDayData.date = dayStartTimestamp
+    exchangeDayData.exchangeAddress = event.address
+    exchangeDayData.ethBalance = BigDecimal.fromString("0")
+    exchangeDayData.tokenBalance = BigDecimal.fromString("0")
+    exchangeDayData.marginalEthRate = BigDecimal.fromString("0")
+    exchangeDayData.ethVolume = BigDecimal.fromString("0")
+    exchangeDayData.ROI = BigDecimal.fromString("0")
+    exchangeDayData.totalEvents = BigInt.fromI32(0)
+    exchangeDayData.tokenPriceUSD = BigDecimal.fromString("0")
+  }
+  exchangeDayData.ethBalance = exchange.ethBalance
+  exchangeDayData.tokenBalance = exchange.tokenBalance
+  if (exchange.ethBalance.equals(BigDecimal.fromString("0"))) {
+    // do nothing
+  } else {
+    exchangeDayData.marginalEthRate = exchange.tokenBalance.div(exchange.ethBalance).truncate(8)
+  }
+  exchangeDayData.ethVolume = exchangeDayData.ethVolume.plus(ethAmount)
+  exchangeDayData.ROI = exchange.ROI
+  exchangeDayData.tokenPriceUSD = exchange.priceUSD
+  exchangeDayData.totalEvents = exchangeDayData.totalEvents.plus(BigInt.fromI32(1))
+  exchangeDayData.save()
 }
 
 
