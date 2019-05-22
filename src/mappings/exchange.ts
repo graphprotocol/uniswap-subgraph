@@ -572,7 +572,6 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   } else {
     exchangeDayData.marginalEthRate = exchange.tokenBalance.div(exchange.ethBalance).truncate(8)
   }
-  exchangeDayData.ethVolume = exchangeDayData.ethVolume.plus(ethAmount)
   exchangeDayData.ROI = exchange.ROI
   exchangeDayData.tokenPriceUSD = exchange.priceUSD
   exchangeDayData.totalEvents = exchangeDayData.totalEvents.plus(BigInt.fromI32(1))
@@ -746,7 +745,6 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   } else {
     exchangeDayData.marginalEthRate = exchange.tokenBalance.div(exchange.ethBalance).truncate(8)
   }
-  exchangeDayData.ethVolume = exchangeDayData.ethVolume.plus(ethAmount)
   exchangeDayData.ROI = exchange.ROI
   exchangeDayData.tokenPriceUSD = exchange.priceUSD
   exchangeDayData.totalEvents = exchangeDayData.totalEvents.plus(BigInt.fromI32(1))
