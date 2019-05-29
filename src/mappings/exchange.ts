@@ -170,6 +170,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   eh.feeInEth = fee
   eh.save()
 
+
   // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
   // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
   let timestamp = event.block.timestamp.toI32()

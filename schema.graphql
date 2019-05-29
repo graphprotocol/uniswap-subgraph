@@ -140,7 +140,7 @@ type ExchangeHistoricalData @entity {
 
 # Data accumulated and condensed into day stats for each exchange
 type ExchangeDayData @entity {
-    id: ID!                                 # token address concatenated with 0,1,2,3 etc. This way can check if it exists. 0 = nov 2nd 2018. 1 = nov 3 2018. etc.
+    id: ID!                                 # token address concatenated with unix date (Nov 2nd 2018 is 17837)
     date: Int!                              # starts on 1541116800 (Nov 2nd 2018 00:00:00). all dates must start on 00:00:00
     exchangeAddress: Bytes!
     ethBalance: BigDecimal!                 # Eth balance at last event within the day
