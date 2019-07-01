@@ -1,4 +1,4 @@
-import {BigInt, BigDecimal, Address} from '@graphprotocol/graph-ts'
+import {BigInt, BigDecimal, Address, log} from '@graphprotocol/graph-ts'
 import {
   TokenPurchase,
   EthPurchase,
@@ -787,6 +787,10 @@ export function handleTransfer(event: Transfer): void {
 
     // Handle normal transfer cases
   } else {
+    if (exchange.totalUniToken == new BigDecimal(new BigInt(0))) {
+      log.error("exchange.totalUniToken is zero, ignoring transfer", new Array());
+      return;
+    }
     let ratio = event.params._value.toBigDecimal().div(exchange.totalUniToken)
     let ethTransferred = ratio.times(exchange.ethBalance)
     let tokenTransferred = ratio.times(exchange.tokenBalance)
