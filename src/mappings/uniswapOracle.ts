@@ -1,54 +1,52 @@
-import {Exchange} from "../types/schema";
-import {BigDecimal, BigInt, Address} from "@graphprotocol/graph-ts/index";
+import { Exchange } from '../types/schema'
+import { BigDecimal, BigInt } from '@graphprotocol/graph-ts/index'
 
-export function uniswapUSDOracle(blockNum: BigInt): BigDecimal {
-  let DAI_Exchange = "0x09cabec1ead1c0ba254b09efb3ee13841712be14"
-  let DAI_BlockContractCreation = 6629140
+const DAIExchange = '0x09cabec1ead1c0ba254b09efb3ee13841712be14'
+const DAIBlockContractCreation = 6629139
 
-  let USDC_Exchange = "0x97dec872013f6b5fb443861090ad931542878126"
-  let USDC_BlockContractCreation = 7207038
+const USDCExchange = '0x97dec872013f6b5fb443861090ad931542878126'
+const USDCBlockContractCreation = 7207017 // first block after a non-trivial amount of liquidity was added
 
-  let TUSD_Exchange = "0x4f30e682d0541eac91748bd38a648d759261b8f3"
-  let TUSD_BlockContractCreation = 7285332
+const TUSDExchange = '0x4f30e682d0541eac91748bd38a648d759261b8f3'
+const TUSDBlockContractCreation = 7281293
+
+export function uniswapUSDOracle(_blockNum: BigInt): BigDecimal {
+  let blockNum = _blockNum.toI32()
 
   let oneUSDInEth: BigDecimal
-  let blockNumInt = blockNum.toI32()
 
-  if (blockNumInt > TUSD_BlockContractCreation) {
-    let daiExchange = Exchange.load(DAI_Exchange)
+  if (blockNum > TUSDBlockContractCreation) {
+    let daiExchange = Exchange.load(DAIExchange) as Exchange
     let daiPrice = daiExchange.price
 
-    let usdcExchange = Exchange.load(USDC_Exchange)
+    let usdcExchange = Exchange.load(USDCExchange) as Exchange
     let usdcPrice = usdcExchange.price
 
-    let tusdExchange = Exchange.load(TUSD_Exchange)
+    let tusdExchange = Exchange.load(TUSDExchange) as Exchange
     let tusdPrice = tusdExchange.price
 
-    let combineThree = daiPrice.plus(usdcPrice).plus(tusdPrice).div(BigDecimal.fromString("3"))
-    oneUSDInEth = BigDecimal.fromString("1").div(combineThree)
-    return oneUSDInEth
-
-  } else if (blockNumInt > USDC_BlockContractCreation) {
-    let daiExchange = Exchange.load(DAI_Exchange)
+    let averagePrice = daiPrice
+      .plus(usdcPrice)
+      .plus(tusdPrice)
+      .div(BigDecimal.fromString('3'))
+    oneUSDInEth = BigDecimal.fromString('1').div(averagePrice)
+  } else if (blockNum > USDCBlockContractCreation) {
+    let daiExchange = Exchange.load(DAIExchange) as Exchange
     let daiPrice = daiExchange.price
 
-    let usdcExchange = Exchange.load(USDC_Exchange)
+    let usdcExchange = Exchange.load(USDCExchange) as Exchange
     let usdcPrice = usdcExchange.price
 
-    let combineTwo = daiPrice.plus(usdcPrice).div(BigDecimal.fromString("2"))
-    oneUSDInEth = BigDecimal.fromString("1").div(combineTwo)
-    return oneUSDInEth
+    let averagePrice = daiPrice.plus(usdcPrice).div(BigDecimal.fromString('2'))
+    oneUSDInEth = BigDecimal.fromString('1').div(averagePrice)
+  } else if (blockNum > DAIBlockContractCreation) {
+    let daiExchange = Exchange.load(DAIExchange) as Exchange
 
-  } else if (blockNumInt >= DAI_BlockContractCreation) {
-    let daiExchange = Exchange.load(DAI_Exchange)
-    let daiPrice = daiExchange.price
-
-    oneUSDInEth = BigDecimal.fromString("1").div(daiPrice)
-    return oneUSDInEth
-
+    let averagePrice = daiExchange.price
+    oneUSDInEth = BigDecimal.fromString('1').div(averagePrice)
   } else {
-    // probably only for a few events, before the dai exchange was made
-    oneUSDInEth = BigDecimal.fromString("0")
-    return oneUSDInEth
+    oneUSDInEth = BigDecimal.fromString('0')
   }
+
+  return oneUSDInEth
 }
