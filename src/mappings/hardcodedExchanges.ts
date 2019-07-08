@@ -6,7 +6,7 @@ export class ASExchange {
   public exchangeAddress: string
 }
 
-// Tokens are sorted in id order up to 550 (as of now)
+// Tokens are sorted in id order up to 565 (as of now)
 // The following changes were made manually:
 // 0xeb9951021698b42e4399f9cbb6267aa35f82d59d (LIF) has 18 decimals
 // 0xe0b7927c4af23765cb51314a0e0521a9645f0e2a (DGD) has 9 decimals
@@ -3850,5 +3850,110 @@ export let hardcodedExchanges: ASExchange[] = [
     symbol: 'AMPL',
     decimals: 9,
     exchangeAddress: '0x042dbbdc27f75d277c3d99efe327db21bc4fde75'
+  },
+  {
+    tokenAddress: '0x8b9c35c79af5319c70dd9a3e3850f368822ed64e',
+    name: 'Dogetoken',
+    symbol: 'DGT',
+    decimals: 18,
+    exchangeAddress: '0x180b93d88e19bff7abde971408716131ed7e2186'
+  },
+  {
+    tokenAddress: '0x3d9a801720cdbce293edbc7d8dcd82d6ceaabbd3',
+    name: 'CentHungary',
+    symbol: 'CHU',
+    decimals: 2,
+    exchangeAddress: '0xd6c8e96d3cdebabea1a339a34a7e0c76975a504c'
+  },
+  {
+    tokenAddress: '0xd69834f67b2f5a760617cc9a9bf5ae3a3bb256c2',
+    name: 'Xenium',
+    symbol: 'XENM',
+    decimals: 18,
+    exchangeAddress: '0x78eff350b7378e913d3dbc71ae5a3c179b7d70d2'
+  },
+  {
+    tokenAddress: '0x1c3bb10de15c31d5dbe48fbb7b87735d1b7d8c32',
+    name: 'BLONDCOIN',
+    symbol: 'BLO',
+    decimals: 18,
+    exchangeAddress: '0x950cebfa171428216af64867deb6d13f3a27c54a'
+  },
+  {
+    tokenAddress: '0xfe34099b8a1eb4cac66168f46014340ba425fa8f',
+    name: 'Make Me Rich Token',
+    symbol: 'MMR',
+    decimals: 18,
+    exchangeAddress: '0x7ff5079450e672f72801bf82899da5a3b6d464a5'
+  },
+  {
+    tokenAddress: '0x22ac30b3afecbbf1cb69bc697bef0bd3e5bec349',
+    name: 'Tripple A',
+    symbol: 'AAA',
+    decimals: 18,
+    exchangeAddress: '0x42ad257cab68d8c4ed11ed1abdd89713b4fc86db'
+  },
+  {
+    tokenAddress: '0x72b509b59bbfe847a1d68eae96161adff8675064',
+    name: 'Sgame Token',
+    symbol: 'SGM',
+    decimals: 18,
+    exchangeAddress: '0x3eb5c28b84041dd801fc1208a60c8dab63737acc'
+  },
+  {
+    tokenAddress: '0x5ae655088e79fa0ced7b472d3bacd215ef796ccc',
+    name: 'SmarcToken',
+    symbol: 'SMARC',
+    decimals: 18,
+    exchangeAddress: '0xa810da2f8fca6816795662acfeee754aa528a1a5'
+  },
+  {
+    tokenAddress: '0x7e1d8a8b01374ab1aa26b40e7c6733e6c168568a',
+    name: 'Winsusu Token',
+    symbol: 'SUSU',
+    decimals: 18,
+    exchangeAddress: '0x0a2a5291039c3d9c92fcd892063c25ec0fd240b7'
+  },
+  {
+    tokenAddress: '0x8aedb297fed4b6884b808ee61faf0837713670d0',
+    name: 'Wrapped MarbleCards',
+    symbol: 'WMC',
+    decimals: 18,
+    exchangeAddress: '0xa0db39d28dacec1974f2a1f6bac7d33f37c102ec'
+  },
+  {
+    tokenAddress: '0x9a0242b7a33dacbe40edb927834f96eb39f8fbcb',
+    name: 'BAX',
+    symbol: 'BAX',
+    decimals: 18,
+    exchangeAddress: '0x7a43ce3ef79ad8b7adf23f4c1bdd0446fd7e4d76'
+  },
+  {
+    tokenAddress: '0x5457d6324e77de6823c5341b6703cded16422829',
+    name: 'REDGIL',
+    symbol: 'REDGIL',
+    decimals: 18,
+    exchangeAddress: '0x7d365fa74360a0740d06552e90c7f320097a0fb3'
+  },
+  {
+    tokenAddress: '0x4ff7fa493559c40abd6d157a0bfc35df68d8d0ac',
+    name: 'Uniswap V1',
+    symbol: 'UNI-V1',
+    decimals: 18,
+    exchangeAddress: '0x639977a3a318ecdde675f53a77fbe51716b16bfe'
+  },
+  {
+    tokenAddress: '0x187d1018e8ef879be4194d6ed7590987463ead85',
+    name: 'FUZE Token',
+    symbol: 'FUZE',
+    decimals: 18,
+    exchangeAddress: '0x520e5f50adc6775723e93da5c81c0b075be28dab'
+  },
+  {
+    tokenAddress: '0x4de2573e27e648607b50e1cfff921a33e4a34405',
+    name: 'Lendroid Support Token',
+    symbol: 'LST',
+    decimals: 18,
+    exchangeAddress: '0x98bdf4e7575319bcd5878c1c7c49a4af618b24cf'
   }
 ]
