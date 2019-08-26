@@ -8,7 +8,7 @@ dataSources:
     name: Factory
     network: mainnet
     source:
-      address: '0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95'
+      address: "0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95"
       abi: Factory
     mapping:
       kind: ethereum/events

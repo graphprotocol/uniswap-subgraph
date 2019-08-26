@@ -149,7 +149,7 @@ type ExchangeDayData @entity {
     ethVolume: BigDecimal!                  # Cumulative volume throughout the day
     ROI: BigDecimal!                        # ROI for the exchange at the last event within the day
     tokenPriceUSD: BigDecimal!              # USD token price at last event within the day
-    totalEvents: BigInt!
+    totalEvents: BigInt!                    
 }
 
     # Note - No fee to provide liqidity
