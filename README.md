@@ -65,7 +65,6 @@ This query fetches high level information on each uniswap exchange contract.
     fee
     version
     startTime
-    endTime
 
     ethLiquidity
     tokenLiquidity

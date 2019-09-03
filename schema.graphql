@@ -27,7 +27,6 @@ type Exchange @entity {
     fee: BigDecimal!                        # Always 0.3% for v1 uniswap
     version: Int!                           # V1 only right now
     startTime: Int!                         # Time exchange was created
-    endTime: Int                            # Time exchange is closed (such as an upgrade to uniswap contacts)
 
     ethLiquidity: BigDecimal!               # Equals the liquidty provided. Will likely be different than ethBalance
     tokenLiquidity: BigDecimal!             # Equals the token liquidity provided. Will likely be different thatn tokenBalance
