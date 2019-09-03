@@ -69,6 +69,7 @@ type User @entity {
     txs: [Transaction!]!  @derivedFrom(field: "userAddress")
 }
 
+# trading and liquidity data around a user and their activity on a given exchange 
 type UserExchangeData @entity {
     id: ID!                         # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34....
     userAddress: Bytes!             # used for @derivedFrom of User
