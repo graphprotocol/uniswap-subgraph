@@ -27,7 +27,6 @@ type Exchange @entity {
     fee: BigDecimal!                        # Always 0.3% for v1 uniswap
     version: Int!                           # V1 only right now
     startTime: Int!                         # Time exchange was created
-    endTime: Int                            # Time exchange is closed (such as an upgrade to uniswap contacts)
 
     ethLiquidity: BigDecimal!               # Equals the liquidty provided. Will likely be different than ethBalance
     tokenLiquidity: BigDecimal!             # Equals the token liquidity provided. Will likely be different thatn tokenBalance
@@ -69,6 +68,7 @@ type User @entity {
     txs: [Transaction!]!  @derivedFrom(field: "userAddress")
 }
 
+# trading and liquidity data around a user and their activity on a given exchange 
 type UserExchangeData @entity {
     id: ID!                         # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34....
     userAddress: Bytes!             # used for @derivedFrom of User
@@ -149,7 +149,7 @@ type ExchangeDayData @entity {
     ethVolume: BigDecimal!                  # Cumulative volume throughout the day
     ROI: BigDecimal!                        # ROI for the exchange at the last event within the day
     tokenPriceUSD: BigDecimal!              # USD token price at last event within the day
-    totalEvents: BigInt!
+    totalEvents: BigInt!                    
 }
 
     # Note - No fee to provide liqidity
