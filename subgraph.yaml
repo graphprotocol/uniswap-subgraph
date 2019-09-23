@@ -24,8 +24,8 @@ dataSources:
         - event: NewExchange(indexed address,indexed address)
           handler: handleNewExchange
 templates:
-  - name: Exchange
-    kind: ethereum/contract
+  - kind: ethereum/contract
+    name: Exchange
     network: mainnet
     source:
       abi: Exchange
