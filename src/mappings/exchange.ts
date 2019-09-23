@@ -34,6 +34,7 @@ function exponentToBigDecimal(decimals: i32): BigDecimal {
 
 function createUserDataEntity(id: string, user: Address, exchange: Address): void {
   const userExchangeData = new UserExchangeData(id)
+
   userExchangeData.userAddress = user
   userExchangeData.exchangeAddress = exchange
 
@@ -60,7 +61,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   const exchange = Exchange.load(exchangeID)
   const ethAmount = event.params.eth_sold.toBigDecimal().div(exponentToBigDecimal(18))
   let tokenAmount: BigDecimal
-  if (exchange.tokenDecimals == null) {
+  if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
     tokenAmount = event.params.tokens_bought.toBigDecimal()
   } else {
     tokenAmount = event.params.tokens_bought.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
@@ -169,7 +170,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.user = event.params.buyer
   transaction.ethAmount = event.params.eth_sold.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || 0) {
+  if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
     transaction.tokenAmount = event.params.tokens_bought.toBigDecimal()
   } else {
     transaction.tokenAmount = event.params.tokens_bought
@@ -382,7 +383,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.user = event.params.buyer
   transaction.ethAmount = event.params.eth_bought.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || 0) {
+  if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
     transaction.tokenAmount = event.params.tokens_sold.toBigDecimal()
   } else {
     transaction.tokenAmount = event.params.tokens_sold.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
@@ -577,7 +578,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.user = event.params.provider
   transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || 0) {
+  if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
     transaction.tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
     transaction.tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
@@ -671,6 +672,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
     tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
+    log.debug('token decimals: { }', [exchange.tokenDecimals.toString()])
     tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
   }
   exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
@@ -761,7 +763,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   transaction.tokenSymbol = exchange.tokenSymbol
   transaction.user = event.params.provider
   transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || 0) {
+  if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
     transaction.tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
     transaction.tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
@@ -885,7 +887,7 @@ export function handleTransfer(event: Transfer): void {
 
     // Handle normal transfer cases
   } else {
-    if (exchange.totalUniToken == new BigDecimal(new BigInt(0))) {
+    if (exchange.totalUniToken == BigDecimal.fromString('0')) {
       log.error('exchange.totalUniToken is zero, ignoring transfer', [])
       return
     }

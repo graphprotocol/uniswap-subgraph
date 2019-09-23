@@ -57,15 +57,14 @@ type Exchange @entity {
     weightedAvgPriceUSD: BigDecimal!        # weightAvgPriceUSD = ( $1 of ETH in ETH ) / weightedAvgPrice
 
     # Fields used to help derived relationship
-    factoryID: String!                                                              # used for @derivedFrom of Factory
-    tokenHolders: [UserExchangeData!]! @derivedFrom(field: "exchangeAddress")       # Relationship to show all token holders on the exchange
-    txs: [Transaction!]! @derivedFrom(field: "exchangeAddress")                     # Relationship to show all txs on the exchange
+    factoryID: Uniswap!                                                              # used for @derivedFrom of Factory
+    tokenHolders: [Bytes!]!                  # Relationship to show all token holders on the exchange
+    txs: [Transaction!]!                     # Relationship to show all txs on the exchange
 }
 
 type User @entity {
     id: ID!                         # user eth adddress
-    exchangeBalances: [UserExchangeData!]!  @derivedFrom(field: "userAddress")
-    txs: [Transaction!]!  @derivedFrom(field: "userAddress")
+    exchangeBalances: [UserExchangeData!]!  @derivedFrom(field: "user")
 }
 
 # trading and liquidity data around a user and their activity on a given exchange 
@@ -73,6 +72,7 @@ type UserExchangeData @entity {
     id: ID!                         # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34....
     userAddress: Bytes!             # used for @derivedFrom of User
     exchangeAddress: Bytes!         # used for @derivedFrom of TrackedExchange
+    user: User!
 
     # Liquidity Provider Data
     ethDeposited: BigDecimal!       # where negative means eth was exchanged for tokens
