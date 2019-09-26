@@ -16,14 +16,17 @@ dataSources:
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:
-        - Uniswap
+        - Exchange
       abis:
         - name: Factory
           file: ./abis/factory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
         - event: NewExchange(indexed address,indexed address)
           handler: handleNewExchange
 templates:
+  # These data sources templates exist to support the different flags that a token could specify
   - kind: ethereum/contract
     name: Exchange
     network: mainnet

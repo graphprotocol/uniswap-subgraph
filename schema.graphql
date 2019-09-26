@@ -2,7 +2,7 @@
 type Uniswap @entity {
     id: ID! # Factory Address
     exchangeCount: Int!
-    exchanges: [Exchange!]! @derivedFrom(field: "factoryID")
+    exchanges: [Exchange!]!
 
     totalVolumeInEth: BigDecimal!           # volume just on eth -i.e. we dont double count volume
     totalLiquidityInEth: BigDecimal!        # 2 * SUM(exchanges.ethLiquidity). Since tokenLiquiduity = ethLiquidity value, can just *2
@@ -57,9 +57,9 @@ type Exchange @entity {
     weightedAvgPriceUSD: BigDecimal!        # weightAvgPriceUSD = ( $1 of ETH in ETH ) / weightedAvgPrice
 
     # Fields used to help derived relationship
-    factoryID: Uniswap!                                                              # used for @derivedFrom of Factory
-    tokenHolders: [Bytes!]!                  # Relationship to show all token holders on the exchange
-    txs: [Transaction!]!                     # Relationship to show all txs on the exchange
+    factory: Uniswap! @derivedFrom(field: "exchanges")
+    tokenHolders: [UserExchangeData!]       # Relationship to show all token holders on the exchange
+    txs: [Transaction!]!                    # Relationship to show all txs on the exchange
 }
 
 type User @entity {
@@ -70,9 +70,10 @@ type User @entity {
 # trading and liquidity data around a user and their activity on a given exchange 
 type UserExchangeData @entity {
     id: ID!                         # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34....
-    userAddress: Bytes!             # used for @derivedFrom of User
-    exchangeAddress: Bytes!         # used for @derivedFrom of TrackedExchange
+    userAddress: Bytes!             
+    exchangeAddress: Bytes!        
     user: User!
+    exchange: Exchange! @derivedFrom(field: "tokenHolders") 
 
     # Liquidity Provider Data
     ethDeposited: BigDecimal!       # where negative means eth was exchanged for tokens
@@ -96,13 +97,10 @@ type UserExchangeData @entity {
 
 type Transaction @entity {
     id: ID!                         # 0,1,2,3, etc....
-    tx: Bytes!
     event: String!
     block: Int!
     timestamp: Int!
-    exchangeAddress: Bytes!
-    tokenAddress: Bytes!
-    tokenSymbol: String
+    exchange: Exchange! @derivedFrom(field :"txs")
     user: Bytes!
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
@@ -129,11 +127,12 @@ type ExchangeHistoricalData @entity {
     ROI: BigDecimal!                        # ROI for the exchanges lifetime.
     totalUniToken: BigDecimal!              # Count of the unilying unitokens that represent liquidity provided ownership
 
-    tokenPriceUSD: BigDecimal!                   # USD / token. USD price at time of transaction
+    tokenPriceUSD: BigDecimal!              # USD / token. USD price at time of transaction
     price: BigDecimal!                      # Price is the total amount of tokens that equal one ETH. i.e. if ETH was 100 USD, price for DAI would be 100
 
     tradeVolumeToken: BigDecimal!           # Total tokens traded EVER. i.e. cumulative
     tradeVolumeEth: BigDecimal!             # Total eth traded EVER. i.e. cumulative
+    # totalTxsCount: BigInt!
 
     feeInEth: BigDecimal!
 }

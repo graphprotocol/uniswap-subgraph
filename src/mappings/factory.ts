@@ -1,12 +1,24 @@
-import { BigInt, BigDecimal, Address } from '@graphprotocol/graph-ts'
+import { BigInt, BigDecimal, Address, log } from '@graphprotocol/graph-ts'
 import { NewExchange } from '../types/Factory/Factory'
 import { Uniswap, Exchange } from '../types/schema'
-import { Exchange as ExchangeContract } from '../types/Factory/templates'
+import { Exchange as ExchangeContract } from '../types/templates'
+// import { ERC20 } from '../types/Factory/ERC20'
 import { hardcodedExchanges } from './hardcodedExchanges'
 
+/**
+ *
+ * Create data from out hard coded list - sets everythign to 0 then checks list
+ *
+ * @todo
+ *
+ * use try catch to get info straight from contracts
+ *
+ */
 function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timestamp: i32): void {
   const exchange = new Exchange(exchangeAddress) as Exchange
   exchange.tokenAddress = tokenAddress
+
+  const tokenAddressStringed = tokenAddress.toHexString()
 
   exchange.fee = BigDecimal.fromString('0.003')
   exchange.version = 1
@@ -37,24 +49,31 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
   exchange.lastPriceUSD = BigDecimal.fromString('0')
   exchange.weightedAvgPriceUSD = BigDecimal.fromString('0')
 
-  exchange.factoryID = '1'
   exchange.tokenHolders = []
   exchange.txs = []
 
-  const tokenAddressStringed = tokenAddress.toHexString()
-
   for (let i = 0; i < hardcodedExchanges.length; i++) {
-    if (tokenAddressStringed == hardcodedExchanges[i].tokenAddress) {
+    if (tokenAddressStringed.toString() == hardcodedExchanges[i].tokenAddress.toString()) {
+      // log.info('Found one to hard code: {}', [tokenAddressStringed.toString()])
       exchange.tokenSymbol = hardcodedExchanges[i].symbol
       exchange.tokenName = hardcodedExchanges[i].name
       exchange.tokenDecimals = hardcodedExchanges[i].tokenDecimals
       break
     } else {
-      exchange.tokenSymbol = null
-      exchange.tokenName = null
+      exchange.tokenSymbol = 'unknown'
+      exchange.tokenName = 'unknown'
       exchange.tokenDecimals = null
     }
   }
+
+  // add the exchange for the derived relationship
+  const uniswap = Uniswap.load('1')
+  const currentExchanges = uniswap.exchanges
+  currentExchanges.push(exchange.id)
+  uniswap.exchanges = currentExchanges
+  uniswap.save()
+
+  // save the new exchange
   exchange.save()
 }
 
@@ -65,6 +84,7 @@ export function handleNewExchange(event: NewExchange): void {
   if (factory == null) {
     factory = new Uniswap('1')
     factory.exchangeCount = 0
+    factory.exchanges = []
     factory.totalVolumeInEth = BigDecimal.fromString('0')
     factory.totalLiquidityInEth = BigDecimal.fromString('0')
     factory.totalVolumeUSD = BigDecimal.fromString('0')
@@ -79,6 +99,7 @@ export function handleNewExchange(event: NewExchange): void {
   factory.exchangeCount = factory.exchangeCount + 1
   factory.save()
 
+  // create new exchange with data from our hard coded list
   hardcodeExchange(event.params.exchange.toHexString(), event.params.token, event.block.timestamp.toI32()) // TODO - don't hard code, after we have the fix
 
   ExchangeContract.create(event.params.exchange)

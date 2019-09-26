@@ -5225,9 +5225,9 @@ export const hardcodedExchanges: Array<AsExchange> = [
   {
     symbol: 'sETH',
     name: 'Synth sETH',
-    tokenAddress: '0x42456D7084eacF4083f1140d3229471bbA2949A8',
+    tokenAddress: '0x5e74c9036fb86bd7ecdcb084a0673efc32ea31cb',
     tokenDecimals: 18,
-    exchangeAddress: '0x4740C758859D4651061CC9CDEFdBa92BDc3a845d'
+    exchangeAddress: '0xe9cf7887b93150d4f2da7dfc6d502b216438f244'
   },
   {
     symbol: 'QSP',

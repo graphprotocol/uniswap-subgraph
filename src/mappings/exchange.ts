@@ -5,7 +5,7 @@ import {
   AddLiquidity,
   RemoveLiquidity,
   Transfer
-} from '../types/Factory/templates/Exchange/Exchange'
+} from '../types/templates/Exchange/Exchange'
 
 import {
   User,
@@ -30,6 +30,15 @@ function exponentToBigDecimal(decimals: i32): BigDecimal {
     bd = bd.times(BigDecimal.fromString('10'))
   }
   return bd
+}
+
+function equalToZero(value: BigDecimal): boolean {
+  const formattedVal = parseFloat(value.toString())
+  const zero = parseFloat(BigDecimal.fromString('0').toString())
+  if (zero == formattedVal) {
+    return true
+  }
+  return false
 }
 
 function createUserDataEntity(id: string, user: Address, exchange: Address): void {
@@ -93,10 +102,14 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     .concat('-')
     .concat(event.params.buyer.toHex())
   let userExchangeData = UserExchangeData.load(userExchangeID)
+
+  // if no userExchangeData yet create new one
   if (userExchangeData == null) {
     createUserDataEntity(userExchangeID, event.params.buyer, event.address)
     userExchangeData = UserExchangeData.load(userExchangeID) // reload here
   }
+
+  //update values
   userExchangeData.ethSold = userExchangeData.ethSold.plus(ethAmount)
   userExchangeData.tokensBought = userExchangeData.tokensBought.plus(tokenAmount)
 
@@ -106,38 +119,38 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
   /****** Get ETH in USD Uniswap USD Tokens ******/
   const oneUSDInEth = uniswapUSDOracle(event.block.number)
-  if (oneUSDInEth.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(oneUSDInEth)) {
     // do nothing, it is one of the first few blocks before dai token traded
   } else {
     exchange.lastPriceUSD = exchange.priceUSD
-    if (exchange.price.equals(BigDecimal.fromString('0'))) {
+    if (equalToZero(exchange.price)) {
       exchange.priceUSD = BigDecimal.fromString('0')
     } else {
       exchange.priceUSD = BigDecimal.fromString('1')
         .div(oneUSDInEth)
         .div(exchange.price)
-        .truncate(4)
-      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).truncate(4)
+        .truncate(18)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).truncate(18)
     }
     exchange.weightedAvgPriceUSD = BigDecimal.fromString('1000000000000000000')
       .div(oneUSDInEth)
       .div(exchange.weightedAvgPrice)
-      .truncate(4)
+      .truncate(18)
     userExchangeData.ethFeesInUSD = BigDecimal.fromString('1000000000000000000')
       .times(userExchangeData.ethFeesPaid)
       .div(oneUSDInEth)
-      .truncate(4)
+      .truncate(18)
   }
 
   // ROI calculations
-  if (exchange.price.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.price)) {
     // do nothing. it will cause a div by zero failure
   } else {
     const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
     const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
     const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
     const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    if (totalLiquidityValue.equals(BigDecimal.fromString('0'))) {
+    if (equalToZero(totalLiquidityValue)) {
       // do nothing. it would cause a div by zero failure
     } else {
       exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
@@ -150,10 +163,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   /****** Update Global Values ******/
   const uniswap = Uniswap.load('1')
   uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
-  uniswap.totalVolumeUSD = uniswap.totalVolumeInEth
-    .times(exchange.price)
-    .times(exchange.priceUSD)
-    .truncate(4)
+  uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD)
   uniswap.totalTokenBuys = uniswap.totalTokenBuys.plus(BigInt.fromI32(1))
   uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
   uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
@@ -161,13 +171,9 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
   /****** Update Transaction ******/
   const transaction = new Transaction(uniswap.txCount.toString())
-  transaction.tx = event.transaction.hash
   transaction.event = 'TokenPurchase'
   transaction.block = event.block.number.toI32()
   transaction.timestamp = event.block.timestamp.toI32()
-  transaction.exchangeAddress = event.address
-  transaction.tokenAddress = exchange.tokenAddress
-  transaction.tokenSymbol = exchange.tokenSymbol
   transaction.user = event.params.buyer
   transaction.ethAmount = event.params.eth_sold.toBigDecimal().div(exponentToBigDecimal(18))
   if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
@@ -179,6 +185,12 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   }
   transaction.fee = fee
   transaction.save()
+
+  // add the transaction to exchange
+  const txs = exchange.txs
+  txs.push(transaction.id)
+  exchange.txs = txs
+  exchange.save()
 
   /************************************
    * Handle the historical data below *
@@ -247,7 +259,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   }
   exchangeDayData.ethBalance = exchange.ethBalance
   exchangeDayData.tokenBalance = exchange.tokenBalance
-  if (exchange.ethBalance.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.ethBalance)) {
     // do nothing
   } else {
     exchangeDayData.marginalEthRate = exchange.tokenBalance.div(exchange.ethBalance).truncate(8)
@@ -276,7 +288,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   exchange.lastPrice = exchange.price
 
   // Here we must handle div by zero, because someone could have bought all the eth or all the tokens
-  if (exchange.ethBalance.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.ethBalance)) {
     exchange.price = BigDecimal.fromString('0')
   } else {
     exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
@@ -318,39 +330,36 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   /****** Get ETH in USD Uniswap USD Tokens ******/
   const oneUSDInEth = uniswapUSDOracle(event.block.number)
-  if (oneUSDInEth.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(oneUSDInEth)) {
     // do nothing, dai price oracle has not been set yet in the compound contract
   } else {
     exchange.lastPriceUSD = exchange.priceUSD
-    if (exchange.price.equals(BigDecimal.fromString('0'))) {
+    if (equalToZero(exchange.price)) {
       exchange.priceUSD = BigDecimal.fromString('0')
     } else {
       exchange.priceUSD = BigDecimal.fromString('1')
         .div(oneUSDInEth)
         .div(exchange.price)
-        .truncate(4)
-      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).truncate(4)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth)
     }
     exchange.weightedAvgPriceUSD = BigDecimal.fromString('1000000000000000000')
       .div(oneUSDInEth)
       .div(exchange.weightedAvgPrice)
-      .truncate(4)
     userExchangeData.tokenFeesInUSD = BigDecimal.fromString('1000000000000000000')
       .times(userExchangeData.tokenFeesPaid)
       .div(oneUSDInEth)
       .div(exchange.price)
-      .truncate(4)
   }
 
   // ROI calculations
-  if (exchange.price.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.price)) {
     // do nothing. it will cause a div by zero failure
   } else {
     const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
     const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
     const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
     const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    if (totalLiquidityValue.equals(BigDecimal.fromString('0'))) {
+    if (equalToZero(totalLiquidityValue)) {
       // do nothing. it would cause a div by zero failure
     } else {
       exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
@@ -363,10 +372,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   /****** Update Global Values ******/
   const uniswap = Uniswap.load('1')
   uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
-  uniswap.totalVolumeUSD = uniswap.totalVolumeInEth
-    .times(exchange.price)
-    .times(exchange.priceUSD)
-    .truncate(4)
+  uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD)
   uniswap.totalTokenSells = uniswap.totalTokenSells.plus(BigInt.fromI32(1))
   uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
   uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
@@ -374,13 +380,9 @@ export function handleEthPurchase(event: EthPurchase): void {
 
   /****** Update Transaction ******/
   const transaction = new Transaction(uniswap.txCount.toString())
-  transaction.tx = event.transaction.hash
   transaction.event = 'EthPurchase'
   transaction.block = event.block.number.toI32()
   transaction.timestamp = event.block.timestamp.toI32()
-  transaction.exchangeAddress = event.address
-  transaction.tokenAddress = exchange.tokenAddress
-  transaction.tokenSymbol = exchange.tokenSymbol
   transaction.user = event.params.buyer
   transaction.ethAmount = event.params.eth_bought.toBigDecimal().div(exponentToBigDecimal(18))
   if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
@@ -390,6 +392,12 @@ export function handleEthPurchase(event: EthPurchase): void {
   }
   transaction.fee = fee
   transaction.save()
+
+  // add the transaction to exchange
+  const txs = exchange.txs
+  txs.push(transaction.id)
+  exchange.txs = txs
+  exchange.save()
 
   /************************************
    * Handle the historical data below *
@@ -432,7 +440,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   eh.tradeVolumeToken = exchange.tradeVolumeToken
   eh.tradeVolumeEth = exchange.tradeVolumeEth
   eh.feeInEth = fee
-  if (exchange.price.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.price)) {
     eh.feeInEth = BigDecimal.fromString('0') // Fee isn't actually zero here, but its hard to calculate this value
   } else {
     eh.feeInEth = fee.div(exchange.price).truncate(18)
@@ -463,7 +471,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   }
   exchangeDayData.ethBalance = exchange.ethBalance
   exchangeDayData.tokenBalance = exchange.tokenBalance
-  if (exchange.ethBalance.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.ethBalance)) {
     // do nothing
   } else {
     exchangeDayData.marginalEthRate = exchange.tokenBalance.div(exchange.ethBalance).truncate(8)
@@ -516,35 +524,41 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     createUserDataEntity(userExchangeID, event.params.provider, event.address)
     userExchangeData = UserExchangeData.load(userExchangeID) // reload here
   }
+
+  // add liquidity provider to list of token holders
+  const holders = exchange.tokenHolders
+  holders.push(userExchangeData.id)
+  exchange.tokenHolders = holders
+  exchange.save()
+
   userExchangeData.ethDeposited = userExchangeData.ethDeposited.plus(ethAmount)
   userExchangeData.tokensDeposited = userExchangeData.tokensDeposited.plus(tokenAmount)
 
   /****** Get ETH in USD Uniswap USD Tokens ******/
   const oneUSDInEth = uniswapUSDOracle(event.block.number)
-  if (oneUSDInEth.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(oneUSDInEth)) {
     // do nothing, dai price oracle has not been set yet in the compound contract
   } else {
     exchange.lastPriceUSD = exchange.priceUSD
-    if (exchange.price.equals(BigDecimal.fromString('0'))) {
+    if (equalToZero(exchange.price)) {
       exchange.priceUSD = BigDecimal.fromString('0')
     } else {
       exchange.priceUSD = BigDecimal.fromString('1')
         .div(oneUSDInEth)
         .div(exchange.price)
-        .truncate(4)
-      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).truncate(4)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth)
     }
   }
 
   // ROI calculations
-  if (exchange.price.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.price)) {
     // do nothing. it will cause a div by zero failure
   } else {
     const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
     const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
     const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
     const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    if (totalLiquidityValue.equals(BigDecimal.fromString('0'))) {
+    if (equalToZero(totalLiquidityValue)) {
       // do nothing. it would cause a div by zero failure
     } else {
       exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
@@ -558,10 +572,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   const uniswap = Uniswap.load('1')
   // times 2, because equal eth and tokens are always added or removed for liquidity
   uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(ethAmount.times(BigDecimal.fromString('2')))
-  uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth
-    .times(exchange.price)
-    .times(exchange.priceUSD)
-    .truncate(4)
+  uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
   uniswap.totalAddLiquidity = uniswap.totalAddLiquidity.plus(BigInt.fromI32(1))
   uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
   uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
@@ -569,13 +580,9 @@ export function handleAddLiquidity(event: AddLiquidity): void {
 
   /****** Update Transaction ******/
   const transaction = new Transaction(uniswap.txCount.toString())
-  transaction.tx = event.transaction.hash
   transaction.event = 'AddLiquidity'
   transaction.block = event.block.number.toI32()
   transaction.timestamp = event.block.timestamp.toI32()
-  transaction.exchangeAddress = event.address
-  transaction.tokenAddress = exchange.tokenAddress
-  transaction.tokenSymbol = exchange.tokenSymbol
   transaction.user = event.params.provider
   transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
   if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
@@ -585,6 +592,12 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   }
   transaction.fee = BigDecimal.fromString('0')
   transaction.save()
+
+  // add the transaction to exchange
+  const txs = exchange.txs
+  txs.push(transaction.id)
+  exchange.txs = txs
+  exchange.save()
 
   /************************************
    * Handle the historical data below *
@@ -651,7 +664,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   }
   exchangeDayData.ethBalance = exchange.ethBalance
   exchangeDayData.tokenBalance = exchange.tokenBalance
-  if (exchange.ethBalance.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.ethBalance)) {
     // do nothing
   } else {
     exchangeDayData.marginalEthRate = exchange.tokenBalance.div(exchange.ethBalance).truncate(8)
@@ -672,7 +685,6 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
     tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
-    log.debug('token decimals: { }', [exchange.tokenDecimals.toString()])
     tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
   }
   exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
@@ -681,15 +693,18 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   exchange.tokenLiquidity = exchange.tokenLiquidity.minus(tokenAmount)
   exchange.removeLiquidityCount = exchange.removeLiquidityCount.plus(BigInt.fromI32(1))
   exchange.lastPrice = exchange.price
-
   // Here we must handle div by zero, because someone could have bought all the eth or all the tokens
-  if (exchange.ethBalance.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.ethBalance)) {
     exchange.price = BigDecimal.fromString('0')
+    exchange.combinedBalanceInEth = exchange.ethBalance
   } else {
     exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
-    exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+    if (equalToZero(exchange.price)) {
+      exchange.combinedBalanceInEth = exchange.ethBalance
+    } else {
+      exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+    }
   }
-
   /****** Update UserExchangeData ******/
   const userExchangeID = exchange.tokenAddress
     .toHexString()
@@ -700,69 +715,56 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     createUserDataEntity(userExchangeID, event.params.provider, event.address)
     userExchangeData = UserExchangeData.load(userExchangeID) // reload here
   }
-
   userExchangeData.ethWithdrawn = userExchangeData.ethWithdrawn.plus(ethAmount)
   userExchangeData.tokensWithdrawn = userExchangeData.tokensWithdrawn.plus(tokenAmount)
-
   /****** Get ETH in USD Uniswap USD Tokens ******/
   const oneUSDInEth = uniswapUSDOracle(event.block.number)
-  if (oneUSDInEth.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(oneUSDInEth)) {
     // do nothing, dai price oracle has not been set yet in the compound contract
   } else {
     exchange.lastPriceUSD = exchange.priceUSD
-    if (exchange.price.equals(BigDecimal.fromString('0'))) {
+    if (equalToZero(exchange.price)) {
       exchange.priceUSD = BigDecimal.fromString('0')
     } else {
       exchange.priceUSD = BigDecimal.fromString('1')
         .div(oneUSDInEth)
         .div(exchange.price)
-        .truncate(4)
-      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).truncate(4)
+      exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth)
     }
   }
-
   // ROI calculations
-  if (exchange.price.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.price)) {
     // do nothing. it will cause a div by zero failure
   } else {
     const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
     const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
     const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
     const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    if (totalLiquidityValue.equals(BigDecimal.fromString('0'))) {
+    if (equalToZero(totalLiquidityValue)) {
       // do nothing. it would cause a div by zero failure
     } else {
       exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
     }
   }
-
   exchange.save()
   userExchangeData.save()
-
   /****** Update Global Values ******/
   const uniswap = Uniswap.load('1')
   // times 2, because equal eth and tokens are always added or removed for liquidity
   uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(ethAmount.times(BigDecimal.fromString('2')))
-  uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth
-    .times(exchange.price)
-    .times(exchange.priceUSD)
-    .truncate(4)
+  uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
   uniswap.totalRemoveLiquidity = uniswap.totalRemoveLiquidity.plus(BigInt.fromI32(1))
   uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
   uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
   uniswap.save()
-
   /****** Update Transaction ******/
   const transaction = new Transaction(uniswap.txCount.toString())
-  transaction.tx = event.transaction.hash
   transaction.event = 'RemoveLiquidity'
   transaction.block = event.block.number.toI32()
   transaction.timestamp = event.block.timestamp.toI32()
-  transaction.exchangeAddress = event.address
-  transaction.tokenAddress = exchange.tokenAddress
-  transaction.tokenSymbol = exchange.tokenSymbol
   transaction.user = event.params.provider
   transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
+
   if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
     transaction.tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
@@ -771,10 +773,15 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   transaction.fee = BigDecimal.fromString('0')
   transaction.save()
 
+  // add the transaction to exchange
+  const txs = exchange.txs
+  txs.push(transaction.id)
+  exchange.txs = txs
+  exchange.save()
+
   /************************************
    * Handle the historical data below *
    ************************************/
-
   const liquidityEventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
   const liquidityEvent = new LiquidityEvent(liquidityEventID.toString())
   liquidityEvent.type = 'RemoveLiquidity'
@@ -790,7 +797,6 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   liquidityEvent.symbol = exchange.tokenSymbol
   liquidityEvent.name = exchange.tokenName
   liquidityEvent.save()
-
   const eh = new ExchangeHistoricalData(uniswap.exchangeHistoryEntityCount.toString())
   eh.exchangeAddress = event.address
   eh.tokenSymbol = exchange.tokenSymbol
@@ -811,7 +817,6 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   eh.tradeVolumeEth = exchange.tradeVolumeEth
   eh.feeInEth = BigDecimal.fromString('0')
   eh.save()
-
   // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
   // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
   const timestamp = event.block.timestamp.toI32()
@@ -836,7 +841,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   }
   exchangeDayData.ethBalance = exchange.ethBalance
   exchangeDayData.tokenBalance = exchange.tokenBalance
-  if (exchange.ethBalance.equals(BigDecimal.fromString('0'))) {
+  if (equalToZero(exchange.ethBalance)) {
     // do nothing
   } else {
     exchangeDayData.marginalEthRate = exchange.tokenBalance.div(exchange.ethBalance).truncate(8)
@@ -887,7 +892,7 @@ export function handleTransfer(event: Transfer): void {
 
     // Handle normal transfer cases
   } else {
-    if (exchange.totalUniToken == BigDecimal.fromString('0')) {
+    if (equalToZero(exchange.totalUniToken)) {
       log.error('exchange.totalUniToken is zero, ignoring transfer', [])
       return
     }
