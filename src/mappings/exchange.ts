@@ -13,10 +13,12 @@ import {
   Transaction,
   Exchange,
   Uniswap,
-  TradeEvent,
-  LiquidityEvent,
   ExchangeHistoricalData,
-  ExchangeDayData
+  ExchangeDayData,
+  AddLiquidityEvent,
+  RemoveLiquidityEvent,
+  TokenPurchaseEvent,
+  EthPurchaseEvent
 } from '../types/schema'
 import { uniswapUSDOracle } from './uniswapOracle'
 
@@ -169,55 +171,37 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
   uniswap.save()
 
+  /******** CREATE TRADE EVENT  ********/
+  const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
+  const tokenPurchaseEvent = new TokenPurchaseEvent(eventID.toString())
+  tokenPurchaseEvent.eth = ethAmount
+  tokenPurchaseEvent.token = tokenAmount
+  tokenPurchaseEvent.tokenFee = BigDecimal.fromString('0')
+  tokenPurchaseEvent.ethFee = fee
+  tokenPurchaseEvent.save()
+
   /****** Update Transaction ******/
-  const transaction = new Transaction(uniswap.txCount.toString())
-  transaction.event = 'TokenPurchase'
+  // check for existing
+  let transaction = Transaction.load(event.transaction.hash.toHexString())
+  if (transaction == null) {
+    transaction = new Transaction(event.transaction.hash.toHexString())
+  }
+  const tokenPurchaseEvents = transaction.tokenPurchaseEvents || []
+  tokenPurchaseEvents.push(tokenPurchaseEvent.id)
+  transaction.tokenPurchaseEvents = tokenPurchaseEvents
+  transaction.exchangeAddress = event.address
   transaction.block = event.block.number.toI32()
   transaction.timestamp = event.block.timestamp.toI32()
   transaction.user = event.params.buyer
-  transaction.ethAmount = event.params.eth_sold.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
-    transaction.tokenAmount = event.params.tokens_bought.toBigDecimal()
-  } else {
-    transaction.tokenAmount = event.params.tokens_bought
-      .toBigDecimal()
-      .div(exponentToBigDecimal(exchange.tokenDecimals))
-  }
   transaction.fee = fee
   transaction.save()
-
-  // add the transaction to exchange
-  const txs = exchange.txs
-  txs.push(transaction.id)
-  exchange.txs = txs
-  exchange.save()
 
   /************************************
    * Handle the historical data below *
    ************************************/
 
-  const tradeEventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
-  const tradeEvent = new TradeEvent(tradeEventID.toString())
-  tradeEvent.type = 'TokenPurchase'
-  tradeEvent.buyer = event.params.buyer
-  tradeEvent.eth = ethAmount
-  tradeEvent.tokenAddress = exchange.tokenAddress
-  tradeEvent.exchangeAddress = event.address
-  tradeEvent.timestamp = event.block.timestamp.toI32()
-  tradeEvent.txhash = event.transaction.hash
-  tradeEvent.block = event.block.number.toI32()
-  tradeEvent.tokenFee = BigDecimal.fromString('0')
-  tradeEvent.ethFee = fee
-  tradeEvent.token = tokenAmount
-  tradeEvent.decimals = exchange.tokenDecimals
-  tradeEvent.symbol = exchange.tokenSymbol
-  tradeEvent.name = exchange.tokenName
-  tradeEvent.save()
-
   const eh = new ExchangeHistoricalData(uniswap.exchangeHistoryEntityCount.toString())
   eh.exchangeAddress = event.address
-  eh.tokenSymbol = exchange.tokenSymbol
-  eh.tokenAddress = exchange.tokenAddress
   eh.timestamp = event.block.timestamp.toI32()
   eh.type = 'TokenPurchase'
   eh.ethLiquidity = exchange.ethLiquidity
@@ -247,6 +231,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   let exchangeDayData = ExchangeDayData.load(id)
   if (exchangeDayData == null) {
     exchangeDayData = new ExchangeDayData(id)
+    exchangeDayData.exchangeAddress = event.address
     exchangeDayData.date = dayStartTimestamp
     exchangeDayData.exchangeAddress = event.address
     exchangeDayData.ethBalance = BigDecimal.fromString('0')
@@ -378,53 +363,36 @@ export function handleEthPurchase(event: EthPurchase): void {
   uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
   uniswap.save()
 
+  /*** Create Trade Event ******/
+  const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
+  const ethPurchaseEvent = new EthPurchaseEvent(eventID.toString())
+  ethPurchaseEvent.eth = ethAmount
+  ethPurchaseEvent.tokenFee = fee
+  ethPurchaseEvent.ethFee = BigDecimal.fromString('0')
+  ethPurchaseEvent.token = tokenAmount
+  ethPurchaseEvent.save()
+
   /****** Update Transaction ******/
-  const transaction = new Transaction(uniswap.txCount.toString())
-  transaction.event = 'EthPurchase'
+  let transaction = Transaction.load(event.transaction.hash.toHexString())
+  if (transaction == null) {
+    transaction = new Transaction(event.transaction.hash.toHexString())
+  }
+  const ethPurchaseEvents = transaction.ethPurchaseEvents || []
+  ethPurchaseEvents.push(ethPurchaseEvent.id)
+  transaction.ethPurchaseEvents = ethPurchaseEvents
+  transaction.exchangeAddress = event.address
   transaction.block = event.block.number.toI32()
   transaction.timestamp = event.block.timestamp.toI32()
   transaction.user = event.params.buyer
-  transaction.ethAmount = event.params.eth_bought.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
-    transaction.tokenAmount = event.params.tokens_sold.toBigDecimal()
-  } else {
-    transaction.tokenAmount = event.params.tokens_sold.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
-  }
   transaction.fee = fee
   transaction.save()
-
-  // add the transaction to exchange
-  const txs = exchange.txs
-  txs.push(transaction.id)
-  exchange.txs = txs
-  exchange.save()
 
   /************************************
    * Handle the historical data below *
    ************************************/
 
-  const tradeEventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
-  const tradeEvent = new TradeEvent(tradeEventID.toString())
-  tradeEvent.type = 'EthPurchase'
-  tradeEvent.buyer = event.params.buyer
-  tradeEvent.eth = ethAmount
-  tradeEvent.exchangeAddress = event.address
-  tradeEvent.tokenAddress = exchange.tokenAddress
-  tradeEvent.timestamp = event.block.timestamp.toI32()
-  tradeEvent.txhash = event.transaction.hash
-  tradeEvent.block = event.block.number.toI32()
-  tradeEvent.tokenFee = fee
-  tradeEvent.ethFee = BigDecimal.fromString('0')
-  tradeEvent.token = tokenAmount
-  tradeEvent.decimals = exchange.tokenDecimals
-  tradeEvent.symbol = exchange.tokenSymbol
-  tradeEvent.name = exchange.tokenName
-  tradeEvent.save()
-
   const eh = new ExchangeHistoricalData(uniswap.exchangeHistoryEntityCount.toString())
   eh.exchangeAddress = event.address
-  eh.tokenSymbol = exchange.tokenSymbol
-  eh.tokenAddress = exchange.tokenAddress
   eh.timestamp = event.block.timestamp.toI32()
   eh.type = 'EthPurchase'
   eh.ethLiquidity = exchange.ethLiquidity
@@ -578,51 +546,33 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
   uniswap.save()
 
+  /** Create Liquidity Event */
+  const eventId = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
+  const addLiquidityEvent = new AddLiquidityEvent(eventId.toString())
+  addLiquidityEvent.ethAmount = ethAmount
+  addLiquidityEvent.tokenAmount = tokenAmount
+  addLiquidityEvent.save()
+
   /****** Update Transaction ******/
-  const transaction = new Transaction(uniswap.txCount.toString())
-  transaction.event = 'AddLiquidity'
+  let transaction = Transaction.load(event.transaction.hash.toHexString())
+  if (transaction == null) {
+    transaction = new Transaction(event.transaction.hash.toHexString())
+  }
+  const addLiquidityEvents = transaction.addLiquidityEvents || []
+  addLiquidityEvents.push(addLiquidityEvent.id)
+  transaction.addLiquidityEvents = addLiquidityEvents
+  transaction.exchangeAddress = event.address
   transaction.block = event.block.number.toI32()
   transaction.timestamp = event.block.timestamp.toI32()
   transaction.user = event.params.provider
-  transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-  if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
-    transaction.tokenAmount = event.params.token_amount.toBigDecimal()
-  } else {
-    transaction.tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
-  }
   transaction.fee = BigDecimal.fromString('0')
   transaction.save()
-
-  // add the transaction to exchange
-  const txs = exchange.txs
-  txs.push(transaction.id)
-  exchange.txs = txs
-  exchange.save()
 
   /************************************
    * Handle the historical data below *
    ************************************/
-
-  const liquidityEventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
-  const liquidityEvent = new LiquidityEvent(liquidityEventID.toString())
-  liquidityEvent.type = 'AddLiquidity'
-  liquidityEvent.provider = event.params.provider
-  liquidityEvent.ethAmount = ethAmount
-  liquidityEvent.exchangeAddress = event.address
-  liquidityEvent.tokenAddress = exchange.tokenAddress
-  liquidityEvent.timestamp = event.block.timestamp.toI32()
-  liquidityEvent.txhash = event.transaction.hash
-  liquidityEvent.block = event.block.number.toI32()
-  liquidityEvent.tokenAmount = tokenAmount
-  liquidityEvent.decimals = exchange.tokenDecimals
-  liquidityEvent.symbol = exchange.tokenSymbol
-  liquidityEvent.name = exchange.tokenName
-  liquidityEvent.save()
-
   const eh = new ExchangeHistoricalData(uniswap.exchangeHistoryEntityCount.toString())
   eh.exchangeAddress = event.address
-  eh.tokenSymbol = exchange.tokenSymbol
-  eh.tokenAddress = exchange.tokenAddress
   eh.timestamp = event.block.timestamp.toI32()
   eh.type = 'AddLiquidity'
   eh.ethLiquidity = exchange.ethLiquidity
@@ -757,50 +707,34 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
   uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
   uniswap.save()
+
+  /** Create Liquidity Event */
+  const eventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
+  const removeLiquidityEvent = new RemoveLiquidityEvent(eventID.toString())
+  removeLiquidityEvent.ethAmount = ethAmount
+  removeLiquidityEvent.tokenAmount = tokenAmount
+  removeLiquidityEvent.save()
+
   /****** Update Transaction ******/
-  const transaction = new Transaction(uniswap.txCount.toString())
-  transaction.event = 'RemoveLiquidity'
+  let transaction = Transaction.load(event.transaction.hash.toHexString())
+  if (transaction == null) {
+    transaction = new Transaction(event.transaction.hash.toHexString())
+  }
+  const removeLiquidityEvents = transaction.removeLiquidityEvents || []
+  removeLiquidityEvents.push(removeLiquidityEvent.id)
+  transaction.removeLiquidityEvents = removeLiquidityEvents
+  transaction.exchangeAddress = event.address
   transaction.block = event.block.number.toI32()
   transaction.timestamp = event.block.timestamp.toI32()
   transaction.user = event.params.provider
-  transaction.ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-
-  if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
-    transaction.tokenAmount = event.params.token_amount.toBigDecimal()
-  } else {
-    transaction.tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
-  }
   transaction.fee = BigDecimal.fromString('0')
   transaction.save()
-
-  // add the transaction to exchange
-  const txs = exchange.txs
-  txs.push(transaction.id)
-  exchange.txs = txs
-  exchange.save()
 
   /************************************
    * Handle the historical data below *
    ************************************/
-  const liquidityEventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
-  const liquidityEvent = new LiquidityEvent(liquidityEventID.toString())
-  liquidityEvent.type = 'RemoveLiquidity'
-  liquidityEvent.provider = event.params.provider
-  liquidityEvent.ethAmount = ethAmount
-  liquidityEvent.exchangeAddress = event.address
-  liquidityEvent.tokenAddress = exchange.tokenAddress
-  liquidityEvent.timestamp = event.block.timestamp.toI32()
-  liquidityEvent.txhash = event.transaction.hash
-  liquidityEvent.block = event.block.number.toI32()
-  liquidityEvent.tokenAmount = tokenAmount
-  liquidityEvent.decimals = exchange.tokenDecimals
-  liquidityEvent.symbol = exchange.tokenSymbol
-  liquidityEvent.name = exchange.tokenName
-  liquidityEvent.save()
   const eh = new ExchangeHistoricalData(uniswap.exchangeHistoryEntityCount.toString())
   eh.exchangeAddress = event.address
-  eh.tokenSymbol = exchange.tokenSymbol
-  eh.tokenAddress = exchange.tokenAddress
   eh.timestamp = event.block.timestamp.toI32()
   eh.type = 'RemoveLiquidity'
   eh.ethLiquidity = exchange.ethLiquidity
@@ -817,6 +751,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   eh.tradeVolumeEth = exchange.tradeVolumeEth
   eh.feeInEth = BigDecimal.fromString('0')
   eh.save()
+
   // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
   // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
   const timestamp = event.block.timestamp.toI32()

@@ -59,7 +59,6 @@ type Exchange @entity {
     # Fields used to help derived relationship
     factory: Uniswap! @derivedFrom(field: "exchanges")
     tokenHolders: [UserExchangeData!]       # Relationship to show all token holders on the exchange
-    txs: [Transaction!]!                    # Relationship to show all txs on the exchange
 }
 
 type User @entity {
@@ -95,16 +94,60 @@ type UserExchangeData @entity {
     tokenFeesInUSD: BigDecimal!
 }
 
+enum EventType {
+    AddLiquidity,
+    RemoveLiquidity,
+    TokenPurchase,
+    EthPurchase
+}
+
 type Transaction @entity {
-    id: ID!                         # 0,1,2,3, etc....
-    event: String!
+    id: ID!  # txn  hash 
+    exchangeAddress: Bytes!
+    addLiquidityEvents: [AddLiquidityEvent!]
+    removeLiquidityEvents: [RemoveLiquidityEvent!]
+    tokenPurchaseEvents: [TokenPurchaseEvent!]
+    ethPurchaseEvents: [EthPurchaseEvent!]
     block: Int!
     timestamp: Int!
-    exchange: Exchange! @derivedFrom(field :"txs")
     user: Bytes!
+    fee: BigDecimal!
+}
+
+# Note - No fee to provide liqidity
+type AddLiquidityEvent @entity {
+    id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
+    transaction: Transaction! @derivedFrom(field: "addLiquidityEvents")
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
-    fee: BigDecimal!
+}
+
+# Note - No fee to provide liqidity
+type RemoveLiquidityEvent @entity {
+    id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
+    transaction: Transaction! @derivedFrom(field: "removeLiquidityEvents")
+    ethAmount: BigDecimal!
+    tokenAmount: BigDecimal!
+}
+
+type TokenPurchaseEvent @entity {
+    id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
+    transaction: Transaction! @derivedFrom(field: "tokenPurchaseEvents")
+    # Monetary Values. Positive or negative determined by the TradeType
+    eth: BigDecimal!
+    token: BigDecimal!
+    tokenFee: BigDecimal!
+    ethFee: BigDecimal!
+}
+
+type EthPurchaseEvent @entity {
+    id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
+    transaction: Transaction! @derivedFrom(field: "ethPurchaseEvents")
+    # Monetary Values. Positive or negative determined by the TradeType
+    eth: BigDecimal!
+    token: BigDecimal!
+    tokenFee: BigDecimal!
+    ethFee: BigDecimal!
 }
 
 ##### Below are entites specifically for uniswap historical data #####
@@ -112,9 +155,7 @@ type Transaction @entity {
 # Historical data for each event of each exchange. Useful for creating graphs and data analysis
 type ExchangeHistoricalData @entity {
     id: ID!
-    exchangeAddress: Bytes! # Uniswap exchange address
-    tokenSymbol: String
-    tokenAddress: Bytes!
+    exchangeAddress: Bytes!
     type: EventType!
     timestamp: Int!
 
@@ -151,56 +192,5 @@ type ExchangeDayData @entity {
     totalEvents: BigInt!                    
 }
 
-    # Note - No fee to provide liqidity
-type LiquidityEvent @entity {
-    id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
-    type: EventType!
-    provider: Bytes!
 
-    # Monetary values
-    ethAmount: BigDecimal!
-    tokenAmount: BigDecimal!
 
-    # Block data
-    timestamp: Int!
-    txhash: Bytes!
-    block: Int!
-
-    # Generic token info. Some can be null because ERC20 interface is not enforced
-    tokenAddress: Bytes!
-    exchangeAddress: Bytes!
-    symbol: String
-    decimals: Int
-    name: String
-}
-
-type TradeEvent @entity {
-    id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
-    type: EventType!
-    buyer: Bytes!
-
-    # Monetary Values. Positive or negative determined by the TradeType
-    eth: BigDecimal!
-    token: BigDecimal!
-    tokenFee: BigDecimal!
-    ethFee: BigDecimal!
-
-    # Block data
-    timestamp: Int!
-    txhash: Bytes!
-    block: Int!
-
-    # Generic token info. Some can be null because ERC20 interface is not enforced
-    tokenAddress: Bytes!
-    exchangeAddress: Bytes!
-    symbol: String
-    decimals: Int
-    name: String
-}
-
-enum EventType {
-    AddLiquidity,
-    RemoveLiquidity,
-    TokenPurchase,
-    EthPurchase
-}

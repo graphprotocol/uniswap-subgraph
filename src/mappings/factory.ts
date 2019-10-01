@@ -2,18 +2,8 @@ import { BigInt, BigDecimal, Address, log } from '@graphprotocol/graph-ts'
 import { NewExchange } from '../types/Factory/Factory'
 import { Uniswap, Exchange } from '../types/schema'
 import { Exchange as ExchangeContract } from '../types/templates'
-// import { ERC20 } from '../types/Factory/ERC20'
 import { hardcodedExchanges } from './hardcodedExchanges'
 
-/**
- *
- * Create data from out hard coded list - sets everythign to 0 then checks list
- *
- * @todo
- *
- * use try catch to get info straight from contracts
- *
- */
 function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timestamp: i32): void {
   const exchange = new Exchange(exchangeAddress) as Exchange
   exchange.tokenAddress = tokenAddress
@@ -50,11 +40,9 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
   exchange.weightedAvgPriceUSD = BigDecimal.fromString('0')
 
   exchange.tokenHolders = []
-  exchange.txs = []
 
   for (let i = 0; i < hardcodedExchanges.length; i++) {
     if (tokenAddressStringed.toString() == hardcodedExchanges[i].tokenAddress.toString()) {
-      // log.info('Found one to hard code: {}', [tokenAddressStringed.toString()])
       exchange.tokenSymbol = hardcodedExchanges[i].symbol
       exchange.tokenName = hardcodedExchanges[i].name
       exchange.tokenDecimals = hardcodedExchanges[i].tokenDecimals
@@ -66,15 +54,17 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
     }
   }
 
-  // add the exchange for the derived relationship
-  const uniswap = Uniswap.load('1')
-  const currentExchanges = uniswap.exchanges
-  currentExchanges.push(exchange.id)
-  uniswap.exchanges = currentExchanges
-  uniswap.save()
-
-  // save the new exchange
-  exchange.save()
+  // only save for tokens with non null decimals
+  if (exchange.tokenDecimals !== null) {
+    // add the exchange for the derived relationship
+    const uniswap = Uniswap.load('1')
+    const currentExchanges = uniswap.exchanges
+    currentExchanges.push(exchange.id)
+    uniswap.exchanges = currentExchanges
+    uniswap.save()
+    // save the new exchange
+    exchange.save()
+  }
 }
 
 export function handleNewExchange(event: NewExchange): void {
