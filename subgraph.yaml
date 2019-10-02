@@ -47,5 +47,13 @@ templates:
         - name: Exchange
           file: ./abis/exchange.json
       eventHandlers:
+        - event: TokenPurchase(indexed address,indexed uint256,indexed uint256)
+          handler: handleTokenPurchase
+        - event: EthPurchase(indexed address,indexed uint256,indexed uint256)
+          handler: handleEthPurchase
         - event: AddLiquidity(indexed address,indexed uint256,indexed uint256)
           handler: handleAddLiquidity
+        - event: RemoveLiquidity(indexed address,indexed uint256,indexed uint256)
+          handler: handleRemoveLiquidity
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
