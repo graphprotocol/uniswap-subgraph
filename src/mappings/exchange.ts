@@ -145,19 +145,19 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   }
 
   // ROI calculations
-  if (equalToZero(exchange.price)) {
-    // do nothing. it will cause a div by zero failure
-  } else {
-    const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-    const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-    const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-    const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    if (equalToZero(totalLiquidityValue)) {
-      // do nothing. it would cause a div by zero failure
-    } else {
-      exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
-    }
-  }
+  // if (equalToZero(exchange.price)) {
+  //   // do nothing. it will cause a div by zero failure
+  // } else {
+  //   const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  //   const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  //   const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  //   const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  //   if (equalToZero(totalLiquidityValue)) {
+  //     // do nothing. it would cause a div by zero failure
+  //   } else {
+  //     exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  //   }
+  // }
 
   exchange.save()
   userExchangeData.save()
@@ -453,16 +453,32 @@ export function handleEthPurchase(event: EthPurchase): void {
 
 // Note - function addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
 export function handleAddLiquidity(event: AddLiquidity): void {
+  log.info('mybug start of the new handle ----', [])
   /****** Update Exchange ******/
   const exchangeID = event.address.toHex()
+  log.info('mybug the exchange is {}', [exchangeID.toString()])
   const exchange = Exchange.load(exchangeID)
   const ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
+  log.info('mybug eth amount is {} ', [ethAmount.toString()])
+  log.info('mybug token amount is {} ', [event.params.token_amount.toString()])
+
   let tokenAmount: BigDecimal
+  log.info('mybug the token decimals are 0? {}', [exchange.tokenDecimals == 0 ? 'true' : 'false'])
+
+  const eDec = exponentToBigDecimal(exchange.tokenDecimals)
+
+  log.info('mybug eDec is {}', [eDec.toString()])
+
+  log.info('mybug was able to convert', [])
+
   if (exchange.tokenDecimals == null) {
     tokenAmount = event.params.token_amount.toBigDecimal()
   } else {
-    tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
+    tokenAmount = event.params.token_amount.toBigDecimal().div(eDec)
   }
+
+  log.info('mybug got to here &&&&&&', [])
+
   exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
   exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
   exchange.ethLiquidity = exchange.ethLiquidity.plus(ethAmount)
@@ -471,6 +487,8 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   exchange.lastPrice = exchange.price
 
   // Don't need check to divide by zero here, adding liquidity would make it impossible
+  log.info('mybug the eth balance is {}', [exchange.ethBalance.toString()])
+  log.info('mybug the price to truncate is {}', [exchange.tokenBalance.div(exchange.ethBalance).toString()])
   exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
   exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
 
@@ -519,19 +537,19 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   }
 
   // ROI calculations
-  if (equalToZero(exchange.price)) {
-    // do nothing. it will cause a div by zero failure
-  } else {
-    const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-    const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-    const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-    const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    if (equalToZero(totalLiquidityValue)) {
-      // do nothing. it would cause a div by zero failure
-    } else {
-      exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
-    }
-  }
+  // if (equalToZero(exchange.price)) {
+  //   // do nothing. it will cause a div by zero failure
+  // } else {
+  //   const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  //   const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  //   const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  //   const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  //   if (equalToZero(totalLiquidityValue)) {
+  //     // do nothing. it would cause a div by zero failure
+  //   } else {
+  //     exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  //   }
+  // }
 
   exchange.save()
   userExchangeData.save()
@@ -541,12 +559,14 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   // times 2, because equal eth and tokens are always added or removed for liquidity
   uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(ethAmount.times(BigDecimal.fromString('2')))
   uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+  log.info('mybug the total add liquidity is {}', [uniswap.totalAddLiquidity.toString()])
   uniswap.totalAddLiquidity = uniswap.totalAddLiquidity.plus(BigInt.fromI32(1))
   uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
   uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
   uniswap.save()
 
   /** Create Liquidity Event */
+  log.info('mybug the total remove liquidity is {}', [uniswap.totalRemoveLiquidity.toString()])
   const eventId = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
   const addLiquidityEvent = new AddLiquidityEvent(eventId.toString())
   addLiquidityEvent.ethAmount = ethAmount
@@ -595,6 +615,9 @@ export function handleAddLiquidity(event: AddLiquidity): void {
   const timestamp = event.block.timestamp.toI32()
   const dayID = timestamp / 86400 // presumably this should be rounded to an int
   const dayStartTimestamp = dayID * 86400
+
+  log.info('mybug the day id is {}', [dayID.toString()])
+
   const id = event.address
     .toHexString()
     .concat('-')
@@ -683,19 +706,19 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     }
   }
   // ROI calculations
-  if (equalToZero(exchange.price)) {
-    // do nothing. it will cause a div by zero failure
-  } else {
-    const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-    const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-    const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-    const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    if (equalToZero(totalLiquidityValue)) {
-      // do nothing. it would cause a div by zero failure
-    } else {
-      exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
-    }
-  }
+  // if (equalToZero(exchange.price)) {
+  //   // do nothing. it will cause a div by zero failure
+  // } else {
+  //   const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
+  //   const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
+  //   const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
+  //   const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
+  //   if (equalToZero(totalLiquidityValue)) {
+  //     // do nothing. it would cause a div by zero failure
+  //   } else {
+  //     exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
+  //   }
+  // }
   exchange.save()
   userExchangeData.save()
   /****** Update Global Values ******/
@@ -757,6 +780,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   const timestamp = event.block.timestamp.toI32()
   const dayID = timestamp / 86400 // presumably this should be rounded to an int
   const dayStartTimestamp = dayID * 86400
+  log.info('this is the dayid: {}', [dayID.toString()])
   const id = event.address
     .toHexString()
     .concat('-')

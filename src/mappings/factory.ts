@@ -56,13 +56,17 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
 
   // only save for tokens with non null decimals
   if (exchange.tokenDecimals !== null) {
-    // add the exchange for the derived relationship
-    const uniswap = Uniswap.load('1')
-    const currentExchanges = uniswap.exchanges
-    currentExchanges.push(exchange.id)
-    uniswap.exchanges = currentExchanges
-    uniswap.save()
-    // save the new exchange
+    // testing - ignore the broken one
+    if (exchangeAddress !== '0x3f0c63da66457dedc2677bef6bbdd457ba7a3c0b') {
+      // add the exchange for the derived relationship
+      const uniswap = Uniswap.load('1')
+      const currentExchanges = uniswap.exchanges
+      currentExchanges.push(exchange.id)
+      uniswap.exchanges = currentExchanges
+      uniswap.save()
+      // save the new exchange
+    }
+
     exchange.save()
   }
 }
