@@ -15,6 +15,7 @@ type Uniswap @entity {
     totalRemoveLiquidity: BigInt!           # Total events where liquidity have been removed
 
     exchangeHistoryEntityCount: BigInt!
+    uniswapHistoryEntityCount: BigInt!
     txCount: BigInt!
 }
 
@@ -50,6 +51,7 @@ type Exchange @entity {
     tradeVolumeEth: BigDecimal!             # Total eth traded EVER
     totalValue: BigDecimal!                 # totalValue is accumulation of trade price * trade volume. i.e. TV = tokensSold * priceTokensSold
     weightedAvgPrice: BigDecimal!           # Avg price of all trades since inception. WAP = totalValue / totalVolume
+    totalTxsCount: BigInt!                  # Total tx count EVER
 
     # Price values uing usd
     lastPriceUSD: BigDecimal!               # The last trade price in USD
@@ -173,8 +175,8 @@ type ExchangeHistoricalData @entity {
 
     tradeVolumeToken: BigDecimal!           # Total tokens traded EVER. i.e. cumulative
     tradeVolumeEth: BigDecimal!             # Total eth traded EVER. i.e. cumulative
-    # totalTxsCount: BigInt!
 
+    totalTxsCount: BigInt!                  # Total tx count EVER
     feeInEth: BigDecimal!
 }
 
@@ -190,6 +192,48 @@ type ExchangeDayData @entity {
     ROI: BigDecimal!                        # ROI for the exchange at the last event within the day
     tokenPriceUSD: BigDecimal!              # USD token price at last event within the day
     totalEvents: BigInt!                    
+}
+
+# Data accumulated and condensed into day stats for all of Uniswap
+type UniswapDayData @entity {
+    id: ID! # timestamp rounded to current day by dividing by 86400 - should only be one per day 
+    date: Int!
+
+    dailyVolumeInETH: BigDecimal!
+    dailyVolumeInUSD: BigDecimal!
+
+    totalVolumeInEth: BigDecimal!           # volume just on eth -i.e. we dont double count volume
+    totalLiquidityInEth: BigDecimal!        # 2 * SUM(exchanges.ethLiquidity). Since tokenLiquiduity = ethLiquidity value, can just *2
+    totalVolumeUSD: BigDecimal!             # Accumulate at each trade, not just calculated off whatever totalVolume is. making it more accurate as it is a live conversion
+    totalLiquidityUSD: BigDecimal!
+
+    totalTokenSells: BigInt!                # Total events where tokens have been sold
+    totalTokenBuys: BigInt!                 # Total events where tokens have been bought
+    totalAddLiquidity: BigInt!              # Total events where liqidity has been added
+    totalRemoveLiquidity: BigInt!           # Total events where liquidity have been removed
+
+    txCount: BigInt!                 
+}
+
+# Data checkpointed at each timestamp for 24hour data 
+type UniswapHistoricalData @entity {
+    id: ID!  # unique based on incremental entity count, one for each transactions
+    timestamp: Int!
+
+    dailyVolumeInETH: BigDecimal!
+    dailyVolumeInUSD: BigDecimal!
+
+    totalVolumeInEth: BigDecimal!           # volume just on eth -i.e. we dont double count volume
+    totalLiquidityInEth: BigDecimal!        # 2 * SUM(exchanges.ethLiquidity). Since tokenLiquiduity = ethLiquidity value, can just *2
+    totalVolumeUSD: BigDecimal!             # Accumulate at each trade, not just calculated off whatever totalVolume is. making it more accurate as it is a live conversion
+    totalLiquidityUSD: BigDecimal!
+
+    totalTokenSells: BigInt!                # Total events where tokens have been sold
+    totalTokenBuys: BigInt!                 # Total events where tokens have been bought
+    totalAddLiquidity: BigInt!              # Total events where liqidity has been added
+    totalRemoveLiquidity: BigInt!           # Total events where liquidity have been removed
+
+    txCount: BigInt!                 
 }
 
 

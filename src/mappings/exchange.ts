@@ -18,7 +18,9 @@ import {
   AddLiquidityEvent,
   RemoveLiquidityEvent,
   TokenPurchaseEvent,
-  EthPurchaseEvent
+  EthPurchaseEvent,
+  UniswapDayData,
+  UniswapHistoricalData
 } from '../types/schema'
 import { uniswapUSDOracle } from './uniswapOracle'
 
@@ -71,7 +73,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
   const exchangeID = event.address.toHex()
   const exchange = Exchange.load(exchangeID)
 
-  if (exchange == null) {
+  if (exchange !== null) {
     const ethAmount = event.params.eth_sold.toBigDecimal().div(exponentToBigDecimal(18))
     let tokenAmount: BigDecimal
     if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
@@ -91,6 +93,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     exchange.tradeVolumeEth = exchange.tradeVolumeEth.plus(ethAmount)
     exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
     exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
+    exchange.totalTxsCount = exchange.totalTxsCount.plus(BigInt.fromI32(1))
 
     /****** Update User ******/
     const userID = event.params.buyer.toHex()
@@ -146,32 +149,70 @@ export function handleTokenPurchase(event: TokenPurchase): void {
         .truncate(18)
     }
 
-    // ROI calculations
-    // if (equalToZero(exchange.price)) {
-    //   // do nothing. it will cause a div by zero failure
-    // } else {
-    //   const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-    //   const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-    //   const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-    //   const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    //   if (equalToZero(totalLiquidityValue)) {
-    //     // do nothing. it would cause a div by zero failure
-    //   } else {
-    //     exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
-    //   }
-    // }
-
     exchange.save()
     userExchangeData.save()
+
+    // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
+    // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
+    const timestamp = event.block.timestamp.toI32()
+    const dayID = timestamp / 86400 // presumably this should be rounded to an int
+    const dayStartTimestamp = dayID * 86400
+    const id = event.address
+      .toHexString()
+      .concat('-')
+      .concat(BigInt.fromI32(dayID).toString())
 
     /****** Update Global Values ******/
     const uniswap = Uniswap.load('1')
     uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
-    uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD)
+    uniswap.totalVolumeUSD = uniswap.totalVolumeUSD.plus(ethAmount.times(exchange.price.times(exchange.priceUSD)))
     uniswap.totalTokenBuys = uniswap.totalTokenBuys.plus(BigInt.fromI32(1))
     uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
+    uniswap.uniswapHistoryEntityCount = uniswap.uniswapHistoryEntityCount.plus(BigInt.fromI32(1))
     uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
     uniswap.save()
+
+    let uniswapDayData = UniswapDayData.load(dayID.toString())
+    if (uniswapDayData == null) {
+      uniswapDayData = new UniswapDayData(dayID.toString())
+      uniswapDayData.date = dayStartTimestamp
+      uniswapDayData.totalVolumeInEth = BigDecimal.fromString('0')
+      uniswapDayData.totalLiquidityInEth = BigDecimal.fromString('0')
+      uniswapDayData.totalVolumeUSD = BigDecimal.fromString('0')
+      uniswapDayData.totalLiquidityUSD = BigDecimal.fromString('0')
+      uniswapDayData.totalTokenSells = BigInt.fromI32(0)
+      uniswapDayData.totalTokenBuys = BigInt.fromI32(0)
+      uniswapDayData.totalAddLiquidity = BigInt.fromI32(0)
+      uniswapDayData.totalRemoveLiquidity = BigInt.fromI32(0)
+      uniswapDayData.txCount = BigInt.fromI32(0)
+    }
+
+    // save the info for historical data based on timestamp
+    let uniswapHistoricalData = new UniswapHistoricalData(uniswap.uniswapHistoryEntityCount.toString())
+    uniswapHistoricalData = new UniswapHistoricalData(id)
+    uniswapHistoricalData.timestamp = event.block.timestamp.toI32()
+    uniswapHistoricalData.totalVolumeInEth = uniswap.totalVolumeInEth
+    uniswapHistoricalData.totalLiquidityInEth = uniswap.totalLiquidityInEth
+    uniswapHistoricalData.totalVolumeUSD = uniswap.totalVolumeUSD
+    uniswapHistoricalData.totalLiquidityUSD = uniswap.totalLiquidityUSD
+    uniswapHistoricalData.totalTokenSells = uniswap.totalTokenSells
+    uniswapHistoricalData.totalTokenBuys = uniswap.totalTokenBuys
+    uniswapHistoricalData.totalAddLiquidity = uniswap.totalAddLiquidity
+    uniswapHistoricalData.totalRemoveLiquidity = uniswap.totalRemoveLiquidity
+    uniswapHistoricalData.txCount = uniswap.txCount
+    uniswapHistoricalData.save()
+
+    // save info
+    uniswapDayData.totalVolumeInEth = uniswap.totalVolumeInEth
+    uniswapDayData.totalLiquidityInEth = uniswap.totalLiquidityInEth
+    uniswapDayData.totalVolumeUSD = uniswap.totalVolumeUSD
+    uniswapDayData.totalLiquidityUSD = uniswap.totalLiquidityUSD
+    uniswapDayData.totalTokenSells = uniswap.totalTokenSells
+    uniswapDayData.totalTokenBuys = uniswap.totalTokenBuys
+    uniswapDayData.totalAddLiquidity = uniswap.totalAddLiquidity
+    uniswapDayData.totalRemoveLiquidity = uniswap.totalRemoveLiquidity
+    uniswapDayData.txCount = uniswap.txCount
+    uniswapDayData.save()
 
     /******** CREATE TRADE EVENT  ********/
     const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
@@ -219,17 +260,9 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     eh.tradeVolumeToken = exchange.tradeVolumeToken
     eh.tradeVolumeEth = exchange.tradeVolumeEth
     eh.feeInEth = fee
+    eh.totalTxsCount = exchange.totalTxsCount
     eh.save()
 
-    // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
-    // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
-    const timestamp = event.block.timestamp.toI32()
-    const dayID = timestamp / 86400 // presumably this should be rounded to an int
-    const dayStartTimestamp = dayID * 86400
-    const id = event.address
-      .toHexString()
-      .concat('-')
-      .concat(BigInt.fromI32(dayID).toString())
     let exchangeDayData = ExchangeDayData.load(id)
     if (exchangeDayData == null) {
       exchangeDayData = new ExchangeDayData(id)
@@ -263,7 +296,7 @@ export function handleEthPurchase(event: EthPurchase): void {
   /****** Update Exchange ******/
   const exchangeID = event.address.toHex()
   const exchange = Exchange.load(exchangeID)
-  if (exchange == null) {
+  if (exchange !== null) {
     const ethAmount = event.params.eth_bought.toBigDecimal().div(exponentToBigDecimal(18))
     let tokenAmount: BigDecimal
     if (exchange.tokenDecimals == null) {
@@ -288,6 +321,7 @@ export function handleEthPurchase(event: EthPurchase): void {
     exchange.tradeVolumeEth = exchange.tradeVolumeEth.plus(ethAmount)
     exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
     exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
+    exchange.totalTxsCount = exchange.totalTxsCount.plus(BigInt.fromI32(1))
 
     /****** Update User ******/
     // It is conceivable that user does not exist yet here
@@ -358,14 +392,65 @@ export function handleEthPurchase(event: EthPurchase): void {
     exchange.save()
     userExchangeData.save()
 
+    // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
+    // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
+    const timestamp = event.block.timestamp.toI32()
+    const dayID = timestamp / 86400 // presumably this should be rounded to an int
+    const dayStartTimestamp = dayID * 86400
+    const id = event.address
+      .toHexString()
+      .concat('-')
+      .concat(BigInt.fromI32(dayID).toString())
+
     /****** Update Global Values ******/
     const uniswap = Uniswap.load('1')
     uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
-    uniswap.totalVolumeUSD = uniswap.totalVolumeInEth.times(exchange.price).times(exchange.priceUSD)
+    uniswap.totalVolumeUSD = uniswap.totalVolumeUSD.plus(ethAmount.times(exchange.price.times(exchange.priceUSD)))
     uniswap.totalTokenSells = uniswap.totalTokenSells.plus(BigInt.fromI32(1))
     uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
+    uniswap.uniswapHistoryEntityCount = uniswap.uniswapHistoryEntityCount.plus(BigInt.fromI32(1))
     uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
     uniswap.save()
+
+    let uniswapDayData = UniswapDayData.load(dayID.toString())
+    if (uniswapDayData == null) {
+      uniswapDayData = new UniswapDayData(dayID.toString())
+      uniswapDayData.date = dayStartTimestamp
+      uniswapDayData.totalVolumeInEth = BigDecimal.fromString('0')
+      uniswapDayData.totalLiquidityInEth = BigDecimal.fromString('0')
+      uniswapDayData.totalVolumeUSD = BigDecimal.fromString('0')
+      uniswapDayData.totalLiquidityUSD = BigDecimal.fromString('0')
+      uniswapDayData.totalTokenSells = BigInt.fromI32(0)
+      uniswapDayData.totalTokenBuys = BigInt.fromI32(0)
+      uniswapDayData.totalAddLiquidity = BigInt.fromI32(0)
+      uniswapDayData.totalRemoveLiquidity = BigInt.fromI32(0)
+      uniswapDayData.txCount = BigInt.fromI32(0)
+    }
+
+    let uniswapHistoricalData = new UniswapHistoricalData(uniswap.uniswapHistoryEntityCount.toString())
+    uniswapHistoricalData = new UniswapHistoricalData(id)
+    uniswapHistoricalData.timestamp = event.block.timestamp.toI32()
+    uniswapHistoricalData.totalVolumeInEth = uniswap.totalVolumeInEth
+    uniswapHistoricalData.totalLiquidityInEth = uniswap.totalLiquidityInEth
+    uniswapHistoricalData.totalVolumeUSD = uniswap.totalVolumeUSD
+    uniswapHistoricalData.totalLiquidityUSD = uniswap.totalLiquidityUSD
+    uniswapHistoricalData.totalTokenSells = uniswap.totalTokenSells
+    uniswapHistoricalData.totalTokenBuys = uniswap.totalTokenBuys
+    uniswapHistoricalData.totalAddLiquidity = uniswap.totalAddLiquidity
+    uniswapHistoricalData.totalRemoveLiquidity = uniswap.totalRemoveLiquidity
+    uniswapHistoricalData.txCount = uniswap.txCount
+    uniswapHistoricalData.save()
+
+    uniswapDayData.totalVolumeInEth = uniswap.totalVolumeInEth
+    uniswapDayData.totalLiquidityInEth = uniswap.totalLiquidityInEth
+    uniswapDayData.totalVolumeUSD = uniswap.totalVolumeUSD
+    uniswapDayData.totalLiquidityUSD = uniswap.totalLiquidityUSD
+    uniswapDayData.totalTokenSells = uniswap.totalTokenSells
+    uniswapDayData.totalTokenBuys = uniswap.totalTokenBuys
+    uniswapDayData.totalAddLiquidity = uniswap.totalAddLiquidity
+    uniswapDayData.totalRemoveLiquidity = uniswap.totalRemoveLiquidity
+    uniswapDayData.txCount = uniswap.txCount
+    uniswapDayData.save()
 
     /*** Create Trade Event ******/
     const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
@@ -412,6 +497,7 @@ export function handleEthPurchase(event: EthPurchase): void {
     eh.tradeVolumeToken = exchange.tradeVolumeToken
     eh.tradeVolumeEth = exchange.tradeVolumeEth
     eh.feeInEth = fee
+    eh.totalTxsCount = exchange.totalTxsCount
     if (equalToZero(exchange.price)) {
       eh.feeInEth = BigDecimal.fromString('0') // Fee isn't actually zero here, but its hard to calculate this value
     } else {
@@ -419,15 +505,6 @@ export function handleEthPurchase(event: EthPurchase): void {
       eh.save()
     }
 
-    // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
-    // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
-    const timestamp = event.block.timestamp.toI32()
-    const dayID = timestamp / 86400 // presumably this should be rounded to an int
-    const dayStartTimestamp = dayID * 86400
-    const id = event.address
-      .toHexString()
-      .concat('-')
-      .concat(BigInt.fromI32(dayID).toString())
     let exchangeDayData = ExchangeDayData.load(id)
     if (exchangeDayData == null) {
       exchangeDayData = new ExchangeDayData(id)
@@ -458,34 +535,18 @@ export function handleEthPurchase(event: EthPurchase): void {
 
 // Note - function addLiquidity() will emit events log.AddLiquidity and log.Transfer back to back
 export function handleAddLiquidity(event: AddLiquidity): void {
-  log.info('mybug start of the new handle ----', [])
   /****** Update Exchange ******/
   const exchangeID = event.address.toHex()
-  log.info('mybug the exchange is {}', [exchangeID.toString()])
   const exchange = Exchange.load(exchangeID)
 
-  if (exchange == null) {
+  if (exchange !== null) {
     const ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
-    log.info('mybug eth amount is {} ', [ethAmount.toString()])
-    log.info('mybug token amount is {} ', [event.params.token_amount.toString()])
-
     let tokenAmount: BigDecimal
-    log.info('mybug the token decimals are 0? {}', [exchange.tokenDecimals == 0 ? 'true' : 'false'])
-
-    const eDec = exponentToBigDecimal(exchange.tokenDecimals)
-
-    log.info('mybug eDec is {}', [eDec.toString()])
-
-    log.info('mybug was able to convert', [])
-
     if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
       tokenAmount = event.params.token_amount.toBigDecimal()
     } else {
-      tokenAmount = event.params.token_amount.toBigDecimal().div(eDec)
+      tokenAmount = event.params.token_amount.toBigDecimal().div(exponentToBigDecimal(exchange.tokenDecimals))
     }
-
-    log.info('mybug got to here &&&&&&', [])
-
     exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
     exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
     exchange.ethLiquidity = exchange.ethLiquidity.plus(ethAmount)
@@ -494,8 +555,6 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     exchange.lastPrice = exchange.price
 
     // Don't need check to divide by zero here, adding liquidity would make it impossible
-    log.info('mybug the eth balance is {}', [exchange.ethBalance.toString()])
-    log.info('mybug the price to truncate is {}', [exchange.tokenBalance.div(exchange.ethBalance).toString()])
     exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
     exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
 
@@ -543,37 +602,73 @@ export function handleAddLiquidity(event: AddLiquidity): void {
       }
     }
 
-    // ROI calculations
-    // if (equalToZero(exchange.price)) {
-    //   // do nothing. it will cause a div by zero failure
-    // } else {
-    //   const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-    //   const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-    //   const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-    //   const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    //   if (equalToZero(totalLiquidityValue)) {
-    //     // do nothing. it would cause a div by zero failure
-    //   } else {
-    //     exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
-    //   }
-    // }
-
     exchange.save()
     userExchangeData.save()
+
+    // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
+    // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
+    const timestamp = event.block.timestamp.toI32()
+    const dayID = timestamp / 86400 // presumably this should be rounded to an int
+    const dayStartTimestamp = dayID * 86400
+    const id = event.address
+      .toHexString()
+      .concat('-')
+      .concat(BigInt.fromI32(dayID).toString())
 
     /****** Update Global Values ******/
     const uniswap = Uniswap.load('1')
     // times 2, because equal eth and tokens are always added or removed for liquidity
     uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(ethAmount.times(BigDecimal.fromString('2')))
-    uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
-    log.info('mybug the total add liquidity is {}', [uniswap.totalAddLiquidity.toString()])
+    if (!equalToZero(exchange.price) && !equalToZero(exchange.priceUSD)) {
+      uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+    }
     uniswap.totalAddLiquidity = uniswap.totalAddLiquidity.plus(BigInt.fromI32(1))
     uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
+    uniswap.uniswapHistoryEntityCount = uniswap.uniswapHistoryEntityCount.plus(BigInt.fromI32(1))
     uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
     uniswap.save()
 
+    let uniswapDayData = UniswapDayData.load(dayID.toString())
+    if (uniswapDayData == null) {
+      uniswapDayData = new UniswapDayData(dayID.toString())
+      uniswapDayData.date = dayStartTimestamp
+      uniswapDayData.totalVolumeInEth = BigDecimal.fromString('0')
+      uniswapDayData.totalLiquidityInEth = BigDecimal.fromString('0')
+      uniswapDayData.totalVolumeUSD = BigDecimal.fromString('0')
+      uniswapDayData.totalLiquidityUSD = BigDecimal.fromString('0')
+      uniswapDayData.totalTokenSells = BigInt.fromI32(0)
+      uniswapDayData.totalTokenBuys = BigInt.fromI32(0)
+      uniswapDayData.totalAddLiquidity = BigInt.fromI32(0)
+      uniswapDayData.totalRemoveLiquidity = BigInt.fromI32(0)
+      uniswapDayData.txCount = BigInt.fromI32(0)
+    }
+
+    let uniswapHistoricalData = new UniswapHistoricalData(uniswap.uniswapHistoryEntityCount.toString())
+    uniswapHistoricalData = new UniswapHistoricalData(id)
+    uniswapHistoricalData.timestamp = event.block.timestamp.toI32()
+    uniswapHistoricalData.totalVolumeInEth = uniswap.totalVolumeInEth
+    uniswapHistoricalData.totalLiquidityInEth = uniswap.totalLiquidityInEth
+    uniswapHistoricalData.totalVolumeUSD = uniswap.totalVolumeUSD
+    uniswapHistoricalData.totalLiquidityUSD = uniswap.totalLiquidityUSD
+    uniswapHistoricalData.totalTokenSells = uniswap.totalTokenSells
+    uniswapHistoricalData.totalTokenBuys = uniswap.totalTokenBuys
+    uniswapHistoricalData.totalAddLiquidity = uniswap.totalAddLiquidity
+    uniswapHistoricalData.totalRemoveLiquidity = uniswap.totalRemoveLiquidity
+    uniswapHistoricalData.txCount = uniswap.txCount
+    uniswapHistoricalData.save()
+
+    uniswapDayData.totalVolumeInEth = uniswap.totalVolumeInEth
+    uniswapDayData.totalLiquidityInEth = uniswap.totalLiquidityInEth
+    uniswapDayData.totalVolumeUSD = uniswap.totalVolumeUSD
+    uniswapDayData.totalLiquidityUSD = uniswap.totalLiquidityUSD
+    uniswapDayData.totalTokenSells = uniswap.totalTokenSells
+    uniswapDayData.totalTokenBuys = uniswap.totalTokenBuys
+    uniswapDayData.totalAddLiquidity = uniswap.totalAddLiquidity
+    uniswapDayData.totalRemoveLiquidity = uniswap.totalRemoveLiquidity
+    uniswapDayData.txCount = uniswap.txCount
+    uniswapDayData.save()
+
     /** Create Liquidity Event */
-    log.info('mybug the total remove liquidity is {}', [uniswap.totalRemoveLiquidity.toString()])
     const eventId = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
     const addLiquidityEvent = new AddLiquidityEvent(eventId.toString())
     addLiquidityEvent.ethAmount = ethAmount
@@ -615,20 +710,9 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     eh.tradeVolumeToken = exchange.tradeVolumeToken
     eh.tradeVolumeEth = exchange.tradeVolumeEth
     eh.feeInEth = BigDecimal.fromString('0')
+    eh.totalTxsCount = exchange.totalTxsCount
     eh.save()
 
-    // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
-    // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
-    const timestamp = event.block.timestamp.toI32()
-    const dayID = timestamp / 86400 // presumably this should be rounded to an int
-    const dayStartTimestamp = dayID * 86400
-
-    log.info('mybug the day id is {}', [dayID.toString()])
-
-    const id = event.address
-      .toHexString()
-      .concat('-')
-      .concat(BigInt.fromI32(dayID).toString())
     let exchangeDayData = ExchangeDayData.load(id)
     if (exchangeDayData == null) {
       exchangeDayData = new ExchangeDayData(id)
@@ -662,7 +746,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
   const exchangeID = event.address.toHex()
   const exchange = Exchange.load(exchangeID)
 
-  if (exchange == null) {
+  if (exchange !== null) {
     const ethAmount = event.params.eth_amount.toBigDecimal().div(exponentToBigDecimal(18))
     let tokenAmount: BigDecimal
     if (exchange.tokenDecimals == null || exchange.tokenDecimals == 0) {
@@ -715,31 +799,72 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
         exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth)
       }
     }
-    // ROI calculations
-    // if (equalToZero(exchange.price)) {
-    //   // do nothing. it will cause a div by zero failure
-    // } else {
-    //   const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-    //   const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-    //   const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-    //   const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-    //   if (equalToZero(totalLiquidityValue)) {
-    //     // do nothing. it would cause a div by zero failure
-    //   } else {
-    //     exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
-    //   }
-    // }
+
     exchange.save()
     userExchangeData.save()
+
+    // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
+    // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
+    const timestamp = event.block.timestamp.toI32()
+    const dayID = timestamp / 86400 // presumably this should be rounded to an int
+    const dayStartTimestamp = dayID * 86400
+    const id = event.address
+      .toHexString()
+      .concat('-')
+      .concat(BigInt.fromI32(dayID).toString())
+
     /****** Update Global Values ******/
     const uniswap = Uniswap.load('1')
     // times 2, because equal eth and tokens are always added or removed for liquidity
     uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(ethAmount.times(BigDecimal.fromString('2')))
-    uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+    if (!equalToZero(exchange.price) && !equalToZero(exchange.priceUSD)) {
+      uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+    }
     uniswap.totalRemoveLiquidity = uniswap.totalRemoveLiquidity.plus(BigInt.fromI32(1))
     uniswap.exchangeHistoryEntityCount = uniswap.exchangeHistoryEntityCount.plus(BigInt.fromI32(1))
+    uniswap.uniswapHistoryEntityCount = uniswap.uniswapHistoryEntityCount.plus(BigInt.fromI32(1))
     uniswap.txCount = uniswap.txCount.plus(BigInt.fromI32(1))
     uniswap.save()
+
+    let uniswapDayData = UniswapDayData.load(dayID.toString())
+    if (uniswapDayData == null) {
+      uniswapDayData = new UniswapDayData(dayID.toString())
+      uniswapDayData.date = dayStartTimestamp
+      uniswapDayData.totalVolumeInEth = BigDecimal.fromString('0')
+      uniswapDayData.totalLiquidityInEth = BigDecimal.fromString('0')
+      uniswapDayData.totalVolumeUSD = BigDecimal.fromString('0')
+      uniswapDayData.totalLiquidityUSD = BigDecimal.fromString('0')
+      uniswapDayData.totalTokenSells = BigInt.fromI32(0)
+      uniswapDayData.totalTokenBuys = BigInt.fromI32(0)
+      uniswapDayData.totalAddLiquidity = BigInt.fromI32(0)
+      uniswapDayData.totalRemoveLiquidity = BigInt.fromI32(0)
+      uniswapDayData.txCount = BigInt.fromI32(0)
+    }
+
+    let uniswapHistoricalData = new UniswapHistoricalData(uniswap.uniswapHistoryEntityCount.toString())
+    uniswapHistoricalData = new UniswapHistoricalData(id)
+    uniswapHistoricalData.timestamp = event.block.timestamp.toI32()
+    uniswapHistoricalData.totalVolumeInEth = uniswap.totalVolumeInEth
+    uniswapHistoricalData.totalLiquidityInEth = uniswap.totalLiquidityInEth
+    uniswapHistoricalData.totalVolumeUSD = uniswap.totalVolumeUSD
+    uniswapHistoricalData.totalLiquidityUSD = uniswap.totalLiquidityUSD
+    uniswapHistoricalData.totalTokenSells = uniswap.totalTokenSells
+    uniswapHistoricalData.totalTokenBuys = uniswap.totalTokenBuys
+    uniswapHistoricalData.totalAddLiquidity = uniswap.totalAddLiquidity
+    uniswapHistoricalData.totalRemoveLiquidity = uniswap.totalRemoveLiquidity
+    uniswapHistoricalData.txCount = uniswap.txCount
+    uniswapHistoricalData.save()
+
+    uniswapDayData.totalVolumeInEth = uniswap.totalVolumeInEth
+    uniswapDayData.totalLiquidityInEth = uniswap.totalLiquidityInEth
+    uniswapDayData.totalVolumeUSD = uniswap.totalVolumeUSD
+    uniswapDayData.totalLiquidityUSD = uniswap.totalLiquidityUSD
+    uniswapDayData.totalTokenSells = uniswap.totalTokenSells
+    uniswapDayData.totalTokenBuys = uniswap.totalTokenBuys
+    uniswapDayData.totalAddLiquidity = uniswap.totalAddLiquidity
+    uniswapDayData.totalRemoveLiquidity = uniswap.totalRemoveLiquidity
+    uniswapDayData.txCount = uniswap.txCount
+    uniswapDayData.save()
 
     /** Create Liquidity Event */
     const eventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
@@ -783,18 +908,9 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     eh.tradeVolumeToken = exchange.tradeVolumeToken
     eh.tradeVolumeEth = exchange.tradeVolumeEth
     eh.feeInEth = BigDecimal.fromString('0')
+    eh.totalTxsCount = exchange.totalTxsCount
     eh.save()
 
-    // Nov 2 2018 is 1541116800 for dayStartTimestamp and 17837 for dayID
-    // Nov 3 2018 would be 1541116800 + 86400 and 17838. And so on, for each exchange
-    const timestamp = event.block.timestamp.toI32()
-    const dayID = timestamp / 86400 // presumably this should be rounded to an int
-    const dayStartTimestamp = dayID * 86400
-    log.info('this is the dayid: {}', [dayID.toString()])
-    const id = event.address
-      .toHexString()
-      .concat('-')
-      .concat(BigInt.fromI32(dayID).toString())
     let exchangeDayData = ExchangeDayData.load(id)
     if (exchangeDayData == null) {
       exchangeDayData = new ExchangeDayData(id)
@@ -825,7 +941,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
 export function handleTransfer(event: Transfer): void {
   const exchangeID = event.address.toHex()
   const exchange = Exchange.load(exchangeID)
-  if (exchange == null) {
+  if (exchange !== null) {
     const userToID = exchange.tokenAddress
       .toHexString()
       .concat('-')

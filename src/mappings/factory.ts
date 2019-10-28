@@ -34,6 +34,7 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
   exchange.tradeVolumeEth = BigDecimal.fromString('0')
   exchange.totalValue = BigDecimal.fromString('0')
   exchange.weightedAvgPrice = BigDecimal.fromString('0')
+  exchange.totalTxsCount = BigInt.fromI32(1)
 
   exchange.priceUSD = BigDecimal.fromString('0')
   exchange.lastPriceUSD = BigDecimal.fromString('0')
@@ -83,6 +84,7 @@ export function handleNewExchange(event: NewExchange): void {
     factory.totalAddLiquidity = BigInt.fromI32(0)
     factory.totalRemoveLiquidity = BigInt.fromI32(0)
     factory.exchangeHistoryEntityCount = BigInt.fromI32(0)
+    factory.uniswapHistoryEntityCount = BigInt.fromI32(0)
     factory.txCount = BigInt.fromI32(0)
   }
   factory.exchangeCount = factory.exchangeCount + 1

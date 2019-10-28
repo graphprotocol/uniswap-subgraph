@@ -43,6 +43,8 @@ templates:
         - User
         - UserExchangeData
         - Transaction
+        - UniswapDayData
+        - UniswapHistoricalData
       abis:
         - name: Exchange
           file: ./abis/exchange.json
