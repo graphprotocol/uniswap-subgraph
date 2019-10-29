@@ -32,6 +32,7 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
   exchange.price = BigDecimal.fromString('0')
   exchange.tradeVolumeToken = BigDecimal.fromString('0')
   exchange.tradeVolumeEth = BigDecimal.fromString('0')
+  exchange.tradeVolumeUSD = BigDecimal.fromString('0')
   exchange.totalValue = BigDecimal.fromString('0')
   exchange.weightedAvgPrice = BigDecimal.fromString('0')
   exchange.totalTxsCount = BigInt.fromI32(1)

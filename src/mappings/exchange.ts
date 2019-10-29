@@ -149,6 +149,9 @@ export function handleTokenPurchase(event: TokenPurchase): void {
         .truncate(18)
     }
 
+    // update now that we have usd price
+    exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(tokenAmount.times(exchange.priceUSD))
+
     exchange.save()
     userExchangeData.save()
 
@@ -224,10 +227,13 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     tokenPurchaseEvent.save()
 
     /****** Update Transaction ******/
-    // check for existing
-    let transaction = Transaction.load(event.transaction.hash.toHexString())
+    const txId = event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.address.toHexString())
+    let transaction = Transaction.load(txId)
     if (transaction == null) {
-      transaction = new Transaction(event.transaction.hash.toHexString())
+      transaction = new Transaction(txId)
     }
     const tokenPurchaseEvents = transaction.tokenPurchaseEvents || []
     tokenPurchaseEvents.push(tokenPurchaseEvent.id)
@@ -249,6 +255,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     eh.type = 'TokenPurchase'
     eh.ethLiquidity = exchange.ethLiquidity
     eh.tokenLiquidity = exchange.tokenLiquidity
+    eh.tradeVolumeUSD = exchange.tradeVolumeUSD
     eh.ethBalance = exchange.ethBalance
     eh.tokenBalance = exchange.tokenBalance
     eh.combinedBalanceInEth = exchange.combinedBalanceInEth
@@ -373,21 +380,8 @@ export function handleEthPurchase(event: EthPurchase): void {
         .div(oneUSDInEth)
         .div(exchange.price)
     }
-
-    // ROI calculations
-    if (equalToZero(exchange.price)) {
-      // do nothing. it will cause a div by zero failure
-    } else {
-      const totalTokensToEth = exchange.tokenBalance.div(exchange.price)
-      const liquidityTokensToEth = exchange.tokenLiquidity.div(exchange.price)
-      const totalBalanceValue = totalTokensToEth.plus(exchange.ethBalance)
-      const totalLiquidityValue = liquidityTokensToEth.plus(exchange.ethLiquidity)
-      if (equalToZero(totalLiquidityValue)) {
-        // do nothing. it would cause a div by zero failure
-      } else {
-        exchange.ROI = totalBalanceValue.div(totalLiquidityValue).truncate(6)
-      }
-    }
+    // update now that we have usd price
+    exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(tokenAmount.times(exchange.priceUSD))
 
     exchange.save()
     userExchangeData.save()
@@ -462,9 +456,13 @@ export function handleEthPurchase(event: EthPurchase): void {
     ethPurchaseEvent.save()
 
     /****** Update Transaction ******/
-    let transaction = Transaction.load(event.transaction.hash.toHexString())
+    const txId = event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.address.toHexString())
+    let transaction = Transaction.load(txId)
     if (transaction == null) {
-      transaction = new Transaction(event.transaction.hash.toHexString())
+      transaction = new Transaction(txId)
     }
     const ethPurchaseEvents = transaction.ethPurchaseEvents || []
     ethPurchaseEvents.push(ethPurchaseEvent.id)
@@ -486,6 +484,7 @@ export function handleEthPurchase(event: EthPurchase): void {
     eh.type = 'EthPurchase'
     eh.ethLiquidity = exchange.ethLiquidity
     eh.tokenLiquidity = exchange.tokenLiquidity
+    eh.tradeVolumeUSD = exchange.tradeVolumeUSD
     eh.ethBalance = exchange.ethBalance
     eh.tokenBalance = exchange.tokenBalance
     eh.combinedBalanceInEth = exchange.combinedBalanceInEth
@@ -552,6 +551,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     exchange.ethLiquidity = exchange.ethLiquidity.plus(ethAmount)
     exchange.tokenLiquidity = exchange.tokenLiquidity.plus(tokenAmount)
     exchange.addLiquidityCount = exchange.addLiquidityCount.plus(BigInt.fromI32(1))
+    exchange.totalTxsCount = exchange.totalTxsCount.plus(BigInt.fromI32(1))
     exchange.lastPrice = exchange.price
 
     // Don't need check to divide by zero here, adding liquidity would make it impossible
@@ -676,9 +676,13 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     addLiquidityEvent.save()
 
     /****** Update Transaction ******/
-    let transaction = Transaction.load(event.transaction.hash.toHexString())
+    const txId = event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.address.toHexString())
+    let transaction = Transaction.load(txId)
     if (transaction == null) {
-      transaction = new Transaction(event.transaction.hash.toHexString())
+      transaction = new Transaction(txId)
     }
     const addLiquidityEvents = transaction.addLiquidityEvents || []
     addLiquidityEvents.push(addLiquidityEvent.id)
@@ -759,6 +763,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     exchange.ethLiquidity = exchange.ethLiquidity.minus(ethAmount)
     exchange.tokenLiquidity = exchange.tokenLiquidity.minus(tokenAmount)
     exchange.removeLiquidityCount = exchange.removeLiquidityCount.plus(BigInt.fromI32(1))
+    exchange.totalTxsCount = exchange.totalTxsCount.plus(BigInt.fromI32(1))
     exchange.lastPrice = exchange.price
     // Here we must handle div by zero, because someone could have bought all the eth or all the tokens
     if (equalToZero(exchange.ethBalance)) {
@@ -874,9 +879,13 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     removeLiquidityEvent.save()
 
     /****** Update Transaction ******/
-    let transaction = Transaction.load(event.transaction.hash.toHexString())
+    const txId = event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.address.toHexString())
+    let transaction = Transaction.load(txId)
     if (transaction == null) {
-      transaction = new Transaction(event.transaction.hash.toHexString())
+      transaction = new Transaction(txId)
     }
     const removeLiquidityEvents = transaction.removeLiquidityEvents || []
     removeLiquidityEvents.push(removeLiquidityEvent.id)
