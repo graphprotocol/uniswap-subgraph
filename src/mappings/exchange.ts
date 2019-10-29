@@ -150,7 +150,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     }
 
     // update now that we have usd price
-    exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(tokenAmount.times(exchange.priceUSD))
+    exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(ethAmount.times(exchange.price))
 
     exchange.save()
     userExchangeData.save()
@@ -381,7 +381,7 @@ export function handleEthPurchase(event: EthPurchase): void {
         .div(exchange.price)
     }
     // update now that we have usd price
-    exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(tokenAmount.times(exchange.priceUSD))
+    exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(ethAmount.times(exchange.price))
 
     exchange.save()
     userExchangeData.save()
@@ -703,6 +703,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     eh.type = 'AddLiquidity'
     eh.ethLiquidity = exchange.ethLiquidity
     eh.tokenLiquidity = exchange.tokenLiquidity
+    eh.tradeVolumeUSD = exchange.tradeVolumeUSD
     eh.ethBalance = exchange.ethBalance
     eh.tokenBalance = exchange.tokenBalance
     eh.combinedBalanceInEth = exchange.combinedBalanceInEth
@@ -906,6 +907,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     eh.type = 'RemoveLiquidity'
     eh.ethLiquidity = exchange.ethLiquidity
     eh.tokenLiquidity = exchange.tokenLiquidity
+    eh.tradeVolumeUSD = exchange.tradeVolumeUSD
     eh.ethBalance = exchange.ethBalance
     eh.tokenBalance = exchange.tokenBalance
     eh.combinedBalanceInEth = exchange.combinedBalanceInEth
