@@ -1,8 +1,10 @@
-import { BigInt, BigDecimal, Address, log } from '@graphprotocol/graph-ts'
+import { BigDecimal, Address } from '@graphprotocol/graph-ts'
 import { NewExchange } from '../types/Factory/Factory'
 import { Uniswap, Exchange } from '../types/schema'
 import { Exchange as ExchangeContract } from '../types/templates'
 import { hardcodedExchanges } from './hardcodedExchanges'
+
+import { zeroBD, zeroBigInt, oneBigInt } from '../helpers'
 
 function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timestamp: i32): void {
   const exchange = new Exchange(exchangeAddress) as Exchange
@@ -14,32 +16,31 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
   exchange.version = 1
   exchange.startTime = timestamp
 
-  exchange.ethLiquidity = BigDecimal.fromString('0')
-  exchange.tokenLiquidity = BigDecimal.fromString('0')
-  exchange.ethBalance = BigDecimal.fromString('0')
-  exchange.tokenBalance = BigDecimal.fromString('0')
-  exchange.combinedBalanceInEth = BigDecimal.fromString('0')
-  exchange.combinedBalanceInUSD = BigDecimal.fromString('0')
-  exchange.ROI = BigDecimal.fromString('0')
-  exchange.totalUniToken = BigDecimal.fromString('0')
+  exchange.ethLiquidity = zeroBD()
+  exchange.tokenLiquidity = zeroBD()
+  exchange.ethBalance = zeroBD()
+  exchange.tokenBalance = zeroBD()
+  exchange.combinedBalanceInEth = zeroBD()
+  exchange.combinedBalanceInUSD = zeroBD()
+  exchange.totalUniToken = zeroBD()
 
-  exchange.addLiquidityCount = BigInt.fromI32(0)
-  exchange.removeLiquidityCount = BigInt.fromI32(0)
-  exchange.sellTokenCount = BigInt.fromI32(0)
-  exchange.buyTokenCount = BigInt.fromI32(0)
+  exchange.addLiquidityCount = zeroBigInt()
+  exchange.removeLiquidityCount = zeroBigInt()
+  exchange.sellTokenCount = zeroBigInt()
+  exchange.buyTokenCount = zeroBigInt()
 
-  exchange.lastPrice = BigDecimal.fromString('0')
-  exchange.price = BigDecimal.fromString('0')
-  exchange.tradeVolumeToken = BigDecimal.fromString('0')
-  exchange.tradeVolumeEth = BigDecimal.fromString('0')
-  exchange.tradeVolumeUSD = BigDecimal.fromString('0')
-  exchange.totalValue = BigDecimal.fromString('0')
-  exchange.weightedAvgPrice = BigDecimal.fromString('0')
-  exchange.totalTxsCount = BigInt.fromI32(1)
+  exchange.lastPrice = zeroBD()
+  exchange.price = zeroBD()
+  exchange.tradeVolumeToken = zeroBD()
+  exchange.tradeVolumeEth = zeroBD()
+  exchange.tradeVolumeUSD = zeroBD()
+  exchange.totalValue = zeroBD()
+  exchange.weightedAvgPrice = zeroBD()
+  exchange.totalTxsCount = oneBigInt()
 
-  exchange.priceUSD = BigDecimal.fromString('0')
-  exchange.lastPriceUSD = BigDecimal.fromString('0')
-  exchange.weightedAvgPriceUSD = BigDecimal.fromString('0')
+  exchange.priceUSD = zeroBD()
+  exchange.lastPriceUSD = zeroBD()
+  exchange.weightedAvgPriceUSD = zeroBD()
 
   exchange.tokenHolders = []
 
@@ -76,17 +77,17 @@ export function handleNewExchange(event: NewExchange): void {
     factory = new Uniswap('1')
     factory.exchangeCount = 0
     factory.exchanges = []
-    factory.totalVolumeInEth = BigDecimal.fromString('0')
-    factory.totalLiquidityInEth = BigDecimal.fromString('0')
-    factory.totalVolumeUSD = BigDecimal.fromString('0')
-    factory.totalLiquidityUSD = BigDecimal.fromString('0')
-    factory.totalTokenSells = BigInt.fromI32(0)
-    factory.totalTokenBuys = BigInt.fromI32(0)
-    factory.totalAddLiquidity = BigInt.fromI32(0)
-    factory.totalRemoveLiquidity = BigInt.fromI32(0)
-    factory.exchangeHistoryEntityCount = BigInt.fromI32(0)
-    factory.uniswapHistoryEntityCount = BigInt.fromI32(0)
-    factory.txCount = BigInt.fromI32(0)
+    factory.totalVolumeInEth = zeroBD()
+    factory.totalLiquidityInEth = zeroBD()
+    factory.totalVolumeUSD = zeroBD()
+    factory.totalLiquidityUSD = zeroBD()
+    factory.totalTokenSells = zeroBigInt()
+    factory.totalTokenBuys = zeroBigInt()
+    factory.totalAddLiquidity = zeroBigInt()
+    factory.totalRemoveLiquidity = zeroBigInt()
+    factory.exchangeHistoryEntityCount = zeroBigInt()
+    factory.uniswapHistoryEntityCount = zeroBigInt()
+    factory.txCount = zeroBigInt()
   }
   factory.exchangeCount = factory.exchangeCount + 1
   factory.save()
