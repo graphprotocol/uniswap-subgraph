@@ -223,9 +223,6 @@ type UniswapHistoricalData @entity {
     id: ID!  # unique based on incremental entity count, one for each transactions
     timestamp: Int!
 
-    dailyVolumeInETH: BigDecimal!
-    dailyVolumeInUSD: BigDecimal!
-
     totalVolumeInEth: BigDecimal!           # volume just on eth -i.e. we dont double count volume
     totalLiquidityInEth: BigDecimal!        # 2 * SUM(exchanges.ethLiquidity). Since tokenLiquiduity = ethLiquidity value, can just *2
     totalVolumeUSD: BigDecimal!             # Accumulate at each trade, not just calculated off whatever totalVolume is. making it more accurate as it is a live conversion

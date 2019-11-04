@@ -150,7 +150,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     }
 
     // update now that we have usd price
-    exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(ethAmount.times(exchange.price))
+    exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(ethAmount.times(exchange.price.times(exchange.priceUSD)))
 
     exchange.save()
     userExchangeData.save()
@@ -179,6 +179,8 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     if (uniswapDayData == null) {
       uniswapDayData = new UniswapDayData(dayID.toString())
       uniswapDayData.date = dayStartTimestamp
+      uniswapDayData.dailyVolumeInETH = BigDecimal.fromString('0')
+      uniswapDayData.dailyVolumeInUSD = BigDecimal.fromString('0')
       uniswapDayData.totalVolumeInEth = BigDecimal.fromString('0')
       uniswapDayData.totalLiquidityInEth = BigDecimal.fromString('0')
       uniswapDayData.totalVolumeUSD = BigDecimal.fromString('0')
@@ -206,6 +208,10 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     uniswapHistoricalData.save()
 
     // save info
+    uniswapDayData.dailyVolumeInETH = uniswapDayData.dailyVolumeInETH.plus(ethAmount)
+    uniswapDayData.dailyVolumeInUSD = uniswapDayData.dailyVolumeInUSD.plus(
+      ethAmount.times(exchange.price.times(exchange.priceUSD))
+    )
     uniswapDayData.totalVolumeInEth = uniswap.totalVolumeInEth
     uniswapDayData.totalLiquidityInEth = uniswap.totalLiquidityInEth
     uniswapDayData.totalVolumeUSD = uniswap.totalVolumeUSD
@@ -381,7 +387,7 @@ export function handleEthPurchase(event: EthPurchase): void {
         .div(exchange.price)
     }
     // update now that we have usd price
-    exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(ethAmount.times(exchange.price))
+    exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(ethAmount.times(exchange.price.times(exchange.priceUSD)))
 
     exchange.save()
     userExchangeData.save()
@@ -410,6 +416,8 @@ export function handleEthPurchase(event: EthPurchase): void {
     if (uniswapDayData == null) {
       uniswapDayData = new UniswapDayData(dayID.toString())
       uniswapDayData.date = dayStartTimestamp
+      uniswapDayData.dailyVolumeInETH = BigDecimal.fromString('0')
+      uniswapDayData.dailyVolumeInUSD = BigDecimal.fromString('0')
       uniswapDayData.totalVolumeInEth = BigDecimal.fromString('0')
       uniswapDayData.totalLiquidityInEth = BigDecimal.fromString('0')
       uniswapDayData.totalVolumeUSD = BigDecimal.fromString('0')
@@ -435,6 +443,10 @@ export function handleEthPurchase(event: EthPurchase): void {
     uniswapHistoricalData.txCount = uniswap.txCount
     uniswapHistoricalData.save()
 
+    uniswapDayData.dailyVolumeInETH = uniswapDayData.dailyVolumeInETH.plus(ethAmount)
+    uniswapDayData.dailyVolumeInUSD = uniswapDayData.dailyVolumeInUSD.plus(
+      ethAmount.times(exchange.price.times(exchange.priceUSD))
+    )
     uniswapDayData.totalVolumeInEth = uniswap.totalVolumeInEth
     uniswapDayData.totalLiquidityInEth = uniswap.totalLiquidityInEth
     uniswapDayData.totalVolumeUSD = uniswap.totalVolumeUSD
@@ -632,6 +644,8 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     if (uniswapDayData == null) {
       uniswapDayData = new UniswapDayData(dayID.toString())
       uniswapDayData.date = dayStartTimestamp
+      uniswapDayData.dailyVolumeInETH = BigDecimal.fromString('0')
+      uniswapDayData.dailyVolumeInUSD = BigDecimal.fromString('0')
       uniswapDayData.totalVolumeInEth = BigDecimal.fromString('0')
       uniswapDayData.totalLiquidityInEth = BigDecimal.fromString('0')
       uniswapDayData.totalVolumeUSD = BigDecimal.fromString('0')
@@ -836,6 +850,8 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     if (uniswapDayData == null) {
       uniswapDayData = new UniswapDayData(dayID.toString())
       uniswapDayData.date = dayStartTimestamp
+      uniswapDayData.dailyVolumeInETH = BigDecimal.fromString('0')
+      uniswapDayData.dailyVolumeInUSD = BigDecimal.fromString('0')
       uniswapDayData.totalVolumeInEth = BigDecimal.fromString('0')
       uniswapDayData.totalLiquidityInEth = BigDecimal.fromString('0')
       uniswapDayData.totalVolumeUSD = BigDecimal.fromString('0')
