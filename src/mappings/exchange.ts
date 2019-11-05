@@ -218,7 +218,7 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
     /******** CREATE TRADE EVENT  ********/
     const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
-    const tokenPurchaseEvent = new TokenPurchaseEvent(eventID.toString())
+    const tokenPurchaseEvent = new TokenPurchaseEvent(eventID.toString().concat('-tp'))
     tokenPurchaseEvent.ethAmount = ethAmount
     tokenPurchaseEvent.tokenAmount = tokenAmount
     tokenPurchaseEvent.tokenFee = zeroBD()
@@ -435,7 +435,7 @@ export function handleEthPurchase(event: EthPurchase): void {
 
     /*** Create Trade Event ******/
     const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
-    const ethPurchaseEvent = new EthPurchaseEvent(eventID.toString())
+    const ethPurchaseEvent = new EthPurchaseEvent(eventID.toString().concat('-ep'))
     ethPurchaseEvent.ethAmount = ethAmount
     ethPurchaseEvent.tokenFee = fee
     ethPurchaseEvent.ethFee = zeroBD()
@@ -641,7 +641,7 @@ export function handleAddLiquidity(event: AddLiquidity): void {
 
     /** Create Liquidity Event */
     const eventId = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
-    const addLiquidityEvent = new AddLiquidityEvent(eventId.toString())
+    const addLiquidityEvent = new AddLiquidityEvent(eventId.toString().concat('-al'))
     addLiquidityEvent.ethAmount = ethAmount
     addLiquidityEvent.tokenAmount = tokenAmount
     addLiquidityEvent.save()
@@ -832,7 +832,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
 
     /** Create Liquidity Event */
     const eventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
-    const removeLiquidityEvent = new RemoveLiquidityEvent(eventID.toString())
+    const removeLiquidityEvent = new RemoveLiquidityEvent(eventID.toString().concat('-rl'))
     removeLiquidityEvent.ethAmount = ethAmount
     removeLiquidityEvent.tokenAmount = tokenAmount
     removeLiquidityEvent.save()
