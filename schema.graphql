@@ -1,10 +1,10 @@
-# Uniswap global values across all exchanges 
+# Uniswap global values across all exchanges
 type Uniswap @entity {
-    id: ID! 
+    id: ID!
     exchangeCount: Int!
     exchanges: [Exchange!]!
-    totalVolumeInEth: BigDecimal!   
-    totalLiquidityInEth: BigDecimal!        
+    totalVolumeInEth: BigDecimal!
+    totalLiquidityInEth: BigDecimal!
 
     totalVolumeUSD: BigDecimal!             # Accumulate at each trade, not just calculated off whatever totalVolume is. making it more accurate as it is a live conversion
     totalLiquidityUSD: BigDecimal!          # Current value of liquidity in USD
@@ -48,10 +48,10 @@ type Exchange @entity {
     price: BigDecimal!                      # Price is the total amount of tokens that equal one ETH. i.e. if ETH was 100 USD, price for DAI would be 100
     tradeVolumeToken: BigDecimal!           # Total tokens traded EVER
     tradeVolumeEth: BigDecimal!             # Total eth traded EVER
-    tradeVolumeUSD: BigDecimal!             # Total USD traded EVER, accumulated at each trade with current token usd price * amount 
+    tradeVolumeUSD: BigDecimal!             # Total USD traded EVER, accumulated at each trade with current token usd price * amount
     totalValue: BigDecimal!                 # totalValue is accumulation of trade price * trade volume. i.e. TV = tokensSold * priceTokensSold
     weightedAvgPrice: BigDecimal!           # Avg price of all trades since inception. WAP = totalValue / totalVolume
-    
+
     totalTxsCount: BigInt!                  # Total tx count EVER
 
     # Price values uing usd
@@ -72,10 +72,10 @@ type User @entity {
 # trading and liquidity data around a user and their activity on a given exchange 
 type UserExchangeData @entity {
     id: ID!                         # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34....
-    userAddress: Bytes!             
-    exchangeAddress: Bytes!        
+    userAddress: Bytes!
+    exchangeAddress: Bytes!
     user: User!
-    exchange: Exchange! @derivedFrom(field: "tokenHolders") 
+    exchange: Exchange! @derivedFrom(field: "tokenHolders")
 
     # Liquidity Provider Data
     ethDeposited: BigDecimal!       # where negative means eth was exchanged for tokens
@@ -118,7 +118,7 @@ type Transaction @entity {
 }
 
 interface TransactionEvent {
-  id: ID!                   
+  id: ID!
   transaction: Transaction!
   ethAmount: BigDecimal!
   tokenAmount: BigDecimal!
@@ -203,7 +203,7 @@ type ExchangeDayData @entity {
 
 # Data accumulated and condensed into day stats for all of Uniswap
 type UniswapDayData @entity {
-    id: ID! # timestamp rounded to current day by dividing by 86400 - should only be one per day 
+    id: ID! # timestamp rounded to current day by dividing by 86400 - should only be one per day
     date: Int!
 
     dailyVolumeInETH: BigDecimal!
@@ -219,10 +219,10 @@ type UniswapDayData @entity {
     totalAddLiquidity: BigInt!              # Total events where liqidity has been added
     totalRemoveLiquidity: BigInt!           # Total events where liquidity have been removed
 
-    txCount: BigInt!                 
+    txCount: BigInt!
 }
 
-# Data checkpointed at each timestamp for 24hour data 
+# Data checkpointed at each timestamp for 24hour data
 type UniswapHistoricalData @entity {
     id: ID!  # unique based on incremental entity count, one for each transactions
     timestamp: Int!
@@ -237,7 +237,7 @@ type UniswapHistoricalData @entity {
     totalAddLiquidity: BigInt!              # Total events where liqidity has been added
     totalRemoveLiquidity: BigInt!           # Total events where liquidity have been removed
 
-    txCount: BigInt!                 
+    txCount: BigInt!
 }
 
 

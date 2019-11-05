@@ -42,7 +42,7 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
   exchange.lastPriceUSD = zeroBD()
   exchange.weightedAvgPriceUSD = zeroBD()
 
-  exchange.tokenHolders = []
+  exchange.factoryID = '1'
 
   for (let i = 0; i < hardcodedExchanges.length; i++) {
     if (tokenAddressStringed.toString() == hardcodedExchanges[i].tokenAddress.toString()) {
