@@ -26,8 +26,7 @@ dataSources:
         - event: NewExchange(indexed address,indexed address)
           handler: handleNewExchange
 templates:
-  # These data sources templates exist to support the different flags that a token could specify
-  - kind: ethereum/contract
+  # These data sources templates exist to support the different flags that a token could specify- kind: ethereum/contract
     name: Exchange
     network: mainnet
     source:
