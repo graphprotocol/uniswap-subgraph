@@ -28,6 +28,7 @@ dataSources:
           handler: handleNewExchange
 templates:
   # These data sources templates exist to support the different flags that a token could specify- kind: ethereum/contract
+  - kind: ethereum/contract
     name: Exchange
     network: mainnet
     source:

@@ -37,8 +37,9 @@ import {
 function createUserDataEntity(id: string, user: Address, exchange: Address): void {
   const userExchangeData = new UserExchangeData(id)
 
-  userExchangeData.userAddress = user.toHex()
-  userExchangeData.exchangeAddress = exchange.toHex()
+  userExchangeData.userAddress = user
+  userExchangeData.user = user.toHex()
+  userExchangeData.exchangeAddress = exchange
 
   userExchangeData.ethDeposited = zeroBD()
   userExchangeData.tokensDeposited = zeroBD()
@@ -60,6 +61,8 @@ function createUserDataEntity(id: string, user: Address, exchange: Address): voi
 function createUniswapDayData(dayID: i32, dayStartTimestamp: i32): void {
   const uniswapDayData = new UniswapDayData(dayID.toString())
   uniswapDayData.date = dayStartTimestamp
+  uniswapDayData.dailyVolumeInETH = zeroBD()
+  uniswapDayData.dailyVolumeInUSD = zeroBD()
   uniswapDayData.totalVolumeInEth = zeroBD()
   uniswapDayData.totalLiquidityInEth = zeroBD()
   uniswapDayData.totalVolumeUSD = zeroBD()
@@ -234,10 +237,10 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     const tokenPurchaseEvents = transaction.tokenPurchaseEvents || []
     tokenPurchaseEvents.push(tokenPurchaseEvent.id)
     transaction.tokenPurchaseEvents = tokenPurchaseEvents
-    transaction.exchangeAddress = event.address.toHex()
+    transaction.exchangeAddress = event.address
     transaction.block = event.block.number.toI32()
     transaction.timestamp = event.block.timestamp.toI32()
-    transaction.user = event.params.buyer.toHex()
+    transaction.user = event.params.buyer
     transaction.fee = fee
     transaction.save()
 
@@ -451,10 +454,10 @@ export function handleEthPurchase(event: EthPurchase): void {
     const ethPurchaseEvents = transaction.ethPurchaseEvents || []
     ethPurchaseEvents.push(ethPurchaseEvent.id)
     transaction.ethPurchaseEvents = ethPurchaseEvents
-    transaction.exchangeAddress = event.address.toHex()
+    transaction.exchangeAddress = event.address
     transaction.block = event.block.number.toI32()
     transaction.timestamp = event.block.timestamp.toI32()
-    transaction.user = event.params.buyer.toHex()
+    transaction.user = event.params.buyer
     transaction.fee = fee
     transaction.save()
 
@@ -655,10 +658,10 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     const addLiquidityEvents = transaction.addLiquidityEvents || []
     addLiquidityEvents.push(addLiquidityEvent.id)
     transaction.addLiquidityEvents = addLiquidityEvents
-    transaction.exchangeAddress = event.address.toHex()
+    transaction.exchangeAddress = event.address
     transaction.block = event.block.number.toI32()
     transaction.timestamp = event.block.timestamp.toI32()
-    transaction.user = event.params.provider.toHex()
+    transaction.user = event.params.provider
     transaction.fee = zeroBD()
     transaction.save()
 
@@ -846,10 +849,10 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     const removeLiquidityEvents = transaction.removeLiquidityEvents || []
     removeLiquidityEvents.push(removeLiquidityEvent.id)
     transaction.removeLiquidityEvents = removeLiquidityEvents
-    transaction.exchangeAddress = event.address.toHex()
+    transaction.exchangeAddress = event.address
     transaction.block = event.block.number.toI32()
     transaction.timestamp = event.block.timestamp.toI32()
-    transaction.user = event.params.provider.toHex()
+    transaction.user = event.params.provider
     transaction.fee = zeroBD()
     transaction.save()
 
