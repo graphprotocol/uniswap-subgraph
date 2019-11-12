@@ -39,7 +39,7 @@ function createUserDataEntity(id: string, user: Address, exchange: Address): voi
 
   userExchangeData.userAddress = user
   userExchangeData.user = user.toHex()
-  userExchangeData.exchangeAddress = exchange
+  userExchangeData.exchange = exchange.toHexString()
 
   userExchangeData.ethDeposited = zeroBD()
   userExchangeData.tokensDeposited = zeroBD()

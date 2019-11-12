@@ -73,9 +73,8 @@ type User @entity {
 type UserExchangeData @entity {
     id: ID!                         # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34....
     userAddress: Bytes!
-    exchangeAddress: Bytes!
     user: User!
-    exchange: Exchange! @derivedFrom(field: "tokenHolders")
+    exchange: Exchange!
 
     # Liquidity Provider Data
     ethDeposited: BigDecimal!       # where negative means eth was exchanged for tokens
