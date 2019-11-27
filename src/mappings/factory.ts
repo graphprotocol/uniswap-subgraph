@@ -4,6 +4,9 @@ import { Uniswap, Exchange } from '../types/schema'
 import { Exchange as ExchangeContract } from '../types/templates'
 import { hardcodedExchanges } from './hardcodedExchanges'
 
+import { log } from '@graphprotocol/graph-ts'
+import { ERC20 } from '../types/Factory/ERC20'
+
 import { zeroBD, zeroBigInt, oneBigInt } from '../helpers'
 
 function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timestamp: i32): void {
@@ -42,17 +45,34 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
   exchange.lastPriceUSD = zeroBD()
   exchange.weightedAvgPriceUSD = zeroBD()
 
+  const contract = ERC20.bind(tokenAddress)
+
+  const decimalsFromContract = contract.try_decimals()
+
+  if (!decimalsFromContract.reverted) {
+    exchange.tokenDecimals = decimalsFromContract.value
+  }
+
   for (let i = 0; i < hardcodedExchanges.length; i++) {
     if (tokenAddressStringed.toString() == hardcodedExchanges[i].tokenAddress.toString()) {
-      exchange.tokenSymbol = hardcodedExchanges[i].symbol
+      if (decimalsFromContract.reverted) {
+        log.debug('Decimals was not found for token address : {}', [tokenAddress.toString()])
+        exchange.tokenDecimals = hardcodedExchanges[i].tokenDecimals
+      }
+      // if (nameFromContract.reverted) {
       exchange.tokenName = hardcodedExchanges[i].name
-      exchange.tokenDecimals = hardcodedExchanges[i].tokenDecimals
-      break
-    } else {
-      exchange.tokenSymbol = 'unknown'
-      exchange.tokenName = 'unknown'
-      exchange.tokenDecimals = null
+      // }
+      // if (symbolFromContract.reverted) {
+      exchange.tokenSymbol = hardcodedExchanges[i].symbol
     }
+    break
+  }
+
+  if (exchange.tokenSymbol === null) {
+    exchange.tokenSymbol = 'unknown'
+  }
+  if (exchange.tokenName === null) {
+    exchange.tokenName = 'unknown'
   }
 
   // only save for tokens with non null decimals
