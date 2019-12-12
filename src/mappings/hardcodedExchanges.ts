@@ -8760,8 +8760,8 @@ export const hardcodedExchanges: Array<AsExchange> = [
   {
     symbol: 'LEV',
     name: 'Leverj',
-    tokenAddress: '0x0F4CA92660Efad97a9a70CB0fe969c755439772C',
+    tokenAddress: '0x0f4ca92660efad97a9a70cb0fe969c755439772c',
     tokenDecimals: 9,
-    exchangeAddress: '0xDA91447a55E28D413F8112dc329c1C2FdA8c181D'
+    exchangeAddress: '0xda91447a55e28d413f8112dc329c1c2fda8c181d'
   }
 ]
