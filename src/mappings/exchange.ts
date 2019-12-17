@@ -737,12 +737,10 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
       exchange.price = zeroBD()
       exchange.combinedBalanceInEth = exchange.ethBalance
     } else {
-      log.debug('mybug ethBalance passing zero test: {}', [exchange.ethBalance.toString()])
       exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
       if (equalToZero(exchange.price)) {
         exchange.combinedBalanceInEth = exchange.ethBalance
       } else {
-        log.debug('mybug exchange price passing zero test: {}', [exchange.price.toString()])
         exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
       }
     }
@@ -768,7 +766,6 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
         exchange.priceUSD = BigDecimal.fromString('1')
           .div(oneUSDInEth)
           .div(exchange.price)
-        log.debug('mybug oneUSD passing zero test: {}', [oneUSDInEth.toString()])
         exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth)
       }
     }

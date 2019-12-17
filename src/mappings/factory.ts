@@ -1,5 +1,6 @@
-import { BigDecimal, Address } from '@graphprotocol/graph-ts'
+import { BigDecimal, Address, log } from '@graphprotocol/graph-ts'
 import { NewExchange } from '../types/Factory/Factory'
+import { ERC20 } from '../types/Factory/ERC20'
 import { Uniswap, Exchange } from '../types/schema'
 import { Exchange as ExchangeContract } from '../types/templates'
 import { hardcodedExchanges } from './hardcodedExchanges'
@@ -8,6 +9,8 @@ import { zeroBD, zeroBigInt, oneBigInt } from '../helpers'
 function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timestamp: i32): void {
   const exchange = new Exchange(exchangeAddress) as Exchange
   exchange.tokenAddress = tokenAddress
+
+  log.debug('mybug address: {}', [tokenAddress.toHexString()])
 
   const tokenAddressStringed = tokenAddress.toHexString()
 
@@ -40,6 +43,13 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
   exchange.priceUSD = zeroBD()
   exchange.lastPriceUSD = zeroBD()
   exchange.weightedAvgPriceUSD = zeroBD()
+
+  // bind to the exchange address
+  const contract = ERC20.bind(tokenAddress)
+
+  // try a basic call - this is the line that seems to break the subgraph,
+  // specifically when MKR returns bytes instead of string
+  const symbolResult = contract.try_symbol().value
 
   for (let i = 0; i < hardcodedExchanges.length; i++) {
     if (tokenAddressStringed.toString() == hardcodedExchanges[i].tokenAddress.toString()) {
