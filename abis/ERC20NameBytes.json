@@ -6,7 +6,7 @@
     "outputs": [
       {
         "name": "",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "payable": false,
