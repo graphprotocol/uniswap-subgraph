@@ -129,6 +129,7 @@ type AddLiquidityEvent implements TransactionEvent  @entity {
     transaction: Transaction! @derivedFrom(field: "addLiquidityEvents")
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
+    uniTokensMinted: BigDecimal! 
 }
 
 # Note - No fee to provide liqidity
@@ -137,6 +138,7 @@ type RemoveLiquidityEvent implements TransactionEvent @entity {
     transaction: Transaction! @derivedFrom(field: "removeLiquidityEvents")
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
+    uniTokensBurned: BigDecimal! 
 }
 
 type TokenPurchaseEvent implements TransactionEvent @entity {
