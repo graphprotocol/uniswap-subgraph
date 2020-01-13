@@ -84,7 +84,7 @@
     "outputs": [
       {
         "name": "",
-        "type": "uint8"
+        "type": "bytes32"
       }
     ],
     "payable": false,
@@ -117,7 +117,7 @@
     "outputs": [
       {
         "name": "",
-        "type": "string"
+        "type": "bytes32"
       }
     ],
     "payable": false,
