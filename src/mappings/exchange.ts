@@ -644,6 +644,12 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     const addLiquidityEvent = new AddLiquidityEvent(eventId.toString().concat('-al'))
     addLiquidityEvent.ethAmount = ethAmount
     addLiquidityEvent.tokenAmount = tokenAmount
+    const currentUniTokenAmount = exchange.totalUniToken
+    let uniMinted = zeroBD()
+    if (!equalToZero(exchange.ethBalance)) {
+      uniMinted = ethAmount.times(currentUniTokenAmount.div(exchange.ethBalance))
+    }
+    addLiquidityEvent.uniTokensMinted = uniMinted
     addLiquidityEvent.save()
 
     /****** Update Transaction ******/
@@ -832,6 +838,14 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     const removeLiquidityEvent = new RemoveLiquidityEvent(eventID.toString().concat('-rl'))
     removeLiquidityEvent.ethAmount = ethAmount
     removeLiquidityEvent.tokenAmount = tokenAmount
+
+    const currentUniTokenAmount = exchange.totalUniToken
+    let uniBurned = zeroBD()
+    if (!equalToZero(exchange.ethBalance)) {
+      uniBurned = ethAmount.times(currentUniTokenAmount.div(exchange.ethBalance))
+    }
+    removeLiquidityEvent.uniTokensBurned = uniBurned
+
     removeLiquidityEvent.save()
 
     /****** Update Transaction ******/
@@ -851,6 +865,7 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     transaction.timestamp = event.block.timestamp.toI32()
     transaction.user = event.params.provider
     transaction.fee = zeroBD()
+
     transaction.save()
 
     /************************************
