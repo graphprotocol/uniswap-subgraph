@@ -94,11 +94,19 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
     // Don't need check to divide by zero here, token is the numerator
     exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
-    exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+
+    if (!equalToZero(exchange.price)) {
+      exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+    }
+
     exchange.tradeVolumeToken = exchange.tradeVolumeToken.plus(tokenAmount)
     exchange.tradeVolumeEth = exchange.tradeVolumeEth.plus(ethAmount)
     exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
-    exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
+
+    if (!equalToZero(exchange.tradeVolumeToken)) {
+      exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
+    }
+
     exchange.totalTxsCount = exchange.totalTxsCount.plus(oneBigInt())
 
     /****** Update User ******/
@@ -315,13 +323,17 @@ export function handleEthPurchase(event: EthPurchase): void {
       exchange.price = zeroBD()
     } else {
       exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
-      exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+      if (!equalToZero(exchange.price)) {
+        exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+      }
     }
 
     exchange.tradeVolumeToken = exchange.tradeVolumeToken.plus(tokenAmount)
     exchange.tradeVolumeEth = exchange.tradeVolumeEth.plus(ethAmount)
     exchange.totalValue = exchange.totalValue.plus(tokenAmount.times(exchange.price)).truncate(18)
-    exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
+    if (!equalToZero(exchange.tradeVolumeToken)) {
+      exchange.weightedAvgPrice = exchange.totalValue.div(exchange.tradeVolumeToken).truncate(18)
+    }
     exchange.totalTxsCount = exchange.totalTxsCount.plus(oneBigInt())
 
     /****** Update User ******/
