@@ -93,7 +93,9 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     exchange.lastPrice = exchange.price
 
     // Don't need check to divide by zero here, token is the numerator
-    exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
+    if (!equalToZero(exchange.ethBalance)) {
+      exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
+    }
 
     if (!equalToZero(exchange.price)) {
       exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
@@ -151,10 +153,12 @@ export function handleTokenPurchase(event: TokenPurchase): void {
           .truncate(18)
         exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth).truncate(18)
       }
-      exchange.weightedAvgPriceUSD = bigDecimalExp18()
-        .div(oneUSDInEth)
-        .div(exchange.weightedAvgPrice)
-        .truncate(18)
+      if (!equalToZero(exchange.weightedAvgPrice)) {
+        exchange.weightedAvgPriceUSD = bigDecimalExp18()
+          .div(oneUSDInEth)
+          .div(exchange.weightedAvgPrice)
+          .truncate(18)
+      }
       userExchangeData.ethFeesInUSD = bigDecimalExp18()
         .times(userExchangeData.ethFeesPaid)
         .div(oneUSDInEth)
@@ -376,13 +380,17 @@ export function handleEthPurchase(event: EthPurchase): void {
           .div(exchange.price)
         exchange.combinedBalanceInUSD = exchange.combinedBalanceInEth.div(oneUSDInEth)
       }
-      exchange.weightedAvgPriceUSD = bigDecimalExp18()
-        .div(oneUSDInEth)
-        .div(exchange.weightedAvgPrice)
-      userExchangeData.tokenFeesInUSD = bigDecimalExp18()
-        .times(userExchangeData.tokenFeesPaid)
-        .div(oneUSDInEth)
-        .div(exchange.price)
+      if (!equalToZero(exchange.weightedAvgPrice)) {
+        exchange.weightedAvgPriceUSD = bigDecimalExp18()
+          .div(oneUSDInEth)
+          .div(exchange.weightedAvgPrice)
+      }
+      if (!equalToZero(exchange.price)) {
+        userExchangeData.tokenFeesInUSD = bigDecimalExp18()
+          .times(userExchangeData.tokenFeesPaid)
+          .div(oneUSDInEth)
+          .div(exchange.price)
+      }
     }
     // update now that we have usd price
     exchange.tradeVolumeUSD = exchange.tradeVolumeUSD.plus(ethAmount.times(exchange.price.times(exchange.priceUSD)))
@@ -549,8 +557,12 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     exchange.lastPrice = exchange.price
 
     // Don't need check to divide by zero here, adding liquidity would make it impossible
-    exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
-    exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+    if (!equalToZero(exchange.ethBalance)) {
+      exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
+    }
+    if (!equalToZero(exchange.price)) {
+      exchange.combinedBalanceInEth = exchange.ethBalance.plus(exchange.tokenBalance.div(exchange.price)).truncate(18)
+    }
 
     /****** Update User ******/
     const userID = event.params.provider.toHex()
