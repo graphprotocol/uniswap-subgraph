@@ -1,4 +1,4 @@
-import { BigDecimal, Address } from '@graphprotocol/graph-ts'
+import { BigDecimal, Address, log } from '@graphprotocol/graph-ts'
 import { NewExchange } from '../types/Factory/Factory'
 import { Uniswap, Exchange } from '../types/schema'
 import { Exchange as ExchangeContract } from '../types/templates'
@@ -92,6 +92,5 @@ export function handleNewExchange(event: NewExchange): void {
 
   // create new exchange with data from our hard coded list
   hardcodeExchange(event.params.exchange.toHexString(), event.params.token, event.block.timestamp.toI32()) // TODO - don't hard code, after we have the fix
-
   ExchangeContract.create(event.params.exchange)
 }

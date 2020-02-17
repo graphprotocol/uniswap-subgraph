@@ -92,7 +92,6 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     exchange.buyTokenCount = exchange.buyTokenCount.plus(oneBigInt())
     exchange.lastPrice = exchange.price
 
-    // Don't need check to divide by zero here, token is the numerator
     if (!equalToZero(exchange.ethBalance)) {
       exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
     }

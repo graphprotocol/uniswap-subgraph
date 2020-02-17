@@ -2108,13 +2108,6 @@ export const hardcodedExchanges: Array<AsExchange> = [
     exchangeAddress: '0xd4846bc16a6bf859c1253a6f37239ff06a99abe5'
   },
   {
-    symbol: 'PTK:SV',
-    name: 'PTK Swansons Vision',
-    tokenAddress: '0x7107f8d12caac33f1c326337378e72ae1eac460a',
-    tokenDecimals: 36,
-    exchangeAddress: '0xfce183635d8bd990348599aabbd0057184d5c490'
-  },
-  {
     symbol: 'BLZ',
     name: 'Bluzelle Token',
     tokenAddress: '0x5732046a883704404f284ce41ffadd5b007fd668',
