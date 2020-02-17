@@ -1,5 +1,6 @@
 import { Exchange } from '../types/schema'
 import { BigDecimal, BigInt } from '@graphprotocol/graph-ts/index'
+import { equalToZero, zeroBD } from '../helpers'
 
 export function uniswapUSDOracle(blockNum: BigInt): BigDecimal {
   const DAI_EXCHANGE = '0x09cabec1ead1c0ba254b09efb3ee13841712be14'
@@ -28,7 +29,11 @@ export function uniswapUSDOracle(blockNum: BigInt): BigDecimal {
       .plus(usdcPrice)
       .plus(tusdPrice)
       .div(BigDecimal.fromString('3'))
-    oneUSDInEth = BigDecimal.fromString('1').div(averagePrice)
+    if (!equalToZero(averagePrice)) {
+      oneUSDInEth = BigDecimal.fromString('1').div(averagePrice)
+    } else {
+      oneUSDInEth = zeroBD()
+    }
     return oneUSDInEth
   } else if (blockNumInt > USDC_BLOCK_CONTRACT_CREATION) {
     const daiExchange = Exchange.load(DAI_EXCHANGE)
@@ -38,13 +43,21 @@ export function uniswapUSDOracle(blockNum: BigInt): BigDecimal {
     const usdcPrice = usdcExchange.price
 
     const averagePrice = daiPrice.plus(usdcPrice).div(BigDecimal.fromString('2'))
-    oneUSDInEth = BigDecimal.fromString('1').div(averagePrice)
+    if (!equalToZero(averagePrice)) {
+      oneUSDInEth = BigDecimal.fromString('1').div(averagePrice)
+    } else {
+      oneUSDInEth = zeroBD()
+    }
     return oneUSDInEth
   } else if (blockNumInt >= DAI_BLOCK_CONTRACT_CREATION) {
     const daiExchange = Exchange.load(DAI_EXCHANGE)
     const daiPrice = daiExchange.price
 
-    oneUSDInEth = BigDecimal.fromString('1').div(daiPrice)
+    if (!equalToZero(daiPrice)) {
+      oneUSDInEth = BigDecimal.fromString('1').div(daiPrice)
+    } else {
+      oneUSDInEth = zeroBD()
+    }
     return oneUSDInEth
   } else {
     // probably only for a few events, before the dai exchange was made
