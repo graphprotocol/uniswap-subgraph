@@ -1,4 +1,4 @@
-import { BigDecimal, Address, log } from '@graphprotocol/graph-ts'
+import { BigDecimal, Address } from '@graphprotocol/graph-ts'
 import { NewExchange } from '../types/Factory/Factory'
 import { Uniswap, Exchange } from '../types/schema'
 import { Exchange as ExchangeContract } from '../types/templates'
