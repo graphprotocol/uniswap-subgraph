@@ -11103,2159 +11103,5758 @@ export const hardcodedExchanges: Array<AsExchange> = [
     exchangeAddress: '0x4839f54eb79a4d2f984d8769805facacdd017e80'
   },
   {
-    symbol: "ETM",
-    name: "ETHERMONEY",
-    tokenAddress: "0xfb0753106a5c16eeb0ee61ad688ede7bbb7a2f6c",
+    symbol: 'ETM',
+    name: 'ETHERMONEY',
+    tokenAddress: '0xfb0753106a5c16eeb0ee61ad688ede7bbb7a2f6c',
     tokenDecimals: 4,
-    exchangeAddress: "0x8bfcbee458e5649a34efd6d9a0818e7a77349dfe"
+    exchangeAddress: '0x8bfcbee458e5649a34efd6d9a0818e7a77349dfe'
   },
   {
-    symbol: "DDN",
-    name: "Daily Divs Network",
-    tokenAddress: "0xdd17d00c4bba48008d49bb4cc292819f5a4282d4",
+    symbol: 'DDN',
+    name: 'Daily Divs Network',
+    tokenAddress: '0xdd17d00c4bba48008d49bb4cc292819f5a4282d4',
     tokenDecimals: 18,
-    exchangeAddress: "0xa59cd8c474ea32b041ebe4a6e0563bd6e8cd91f4"
+    exchangeAddress: '0xa59cd8c474ea32b041ebe4a6e0563bd6e8cd91f4'
   },
   {
-    symbol: "$PEW",
-    name: "PEW PEW PEW",
-    tokenAddress: "0x892091bdd49fe955859d4bbb8a9a2b7685ccec82",
+    symbol: '$PEW',
+    name: 'PEW PEW PEW',
+    tokenAddress: '0x892091bdd49fe955859d4bbb8a9a2b7685ccec82',
     tokenDecimals: 18,
-    exchangeAddress: "0x5489ccd5f398332c7e0bf30d1fae6eee7f9b565e"
+    exchangeAddress: '0x5489ccd5f398332c7e0bf30d1fae6eee7f9b565e'
   },
   {
-    symbol: "INO",
-    name: "Ino Coin",
-    tokenAddress: "0xc9859fccc876e6b4b3c749c5d29ea04f48acb74f",
+    symbol: 'INO',
+    name: 'Ino Coin',
+    tokenAddress: '0xc9859fccc876e6b4b3c749c5d29ea04f48acb74f',
     tokenDecimals: 0,
-    exchangeAddress: "0xe3f2f02d3ff2e0d1df768d0256ae1e36b7213fb5"
+    exchangeAddress: '0xe3f2f02d3ff2e0d1df768d0256ae1e36b7213fb5'
   },
   {
-    symbol: "RRC",
-    name: "RenRenCoin",
-    tokenAddress: "0xdc7836bc6c84c51275365e337fd147db2dc7b3c3",
+    symbol: 'RRC',
+    name: 'RenRenCoin',
+    tokenAddress: '0xdc7836bc6c84c51275365e337fd147db2dc7b3c3',
     tokenDecimals: 18,
-    exchangeAddress: "0x0d33b109bcc04ee9996dd5ff76278cac1560c885"
+    exchangeAddress: '0x0d33b109bcc04ee9996dd5ff76278cac1560c885'
   },
   {
-    symbol: "KOWAL",
-    name: "Kowalski Token",
-    tokenAddress: "0xde06a39dd3b682338878c4fbab12c38d5e684f69",
+    symbol: 'KOWAL',
+    name: 'Kowalski Token',
+    tokenAddress: '0xde06a39dd3b682338878c4fbab12c38d5e684f69',
     tokenDecimals: 2,
-    exchangeAddress: "0x39bf5669440e7d6275945a643981c5d55b193415"
+    exchangeAddress: '0x39bf5669440e7d6275945a643981c5d55b193415'
   },
   {
-    symbol: "HUSD",
-    name: "HUSD",
-    tokenAddress: "0xdf574c24545e5ffecb9a659c229253d4111d87e1",
+    symbol: 'HUSD',
+    name: 'HUSD',
+    tokenAddress: '0xdf574c24545e5ffecb9a659c229253d4111d87e1',
     tokenDecimals: 8,
-    exchangeAddress: "0x15f09d56bf4d6a1aa2bfeea9bb0d3f0bdd6f80ac"
+    exchangeAddress: '0x15f09d56bf4d6a1aa2bfeea9bb0d3f0bdd6f80ac'
   },
   {
-    symbol: "DAPS",
-    name: "DAPSTOKEN",
-    tokenAddress: "0x93190dbce9b9bd4aa546270a8d1d65905b5fdd28",
+    symbol: 'DAPS',
+    name: 'DAPSTOKEN',
+    tokenAddress: '0x93190dbce9b9bd4aa546270a8d1d65905b5fdd28',
     tokenDecimals: 18,
-    exchangeAddress: "0x38fc384f31ace471e96c60e42b1dc6e769b518f5"
+    exchangeAddress: '0x38fc384f31ace471e96c60e42b1dc6e769b518f5'
   },
   {
-    symbol: "GRD",
-    name: "GRIND+",
-    tokenAddress: "0x859beb8615977263ee2e702f06c283f7ab990b5a",
+    symbol: 'GRD',
+    name: 'GRIND+',
+    tokenAddress: '0x859beb8615977263ee2e702f06c283f7ab990b5a',
     tokenDecimals: 18,
-    exchangeAddress: "0x099bb9590e331e3501c564c77c59c654c60174d1"
+    exchangeAddress: '0x099bb9590e331e3501c564c77c59c654c60174d1'
   },
   {
-    symbol: "DLE",
-    name: "DLF EURO",
-    tokenAddress: "0x95bbb17f8f69d31f1465b819b45d0c3df8820988",
+    symbol: 'DLE',
+    name: 'DLF EURO',
+    tokenAddress: '0x95bbb17f8f69d31f1465b819b45d0c3df8820988',
     tokenDecimals: 6,
-    exchangeAddress: "0xac23f8645752470dce18151539b82daf5e51a863"
+    exchangeAddress: '0xac23f8645752470dce18151539b82daf5e51a863'
   },
   {
-    symbol: "TBC",
-    name: "ThunderBoltCoin",
-    tokenAddress: "0x627974847450c45b60b3fe3598f4e6e4cf945b9a",
+    symbol: 'TBC',
+    name: 'ThunderBoltCoin',
+    tokenAddress: '0x627974847450c45b60b3fe3598f4e6e4cf945b9a',
     tokenDecimals: 18,
-    exchangeAddress: "0x2b7b3dd16488f906d190e241156984bb4274d269"
+    exchangeAddress: '0x2b7b3dd16488f906d190e241156984bb4274d269'
   },
   {
-    symbol: "TBCBNT",
-    name: "ThunderBoltCoin Smart Relay Token",
-    tokenAddress: "0xb13819374575be7ced2b0896c645612164ebe772",
+    symbol: 'TBCBNT',
+    name: 'ThunderBoltCoin Smart Relay Token',
+    tokenAddress: '0xb13819374575be7ced2b0896c645612164ebe772',
     tokenDecimals: 18,
-    exchangeAddress: "0x17ee274931954d070c89805d0b4580562c521b51"
+    exchangeAddress: '0x17ee274931954d070c89805d0b4580562c521b51'
   },
   {
-    symbol: "SCUDO",
-    name: "ScudoCash",
-    tokenAddress: "0xb0cc5610e590eb7215bf4d69eca2ca26b6a9bc87",
+    symbol: 'SCUDO',
+    name: 'ScudoCash',
+    tokenAddress: '0xb0cc5610e590eb7215bf4d69eca2ca26b6a9bc87',
     tokenDecimals: 18,
-    exchangeAddress: "0x864b64f13778a02e61b891a135150684ca1fe6a9"
+    exchangeAddress: '0x864b64f13778a02e61b891a135150684ca1fe6a9'
   },
   {
-    symbol: "HEX3D",
-    name: "HEX3D.WIN",
-    tokenAddress: "0x69c70ef84637e7584c6b20b41ed4665806d9f85c",
+    symbol: 'HEX3D',
+    name: 'HEX3D.WIN',
+    tokenAddress: '0x69c70ef84637e7584c6b20b41ed4665806d9f85c',
     tokenDecimals: 18,
-    exchangeAddress: "0xe9b06e1e9cfb5d7523918bd8f145907f6f4e8836"
+    exchangeAddress: '0xe9b06e1e9cfb5d7523918bd8f145907f6f4e8836'
   },
   {
-    symbol: "BNK",
-    name: "Banker Token",
-    tokenAddress: "0xc80c5e40220172b36adee2c951f26f2a577810c5",
+    symbol: 'BNK',
+    name: 'Banker Token',
+    tokenAddress: '0xc80c5e40220172b36adee2c951f26f2a577810c5',
     tokenDecimals: 8,
-    exchangeAddress: "0xf09acb86dbb19e85d52439c2682d5267c3c5e71a"
+    exchangeAddress: '0xf09acb86dbb19e85d52439c2682d5267c3c5e71a'
   },
   {
-    symbol: "SKULL",
-    name: "Skull",
-    tokenAddress: "0xbcc66ed2ab491e9ae7bf8386541fb17421fa9d35",
+    symbol: 'SKULL',
+    name: 'Skull',
+    tokenAddress: '0xbcc66ed2ab491e9ae7bf8386541fb17421fa9d35',
     tokenDecimals: 4,
-    exchangeAddress: "0xae33701b6b48267db4bb51e472e4e7ab5aad2e3e"
+    exchangeAddress: '0xae33701b6b48267db4bb51e472e4e7ab5aad2e3e'
   },
   {
-    symbol: "LSD",
-    name: "Liquidity StakeD",
-    tokenAddress: "0x694d6ab8b31bba22ccb670889e63c08193b837c7",
+    symbol: 'LSD',
+    name: 'Liquidity StakeD',
+    tokenAddress: '0x694d6ab8b31bba22ccb670889e63c08193b837c7',
     tokenDecimals: 18,
-    exchangeAddress: "0x3c2c07e925f8d7c8c38840a4678575fecd64d279"
+    exchangeAddress: '0x3c2c07e925f8d7c8c38840a4678575fecd64d279'
   },
   {
-    symbol: "OPA",
-    name: "Opta Token",
-    tokenAddress: "0x3fe2ef1dfb1595195768627d16751d552586dce8",
+    symbol: 'OPA',
+    name: 'Opta Token',
+    tokenAddress: '0x3fe2ef1dfb1595195768627d16751d552586dce8',
     tokenDecimals: 10,
-    exchangeAddress: "0x5aafb35defe9502dfdd58c59e5e62866103d5585"
+    exchangeAddress: '0x5aafb35defe9502dfdd58c59e5e62866103d5585'
   },
   {
-    symbol: "STRX",
-    name: "Storex",
-    tokenAddress: "0x12c8b0914e6dee22c7557a0a8b928ae6cacfbcf7",
+    symbol: 'STRX',
+    name: 'Storex',
+    tokenAddress: '0x12c8b0914e6dee22c7557a0a8b928ae6cacfbcf7',
     tokenDecimals: 18,
-    exchangeAddress: "0xf55d5cfa2b4ecff567cf02608391fec40232c8f4"
+    exchangeAddress: '0xf55d5cfa2b4ecff567cf02608391fec40232c8f4'
   },
   {
-    symbol: "TLN",
-    name: "Trustlines Network Token",
-    tokenAddress: "0x679131f591b4f369acb8cd8c51e68596806c3916",
+    symbol: 'TLN',
+    name: 'Trustlines Network Token',
+    tokenAddress: '0x679131f591b4f369acb8cd8c51e68596806c3916',
     tokenDecimals: 18,
-    exchangeAddress: "0x61f8676cb335403836607be179f1f61e1dbbc44d"
+    exchangeAddress: '0x61f8676cb335403836607be179f1f61e1dbbc44d'
   },
   {
-    symbol: "RLCP",
-    name: "RLC Points Token",
-    tokenAddress: "0x25168b494408a63b1394b6ecd2a93934590cfd03",
+    symbol: 'RLCP',
+    name: 'RLC Points Token',
+    tokenAddress: '0x25168b494408a63b1394b6ecd2a93934590cfd03',
     tokenDecimals: 4,
-    exchangeAddress: "0x111dae04e4178fd3ce02e7c1c98eea1c1604d64e"
+    exchangeAddress: '0x111dae04e4178fd3ce02e7c1c98eea1c1604d64e'
   },
   {
-    symbol: "TKZ",
-    name: "Tokenization",
-    tokenAddress: "0xdd84745acbe5143e6656d3603d59aca20dd0b0c5",
+    symbol: 'TKZ',
+    name: 'Tokenization',
+    tokenAddress: '0xdd84745acbe5143e6656d3603d59aca20dd0b0c5',
     tokenDecimals: 18,
-    exchangeAddress: "0xf145ae561724128901957d4579ead90e1b6a173b"
+    exchangeAddress: '0xf145ae561724128901957d4579ead90e1b6a173b'
   },
   {
-    symbol: "GDN",
-    name: "Golden",
-    tokenAddress: "0xa955c0e38a64f07b751a18ffb99f59f4af87aa3a",
+    symbol: 'GDN',
+    name: 'Golden',
+    tokenAddress: '0xa955c0e38a64f07b751a18ffb99f59f4af87aa3a',
     tokenDecimals: 18,
-    exchangeAddress: "0x77672bf6ac0a1ec1d5b3fb45cfc32b830245ece4"
+    exchangeAddress: '0x77672bf6ac0a1ec1d5b3fb45cfc32b830245ece4'
   },
   {
-    symbol: "USDG",
-    name: "USDG",
-    tokenAddress: "0xf906997808f73b09c1007b98ab539b189282b192",
+    symbol: 'USDG',
+    name: 'USDG',
+    tokenAddress: '0xf906997808f73b09c1007b98ab539b189282b192',
     tokenDecimals: 3,
-    exchangeAddress: "0x620976394aeda437e7862e3471fec89de9809a34"
+    exchangeAddress: '0x620976394aeda437e7862e3471fec89de9809a34'
   },
   {
-    symbol: "BCR",
-    name: "BITCOREA",
-    tokenAddress: "0x41bd6892e3a1aa2f62fce3b609483b72cf2d1cc7",
+    symbol: 'BCR',
+    name: 'BITCOREA',
+    tokenAddress: '0x41bd6892e3a1aa2f62fce3b609483b72cf2d1cc7',
     tokenDecimals: 18,
-    exchangeAddress: "0xed1067b588c449669d289a87f92375c9f21085b8"
+    exchangeAddress: '0xed1067b588c449669d289a87f92375c9f21085b8'
   },
   {
-    symbol: "PLBT",
-    name: "Polybius Token",
-    tokenAddress: "0x0affa06e7fbe5bc9a764c979aa66e8256a631f02",
+    symbol: 'PLBT',
+    name: 'Polybius Token',
+    tokenAddress: '0x0affa06e7fbe5bc9a764c979aa66e8256a631f02',
     tokenDecimals: 6,
-    exchangeAddress: "0x1b643f0f476aa6c33c76473ecb161b5e4a7e113b"
+    exchangeAddress: '0x1b643f0f476aa6c33c76473ecb161b5e4a7e113b'
   },
   {
-    symbol: "DOGE",
-    name: "DOGE Token",
-    tokenAddress: "0x0bc0a7b096504704e10bb19b0c6ce46232f22eda",
+    symbol: 'DOGE',
+    name: 'DOGE Token',
+    tokenAddress: '0x0bc0a7b096504704e10bb19b0c6ce46232f22eda',
     tokenDecimals: 8,
-    exchangeAddress: "0x91227d48b86cf338ace672290277bba2eb5d370e"
+    exchangeAddress: '0x91227d48b86cf338ace672290277bba2eb5d370e'
   },
   {
-    symbol: "CTC",
-    name: "Crypto Trade Coin",
-    tokenAddress: "0x918c97179370e92a7346d8aeb2758e8b30301723",
+    symbol: 'CTC',
+    name: 'Crypto Trade Coin',
+    tokenAddress: '0x918c97179370e92a7346d8aeb2758e8b30301723',
     tokenDecimals: 18,
-    exchangeAddress: "0xc84ef6b3ae18c99c432f15ae89e70894d8135eec"
+    exchangeAddress: '0xc84ef6b3ae18c99c432f15ae89e70894d8135eec'
   },
   {
-    symbol: "POHC",
-    name: "POH COIN",
-    tokenAddress: "0x9ffc0287aa2083431a8f202a4eb65193359529b9",
+    symbol: 'POHC',
+    name: 'POH COIN',
+    tokenAddress: '0x9ffc0287aa2083431a8f202a4eb65193359529b9',
     tokenDecimals: 8,
-    exchangeAddress: "0x3d27b540150ba34eb788024fd15f48a956fe9e16"
+    exchangeAddress: '0x3d27b540150ba34eb788024fd15f48a956fe9e16'
   },
   {
-    symbol: "DET",
-    name: "Dragon Exchange",
-    tokenAddress: "0x7d49eaac4c70abc1a659122f08c0806ae44703ef",
+    symbol: 'DET',
+    name: 'Dragon Exchange',
+    tokenAddress: '0x7d49eaac4c70abc1a659122f08c0806ae44703ef',
     tokenDecimals: 18,
-    exchangeAddress: "0x921bfbd0df75c55353564c7fd0ce30829aaaaf26"
+    exchangeAddress: '0x921bfbd0df75c55353564c7fd0ce30829aaaaf26'
   },
   {
-    symbol: "PASG",
-    name: "Passive Gold",
-    tokenAddress: "0x083a96c390c942def68b6343d1c651eeae604b50",
+    symbol: 'PASG',
+    name: 'Passive Gold',
+    tokenAddress: '0x083a96c390c942def68b6343d1c651eeae604b50',
     tokenDecimals: 18,
-    exchangeAddress: "0x8f193b443f05aad921f262da36d3dde6c7adfe9a"
+    exchangeAddress: '0x8f193b443f05aad921f262da36d3dde6c7adfe9a'
   },
   {
-    symbol: "COIN",
-    name: "Coinvest COIN V3 Token",
-    tokenAddress: "0xeb547ed1d8a3ff1461abaa7f0022fed4836e00a4",
+    symbol: 'COIN',
+    name: 'Coinvest COIN V3 Token',
+    tokenAddress: '0xeb547ed1d8a3ff1461abaa7f0022fed4836e00a4',
     tokenDecimals: 18,
-    exchangeAddress: "0x13e737c0eb32f1c77b48bb0cc319edceb260d6bc"
+    exchangeAddress: '0x13e737c0eb32f1c77b48bb0cc319edceb260d6bc'
   },
   {
-    symbol: "NKN",
-    name: "NKN",
-    tokenAddress: "0x5cf04716ba20127f1e2297addcf4b5035000c9eb",
+    symbol: 'NKN',
+    name: 'NKN',
+    tokenAddress: '0x5cf04716ba20127f1e2297addcf4b5035000c9eb',
     tokenDecimals: 18,
-    exchangeAddress: "0x49e0a4dbddb0c2889ccc6ce7ad51654dbb65123d"
+    exchangeAddress: '0x49e0a4dbddb0c2889ccc6ce7ad51654dbb65123d'
   },
   {
-    symbol: "UNI-V1",
-    name: "Uniswap V1",
-    tokenAddress: "0x2f5b009d42917452f4f057b0998dfad4d84c7662",
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x2f5b009d42917452f4f057b0998dfad4d84c7662',
     tokenDecimals: 18,
-    exchangeAddress: "0x7d14b002809c6ddc961d815c0ac3bee426ce8ade"
+    exchangeAddress: '0x7d14b002809c6ddc961d815c0ac3bee426ce8ade'
   },
   {
-    symbol: "KAT",
-    name: "Kambria Token",
-    tokenAddress: "0xa858bc1b71a895ee83b92f149616f9b3f6afa0fb",
+    symbol: 'KAT',
+    name: 'Kambria Token',
+    tokenAddress: '0xa858bc1b71a895ee83b92f149616f9b3f6afa0fb',
     tokenDecimals: 18,
-    exchangeAddress: "0xfc7e5dd2cb55fd0aa9140445620eeb8b3cca8251"
+    exchangeAddress: '0xfc7e5dd2cb55fd0aa9140445620eeb8b3cca8251'
   },
   {
-    symbol: "KGG",
-    name: "KingsGold",
-    tokenAddress: "0x9bf8a52ed07c795f85dc822897e13dec476c2363",
+    symbol: 'KGG',
+    name: 'KingsGold',
+    tokenAddress: '0x9bf8a52ed07c795f85dc822897e13dec476c2363',
     tokenDecimals: 18,
-    exchangeAddress: "0xd8b0efadd140980b9df65eb889ad6cb0ff78dc74"
+    exchangeAddress: '0xd8b0efadd140980b9df65eb889ad6cb0ff78dc74'
   },
   {
-    symbol: "KAASO",
-    name: "Kaaso",
-    tokenAddress: "0xf6bf74a97d78f2242376769ef1e79885cf1f0c1c",
+    symbol: 'KAASO',
+    name: 'Kaaso',
+    tokenAddress: '0xf6bf74a97d78f2242376769ef1e79885cf1f0c1c',
     tokenDecimals: 18,
-    exchangeAddress: "0x6deb055120522429f936b1b1987d4e1a4c349f15"
+    exchangeAddress: '0x6deb055120522429f936b1b1987d4e1a4c349f15'
   },
   {
-    symbol: "VNS",
-    name: "HerCoin",
-    tokenAddress: "0x098af16554f87546b35beccded6a5adad7b315e9",
+    symbol: 'VNS',
+    name: 'HerCoin',
+    tokenAddress: '0x098af16554f87546b35beccded6a5adad7b315e9',
     tokenDecimals: 18,
-    exchangeAddress: "0xfe514c553f7d80415ef6a613c0f36c28b726dfea"
+    exchangeAddress: '0xfe514c553f7d80415ef6a613c0f36c28b726dfea'
   },
   {
-    symbol: "HGH",
-    name: "HGH Token",
-    tokenAddress: "0x40c6f861a08f97dfbc3c0931485bff4921975a56",
+    symbol: 'HGH',
+    name: 'HGH Token',
+    tokenAddress: '0x40c6f861a08f97dfbc3c0931485bff4921975a56',
     tokenDecimals: 18,
-    exchangeAddress: "0xcaf799a65effa5651d5ba9bfa95c057ec90dc151"
+    exchangeAddress: '0xcaf799a65effa5651d5ba9bfa95c057ec90dc151'
   },
   {
-    symbol: "XAU",
-    name: "Goldneum",
-    tokenAddress: "0xdd32c6a39a06d079e467687a0252b02a36ee2b33",
+    symbol: 'XAU',
+    name: 'Goldneum',
+    tokenAddress: '0xdd32c6a39a06d079e467687a0252b02a36ee2b33',
     tokenDecimals: 18,
-    exchangeAddress: "0x4839f54eb79a4d2f984d8769805facacdd017e80"
+    exchangeAddress: '0x4839f54eb79a4d2f984d8769805facacdd017e80'
   },
   {
-    symbol: "CXO",
-    name: "CargoX Token",
-    tokenAddress: "0xb6ee9668771a79be7967ee29a63d4184f8097143",
+    symbol: 'CXO',
+    name: 'CargoX Token',
+    tokenAddress: '0xb6ee9668771a79be7967ee29a63d4184f8097143',
     tokenDecimals: 18,
-    exchangeAddress: "0x885d7c61ca9865e33f6bbefec081ee4cdf42844a"
+    exchangeAddress: '0x885d7c61ca9865e33f6bbefec081ee4cdf42844a'
   },
   {
-    symbol: "CHP",
-    name: "Poker Chips",
-    tokenAddress: "0xf3db7560e820834658b590c96234c333cd3d5e5e",
+    symbol: 'CHP',
+    name: 'Poker Chips',
+    tokenAddress: '0xf3db7560e820834658b590c96234c333cd3d5e5e',
     tokenDecimals: 18,
-    exchangeAddress: "0xeece8a4e30b46e5b456083e474b89c931248f588"
+    exchangeAddress: '0xeece8a4e30b46e5b456083e474b89c931248f588'
   },
   {
-    symbol: "ETO",
-    name: "Engage Token",
-    tokenAddress: "0x4b50e6f7050f184a3657b8c5f0ef8a48596f5c8a",
+    symbol: 'ETO',
+    name: 'Engage Token',
+    tokenAddress: '0x4b50e6f7050f184a3657b8c5f0ef8a48596f5c8a',
     tokenDecimals: 18,
-    exchangeAddress: "0xdd5168dc064efc79d632dbb2c5b66558a2d85654"
+    exchangeAddress: '0xdd5168dc064efc79d632dbb2c5b66558a2d85654'
   },
   {
-    symbol: "VSF",
-    name: "VeriSafe",
-    tokenAddress: "0xac9ce326e95f51b5005e9fe1dd8085a01f18450c",
+    symbol: 'VSF',
+    name: 'VeriSafe',
+    tokenAddress: '0xac9ce326e95f51b5005e9fe1dd8085a01f18450c',
     tokenDecimals: 18,
-    exchangeAddress: "0x1e0056b00a9a2162ed314243f041d51e27d37837"
+    exchangeAddress: '0x1e0056b00a9a2162ed314243f041d51e27d37837'
   },
   {
-    symbol: "INSTAR",
-    name: "Insights Network",
-    tokenAddress: "0xc72fe8e3dd5bef0f9f31f259399f301272ef2a2d",
+    symbol: 'INSTAR',
+    name: 'Insights Network',
+    tokenAddress: '0xc72fe8e3dd5bef0f9f31f259399f301272ef2a2d',
     tokenDecimals: 18,
-    exchangeAddress: "0x1f89c1281c60d8ef6b78005241321bbe3bddbf40"
+    exchangeAddress: '0x1f89c1281c60d8ef6b78005241321bbe3bddbf40'
   },
   {
-    symbol: "STX",
-    name: "Suptex STX",
-    tokenAddress: "0x9c6452092abacac981736bdf384740cf0e37901a",
+    symbol: 'STX',
+    name: 'Suptex STX',
+    tokenAddress: '0x9c6452092abacac981736bdf384740cf0e37901a',
     tokenDecimals: 18,
-    exchangeAddress: "0xdb7dcf6f408708ee6b90ec0a6b1e7b9f408291d7"
+    exchangeAddress: '0xdb7dcf6f408708ee6b90ec0a6b1e7b9f408291d7'
   },
   {
-    symbol: "KAV",
-    name: "KAVAL",
-    tokenAddress: "0x781fc0bcfc20f5d395779724c8698c6442d65e59",
+    symbol: 'KAV',
+    name: 'KAVAL',
+    tokenAddress: '0x781fc0bcfc20f5d395779724c8698c6442d65e59',
     tokenDecimals: 8,
-    exchangeAddress: "0x08ee8d105f401a6bdd1b1a7f8fca541a08bd13ca"
+    exchangeAddress: '0x08ee8d105f401a6bdd1b1a7f8fca541a08bd13ca'
   },
   {
-    symbol: "NXC",
-    name: "Nixma Coin",
-    tokenAddress: "0x93ec2b9d85a7f4b0abc66abf4ca8d5e50c355516",
+    symbol: 'NXC',
+    name: 'Nixma Coin',
+    tokenAddress: '0x93ec2b9d85a7f4b0abc66abf4ca8d5e50c355516',
     tokenDecimals: 18,
-    exchangeAddress: "0xf623d64ae122a0539536a04fba32cabeb2a303df"
+    exchangeAddress: '0xf623d64ae122a0539536a04fba32cabeb2a303df'
   },
   {
-    symbol: "STRAW",
-    name: "STRAW Coin",
-    tokenAddress: "0xb92179b36794e169a2e5582ece92936480754da9",
+    symbol: 'STRAW',
+    name: 'STRAW Coin',
+    tokenAddress: '0xb92179b36794e169a2e5582ece92936480754da9',
     tokenDecimals: 18,
-    exchangeAddress: "0x009593513eba0b19766a779e94ee3f432b633237"
+    exchangeAddress: '0x009593513eba0b19766a779e94ee3f432b633237'
   },
   {
-    symbol: "MUXE",
-    name: "MUXE Token",
-    tokenAddress: "0x515669d308f887fd83a471c7764f5d084886d34d",
+    symbol: 'MUXE',
+    name: 'MUXE Token',
+    tokenAddress: '0x515669d308f887fd83a471c7764f5d084886d34d',
     tokenDecimals: 18,
-    exchangeAddress: "0x5796383bc0b02076ae0798fcbb9761478fd97603"
+    exchangeAddress: '0x5796383bc0b02076ae0798fcbb9761478fd97603'
   },
   {
-    symbol: "JRT",
-    name: "Jarvis Reward Token",
-    tokenAddress: "0x082582c4271f3f6dd5f4306cbcac822076516c53",
+    symbol: 'JRT',
+    name: 'Jarvis Reward Token',
+    tokenAddress: '0x082582c4271f3f6dd5f4306cbcac822076516c53',
     tokenDecimals: 18,
-    exchangeAddress: "0x475481f46da08727fff0ca69e339be87d732031d"
+    exchangeAddress: '0x475481f46da08727fff0ca69e339be87d732031d'
   },
   {
-    symbol: "TEO",
-    name: "Tokeneo",
-    tokenAddress: "0x70f414b2bcc447f8e41a57c357c20e3ad1bb864d",
+    symbol: 'TEO',
+    name: 'Tokeneo',
+    tokenAddress: '0x70f414b2bcc447f8e41a57c357c20e3ad1bb864d',
     tokenDecimals: 18,
-    exchangeAddress: "0x4957a4338b05dfaa95c001a549fbf26662cf4db7"
+    exchangeAddress: '0x4957a4338b05dfaa95c001a549fbf26662cf4db7'
   },
   {
-    symbol: "DANK",
-    name: "Dank Signals",
-    tokenAddress: "0xc354dde9ac078ed9572df94063c300d1d92468fd",
+    symbol: 'DANK',
+    name: 'Dank Signals',
+    tokenAddress: '0xc354dde9ac078ed9572df94063c300d1d92468fd',
     tokenDecimals: 18,
-    exchangeAddress: "0x761b53593d6959dab73b68c216b735a404fee59b"
+    exchangeAddress: '0x761b53593d6959dab73b68c216b735a404fee59b'
   },
   {
-    symbol: "ECOM",
-    name: "Omnitude Token",
-    tokenAddress: "0x171d750d42d661b62c277a6b486adb82348c3eca",
+    symbol: 'ECOM',
+    name: 'Omnitude Token',
+    tokenAddress: '0x171d750d42d661b62c277a6b486adb82348c3eca',
     tokenDecimals: 18,
-    exchangeAddress: "0x17988c2d019e954be15128631fe9f6cdde05aa5e"
+    exchangeAddress: '0x17988c2d019e954be15128631fe9f6cdde05aa5e'
   },
   {
-    symbol: "INFT",
-    name: "Infinito Token",
-    tokenAddress: "0x83d60e7aed59c6829fb251229061a55f35432c4d",
+    symbol: 'INFT',
+    name: 'Infinito Token',
+    tokenAddress: '0x83d60e7aed59c6829fb251229061a55f35432c4d',
     tokenDecimals: 6,
-    exchangeAddress: "0xe32f1d8795458c049d226bce1f0675870a6a9476"
+    exchangeAddress: '0xe32f1d8795458c049d226bce1f0675870a6a9476'
   },
   {
-    symbol: "PLY",
-    name: "PLAY",
-    tokenAddress: "0xfb41f7b63c8e84f4ba1ecd4d393fd9daa5d14d61",
+    symbol: 'PLY',
+    name: 'PLAY',
+    tokenAddress: '0xfb41f7b63c8e84f4ba1ecd4d393fd9daa5d14d61',
     tokenDecimals: 18,
-    exchangeAddress: "0x8fc12e88a8dfddd65c6cb6c3ff1f08c26e5bcf24"
+    exchangeAddress: '0x8fc12e88a8dfddd65c6cb6c3ff1f08c26e5bcf24'
   },
   {
-    symbol: "ECT",
-    name: "SuperEdge",
-    tokenAddress: "0x4ccc3759eb48faf1c6cfadad2619e7038db6b212",
+    symbol: 'ECT',
+    name: 'SuperEdge',
+    tokenAddress: '0x4ccc3759eb48faf1c6cfadad2619e7038db6b212',
     tokenDecimals: 8,
-    exchangeAddress: "0x8f565323634fd9949860d6ae1031df459429efc1"
+    exchangeAddress: '0x8f565323634fd9949860d6ae1031df459429efc1'
   },
   {
-    symbol: "QUAD",
-    name: "QuadCore Chain",
-    tokenAddress: "0xe0e705c9bff67188a79dc5f59f0b2675031a6055",
+    symbol: 'QUAD',
+    name: 'QuadCore Chain',
+    tokenAddress: '0xe0e705c9bff67188a79dc5f59f0b2675031a6055',
     tokenDecimals: 8,
-    exchangeAddress: "0x1cb48621a6e0f04442cd3e8b95fd6ee49921a7d9"
+    exchangeAddress: '0x1cb48621a6e0f04442cd3e8b95fd6ee49921a7d9'
   },
   {
-    symbol: "SCB",
-    name: "SCB",
-    tokenAddress: "0x8aaa0d43cc86ed98b7aa9c8e1f87a319cd873dc4",
+    symbol: 'SCB',
+    name: 'SCB',
+    tokenAddress: '0x8aaa0d43cc86ed98b7aa9c8e1f87a319cd873dc4',
     tokenDecimals: 4,
-    exchangeAddress: "0x51083be1c8ffbedcec56f28aa41b6707310ac489"
+    exchangeAddress: '0x51083be1c8ffbedcec56f28aa41b6707310ac489'
   },
   {
-    symbol: "BTCA",
-    name: "BitAir",
-    tokenAddress: "0x02725836ebf3ecdb1cdf1c7b02fcbbfaa2736af8",
+    symbol: 'BTCA',
+    name: 'BitAir',
+    tokenAddress: '0x02725836ebf3ecdb1cdf1c7b02fcbbfaa2736af8',
     tokenDecimals: 8,
-    exchangeAddress: "0xcf54672b4d3a4477a5ef3031206d06f54fef654a"
+    exchangeAddress: '0xcf54672b4d3a4477a5ef3031206d06f54fef654a'
   },
   {
-    symbol: "PYGOZ",
-    name: "PYGOZ",
-    tokenAddress: "0xbb98fc1fd1080d2b8bdad75c51d30b50c6f59b62",
+    symbol: 'PYGOZ',
+    name: 'PYGOZ',
+    tokenAddress: '0xbb98fc1fd1080d2b8bdad75c51d30b50c6f59b62',
     tokenDecimals: 4,
-    exchangeAddress: "0xa8566d5ad1ba44cd763d8ba8846310a7b12e5647"
+    exchangeAddress: '0xa8566d5ad1ba44cd763d8ba8846310a7b12e5647'
   },
   {
-    symbol: "WGM",
-    name: "WGM",
-    tokenAddress: "0x219803d17f3067eb53d521ba8948d2734f402f7d",
+    symbol: 'WGM',
+    name: 'WGM',
+    tokenAddress: '0x219803d17f3067eb53d521ba8948d2734f402f7d',
     tokenDecimals: 4,
-    exchangeAddress: "0x4ee32485431b366bb7e8a3a200954265c5f7cd57"
+    exchangeAddress: '0x4ee32485431b366bb7e8a3a200954265c5f7cd57'
   },
   {
-    symbol: "FACE",
-    name: "Faceter Token",
-    tokenAddress: "0x1ccaa0f2a7210d76e1fdec740d5f323e2e1b1672",
+    symbol: 'FACE',
+    name: 'Faceter Token',
+    tokenAddress: '0x1ccaa0f2a7210d76e1fdec740d5f323e2e1b1672',
     tokenDecimals: 18,
-    exchangeAddress: "0xd5544bf3a1e9b364fb81c6f541c35602e91becf3"
+    exchangeAddress: '0xd5544bf3a1e9b364fb81c6f541c35602e91becf3'
   },
   {
-    symbol: "UNI-V1",
-    name: "Uniswap V1",
-    tokenAddress: "0x93ff2c787c140c4ce21f01cc211fbdace274077f",
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x93ff2c787c140c4ce21f01cc211fbdace274077f',
     tokenDecimals: 18,
-    exchangeAddress: "0x7a3ecac09316e3c10b9158887704422e2469f141"
+    exchangeAddress: '0x7a3ecac09316e3c10b9158887704422e2469f141'
   },
   {
-    symbol: "TRUST",
-    name: "Harmony Block Capital",
-    tokenAddress: "0x0ee815f8be0b0259e2657c8b8d1e57bd3d60f26b",
+    symbol: 'TRUST',
+    name: 'Harmony Block Capital',
+    tokenAddress: '0x0ee815f8be0b0259e2657c8b8d1e57bd3d60f26b',
     tokenDecimals: 6,
-    exchangeAddress: "0xabf6fbb379f8fb359b74c341d849d64816894e76"
+    exchangeAddress: '0xabf6fbb379f8fb359b74c341d849d64816894e76'
   },
   {
-    symbol: "aDAI",
-    name: "Aave Interest bearing DAI",
-    tokenAddress: "0x363edc62b8236a0079c00320340485ee0e7b17ae",
+    symbol: 'aDAI',
+    name: 'Aave Interest bearing DAI',
+    tokenAddress: '0x363edc62b8236a0079c00320340485ee0e7b17ae',
     tokenDecimals: 18,
-    exchangeAddress: "0x302c7a502524179768ee47d04d43f0cad0f5724e"
+    exchangeAddress: '0x302c7a502524179768ee47d04d43f0cad0f5724e'
   },
   {
-    symbol: "EMR",
-    name: "Emaar Utility Token",
-    tokenAddress: "0x745d62d3b23344ca200beb83effecc8f762057ed",
+    symbol: 'EMR',
+    name: 'Emaar Utility Token',
+    tokenAddress: '0x745d62d3b23344ca200beb83effecc8f762057ed',
     tokenDecimals: 18,
-    exchangeAddress: "0xfb3e8f087ad7e732741989de0afc3bfcd39ca346"
+    exchangeAddress: '0xfb3e8f087ad7e732741989de0afc3bfcd39ca346'
   },
   {
-    symbol: "LSNX_20200114",
-    name: "MARKET Protocol Long Position Token",
-    tokenAddress: "0x5bcf04986e164edb7ea45f6e5fb8976b7fcdb3d8",
+    symbol: 'LSNX_20200114',
+    name: 'MARKET Protocol Long Position Token',
+    tokenAddress: '0x5bcf04986e164edb7ea45f6e5fb8976b7fcdb3d8',
     tokenDecimals: 5,
-    exchangeAddress: "0xfb234ad911eb1e4b52121591668ff9c5ce72feb2"
+    exchangeAddress: '0xfb234ad911eb1e4b52121591668ff9c5ce72feb2'
   },
   {
-    symbol: "SSNX_20200114",
-    name: "MARKET Protocol Short Position Token",
-    tokenAddress: "0x72cdfdc0f6dfd6e1805c8714766bf8d0a2b88038",
+    symbol: 'SSNX_20200114',
+    name: 'MARKET Protocol Short Position Token',
+    tokenAddress: '0x72cdfdc0f6dfd6e1805c8714766bf8d0a2b88038',
     tokenDecimals: 5,
-    exchangeAddress: "0x33c9a6925044905f861e3da62b0737a44f92146a"
+    exchangeAddress: '0x33c9a6925044905f861e3da62b0737a44f92146a'
   },
   {
-    symbol: "RONC",
-    name: "RONCoin",
-    tokenAddress: "0xf1b819fdb689f43afc161db789800ed799f18388",
+    symbol: 'RONC',
+    name: 'RONCoin',
+    tokenAddress: '0xf1b819fdb689f43afc161db789800ed799f18388',
     tokenDecimals: 18,
-    exchangeAddress: "0x9567e37fedd6fd60186d4829a70dfac7c9907714"
+    exchangeAddress: '0x9567e37fedd6fd60186d4829a70dfac7c9907714'
   },
   {
-    symbol: "CMS",
-    name: "COMSA",
-    tokenAddress: "0xf83301c5cd1ccbb86f466a6b3c53316ed2f8465a",
+    symbol: 'CMS',
+    name: 'COMSA',
+    tokenAddress: '0xf83301c5cd1ccbb86f466a6b3c53316ed2f8465a',
     tokenDecimals: 6,
-    exchangeAddress: "0x87d4cc18b2ee0fb2d46f369128eb6afc0278196d"
+    exchangeAddress: '0x87d4cc18b2ee0fb2d46f369128eb6afc0278196d'
   },
   {
-    symbol: "Sp",
-    name: "Sponsorships",
-    tokenAddress: "0x0ab346a16cea1b1363b20430c414eab7bc179324",
+    symbol: 'Sp',
+    name: 'Sponsorships',
+    tokenAddress: '0x0ab346a16cea1b1363b20430c414eab7bc179324',
     tokenDecimals: 0,
-    exchangeAddress: "0x15ea569369b48b1dcc4571beb35142ee14331356"
+    exchangeAddress: '0x15ea569369b48b1dcc4571beb35142ee14331356'
   },
   {
-    symbol: "ANJ",
-    name: "Aragon Network Juror",
-    tokenAddress: "0xcd62b1c403fa761baadfc74c525ce2b51780b184",
+    symbol: 'ANJ',
+    name: 'Aragon Network Juror',
+    tokenAddress: '0xcd62b1c403fa761baadfc74c525ce2b51780b184',
     tokenDecimals: 18,
-    exchangeAddress: "0x64a9edd3f5fce0252cd708e26c8dd11205742826"
+    exchangeAddress: '0x64a9edd3f5fce0252cd708e26c8dd11205742826'
   },
   {
-    symbol: "PYRA",
-    name: "PYRAHEX.NETWORK",
-    tokenAddress: "0x3f83c5f5e89f604883ac2454edd287abea343ec2",
+    symbol: 'PYRA',
+    name: 'PYRAHEX.NETWORK',
+    tokenAddress: '0x3f83c5f5e89f604883ac2454edd287abea343ec2',
     tokenDecimals: 8,
-    exchangeAddress: "0x35ec0972457aef3944dafe020a39477d4e3af1a3"
+    exchangeAddress: '0x35ec0972457aef3944dafe020a39477d4e3af1a3'
   },
   {
-    symbol: "EECO",
-    name: "E Coin",
-    tokenAddress: "0x5ad432ad3ccf0239dc56d3540a1e5e5cbafb37c3",
+    symbol: 'EECO',
+    name: 'E Coin',
+    tokenAddress: '0x5ad432ad3ccf0239dc56d3540a1e5e5cbafb37c3',
     tokenDecimals: 18,
-    exchangeAddress: "0x6f103b55de3ed6ecd5b8c99ac5eccf2821db965a"
+    exchangeAddress: '0x6f103b55de3ed6ecd5b8c99ac5eccf2821db965a'
   },
   {
-    symbol: "OD",
-    name: "Origin D",
-    tokenAddress: "0x3c2cf21b9d4b543b93a9bcfe637f673d8bd944d8",
+    symbol: 'OD',
+    name: 'Origin D',
+    tokenAddress: '0x3c2cf21b9d4b543b93a9bcfe637f673d8bd944d8',
     tokenDecimals: 18,
-    exchangeAddress: "0x1d9fbf656b1a5d441038a4b63709909ce6961203"
+    exchangeAddress: '0x1d9fbf656b1a5d441038a4b63709909ce6961203'
   },
   {
-    symbol: "KEY",
-    name: "KEY",
-    tokenAddress: "0x4cd988afbad37289baaf53c13e98e2bd46aaea8c",
+    symbol: 'KEY',
+    name: 'KEY',
+    tokenAddress: '0x4cd988afbad37289baaf53c13e98e2bd46aaea8c',
     tokenDecimals: 18,
-    exchangeAddress: "0x5780bcd22e3c08c4b6b5c47c406ea6dc53e278be"
+    exchangeAddress: '0x5780bcd22e3c08c4b6b5c47c406ea6dc53e278be'
   },
   {
-    symbol: "CIEX",
-    name: "ChinaInvestmentExchangeToken",
-    tokenAddress: "0x195336ffb6792b8e268d206e985e931e236539d6",
+    symbol: 'CIEX',
+    name: 'ChinaInvestmentExchangeToken',
+    tokenAddress: '0x195336ffb6792b8e268d206e985e931e236539d6',
     tokenDecimals: 18,
-    exchangeAddress: "0x31ba13a00b2d7d7e3ae6740e7485b883f3c8d1f4"
+    exchangeAddress: '0x31ba13a00b2d7d7e3ae6740e7485b883f3c8d1f4'
   },
   {
-    symbol: "MANA",
-    name: "Decentraland",
-    tokenAddress: "0xc51c4405aab4dd716c2f2873ff7565eb68fdb36f",
+    symbol: 'MANA',
+    name: 'Decentraland',
+    tokenAddress: '0xc51c4405aab4dd716c2f2873ff7565eb68fdb36f',
     tokenDecimals: 18,
-    exchangeAddress: "0x60af3d8212d20db13486388ef7129a3de312ceb9"
+    exchangeAddress: '0x60af3d8212d20db13486388ef7129a3de312ceb9'
   },
   {
-    symbol: "💲PC",
-    name: "Star Pacific Coin",
-    tokenAddress: "0xcf7d119bcb6822283003adc7c1a40e9ae7097b75",
+    symbol: '💲PC',
+    name: 'Star Pacific Coin',
+    tokenAddress: '0xcf7d119bcb6822283003adc7c1a40e9ae7097b75',
     tokenDecimals: 1,
-    exchangeAddress: "0xd1fd7bef3074fda1cc6abd19630a16d7e7dd9efc"
+    exchangeAddress: '0xd1fd7bef3074fda1cc6abd19630a16d7e7dd9efc'
   },
   {
-    symbol: "NGNT",
-    name: "Naira Token",
-    tokenAddress: "0x05bbed16620b352a7f889e23e3cf427d1d379ffe",
+    symbol: 'NGNT',
+    name: 'Naira Token',
+    tokenAddress: '0x05bbed16620b352a7f889e23e3cf427d1d379ffe',
     tokenDecimals: 2,
-    exchangeAddress: "0x1de44c32e2c4866c6f873b2dafa8d0acc45842e8"
+    exchangeAddress: '0x1de44c32e2c4866c6f873b2dafa8d0acc45842e8'
   },
   {
-    symbol: "ETR",
-    name: "Ethereum Rush",
-    tokenAddress: "0x6f371ca338bbddd0baf719e1d5d0797cce20774f",
+    symbol: 'ETR',
+    name: 'Ethereum Rush',
+    tokenAddress: '0x6f371ca338bbddd0baf719e1d5d0797cce20774f',
     tokenDecimals: 18,
-    exchangeAddress: "0x713458ad4751d6980c5a9eb097b9fab8b2d7d5b8"
+    exchangeAddress: '0x713458ad4751d6980c5a9eb097b9fab8b2d7d5b8'
   },
   {
-    symbol: "CELC",
-    name: "CelCoin",
-    tokenAddress: "0x19b58d95929586ad750893caad43e77aa6e8ce9e",
+    symbol: 'CELC',
+    name: 'CelCoin',
+    tokenAddress: '0x19b58d95929586ad750893caad43e77aa6e8ce9e',
     tokenDecimals: 8,
-    exchangeAddress: "0x5b0d9e4099bf629387a842ed6bff4dab70573f31"
+    exchangeAddress: '0x5b0d9e4099bf629387a842ed6bff4dab70573f31'
   },
   {
-    symbol: "GMT",
-    name: "Global Messaging Token",
-    tokenAddress: "0xb3bd49e28f8f832b8d1e246106991e546c323502",
+    symbol: 'GMT',
+    name: 'Global Messaging Token',
+    tokenAddress: '0xb3bd49e28f8f832b8d1e246106991e546c323502',
     tokenDecimals: 18,
-    exchangeAddress: "0xab0b841641fd546837a5e6ad98f796f66fd3ea2d"
+    exchangeAddress: '0xab0b841641fd546837a5e6ad98f796f66fd3ea2d'
   },
   {
-    symbol: "FORCER",
-    name: "Forcer",
-    tokenAddress: "0xc1fb6c015fc535abd331d3029de76a62e412fb23",
+    symbol: 'FORCER',
+    name: 'Forcer',
+    tokenAddress: '0xc1fb6c015fc535abd331d3029de76a62e412fb23',
     tokenDecimals: 4,
-    exchangeAddress: "0x8dc13e59ad8bbe4424ba8c65ff1361543c195395"
+    exchangeAddress: '0x8dc13e59ad8bbe4424ba8c65ff1361543c195395'
   },
   {
-    symbol: "ERC",
-    name: "ERC20",
-    tokenAddress: "0x26d5bd2dfeda983ecd6c39899e69dae6431dffbb",
+    symbol: 'ERC',
+    name: 'ERC20',
+    tokenAddress: '0x26d5bd2dfeda983ecd6c39899e69dae6431dffbb',
     tokenDecimals: 18,
-    exchangeAddress: "0x728ad96d9db76339411131f4e533c9c7419210b0"
+    exchangeAddress: '0x728ad96d9db76339411131f4e533c9c7419210b0'
   },
   {
-    symbol: "ADT",
-    name: "AdToken",
-    tokenAddress: "0xd0d6d6c5fe4a677d343cc433536bb717bae167dd",
+    symbol: 'ADT',
+    name: 'AdToken',
+    tokenAddress: '0xd0d6d6c5fe4a677d343cc433536bb717bae167dd',
     tokenDecimals: 9,
-    exchangeAddress: "0x042f17156da0e2d7ee58f9f138f0e1c9880344c3"
+    exchangeAddress: '0x042f17156da0e2d7ee58f9f138f0e1c9880344c3'
   },
   {
-    symbol: "GOLD",
-    name: "Ethernet Gold",
-    tokenAddress: "0xc9c7ba7618419e6dc57389358a0836ed75079315",
+    symbol: 'GOLD',
+    name: 'Ethernet Gold',
+    tokenAddress: '0xc9c7ba7618419e6dc57389358a0836ed75079315',
     tokenDecimals: 0,
-    exchangeAddress: "0xf75338e853cd3cf1732cc6705cfcc7c9c634c94c"
+    exchangeAddress: '0xf75338e853cd3cf1732cc6705cfcc7c9c634c94c'
   },
   {
-    symbol: "SUPER",
-    name: "Super Human",
-    tokenAddress: "0x19686a8058adc1ce23c1a5fdd515ecd493b69e10",
+    symbol: 'SUPER',
+    name: 'Super Human',
+    tokenAddress: '0x19686a8058adc1ce23c1a5fdd515ecd493b69e10',
     tokenDecimals: 0,
-    exchangeAddress: "0x6542f8cdafcdb147bfdf3e8a78518eb92567df01"
+    exchangeAddress: '0x6542f8cdafcdb147bfdf3e8a78518eb92567df01'
   },
   {
-    symbol: "ETM",
-    name: "Ethermoney",
-    tokenAddress: "0x28926c46bc5c0aeab39c72f7c1201bfb8056d509",
+    symbol: 'ETM',
+    name: 'Ethermoney',
+    tokenAddress: '0x28926c46bc5c0aeab39c72f7c1201bfb8056d509',
     tokenDecimals: 18,
-    exchangeAddress: "0xdc1fcb2659c49fe1726692594d5f9afbe6fd1883"
+    exchangeAddress: '0xdc1fcb2659c49fe1726692594d5f9afbe6fd1883'
   },
   {
-    symbol: "GOD",
-    name: "Nike GOD",
-    tokenAddress: "0xf4b9dce551fc370593605ad91c5aa31f76b7b16b",
+    symbol: 'GOD',
+    name: 'Nike GOD',
+    tokenAddress: '0xf4b9dce551fc370593605ad91c5aa31f76b7b16b',
     tokenDecimals: 0,
-    exchangeAddress: "0x2bda0887989bc0b4b2a2f530bcce45a61975e237"
+    exchangeAddress: '0x2bda0887989bc0b4b2a2f530bcce45a61975e237'
   },
   {
-    symbol: "JAMIE",
-    name: "Jamie Bitcoin",
-    tokenAddress: "0x417d2562603b7d3bae74ad3b03557e2f2e026cb2",
+    symbol: 'JAMIE',
+    name: 'Jamie Bitcoin',
+    tokenAddress: '0x417d2562603b7d3bae74ad3b03557e2f2e026cb2',
     tokenDecimals: 0,
-    exchangeAddress: "0x6d4c200106b7fe27cbc643c18358f37646122385"
+    exchangeAddress: '0x6d4c200106b7fe27cbc643c18358f37646122385'
   },
   {
-    symbol: "NDC",
-    name: "NEVERDIE",
-    tokenAddress: "0xa54ddc7b3cce7fc8b1e3fa0256d0db80d2c10970",
+    symbol: 'NDC',
+    name: 'NEVERDIE',
+    tokenAddress: '0xa54ddc7b3cce7fc8b1e3fa0256d0db80d2c10970',
     tokenDecimals: 18,
-    exchangeAddress: "0x4492b94cb6272ced76ae7c27b834e8e36e39fa74"
+    exchangeAddress: '0x4492b94cb6272ced76ae7c27b834e8e36e39fa74'
   },
   {
-    symbol: "DFB",
-    name: "DeFiBurn",
-    tokenAddress: "0x939cafa8630b3876b092ec2b71772db183c11758",
+    symbol: 'DFB',
+    name: 'DeFiBurn',
+    tokenAddress: '0x939cafa8630b3876b092ec2b71772db183c11758',
     tokenDecimals: 18,
-    exchangeAddress: "0x62b39dfc4b507ee771b7d2179a28add6adb5ed5e"
+    exchangeAddress: '0x62b39dfc4b507ee771b7d2179a28add6adb5ed5e'
   },
   {
-    symbol: "HOLO",
-    name: "Hologram",
-    tokenAddress: "0x80b02cac429730081571a9e5513635da7e8f76c0",
+    symbol: 'HOLO',
+    name: 'Hologram',
+    tokenAddress: '0x80b02cac429730081571a9e5513635da7e8f76c0',
     tokenDecimals: 0,
-    exchangeAddress: "0x9ed6d616d5ce50b0b489dab7769c108d426fbaf3"
+    exchangeAddress: '0x9ed6d616d5ce50b0b489dab7769c108d426fbaf3'
   },
   {
-    symbol: "aDAI",
-    name: "Aave Interest bearing DAI",
-    tokenAddress: "0xfc1e690f61efd961294b3e1ce3313fbd8aa4f85d",
+    symbol: 'aDAI',
+    name: 'Aave Interest bearing DAI',
+    tokenAddress: '0xfc1e690f61efd961294b3e1ce3313fbd8aa4f85d',
     tokenDecimals: 18,
-    exchangeAddress: "0x7cfab87aac0899c093235b342ac0e5b1acf159eb"
+    exchangeAddress: '0x7cfab87aac0899c093235b342ac0e5b1acf159eb'
+  },
+  {
+    symbol: 'BITS',
+    name: 'Ethereum Bits',
+    tokenAddress: '0x890196c13906ccbcc604ccb0ba48938c1217db5c',
+    tokenDecimals: 0,
+    exchangeAddress: '0x4355fdeac69301db38493a5c65f41fd4e4f06184'
+  },
+  {
+    symbol: 'MNFT',
+    name: 'MNFT',
+    tokenAddress: '0xdb7eb3ede973665b1bb9f3016861e3255062e4ed',
+    tokenDecimals: 4,
+    exchangeAddress: '0x6ad2fb782ff5feba6acc6321bfd24e14d6db4f5e'
+  },
+  {
+    symbol: 'PYRO',
+    name: 'PYRO Network',
+    tokenAddress: '0x14409b0fc5c7f87b5dad20754fe22d29a3de8217',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf9a489e82cf4a090fd1fc766eb21edec249d7e71'
+  },
+  {
+    symbol: 'VOKE',
+    name: 'Voke',
+    tokenAddress: '0xd858c11a1e990d7d02e0897b9b19dadef8171832',
+    tokenDecimals: 4,
+    exchangeAddress: '0x488e9d8195a08acabb30c14fddd35bab3a15be0f'
+  },
+  {
+    symbol: 'BERT',
+    name: 'Bertbit',
+    tokenAddress: '0x6e9de2e85a8c1188995fecea289b3f22e489bb12',
+    tokenDecimals: 4,
+    exchangeAddress: '0x0476ceda88b20b5e0af1a598530db64667b03507'
+  },
+  {
+    symbol: 'PUBLX',
+    name: 'PUBLX',
+    tokenAddress: '0x1a6658f40e51b372e593b7d2144c1402d5cf33e8',
+    tokenDecimals: 18,
+    exchangeAddress: '0x51178a657a183ac593c58e9b961eefd8e20bc9c2'
+  },
+  {
+    symbol: '$PEW:DAI',
+    name: 'PEW PEW PUT',
+    tokenAddress: '0x51c5faedc00b0649918d2f26b6237646eeca1951',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbcdf3d061bbcd6591e9fed1ad46c3f07d43654dc'
+  },
+  {
+    symbol: 'WYS',
+    name: 'wys Token',
+    tokenAddress: '0xd8950fdeaa10304b7a7fd03a2fc66bc39f3c711a',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb69f24efa39eace10055984c8f25bcfea1a94baa'
+  },
+  {
+    symbol: 'aETH',
+    name: 'Aave Interest bearing ETH',
+    tokenAddress: '0x3a3a65aab0dd2a17e3f1947ba16138cd37d08c04',
+    tokenDecimals: 18,
+    exchangeAddress: '0xdf9da8616d462985f3207aebbc2fe1500087f1b6'
+  },
+  {
+    symbol: 'STO',
+    name: 'storeum',
+    tokenAddress: '0xcb39c3502415152b2ec90ff07ee18cc94f681a72',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc3e7d05555afcb36fac93fd42fe8692129074720'
+  },
+  {
+    symbol: 'MAGIC',
+    name: 'PET3R USES THE FORCE',
+    tokenAddress: '0x51876a15aff97a68ed7df051ce11fade0b91b384',
+    tokenDecimals: 1,
+    exchangeAddress: '0x26b7ea8b1c8c5709c0852bf8fd8136afda4e9ed3'
+  },
+  {
+    symbol: 'TSD',
+    name: 'TimesDollar',
+    tokenAddress: '0xe9865ee5fb3b9c4c99cfe865beb5c303ab4d9539',
+    tokenDecimals: 5,
+    exchangeAddress: '0x4565e521ec1ca1c32786e51c8062a94fcdf06581'
+  },
+  {
+    symbol: 'CYMT',
+    name: 'CyberMusic',
+    tokenAddress: '0x78c292d1445e6b9558bf42e8bc369271ded062ea',
+    tokenDecimals: 8,
+    exchangeAddress: '0x1ed0fa36e0c411c2052a81702cbbfce772675729'
+  },
+  {
+    symbol: 'MGC',
+    name: 'More Gold Coin',
+    tokenAddress: '0x174bfa6600bf90c885c7c01c7031389ed1461ab9',
+    tokenDecimals: 18,
+    exchangeAddress: '0x385eb222c05e9251a6979a076c54cd5a3b199ded'
+  },
+  {
+    symbol: 'NANA',
+    name: 'nana token',
+    tokenAddress: '0x00fb4ce3f7edb8dd1a0ec5c6b2e6a656219e2ced',
+    tokenDecimals: 2,
+    exchangeAddress: '0x06f52a0a0620bc9ee5a6229d99a8c98336e1b19d'
+  },
+  {
+    symbol: 'iBBT',
+    name: 'iBBT Utility Token',
+    tokenAddress: '0x691c25c461dafc47792b6e4d674fbb637bca1c6f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xfc3155e9789c6ada9078e96c9fbf812b521f4087'
+  },
+  {
+    symbol: 'MDT',
+    name: 'MillionDollarToken',
+    tokenAddress: '0x37f014c64d186eaf879c0033846b51924ce42584',
+    tokenDecimals: 0,
+    exchangeAddress: '0x35e0b74a6828afe72972a35ecc19305a7837fd2c'
+  },
+  {
+    symbol: 'DEC',
+    name: 'DarkEnergyCrystals',
+    tokenAddress: '0x9393fdc77090f31c7db989390d43f454b1a6e7f3',
+    tokenDecimals: 3,
+    exchangeAddress: '0x32a40bf367bbf528c1b5605003cd2e33e00d6ad4'
+  },
+  {
+    symbol: 'ZAPH',
+    name: 'ZAPH Token',
+    tokenAddress: '0x9f675e2c53ed88168e5928747caf31062da24f21',
+    tokenDecimals: 4,
+    exchangeAddress: '0xe042cb321e2fdb520ccc047337b7298f4972e7cb'
+  },
+  {
+    symbol: 'AMIR',
+    name: 'Amir',
+    tokenAddress: '0xe8ed6fe37def6d06d8f3b7af06aafb5da6541094',
+    tokenDecimals: 6,
+    exchangeAddress: '0xa4cc94a1d23564da127d87d5602f0ab00539fafd'
+  },
+  {
+    symbol: 'BOO',
+    name: 'Bamboo Token',
+    tokenAddress: '0x4336a5629bf30bee8bf571a6243cf50487b0de21',
+    tokenDecimals: 10,
+    exchangeAddress: '0x9afbdf81a5e6d00b1d04c915998a5aea88ab71f4'
+  },
+  {
+    symbol: 'HBC',
+    name: 'HOPE BILLION COIN',
+    tokenAddress: '0xc7c9f20a6268cfe4b3f28f279c2da273f7ec189a',
+    tokenDecimals: 18,
+    exchangeAddress: '0xadf852e0ce8b611a38b2d15b946f33ec646c444b'
+  },
+  {
+    symbol: 'YGG',
+    name: 'YGG',
+    tokenAddress: '0xc254664c7408dde413969fbcd593328f6099e32f',
+    tokenDecimals: 4,
+    exchangeAddress: '0xda556c0c74e66039ca9fe257ce3ddeb72f77a2e3'
+  },
+  {
+    symbol: 'LIB',
+    name: 'BankLife',
+    tokenAddress: '0x3fd2e747cea0e8a78f1827ea2ffd3334628a600b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x197155ec827864075f3c83e9597d005c69e63b80'
+  },
+  {
+    symbol: 'SWL',
+    name: 'Swiftlance token',
+    tokenAddress: '0x8cd480260a47f04589670a313d27a15b321ad266',
+    tokenDecimals: 8,
+    exchangeAddress: '0xe1048f6b00565b2e575b6f4f0c26ff3ac25e98f8'
+  },
+  {
+    symbol: 'BFF',
+    name: 'BffDoom',
+    tokenAddress: '0xcabf96a41a4d98ee91d4fb1004dc4b3b8548cb53',
+    tokenDecimals: 8,
+    exchangeAddress: '0xffaa84a2c03e7ac86626d0b0e37f0e3fe1b78e00'
+  },
+  {
+    symbol: 'TMB',
+    name: 'TemboCoin',
+    tokenAddress: '0x1de09690e0d3c75c22cd19acc1aebde46bbc7d25',
+    tokenDecimals: 0,
+    exchangeAddress: '0x64d80812093be374e014406b73caf60994b2be96'
+  },
+  {
+    symbol: 'coby',
+    name: 'coby Token',
+    tokenAddress: '0xd3b5c0d63475309201ef9acd0f6a4542db119335',
+    tokenDecimals: 1,
+    exchangeAddress: '0xa0619040bc67668c27e10b6dbb5f132815fd5575'
+  },
+  {
+    symbol: 'SIM',
+    name: 'SimpleToken',
+    tokenAddress: '0x8f1b950d4eed71fa5f7d16e01e7905a518fbed4a',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0d0d9fef65f845551f50b9c12bdea611507d1569'
+  },
+  {
+    symbol: 'JULIEN',
+    name: 'Julien',
+    tokenAddress: '0xe6710e0cda178f3d921f456902707b0d4c4a332b',
+    tokenDecimals: 4,
+    exchangeAddress: '0x4ce8d670c0ccea741829551b347e2ebabdba638f'
+  },
+  {
+    symbol: 'PLAT',
+    name: 'BitGuild PLAT',
+    tokenAddress: '0x7e43581b19ab509bcf9397a2efd1ab10233f27de',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9b40c045cc0e2e8ed958cb79f8b7c403bf960f2f'
+  },
+  {
+    symbol: 'ZXC',
+    name: '0xcert Protocol Token',
+    tokenAddress: '0x83e2be8d114f9661221384b3a50d24b96a5653f5',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb263893655286dafc58c1d1ee0670ef296c2488c'
+  },
+  {
+    symbol: 'IAN',
+    name: 'Ian Coin',
+    tokenAddress: '0x19c506211a26a67ad7e6d45cd274bad1863f8667',
+    tokenDecimals: 18,
+    exchangeAddress: '0x649281c5ae2134cab9834cca30653e5c63424051'
+  },
+  {
+    symbol: 'MARS',
+    name: 'Mars',
+    tokenAddress: '0x5d3a4b00db536f7e2be988bc84d92598ed116217',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8debd17284a21865819d1ce1fb2dbcef2a86a616'
+  },
+  {
+    symbol: 'LAW',
+    name: 'Plutocracy',
+    tokenAddress: '0x9b03f09d259fba1ad3111729bdb8ffa55f49190f',
+    tokenDecimals: 0,
+    exchangeAddress: '0x33e0a5a6727ebd1b0c6874e1332c557916d0b047'
+  },
+  {
+    symbol: 'YOT',
+    name: 'Yo Token',
+    tokenAddress: '0xa817a9bcccb3cc79a588879214357e0b4a1a2e28',
+    tokenDecimals: 18,
+    exchangeAddress: '0x529744fd99f9684c9bfa73dc0adb873238dcd1b4'
+  },
+  {
+    symbol: 'YUNG',
+    name: 'YUNG',
+    tokenAddress: '0xbe47f50c85d9f3da055bc8cddaa33dea16926d9d',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbb51faef044941f996f2db81cf7270845a76156d'
+  },
+  {
+    symbol: 'YGG',
+    name: 'YGG',
+    tokenAddress: '0x4ff2b0f58bc8f24e5cfb2a3ef4500162ada1f6da',
+    tokenDecimals: 4,
+    exchangeAddress: '0xaae7426b8d24cda480329609379cea29f76c2cb3'
+  },
+  {
+    symbol: 'TRUSD',
+    name: 'TrustUSD',
+    tokenAddress: '0xdd436a0dce9244b36599ae7b22f0373b4e33992d',
+    tokenDecimals: 18,
+    exchangeAddress: '0x041ac4e52e8e83f3f389fe7e419fa4eecd4dfb2b'
+  },
+  {
+    symbol: 'WEEBS',
+    name: 'Weebs',
+    tokenAddress: '0x1074608e45b42eb25d1e97382e8a1d151987eaba',
+    tokenDecimals: 4,
+    exchangeAddress: '0x4d11123334ac820862162bfbc010fffc2a73ee57'
+  },
+  {
+    symbol: 'CALVIN',
+    name: 'Calvin',
+    tokenAddress: '0xdc8092aaf83e00ebf9b01a2e90b7b7ef867ba503',
+    tokenDecimals: 4,
+    exchangeAddress: '0x657de502ee9fed80d5496a1da0007fe72b2bd18b'
+  },
+  {
+    symbol: 'DRPU',
+    name: 'DRP Utility',
+    tokenAddress: '0xe30e02f049957e2a5907589e06ba646fb2c321ba',
+    tokenDecimals: 8,
+    exchangeAddress: '0x0fee4ac8f7e8239e02dc1c6cdc02b78e1b289839'
+  },
+  {
+    symbol: 'ZERO',
+    name: 'Zero Coin',
+    tokenAddress: '0xc975ebf130ad3ded5545216aaf23191aba69f291',
+    tokenDecimals: 0,
+    exchangeAddress: '0x901cb3a323221fe4a2b392c0a5c59027cec08ae6'
+  },
+  {
+    symbol: 'XAI',
+    name: 'AICoin',
+    tokenAddress: '0x268b7976e94e84a48bf8b2b57ba34b59ed836a74',
+    tokenDecimals: 8,
+    exchangeAddress: '0x0573cd872ff6b6efd20f00e7a9fb02fcd7cd9faf'
+  },
+  {
+    symbol: 'BLAQ',
+    name: 'BLAQUE',
+    tokenAddress: '0x7a7f8d1a19e9a9547035e494d204448bb1388fb5',
+    tokenDecimals: 18,
+    exchangeAddress: '0xaa3eed5178d3239a8d9faf11f16ae3adbbc7ea7e'
+  },
+  {
+    symbol: 'BRC',
+    name: 'Brettcoin',
+    tokenAddress: '0x4777819cccf1a8d1964a27963b7341c3aa653051',
+    tokenDecimals: 18,
+    exchangeAddress: '0x868c87253a02c48ea3c3b1364587620cbc680627'
+  },
+  {
+    symbol: 'TRD',
+    name: 'Thirdhalf.com Token',
+    tokenAddress: '0x4a479bc7330719bf843634f8fb1c53ea88884e8f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5a463b374b486c2055e6f392c8895dd3e1b2e656'
+  },
+  {
+    symbol: 'DM',
+    name: 'Digitale Mark',
+    tokenAddress: '0xbd5dd4d4c51137ee47d080d19cd13670c90df2e9',
+    tokenDecimals: 2,
+    exchangeAddress: '0xa150f7e63e3f2053fc493153b7a43d14d9698ff8'
+  },
+  {
+    symbol: 'AIRDROP',
+    name: 'AirdropToken',
+    tokenAddress: '0xba7435a4b4c747e0101780073eeda872a69bdcd4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6acb64fc1e111c47ac9a7c2767459d9d3ed062d9'
+  },
+  {
+    symbol: 'DGO',
+    name: 'Dinngo',
+    tokenAddress: '0x6d38574be6c230272daad16fa5f291f825bd0da1',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf04f5df7e9754482cf9dd76b52bc3693e231e399'
+  },
+  {
+    symbol: 'CTO',
+    name: 'CotteToken',
+    tokenAddress: '0x7fd483c9f72cf1bf9be2852810e50def29ff2f7f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xcb4c79e50da5aa01d8016218bcdb8b2e1c3f191f'
+  },
+  {
+    symbol: 'SLI',
+    name: 'Sleipnirwallet',
+    tokenAddress: '0x625ce07842a307f190c93316e8215073ce6bd4c4',
+    tokenDecimals: 6,
+    exchangeAddress: '0x1ac7f6257710c788631ec4e35fda7bdd27f82e0b'
+  },
+  {
+    symbol: 'CAMO',
+    name: 'CAMO',
+    tokenAddress: '0xe86a746330b0b691323d2cbb5c140f77d7f198a4',
+    tokenDecimals: 4,
+    exchangeAddress: '0xe5f208b9f709d42c0e43658f34b9b6d6f531e39f'
+  },
+  {
+    symbol: 'HLS',
+    name: 'Hungry of Loves',
+    tokenAddress: '0x3a32a83b1a0a6f266bc54069e8677fefc4059da9',
+    tokenDecimals: 18,
+    exchangeAddress: '0x406153404823e61003d6f302089621c264bdb728'
+  },
+  {
+    symbol: 'FDAI',
+    name: 'Fake DAI',
+    tokenAddress: '0x69215a5c0cf2e69b0803ca283a5ad6dcc0a105bc',
+    tokenDecimals: 18,
+    exchangeAddress: '0x97a5df8bcc5c297067fb807409139b5038684111'
+  },
+  {
+    symbol: 'MP',
+    name: 'Mark Powell',
+    tokenAddress: '0x344c00d6ef1eaf1c0d592915ca976a71a7a95715',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6445075bbf02c597a5a2ab29c73292e64fc7ede9'
+  },
+  {
+    symbol: 'MTX',
+    name: 'Matrix',
+    tokenAddress: '0x3154bf7cbb077e1a46eadf4c1ed019157e8e0687',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8313d98f9ed87e37341c72d47271c6a197d878cf'
+  },
+  {
+    symbol: 'MCX',
+    name: 'MachiX Token',
+    tokenAddress: '0xd15ecdcf5ea68e3995b2d0527a0ae0a3258302f8',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc4c18dec88a6576a8e345887fb1a229e97ba55e7'
+  },
+  {
+    symbol: 'BOL',
+    name: 'Freight Trust Protocol',
+    tokenAddress: '0xefe98765da3824ef4a5358ba798cec87c13d8c62',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe0759863816a0fa5ece145336ae8b72ad2fc3d2f'
+  },
+  {
+    symbol: 'AS1',
+    name: 'Andy Simon',
+    tokenAddress: '0xe3dc650b0054c5fd4aea05cb110c1c19733bfe05',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd78ef5938ffbec6edde49d2524bde929cf47ec8a'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x9bf7805f5deb58dbb881e05b1af09819f8e90eaa',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6e48a8c8a0407652261564e49ed2a6915a48f028'
+  },
+  {
+    symbol: 'ROOBEE',
+    name: 'ROOBEE',
+    tokenAddress: '0xa31b1767e09f842ecfd4bc471fe44f830e3891aa',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc48ded68b38efb8f9f221d17d7820ba99c58b7cb'
+  },
+  {
+    symbol: 'LBRTY',
+    name: 'LIBERTY',
+    tokenAddress: '0xb1f2b122139dacd2ad29840e92cbc38716568994',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc86b9736d32eefa307282e7da92d6b734bb345ef'
+  },
+  {
+    symbol: 'NINA',
+    name: 'Christina',
+    tokenAddress: '0x17b76cc75d3e2d8e2d3e595e5b20b8b1d83fcbde',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1418f2134ed80dc06c0159f5ab4e235fa2a03f94'
+  },
+  {
+    symbol: 'DMEX',
+    name: 'DMEX Token',
+    tokenAddress: '0x45fcf164baffbefaee70a368c96de6f33bdccab0',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6ca505899b49533d23a26737c2efbefc3e5e7350'
+  },
+  {
+    symbol: 'SEM',
+    name: 'Sem',
+    tokenAddress: '0xd129364a82eb0d901ac7ee1998f39b4419f7721c',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd8f656799bb28608beb168709199913c1ffcdd63'
+  },
+  {
+    symbol: 'ELIX',
+    name: 'elixir',
+    tokenAddress: '0xc8c6a31a4a806d3710a7b38b7b296d2fabccdba8',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1bafbe8963131289f466638b8b948a25236c893a'
+  },
+  {
+    symbol: 'UQn',
+    name: 'Uqinzen',
+    tokenAddress: '0xac298353ab790e668986ac9e2d3a9ddfc600ff78',
+    tokenDecimals: 2,
+    exchangeAddress: '0x2298a208c509a7ab0879b8d37100cd1474b136ca'
+  },
+  {
+    symbol: 'CALLIL',
+    name: 'CALLIL',
+    tokenAddress: '0x92c5fb8031d6d0caaf053e88b099c5e1701c1116',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb3899d8b45ac320ffd07d8e3cf1a26086faaddde'
+  },
+  {
+    symbol: 'JJJ',
+    name: 'Jonathan Joseph',
+    tokenAddress: '0x3c35132d0b129f068fdfa65b2c4d265fa5d8cea6',
+    tokenDecimals: 4,
+    exchangeAddress: '0xb94ca1547e01376b1fbae749928b3db4bd22d2cc'
+  },
+  {
+    symbol: 'UKI',
+    name: 'UK Investments',
+    tokenAddress: '0xbdf46502dd5001ed841ad741c8aac4b4e322b320',
+    tokenDecimals: 10,
+    exchangeAddress: '0x08f38eaa40c7089960591baa2b3aa912c6b7a98a'
+  },
+  {
+    symbol: 'EAI',
+    name: 'ethereumAI Token',
+    tokenAddress: '0x2f102963f61acf1ca4badfe82057b440f2fc722c',
+    tokenDecimals: 6,
+    exchangeAddress: '0x390f0c2bd0fbf2e876a2269a14700f0183ce9b28'
+  },
+  {
+    symbol: 'GST',
+    name: 'GAMESTARS TOKEN',
+    tokenAddress: '0x67a9099f0008c35c61c00042cd9fb03684451097',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd8c676ee01d6429b94d1b4b6b328907dbc613f3b'
+  },
+  {
+    symbol: 'SRH',
+    name: 'SRH',
+    tokenAddress: '0xc350e846e2c57f9eece90febc253d14c8080871b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x685a4a592bfac11a91c8c940bf34f7cd7be6f6f8'
+  },
+  {
+    symbol: 'BNANA',
+    name: 'Chimpion',
+    tokenAddress: '0x07ef9e82721ac16809d24dafbe1792ce01654db4',
+    tokenDecimals: 18,
+    exchangeAddress: '0xab9488f145aaa84d57f2b7b595e14ff6cb810674'
+  },
+  {
+    symbol: 'CRAD',
+    name: 'CRAD CASH',
+    tokenAddress: '0x608f006b6813f97097372d0d31fb0f11d1ca3e4e',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd883926830cc566f8ecc415ae6513d2829422574'
+  },
+  {
+    symbol: 'WOPS',
+    name: 'Westerops',
+    tokenAddress: '0x87ee5f6fa770311842c007a748260ddbe2ca930f',
+    tokenDecimals: 6,
+    exchangeAddress: '0x237c8060b3c5a63cc3080ad8f4aabca03ecf4d11'
+  },
+  {
+    symbol: 'STS',
+    name: 'Status Security',
+    tokenAddress: '0x2193b9f2b5e5051e41c32c71b25587d6a6f045c8',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa192439e9510cb9198b11132cd823842b13f7839'
+  },
+  {
+    symbol: 'TEN',
+    name: 'Tithe',
+    tokenAddress: '0xb45cecdf04a0cd7dc30181572e2352b510ef7b93',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6914e8e0179d6dca70b2c3c76f5ff502a2d8b023'
+  },
+  {
+    symbol: 'EDO',
+    name: 'Eidoo Token',
+    tokenAddress: '0xced4e93198734ddaff8492d525bd258d49eb388e',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1e8f3b01ceb7544db5d47a251c2d7942ac257fa4'
+  },
+  {
+    symbol: 'MGO',
+    name: 'MobileGo Token',
+    tokenAddress: '0x40395044ac3c0c57051906da938b54bd6557f212',
+    tokenDecimals: 8,
+    exchangeAddress: '0x145a085a1432b86207e2d3844ea14a3679cf6112'
+  },
+  {
+    symbol: 'DMEX',
+    name: 'DMEX Token',
+    tokenAddress: '0x13bfb9164746afecdd0d5db71d037328661fc49f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6089e4a1ae7754334aa5a91cf5ab16a34029b518'
+  },
+  {
+    symbol: 'MNE',
+    name: 'minereum',
+    tokenAddress: '0x1a95b271b0535d15fa49932daba31ba612b52946',
+    tokenDecimals: 8,
+    exchangeAddress: '0xd6a1271f0ea94217bb73ca813b72404c08475682'
+  },
+  {
+    symbol: 'NOKU',
+    name: 'NOKU',
+    tokenAddress: '0x1fc52f1abade452dd4674477d4711951700b3d27',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9a20550f841e930131bf8528c6c87f3afa191629'
+  },
+  {
+    symbol: 'IKTK',
+    name: 'IKTkroner',
+    tokenAddress: '0x8af44e92c0236422934e4224e7e252ce0e21735b',
+    tokenDecimals: 0,
+    exchangeAddress: '0xf291dfe9d6533a7305bebc3e7a2d47f25e4123fe'
+  },
+  {
+    symbol: 'SCOTT',
+    name: 'SCOTT',
+    tokenAddress: '0x27fd686db10e0ae047fe8fe1de9830c0e0dc3cfa',
+    tokenDecimals: 4,
+    exchangeAddress: '0x76f455c38ab1fef84cf27f51065ee1374fa400e5'
+  },
+  {
+    symbol: 'USD',
+    name: 'USD',
+    tokenAddress: '0x22a39c2dd54b71ac884657bb3e37308abe2d02e1',
+    tokenDecimals: 0,
+    exchangeAddress: '0x8085d4f288d36c20a632f27361ccc74e9b4bb725'
+  },
+  {
+    symbol: 'HGBT',
+    name: 'CrazyBoxToken',
+    tokenAddress: '0x00471ae525110087bbc6847cb6e9691bacd13c89',
+    tokenDecimals: 8,
+    exchangeAddress: '0xe9008308f4401bde01fd55b8722fe0f7eec128ac'
+  },
+  {
+    symbol: 'ETH',
+    name: 'Ethereum',
+    tokenAddress: '0x390bf02a7e842ed3ffd22be931ec87430428f1d8',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb8aae1eeac9485953ce7ae84a25dc992bc55feca'
+  },
+  {
+    symbol: 'CARD',
+    name: 'Cardstack',
+    tokenAddress: '0x954b890704693af242613edef1b603825afcd708',
+    tokenDecimals: 18,
+    exchangeAddress: '0x93d2ce3df3f79f5accadabd7647a42ffd1fe6f78'
+  },
+  {
+    symbol: 'eUSD',
+    name: 'Eurodollar',
+    tokenAddress: '0x8c4f045c35288f899fe7b034dbe13bab2bb454ab',
+    tokenDecimals: 18,
+    exchangeAddress: '0x91b7fd1f4d6a28d782299fabd00a6c7adff77564'
+  },
+  {
+    symbol: 'B0T',
+    name: 'The Emperial Currency',
+    tokenAddress: '0xdd60f9dd5b891b728955149bd59f42c6513c8dc6',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1b399e4052d715997659d3a6a6507c5b22ed66b6'
+  },
+  {
+    symbol: 'PLA',
+    name: 'PlayChip',
+    tokenAddress: '0x0198f46f520f33cd4329bd4be380a25a90536cd5',
+    tokenDecimals: 18,
+    exchangeAddress: '0xdf28084119560321bbbd45d1da4aa83d3112e153'
+  },
+  {
+    symbol: 'UTNP',
+    name: 'UTN-P: Universa Token',
+    tokenAddress: '0x9e3319636e2126e3c0bc9e3134aec5e1508a46c7',
+    tokenDecimals: 18,
+    exchangeAddress: '0x020049960ca05a7e76aefe8a7dba2b557bfc3259'
+  },
+  {
+    symbol: 'SKATE',
+    name: 'Sk8coin',
+    tokenAddress: '0x8f01ebcdc9972cf3c7ea61ddf57d124846896db8',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd7f67c9340dda558905b9f773e97e4fe86e2e3dd'
+  },
+  {
+    symbol: 'USDCUSDB',
+    name: 'USD//C Smart Relay Token',
+    tokenAddress: '0x976a003d2e8ba230e9c7fb65da5de448a4bc2d0d',
+    tokenDecimals: 6,
+    exchangeAddress: '0xf161855f78e71838ade1cf9ca90566220758b534'
+  },
+  {
+    symbol: 'BDP',
+    name: 'BidiPass',
+    tokenAddress: '0x593114f03a0a575aece9ed675e52ed68d2172b8c',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa6391e46e686976cd2101c1353919211e8c00705'
+  },
+  {
+    symbol: 'CURA',
+    name: 'CuraDAI',
+    tokenAddress: '0x0a4b2d4b48a63088e0897a3f147ba37f81a27722',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc07b2fba5ec3cb810244f8499943564455322dc9'
+  },
+  {
+    symbol: 'CHSB',
+    name: 'SwissBorg Token',
+    tokenAddress: '0xba9d4199fab4f26efe3551d490e3821486f135ba',
+    tokenDecimals: 8,
+    exchangeAddress: '0x897ee0b6c3ef0168052a3f599b1a74b5a02f4366'
+  },
+  {
+    symbol: 'RPAI',
+    name: 'Painthereum RED',
+    tokenAddress: '0x96f4c85e7830c755981c12fb7c702ef580047b2a',
+    tokenDecimals: 18,
+    exchangeAddress: '0xdb4b2df12487acf6d7a2bc8600e9a65c9ee4e60c'
+  },
+  {
+    symbol: 'GPAI',
+    name: 'Painthereum GREEN',
+    tokenAddress: '0x3865cb3cb00041d7e1b4f8189aa73a8cc590c28c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0d61a26bc6a7e5e9ae4f4759c5e3e5c5f1b0c69b'
+  },
+  {
+    symbol: 'BPAI',
+    name: 'Painthereum BLUE',
+    tokenAddress: '0x3c023a75da4635ce931778ce24a36b041e503eff',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb63935e23dc8f6f7410a5d253aecd474cc3ec19a'
+  },
+  {
+    symbol: 'BBSC',
+    name: 'BaoBoShiCoin',
+    tokenAddress: '0xf89ba2862dfae69bc2546568d56b087d7454c9c9',
+    tokenDecimals: 18,
+    exchangeAddress: '0x7247326e46cfb46bbe704e36ff9bdf40866aeff0'
+  },
+  {
+    symbol: 'PSC',
+    name: 'PRODATA SHARES COIN',
+    tokenAddress: '0x6744ebb5214d06ec62a310f72a2e8e0770180fc7',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6947d6b18db1a2468a3aa888a5a2d64b0f8b6dbb'
+  },
+  {
+    symbol: 'HCC',
+    name: 'HOPE COLLATERAL COIN',
+    tokenAddress: '0x3193271d8cb966234ca9bd1eda066fdc2dddae30',
+    tokenDecimals: 18,
+    exchangeAddress: '0xaa87891bd4c16b8cb35532a379ab40ad343375d2'
+  },
+  {
+    symbol: 'PEW',
+    name: 'BroFistCoin',
+    tokenAddress: '0xa701122c1b67220a8b6883d03c8ad67896b12466',
+    tokenDecimals: 8,
+    exchangeAddress: '0x80eba0fd9438b38486ca83206fc4a12951cb6cf3'
+  },
+  {
+    symbol: 'BKMcoffee',
+    name: '书影币',
+    tokenAddress: '0x1ce167d0e32f05af1d7ec02769161c70bdf84609',
+    tokenDecimals: 3,
+    exchangeAddress: '0xcea1b0209ad24a10ca2b350459c358a1590693f7'
+  },
+  {
+    symbol: 'CNAC',
+    name: 'Crypto is not a Crime',
+    tokenAddress: '0xfb17aada497f76cae49326f9c19d6e661888d70b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5909e61cafcc8fa307ce0ba5812cd602c01ad093'
+  },
+  {
+    symbol: 'real',
+    name: 'realcoin',
+    tokenAddress: '0x8e656797a8c494ab9148b21e30250ced0afd9f17',
+    tokenDecimals: 3,
+    exchangeAddress: '0xff28aec0850738010cfafdeafeb388c2ac648c2d'
+  },
+  {
+    symbol: 'TJL',
+    name: 'Timo Lehes',
+    tokenAddress: '0xd190167c333069ba4f92f6336b884045b1160a54',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5f9a13df22c691e7880e8864ce84675b3cfa8971'
+  },
+  {
+    symbol: 'CNSL',
+    name: 'Counsel',
+    tokenAddress: '0xea0bea4d852687c45fdc57f6b06a8a92302baabc',
+    tokenDecimals: 18,
+    exchangeAddress: '0x4389d757fa071fd714fd74afdcc7da384c9a7ede'
+  },
+  {
+    symbol: 'OHFF',
+    name: 'OHFF',
+    tokenAddress: '0xf0aabeacbc2d91baf21bda0006c9d65de736053a',
+    tokenDecimals: 4,
+    exchangeAddress: '0x1ea22dfec6f1022d053e7fe0909e3a42fe4167dd'
+  },
+  {
+    symbol: 'null',
+    name: 'HEXTEWKEN',
+    tokenAddress: '0xd495cc8c7c29c7fa3e027a5759561ab68c363609',
+    tokenDecimals: 8,
+    exchangeAddress: '0xdd1f46dbc88ba7ebcb0edcaf023643d2c5098850'
+  },
+  {
+    symbol: 'JT',
+    name: 'JungleToken',
+    tokenAddress: '0x285ce65705d26c28f7a720cf3bfe8b868c82a48f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa31a0b8e8a73f0cdc625436d516c9bed91529ace'
+  },
+  {
+    symbol: 'BLK',
+    name: 'BLANK',
+    tokenAddress: '0x6fbf4e57ec93cdd33c74762f7d99694228a68cd2',
+    tokenDecimals: 2,
+    exchangeAddress: '0xacbd1201ca450f646ff2f04bc7d73d5252fd5de5'
+  },
+  {
+    symbol: 'DCO',
+    name: 'Decentralized chain offer',
+    tokenAddress: '0x65668f5d2b4ec78e31eb4db47d2258320761de72',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3fc9c3ad3853c54109f9ff6b262127e234d2a1df'
+  },
+  {
+    symbol: 'JOB',
+    name: 'Jobchain',
+    tokenAddress: '0x17280da053596e097604839c61a2ef5efb7d493f',
+    tokenDecimals: 8,
+    exchangeAddress: '0xf3311aa6c9aa3b4663343ef68aa884561afa73ef'
+  },
+  {
+    symbol: 'SCS',
+    name: 'Smart Contract Service',
+    tokenAddress: '0xa662e2fa780c4cdaa5134435824dc2f16ad6f329',
+    tokenDecimals: 18,
+    exchangeAddress: '0xcc788a4db4f1781eed07650ad17de90f979b7af0'
+  },
+  {
+    symbol: 'FENIX',
+    name: 'fenix',
+    tokenAddress: '0x0b0d58ac4ad856c4600a233c8169dba39d7326ab',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd2537136e12dc2c3a89194258f8401844e2db87c'
+  },
+  {
+    symbol: 'RV',
+    name: 'Herve',
+    tokenAddress: '0xe97d2d78c51c277eddc110cf3869861359968b99',
+    tokenDecimals: 18,
+    exchangeAddress: '0x31c7a4fa09dfaaf0a6d595f4a0161f43da775b3d'
+  },
+  {
+    symbol: 'LCX',
+    name: 'LCX',
+    tokenAddress: '0x037a54aab062628c9bbae1fdb1583c195585fe41',
+    tokenDecimals: 18,
+    exchangeAddress: '0xade1a79d149aee8536cb6c422571c4bf7ec62a11'
+  },
+  {
+    symbol: 'CTW',
+    name: 'CTWorld Token',
+    tokenAddress: '0x29d82a45143569e02a0566f94f94b38f946858db',
+    tokenDecimals: 18,
+    exchangeAddress: '0x26a021133d1686476966f9882cae832508e3c083'
+  },
+  {
+    symbol: 'CB',
+    name: 'Chris Blec',
+    tokenAddress: '0x2043f5f3e44c76e6fb9266c7247cef569172d664',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1fe2ee65e684c246099001751f01cd17736a8490'
+  },
+  {
+    symbol: 'SREUR',
+    name: 'EURO TOKEN',
+    tokenAddress: '0x7a0e91c4204355e0a6bbf746dc0b7e32dfefdecf',
+    tokenDecimals: 8,
+    exchangeAddress: '0x09212cbfcd3d2aeefb6c605de6c1a497d71f0e63'
+  },
+  {
+    symbol: 'ZAM',
+    name: 'Zamrud',
+    tokenAddress: '0x9d3571f685e0fec61925b248977a09f8da047f48',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa301e30b899e9d8c51e71435ae472566df34c26e'
+  },
+  {
+    symbol: 'CRF',
+    name: 'CRYPTOFRIDGE',
+    tokenAddress: '0xdb399d5d44cfb9cb7cbbdc64be1dc3b978ca1f06',
+    tokenDecimals: 18,
+    exchangeAddress: '0x541eb6e395f2bbb5ae8deeb93af7750a252fdae7'
+  },
+  {
+    symbol: 'TRON',
+    name: 'Bitcoin Tron',
+    tokenAddress: '0x9693dded163393f18810c7a799c662998bf8bf3e',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0b684f0755c261b027c0258bf1ff077f7b33aa0c'
+  },
+  {
+    symbol: 'EVC',
+    name: 'Evcoin',
+    tokenAddress: '0x6957cbcf451fd1b1dc04dc67b7682d62fba9e2ad',
+    tokenDecimals: 3,
+    exchangeAddress: '0xd4291adf8982cf9fd1aaab8fe12f398c1f10530d'
+  },
+  {
+    symbol: 'ALEX',
+    name: 'AlexMasmej',
+    tokenAddress: '0x8ba6dcc667d3ff64c1a2123ce72ff5f0199e5315',
+    tokenDecimals: 4,
+    exchangeAddress: '0xb49c53f2e459ce96b04318610abd77f4e83113db'
+  },
+  {
+    symbol: 'SNC',
+    name: 'SunContract',
+    tokenAddress: '0xf4134146af2d511dd5ea8cdb1c4ac88c57d60404',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0f0c85fc12ac26059f2e991716d6ce9a9437e121'
+  },
+  {
+    symbol: 'ART',
+    name: 'ART Token',
+    tokenAddress: '0x33e1b26d699d923e4cdba286cc5783d3c04831c3',
+    tokenDecimals: 0,
+    exchangeAddress: '0x468188c85df476d0c4037318de0d38162d0c3786'
+  },
+  {
+    symbol: 'TBCUSDB',
+    name: 'ThunderBoltCoin Smart Relay Token',
+    tokenAddress: '0x323e4d8097b0a58ab8210ac6efcc4a89285cfc6b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3d3f82c19774bff701420244091bc14a75fb07da'
+  },
+  {
+    symbol: 'LIT',
+    name: 'LITonium',
+    tokenAddress: '0x2e3c062e16c1a3a04ddc5003c62e294305d83684',
+    tokenDecimals: 2,
+    exchangeAddress: '0x2f31baa72804ce5a32968646a1e44806162e7954'
+  },
+  {
+    symbol: 'cDAIUSDC',
+    name: 'Stablecoins.exchange cDAI/cUSDC',
+    tokenAddress: '0x3740fb63ab7a09891d7c0d4299442a551d06f5fd',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8174c73908e5c61d7158dc291729778ea99e078a'
+  },
+  {
+    symbol: 'REAK',
+    name: 'Reakoin',
+    tokenAddress: '0xa5b2dbba9a3c04ec4f56cbe16520debecbf35545',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6d74b580df8829f20ba570c1cde4468ddec35b7c'
+  },
+  {
+    symbol: 'NMP',
+    name: 'Neuromorphic',
+    tokenAddress: '0x4d6b9f281af31916a0f16d1cea2ec7384851eaab',
+    tokenDecimals: 18,
+    exchangeAddress: '0xdf6f8fdde0965862a7da5db0649e7c523b719f78'
+  },
+  {
+    symbol: 'SCRO',
+    name: 'JustEscrowCoin',
+    tokenAddress: '0x0a133dfa1f65ff6f834205ed43d66344306fa02c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6bbcae545a4b26e64883deaee14dab5a17b9d127'
+  },
+  {
+    symbol: 'RMBC',
+    name: 'RMBC',
+    tokenAddress: '0x4ad280a2f38404ce1fd75556f3b9951e63acaf03',
+    tokenDecimals: 6,
+    exchangeAddress: '0xcae4f1407ee7f129ce5f06d010260c3570bcfe28'
+  },
+  {
+    symbol: '0xETH',
+    name: '0xEthereum Token',
+    tokenAddress: '0x36d06ccc92cefd9ec38fe759d957da0b0ecc249f',
+    tokenDecimals: 8,
+    exchangeAddress: '0x918e7dcb95226f9ed937f7a05b93c1e29aeaa74b'
+  },
+  {
+    symbol: 'UNI',
+    name: 'Unipot',
+    tokenAddress: '0x97c795a8028b96e5e2a508468b1c132fca5caa19',
+    tokenDecimals: 8,
+    exchangeAddress: '0xb3e22422398aad8c7b12ae25766ad37e56fb8715'
+  },
+  {
+    symbol: 'VTX',
+    name: 'VorteX Network',
+    tokenAddress: '0xd957e08ac5421e2c28510586b57d095e5094836a',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0085146bd3b67f9b80c54640cb25185d685a2d7e'
+  },
+  {
+    symbol: 'DLH',
+    name: 'DELHUMEAU',
+    tokenAddress: '0x0651e4a1de38691677f2c82bd89793a8d42e7293',
+    tokenDecimals: 18,
+    exchangeAddress: '0x685e22b182e4766fc28ba87eccc480cf871dd432'
+  },
+  {
+    symbol: 'HD',
+    name: 'Herve Delhumeau',
+    tokenAddress: '0x667e1a2f05f15897fb74331031b9f829d5d3d7e5',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0f85e8ceb45bc5281834b1a80deef05ecfc7e003'
+  },
+  {
+    symbol: 'FICO',
+    name: 'FIND Coin',
+    tokenAddress: '0xe0132738036603760c0e9cb8aeb502a32c1b3348',
+    tokenDecimals: 18,
+    exchangeAddress: '0x44f1e90ff2a3575137810f6cfea2dc84385e9d40'
+  },
+  {
+    symbol: 'HOWL',
+    name: 'Howl',
+    tokenAddress: '0xd1dc64b4bdaab103a72bf4778a33740704aff380',
+    tokenDecimals: 4,
+    exchangeAddress: '0xaf1785b6f83ba096d311543f72951e040a417da2'
+  },
+  {
+    symbol: 'SCT',
+    name: 'SatoshiCrypto',
+    tokenAddress: '0x3f012e0ab3ff4797231faf20eb71f682240d1b1f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1a565ddf5dcbe96dc94371a814793cf9ac9d63fa'
+  },
+  {
+    symbol: 'YATX',
+    name: 'Yattaqi Pro',
+    tokenAddress: '0x39043aae9c48a628f5184af7a5bb925137757b15',
+    tokenDecimals: 8,
+    exchangeAddress: '0x736e8cdc62c59fcd47ad26a8e3a7d7071fbe7bb8'
+  },
+  {
+    symbol: 'PSK',
+    name: 'Pool of Stake Master Token',
+    tokenAddress: '0x1c5f43710a1776b0ea7191b7ead75d4b98d69858',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9ad4f22817d35c645e7ae825a6b8678d2237bf21'
+  },
+  {
+    symbol: 'CUBE',
+    name: 'Somnium Space Cubes',
+    tokenAddress: '0xdf801468a808a32656d2ed2d2d80b72a129739f4',
+    tokenDecimals: 8,
+    exchangeAddress: '0x21e7259f42b68bd89fd85f33584eda9bdf5b7004'
+  },
+  {
+    symbol: 'TXH',
+    name: 'TradeX Token',
+    tokenAddress: '0x5432c580e34f590f4dd901b825ddeb92e905e826',
+    tokenDecimals: 18,
+    exchangeAddress: '0x721517009639fff86759a889d890f77f27514cbb'
+  },
+  {
+    symbol: 'BRZE',
+    name: 'Breeze',
+    tokenAddress: '0x77c07555af5ffdc946fb47ce15ea68620e4e7170',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd164626d50983fefadce6edf934148a4fe29097f'
+  },
+  {
+    symbol: 'WCF',
+    name: 'Wrapped ChainFaces',
+    tokenAddress: '0x659046522c5c246a34a7eb17a814ca648436644a',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8f29e4ffdeb4515e3c6ff1195a449f1fba950a6c'
+  },
+  {
+    symbol: 'SPDG',
+    name: 'SpeedGas',
+    tokenAddress: '0x16bc9068f98557609dc0300cd22aa627ee7f4e62',
+    tokenDecimals: 8,
+    exchangeAddress: '0xab48b8e31e6acb3e4e823d7c2b37fca48829d329'
+  },
+  {
+    symbol: 'HEDG',
+    name: 'HedgeTrade',
+    tokenAddress: '0xf1290473e210b2108a85237fbcd7b6eb42cc654f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb5b46a2521048d7f2f9d9603eeb1b7abf7d18886'
+  },
+  {
+    symbol: 'GOU',
+    name: 'Gou',
+    tokenAddress: '0xb19977b23b40d59254b8f5a0bdb67076b4fa0bc6',
+    tokenDecimals: 4,
+    exchangeAddress: '0x9845bc0f87585944207526976d83be8129d612ce'
+  },
+  {
+    symbol: 'BLC',
+    name: 'Black Lion Coin',
+    tokenAddress: '0x42dbc00e14f711260e606edbd4f14394ab4780d8',
+    tokenDecimals: 18,
+    exchangeAddress: '0x136a635440822482e8ccaef38760d9234328612e'
+  },
+  {
+    symbol: 'ARO',
+    name: 'Aeronia',
+    tokenAddress: '0x8b0b3526b414ed5019049326544c07725a30da92',
+    tokenDecimals: 18,
+    exchangeAddress: '0x7979d646644a2ff37228740dfbc8e0567856cb48'
+  },
+  {
+    symbol: 'WHEN',
+    name: 'WHEN Token',
+    tokenAddress: '0xf4fe95603881d0e07954fd7605e0e9a916e42c44',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9e6f8d8189ac409e2d9fe4a441d673ec8b611d78'
+  },
+  {
+    symbol: 'PTR',
+    name: 'Petro',
+    tokenAddress: '0xe964de82b9b83915ab8591bbebf1bfc4c65bb1dc',
+    tokenDecimals: 8,
+    exchangeAddress: '0xd4125bf96b48d7efcb23fdcfd782c0cb18449de3'
+  },
+  {
+    symbol: 'AETH',
+    name: 'Atomic Ethereum',
+    tokenAddress: '0xb7742216e874c7c33f608c41e625b01a6f323570',
+    tokenDecimals: 1,
+    exchangeAddress: '0x1029d1ff7862fbe8fa6358dc1313488ed6885fc6'
+  },
+  {
+    symbol: 'STMX',
+    name: 'Crypterio Coin',
+    tokenAddress: '0xe5fe68179c71d9fb4c1fed2035f4bbff9dc7b967',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3e626492cf0a1dd58b6ba4542b47134e3b64e431'
+  },
+  {
+    symbol: 'aUSDT',
+    name: 'Aave Interest bearing USDT',
+    tokenAddress: '0x71fc860f7d3a592a4a98740e39db31d25db65ae8',
+    tokenDecimals: 6,
+    exchangeAddress: '0x967735eb617ad99e86dfe5e13b7dd85df19ea5b1'
+  },
+  {
+    symbol: 'ZDR',
+    name: 'Zloadr Token',
+    tokenAddress: '0xbdfa65533074b0b23ebc18c7190be79fa74b30c2',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc1a7765bdbe7cb90b8e7ac89b9a2c07a2a111880'
+  },
+  {
+    symbol: 'SATURN',
+    name: 'Saturn',
+    tokenAddress: '0x73dd6e972b4fce8ca611747b40006bcc8ee38e27',
+    tokenDecimals: 18,
+    exchangeAddress: '0x901f55986b1ec595d48595d57001827c98160af3'
+  },
+  {
+    symbol: '㏕₧',
+    name: 'TALEGO',
+    tokenAddress: '0xfab890ed2907e860038f67b257e7f3cc75683369',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc0556e0cd21ac31a98a65e572bc64c41d73892dd'
+  },
+  {
+    symbol: 'DINK',
+    name: 'DINKY',
+    tokenAddress: '0xec1721e6fb745217c108e6d99d7115fc251ab88b',
+    tokenDecimals: 8,
+    exchangeAddress: '0x8ea71b38759c869a1e4ce94e8e51e631b294490f'
+  },
+  {
+    symbol: 'DXT',
+    name: 'DataWallet Token',
+    tokenAddress: '0x8db54ca569d3019a2ba126d03c37c44b5ef81ef6',
+    tokenDecimals: 8,
+    exchangeAddress: '0x39bd9a3c5af0dd9592d0eaef2ddf34b22ec5cd10'
+  },
+  {
+    symbol: 'NEOG',
+    name: 'null',
+    tokenAddress: '0x449574c69f3a658794829ed81639a7a9ece041e1',
+    tokenDecimals: 0,
+    exchangeAddress: '0xa4433596eeeab8329cc6725ca266025472230c11'
+  },
+  {
+    symbol: 'ETG',
+    name: 'null',
+    tokenAddress: '0x28c8d01ff633ea9cd8fc6a451d7457889e698de6',
+    tokenDecimals: 0,
+    exchangeAddress: '0x69738470f8f73539fee0f6867cbd24b8c0a7e50a'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x17f11fca7a66e8049484ae0a74e0013c5719ec77',
+    tokenDecimals: 18,
+    exchangeAddress: '0x75121e3a693f8720a9cb1bf8138c85eff37665ea'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x4cdfd08c4128c48987425846763b01f1570dc825',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa0b519e9026dfdf5b46eb254584397b2bf38a4c6'
+  },
+  {
+    symbol: 'W0xETH',
+    name: 'Wrapped 0xEthereum Token',
+    tokenAddress: '0x716523231368d43bdfe1f06afe1c62930731ab13',
+    tokenDecimals: 8,
+    exchangeAddress: '0xc1a1090c262b02b1ff26ec5d8868c78e9324a348'
+  },
+  {
+    symbol: 'ARCG',
+    name: 'Arch Crypton Game',
+    tokenAddress: '0xf5774f42b28f35429aac35f8eb57541c511fdd49',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbfb13b8bc14ffe736e13cd3ff8c54e7c8496e596'
+  },
+  {
+    symbol: 'EH2',
+    name: 'EnergonX Hydrogen H₂',
+    tokenAddress: '0xa7d768ebd9915793393f117f8ab10f4a206875d8',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf2ba17e87770fc2b3f5892eef234d9e5a45206a8'
+  },
+  {
+    symbol: 'XMRG',
+    name: 'Monero Gold',
+    tokenAddress: '0x0f598112679b78e17a4a9febc83703710d33489c',
+    tokenDecimals: 8,
+    exchangeAddress: '0xceda48d2d41a6b725c2be17ae306474db5193027'
+  },
+  {
+    symbol: 'APX',
+    name: 'Apex',
+    tokenAddress: '0x2b69f7c421f7b5dbda8c0c637b0f15186df50b59',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0d9e04ad1f4873ce8210f26f8f1686d9d973889f'
+  },
+  {
+    symbol: 'XLM',
+    name: 'Stellar',
+    tokenAddress: '0xd37f6655a53d907858efb65de16a561a1c3be751',
+    tokenDecimals: 18,
+    exchangeAddress: '0x889ffb451d55d0832b54264dea17b4f5ac1a49e4'
+  },
+  {
+    symbol: 'ETC',
+    name: 'Ethereum',
+    tokenAddress: '0xa1621d5ceb743bbd4c9b9e65b6ff79cc661908e9',
+    tokenDecimals: 18,
+    exchangeAddress: '0xcbf2caa4e86f380139469d6dc97048a108e11d48'
+  },
+  {
+    symbol: 'CC coinslot.com',
+    name: 'Coin-coin coinslot.com',
+    tokenAddress: '0x7f3eab3491ed282197038f1b89ca33d7e5adffba',
+    tokenDecimals: 8,
+    exchangeAddress: '0x7a651d199019f1a2e737978d354106d6dd0644e1'
+  },
+  {
+    symbol: 'Spark',
+    name: 'Sparkles Light',
+    tokenAddress: '0x4c4c62a08eb49404ab85f3b4a0d6560488f2e216',
+    tokenDecimals: 6,
+    exchangeAddress: '0xa9b3794a48554d7008875b4e9d9b8961f5605d50'
+  },
+  {
+    symbol: 'RES',
+    name: 'Resfinex',
+    tokenAddress: '0x0a9f693fce6f00a51a8e0db4351b5a8078b4242e',
+    tokenDecimals: 5,
+    exchangeAddress: '0xa9a666ec585bcc8551ac7648258bbfaf936c2c25'
+  },
+  {
+    symbol: 'ALU',
+    name: 'ALUCHAIN',
+    tokenAddress: '0x3b2f94c251c2cccb7ad16a68f040a220cc2bdd72',
+    tokenDecimals: 8,
+    exchangeAddress: '0xd8c324c801aee42a83657887ff37ce859e6e60c6'
+  },
+  {
+    symbol: 'STQ',
+    name: 'Storiqa Token',
+    tokenAddress: '0x5c3a228510d246b78a3765c20221cbf3082b44a4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x39a0b1cafcf65abd0df4c8d20f36391ab6a90b6a'
+  },
+  {
+    symbol: 'TTT',
+    name: 'Tapcoin',
+    tokenAddress: '0x9f599410d207f3d2828a8712e5e543ac2e040382',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0f5d5579547b3fdc99da897135b0ff66cdb95387'
+  },
+  {
+    symbol: 'ETHUSDADL4',
+    name: 'ETHUSD ADL 4H Set',
+    tokenAddress: '0xb8243b4eeca27a4191e879760b88fe2270561796',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa995056b1730a2c4493707dd901c17cc8b9d610c'
+  },
+  {
+    symbol: 'BTCS',
+    name: 'Bitcoin Solar',
+    tokenAddress: '0x5f51a196ed91fb14e3b3650c30743675c9a429be',
+    tokenDecimals: 18,
+    exchangeAddress: '0x07de855ee319d35e603e5d25d247adf3fbb44cb1'
+  },
+  {
+    symbol: 'DNN',
+    name: 'DNN',
+    tokenAddress: '0x9d9832d1beb29cc949d75d61415fd00279f84dc2',
+    tokenDecimals: 18,
+    exchangeAddress: '0x53109f32c4d68e0d728a541b9d7726d50a97ddbf'
+  },
+  {
+    symbol: 'BRD',
+    name: 'Bread Token',
+    tokenAddress: '0x558ec3152e2eb2174905cd19aea4e34a23de9ad6',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb2360c3263ee0c97d5937ad4e598e57ef9923a1e'
+  },
+  {
+    symbol: 'FLUZ',
+    name: 'FluzFluz',
+    tokenAddress: '0x954b5de09a55e59755acbda29e1eb74a45d30175',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd1028b8af0e4e54812f0d0dd726de687cd361e96'
+  },
+  {
+    symbol: 'PHM',
+    name: 'Phoneum',
+    tokenAddress: '0x8b6dd2144a3cc6677600735d0e62134839bb85d0',
+    tokenDecimals: 2,
+    exchangeAddress: '0xe7e2ec57aa0fe59b55e23288bc9a6d748fa4f713'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x2b7b3dd16488f906d190e241156984bb4274d269',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe8a90f4a47b54988fe031bceede1449284f1de67'
+  },
+  {
+    symbol: 'CBD',
+    name: 'TheCBDcoin',
+    tokenAddress: '0xd02a1ed82fa5091a5639dc507f2f6130e5bc61be',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf5941b6cd3c2c25c8066a14a946d41902e7efcdc'
+  },
+  {
+    symbol: 'UVU',
+    name: 'Comunion UVU Token',
+    tokenAddress: '0xc163eade1a642d8ccef1046bae2569a00cb647ed',
+    tokenDecimals: 8,
+    exchangeAddress: '0x696725bbf41283cad29ef421b427464a8d87dc37'
+  },
+  {
+    symbol: 'STON',
+    name: 'Mainston',
+    tokenAddress: '0xe31cbf04019fb9a859f9dfce6389efeb45170380',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc9528eaa5f47b994df042fc623648cb07cc0e83e'
+  },
+  {
+    symbol: 'XLIC',
+    name: 'Lico',
+    tokenAddress: '0xe17607302cff3a5b246916e6bfd0eda7bbd2c4b0',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe3412f2155fe1d49febc6f8ed605773682c502d1'
+  },
+  {
+    symbol: 'BRZ',
+    name: 'BRZ',
+    tokenAddress: '0x420412e765bfa6d85aaac94b4f7b708c89be2e2b',
+    tokenDecimals: 4,
+    exchangeAddress: '0xcc7662060ff05ea3ab68c8eb39653c1e52708adf'
+  },
+  {
+    symbol: 'UNI',
+    name: 'Unipot',
+    tokenAddress: '0x3e370a6c8255b065bd42bc0ac9255b269cfcc172',
+    tokenDecimals: 8,
+    exchangeAddress: '0x8c871606331caff597ef08f59d6fd6b97d70ba7b'
+  },
+  {
+    symbol: 'DIO',
+    name: 'Decimated Token',
+    tokenAddress: '0x35a5cb585d51d836922b78a9bb1f5c04635c39b6',
+    tokenDecimals: 8,
+    exchangeAddress: '0xbba5ac05ed924e27347f49bded2b7b323e3b2eb3'
+  },
+  {
+    symbol: 'KAPP',
+    name: 'Kappi Token',
+    tokenAddress: '0x2439c0549f1616dab533c8af5d42a77331173b3a',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5f6bd82aedfc9d8e037269e65e930cdda3ade103'
+  },
+  {
+    symbol: 'YGG',
+    name: 'YGG',
+    tokenAddress: '0x0b686de16d57b4d2d0384d06bec6ef5d5d7dce5f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3d4b054dacd9a78dc7bb9508045ea353acc3901b'
+  },
+  {
+    symbol: 'PHT',
+    name: 'Phoneum Token',
+    tokenAddress: '0xbbd227e805b90b8fe8f4c01a3f4e48bdae0599af',
+    tokenDecimals: 2,
+    exchangeAddress: '0x0865f2656819f08d38d26e1e134be5e519951526'
+  },
+  {
+    symbol: 'KPT',
+    name: 'krypital',
+    tokenAddress: '0x814d76b36a7d34df364f4fc6b075ba47f9ba1f47',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd30ebbbb823fe8f14ce3d0e1c1ed383cb8b71708'
+  },
+  {
+    symbol: 'TAPS',
+    name: 'TAPSPAY',
+    tokenAddress: '0x56bb6f961f2cb9947fea063df1a42c2233487903',
+    tokenDecimals: 8,
+    exchangeAddress: '0x65b88e9eae685c178c08ef9c9ebf5999b860866b'
+  },
+  {
+    symbol: 'BTCN',
+    name: 'Bitcoin Neo',
+    tokenAddress: '0x2976ac3d0bb67c6307a73df852c61c14cdda9863',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa9c91e55dcbc0c4c7db567f752506620e44a8ba2'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0xe04bc8d7c6e49ae6fb193f0a995046ef63d6526b',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd180eb4f6ed4fec49916d1538446875713737fe0'
+  },
+  {
+    symbol: 'CBU',
+    name: 'BANQUEUNIVERSAL',
+    tokenAddress: '0xcef46305d096fa876dd23048bf80f9345282e3fc',
+    tokenDecimals: 0,
+    exchangeAddress: '0x446097f12eb3aaaf0c068827633cb516aeb5e53f'
+  },
+  {
+    symbol: 'FON',
+    name: 'fonetones',
+    tokenAddress: '0x5666bdc5c4f54f6ef65956e315e1a674932b68d5',
+    tokenDecimals: 6,
+    exchangeAddress: '0xb5300fa43c9cf6f3b1240b2dbc28fb155c8c5926'
+  },
+  {
+    symbol: 'DiP',
+    name: 'Divided Party',
+    tokenAddress: '0xa27be88ad1dce22609a4a7f4c395f861bbabeae2',
+    tokenDecimals: 8,
+    exchangeAddress: '0xd8703d9b785308174f3d6adfaf9bfa6179642f22'
+  },
+  {
+    symbol: 'rDAI',
+    name: 'Redeemable DAI',
+    tokenAddress: '0x261b45d85ccfeabb11f022eba346ee8d1cd488c0',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbffcd1abd9c05b2b9b9a9a52768a36cfbd3a1d39'
+  },
+  {
+    symbol: 'HYM',
+    name: 'HYMAG Token',
+    tokenAddress: '0x9488885f5c49c86f35f9ff8fd9e3ec6eb33534fc',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5c8c805e407a3b38359add3d777d0dbe0dcbda69'
+  },
+  {
+    symbol: 'HAPI',
+    name: 'HAPI',
+    tokenAddress: '0x1d0f1b6833f0ad4f363b5460e336bc129f204a76',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0a638d29c7c9cd0f5e7a330b6438b27c3bda976a'
+  },
+  {
+    symbol: 'JOB',
+    name: 'Jobchain',
+    tokenAddress: '0xdfbc9050f5b01df53512dcc39b4f2b2bbacd517a',
+    tokenDecimals: 8,
+    exchangeAddress: '0xb8e1a547787c20231adab691dcc2f7b01efd6552'
+  },
+
+  {
+    symbol: 'CGN',
+    name: 'KölschCoin',
+    tokenAddress: '0x76877187924f1ece53e1a7fdcbd964491a747d0f',
+    tokenDecimals: 0,
+    exchangeAddress: '0x3feb2c81d0ef1a0d7bf9f7ccd93f5149da8c0523'
+  },
+  {
+    symbol: 'KAE',
+    name: 'Kaeuoi',
+    tokenAddress: '0x4fe671f75febe114dbea88bb8266c177cb5e466a',
+    tokenDecimals: 7,
+    exchangeAddress: '0x878f7a03ecd2884556b039af6944b2320cad4cf2'
+  },
+  {
+    symbol: 'BPC',
+    name: 'BloodyPercent',
+    tokenAddress: '0xf21d65979bd89b28f05ef19f3c65dd2a1d02946d',
+    tokenDecimals: 4,
+    exchangeAddress: '0x06372d3f478534c07ea0eb9b7ec4b72ca8548ffd'
+  },
+  {
+    symbol: 'INVOX',
+    name: 'Invox Finance Token',
+    tokenAddress: '0x4485561db76614ff727f8e0a3ea95690b8b16022',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbb800b86e226be487e4054ad5db687546ecf7a42'
+  },
+  {
+    symbol: 'CBU',
+    name: 'BANQUEUNIVERSAL',
+    tokenAddress: '0xcef46305d096fa876dd23048bf80f9345282e3fc',
+    tokenDecimals: 0,
+    exchangeAddress: '0x446097f12eb3aaaf0c068827633cb516aeb5e53f'
+  },
+  {
+    symbol: 'MSDZAR',
+    name: 'Multi Stable DZAR MultiToken V1',
+    tokenAddress: '0xec9ee41b316b7f335274c37ef17f8e34b1171df8',
+    tokenDecimals: 18,
+    exchangeAddress: '0x706d590a91166554d8bbb3caafb4c70418af7144'
+  },
+  {
+    symbol: 'OLT',
+    name: 'Oneledger Token',
+    tokenAddress: '0x64a60493d888728cf42616e034a0dfeae38efcf0',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3e38efadde169a816912ea2e481295b3392842e7'
+  },
+  {
+    symbol: 'TAPS',
+    name: 'TAPSPAY',
+    tokenAddress: '0x56bb6f961f2cb9947fea063df1a42c2233487903',
+    tokenDecimals: 8,
+    exchangeAddress: '0x65b88e9eae685c178c08ef9c9ebf5999b860866b'
+  },
+  {
+    symbol: 'BTCC',
+    name: 'BitcoinCrown',
+    tokenAddress: '0xc0c05862cca68b0b4c806796a6e7d965a6f18095',
+    tokenDecimals: 18,
+    exchangeAddress: '0x84e6f8604cb4d7768ccb428b34a853a6f2a33507'
+  },
+  {
+    symbol: 'STASH',
+    name: 'BitStash',
+    tokenAddress: '0x965f109d31ccb77005858defae0ebaf7b4381652',
+    tokenDecimals: 18,
+    exchangeAddress: '0x810557057970c44e8c77dc9a1f2088ac1ba97dc9'
+  },
+  {
+    symbol: 'AiFC',
+    name: 'AiFChain',
+    tokenAddress: '0x10fb4ad704871b6880776666c61d14aa075a5992',
+    tokenDecimals: 18,
+    exchangeAddress: '0x76bdc937ffb920f0e0542bb5857a37620735a1df'
+  },
+  {
+    symbol: 'BTGN',
+    name: 'Bitre Mining',
+    tokenAddress: '0x956cdac781389d259de92e427ecd86e1cc273f7f',
+    tokenDecimals: 8,
+    exchangeAddress: '0x0e7288fe7e019864b3b3528a8c89fa691cb802da'
+  },
+  {
+    symbol: 'ECR',
+    name: 'Eastads Credits',
+    tokenAddress: '0xc6c9db23d0dd0469b0bf97f365ae816274baa19a',
+    tokenDecimals: 18,
+    exchangeAddress: '0x76c0ba9aa256064c5e9e03193909ce18f8745fcb'
+  },
+  {
+    symbol: 'MCHI',
+    name: 'Mochi Coin',
+    tokenAddress: '0x23befbcb388c3d71efa20f34cb2f7eb23953f909',
+    tokenDecimals: 18,
+    exchangeAddress: '0x98e0d32af21bb49d63f36f1ea3e6efebb3194b88'
+  },
+  {
+    symbol: 'MP',
+    name: 'MularPay',
+    tokenAddress: '0x4a48a334906f1a323628ee3eec33e8cce7bd2cfc',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb23c17ddfc6f0f87f490384edb82525efd77a508'
+  },
+  {
+    symbol: 'REV',
+    name: 'Revelation Coin',
+    tokenAddress: '0xe6be436df1ff96956dfe0b2b77fab84ede30236f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa1a55be31cdde461475c68bb46811fc1e9efe3e5'
+  },
+  {
+    symbol: 'ECR',
+    name: 'Eastads Credits',
+    tokenAddress: '0x99b09a9b9e9c26b3e65d84fcc9a1cd8acb289e25',
+    tokenDecimals: 18,
+    exchangeAddress: '0x4ef7831ba0320dd89b483a9935d209ccf5fab6ae'
+  },
+  {
+    symbol: '$HEXA',
+    name: '$HEXA',
+    tokenAddress: '0x90752ece85adcc6da7bd109019e620eb0c583c99',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3b238a50f71ffe4265f8c0e6288bec22fef7d6f1'
+  },
+  {
+    symbol: 'ETH',
+    name: 'Ether',
+    tokenAddress: '0x5bfe6ece3bf81cf6c0128ef54b7b57d02d4243e9',
+    tokenDecimals: 18,
+    exchangeAddress: '0x4aa1475544de284a215f9345253e758830bb81fe'
+  },
+  {
+    symbol: 'CDT',
+    name: 'CoinDash Token',
+    tokenAddress: '0x177d39ac676ed1c67a2b268ad7f1e58826e5b0af',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf945c8965e5b6a5c4d824ed7252c7ab8d01e4d15'
+  },
+  {
+    symbol: 'INT',
+    name: 'INTEGER',
+    tokenAddress: '0x2fceb9fd4d64f4cc9a16eeabc097186e1170c09f',
+    tokenDecimals: 0,
+    exchangeAddress: '0x81d32f6f9f512b29e34a4790df6144e0d35f6767'
+  },
+  {
+    symbol: 'THX',
+    name: 'ThoreNext',
+    tokenAddress: '0xf08c68bd5f4194d994fd70726746bf529ee5a617',
+    tokenDecimals: 0,
+    exchangeAddress: '0xd9b140a6515c3a0c74c4a40cdb8ab7d6fb4f7dec'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x601c32e0580d3aef9437db52d09f5a5d7e60ec22',
+    tokenDecimals: 18,
+    exchangeAddress: '0x91478d6de81128a75e6e4bcd1a1168a6767753a3'
+  },
+  {
+    symbol: 'PAMM',
+    name: 'PAMMCOIN',
+    tokenAddress: '0x30a9dab82f8fa64fdfea43665546e24aba7280db',
+    tokenDecimals: 8,
+    exchangeAddress: '0x1ee7ba2c7a2ac01de15ec2916686468ac0a560e0'
+  },
+  {
+    symbol: 'aMKR',
+    name: 'Aave Interest bearing MKR',
+    tokenAddress: '0x7deb5e830be29f91e298ba5ff1356bb7f8146998',
+    tokenDecimals: 18,
+    exchangeAddress: '0x62e08396d0c05159e97f9d1d4039f5487c8cefac'
+  },
+  {
+    symbol: '†‡†',
+    name: 'Republica Citizenship Token',
+    tokenAddress: '0x6f0f9b631ca3eba75d42daee75e599bd5553c863',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8fd5551e2b68a043957b6a0e15355ae212e135c6'
+  },
+  {
+    symbol: 'BTCN',
+    name: 'Bitcoin Neo',
+    tokenAddress: '0x2976ac3d0bb67c6307a73df852c61c14cdda9863',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa9c91e55dcbc0c4c7db567f752506620e44a8ba2'
+  },
+  {
+    symbol: 'MYFI',
+    name: 'MYFICHAIN',
+    tokenAddress: '0x8aff1a0fec91cfa690fe79c1c140f5b59c56a181',
+    tokenDecimals: 18,
+    exchangeAddress: '0x659773277659846945bf74ad8a526bb2cc4dcc0c'
+  },
+  {
+    symbol: 'SRK',
+    name: 'SparkPoint',
+    tokenAddress: '0x0488401c3f535193fa8df029d9ffe615a06e74e6',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0df5be89756b2873044a16f8feca710f703324f8'
+  },
+  {
+    symbol: 'CBT',
+    name: 'CommerceBlock Token',
+    tokenAddress: '0x076c97e1c869072ee22f8c91978c99b4bcb02591',
+    tokenDecimals: 18,
+    exchangeAddress: '0x68a2a9bce325301dab3244a74a3693d995eed1b0'
+  },
+  {
+    symbol: 'CCT',
+    name: 'Clap Clap Token',
+    tokenAddress: '0x0f00c8dd21da51bc6a6ac07f491a7dbe69746f16',
+    tokenDecimals: 18,
+    exchangeAddress: '0xff8981fdb16962b736e6ee71c2d063b008a24539'
+  },
+  {
+    symbol: 'AMRC',
+    name: 'Americoin',
+    tokenAddress: '0xe6326104f9bf98c3a26a18fa976c781395441829',
+    tokenDecimals: 18,
+    exchangeAddress: '0x434d98c854fd80e049b8fc6842abff0082d4c4d5'
+  },
+  {
+    symbol: '0xETC',
+    name: '0xETH Classic',
+    tokenAddress: '0x71e4b8de109428f999391eb3424d2cc87192e8ba',
+    tokenDecimals: 8,
+    exchangeAddress: '0xda3b2d33ea27cd6e2b1d3e4821f3c64bf045c2d5'
+  },
+  {
+    symbol: 'CRE',
+    name: 'CarryToken',
+    tokenAddress: '0x115ec79f1de567ec68b7ae7eda501b406626478e',
+    tokenDecimals: 18,
+    exchangeAddress: '0x72ddc243b2858f1f673a067faaab3210fdc69f36'
+  },
+  {
+    symbol: 'ABC',
+    name: 'ABC - Anti Bureaucracy Coin',
+    tokenAddress: '0xafd75caff5c1d402cbf3692e289775438df6a9f0',
+    tokenDecimals: 8,
+    exchangeAddress: '0xb4db92a7fd67c96f64b5c59cc45e62ad520db11d'
+  },
+  {
+    symbol: 'HOUR',
+    name: '365DAYSWTF Rewards',
+    tokenAddress: '0xd48cf65488486fa0d45b806aa51ca35727d70880',
+    tokenDecimals: 18,
+    exchangeAddress: '0x31f8c12498402b41787acd74021b6483e4b793f3'
+  },
+  {
+    symbol: 'XRPG',
+    name: 'Ripple Gold Token',
+    tokenAddress: '0x961549769241f1354c695f69fe33db8f94a692fa',
+    tokenDecimals: 8,
+    exchangeAddress: '0x970f59ee186cc34f8ce83f2bc72d78d46f19fd20'
+  },
+  {
+    symbol: 'ETHMOON',
+    name: '10X Long Ethereum Token',
+    tokenAddress: '0x5dcfa62f81b43ce7a3632454d327dee1f1d93b28',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0d4b73d58869f5c33f267d3401204489874f8968'
+  },
+  {
+    symbol: 'BitC',
+    name: 'BitCash',
+    tokenAddress: '0xf88bd1ba6f1e0e7e11686778954d0654e43e8e7d',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb06b1a03082d3adf86bddf9271db6db2e2365db7'
+  },
+  {
+    symbol: 'NAT',
+    name: 'Natmin',
+    tokenAddress: '0x90d46a9636b973f18186541d1b04ed3621a49cb0',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6c470b0a008d8e83161243d80b3165034828e0a8'
+  },
+  {
+    symbol: 'XAK',
+    name: 'Xamatek',
+    tokenAddress: '0x767ee3150ac31f982190ef41728cf9a969355286',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf0e894168eabc4af904747f20d087614e07e6b08'
+  },
+  {
+    symbol: 'CPLX',
+    name: 'Coinoplex',
+    tokenAddress: '0x567f4f0b0b5209644c0390f7860c7859b0f82a90',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9c941dae8b4e6a756851d1a3a277db3c89927a7c'
+  },
+  {
+    symbol: 'AGVC',
+    name: 'AgaveCoin',
+    tokenAddress: '0x8b79656fc38a04044e495e22fad747126ca305c4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x2fccee43814c114f63de28d3c7be963ccb94bdaf'
+  },
+  {
+    symbol: 'TWOB',
+    name: 'The Whale of Blockchain',
+    tokenAddress: '0x975ce667d59318e13da8acd3d2f534be5a64087b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x568c09d7b1eebb47826ccccdece21d431ca783ee'
+  },
+  {
+    symbol: 'BTCL',
+    name: 'BTC LITE',
+    tokenAddress: '0x5acd19b9c91e596b1f062f18e3d02da7ed8d1e50',
+    tokenDecimals: 8,
+    exchangeAddress: '0x1c86abf4f08b293909f083b288679242f6ec84e1'
+  },
+  {
+    symbol: '300',
+    name: '300 Token',
+    tokenAddress: '0xaec98a708810414878c3bcdf46aad31ded4a4557',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3308b73c1c5b6b51b74c233cad59f9b1b8530f05'
+  },
+  {
+    symbol: 'OCN',
+    name: 'OCoin',
+    tokenAddress: '0x4092678e4e78230f46a1534c0fbc8fa39780892b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x438406f3314eacffdea9f7fca4b1ccdee84a9a5f'
+  },
+  {
+    symbol: 'MYC',
+    name: 'Mycion',
+    tokenAddress: '0xe1ac9eb7cddabfd9e5ca49c23bd521afcdf8be49',
+    tokenDecimals: 18,
+    exchangeAddress: '0x2b051e0651e86156eb7567fab92413289861f793'
+  },
+  {
+    symbol: 'BOBx',
+    name: 'Free BOB Tokens - BobsRepair.com',
+    tokenAddress: '0xd3ace836e47f7cf4948dffd8ca2937494c52580c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0ccdcaae1480025636386508a8d2f7bbf0faace7'
+  },
+  {
+    symbol: 'TRB',
+    name: 'Tellor Tributes',
+    tokenAddress: '0x4cadcb47216d7bb63ee0a2c7147ac46161ff3e3c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x363c1087d4f205850449b11c663b8a19bc50c3b0'
+  },
+  {
+    symbol: 'PMOD',
+    name: 'Promodl',
+    tokenAddress: '0xaf47ebbd460f21c2b3262726572ca8812d7143b0',
+    tokenDecimals: 0,
+    exchangeAddress: '0x5040420651d7109360374a94dd365a3e9927ebfb'
+  },
+  {
+    symbol: 'CRC',
+    name: 'CryCash Token',
+    tokenAddress: '0xf41e5fbc2f6aac200dd8619e121ce1f05d150077',
+    tokenDecimals: 18,
+    exchangeAddress: '0xae1c77ee3ab639d1f3cf554567b82f61c0ddc160'
+  },
+  {
+    symbol: 'RXC',
+    name: 'RadiKaL  XChaNgE',
+    tokenAddress: '0x3215bf0bffed4a6406881fcff42c9d43c774615a',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc76124d4f8256fb96171bf102b5702ed9d655462'
+  },
+  {
+    symbol: 'BITX',
+    name: 'BITIFEX',
+    tokenAddress: '0xa0ed4c4acbf07c03365d6bbe28150a819aff700f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0aea13985e6cc5b1665200efa96a90c4a145239e'
+  },
+  {
+    symbol: 'BITX',
+    name: 'BITIFEX',
+    tokenAddress: '0x87f84ec5c9ba8ab334807171d65faa86cf67f149',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8cfb0d5baa5d13dd00eab5651b2501b68c7bc16f'
+  },
+  {
+    symbol: 'HORSE',
+    name: 'Horse',
+    tokenAddress: '0x5b0751713b2527d7f002c0c4e2a37e1219610a6b',
+    tokenDecimals: 18,
+    exchangeAddress: '0xff250fa4ec02d242f00287066bb8a7062033910a'
+  },
+  {
+    symbol: 'FAB',
+    name: 'FAB Token',
+    tokenAddress: '0x12683dc9eec95a5f742d40206e73319e6b9d8a91',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb54374cabe59a64418b1eb5058d1bc1506b4be3a'
+  },
+  {
+    symbol: 'HEALP',
+    name: 'An Etheal Promo',
+    tokenAddress: '0x7b2f9706cd8473b4f5b7758b0171a9933fc6c4d6',
+    tokenDecimals: 0,
+    exchangeAddress: '0xf7bc4b3d1fc04d73585f217bca06920ca0a71d95'
+  },
+  {
+    symbol: 'TBAR',
+    name: 'TitaniumBlockchain',
+    tokenAddress: '0xd2d121383187d4ed9cb4d40e7ce5d676f5994e0d',
+    tokenDecimals: 0,
+    exchangeAddress: '0xbaed8adf9e58e353ba26f19018c4680ee8e6e7fe'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x0d4b73d58869f5c33f267d3401204489874f8968',
+    tokenDecimals: 18,
+    exchangeAddress: '0x600f38d90c1055297d097dbaf9180acb12eb91f0'
+  },
+  {
+    symbol: '0xETD',
+    name: '0xETH Diamond',
+    tokenAddress: '0x91f5f9c36b093907b0f99d1dbcf41aaf1db28916',
+    tokenDecimals: 8,
+    exchangeAddress: '0x09b30ae6a7a71e4ccc972989f336ddfc8b90c1f4'
+  },
+  {
+    symbol: 'PAS',
+    name: 'Passive',
+    tokenAddress: '0xe25db4baa49ea3b8627986ffc22c7bd5e0c88d49',
+    tokenDecimals: 18,
+    exchangeAddress: '0xadfa51248ae5f82008c188ca3f329d4caddad1ec'
+  },
+  {
+    symbol: 'BLOX',
+    name: 'BlockSpace',
+    tokenAddress: '0xebd254a8ab9a5f6f26602bbad85e30d144454e94',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8a80504a9a3ddf6a5620bf141bcee3fafd6de52f'
+  },
+  {
+    symbol: 'MOON',
+    name: '10X Long Bitcoin Token',
+    tokenAddress: '0xba7cdd0953e8f950317dda347a716f162713b226',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf39d034c7040bf266f05fe46b8d45a98f7456038'
+  },
+  {
+    symbol: 'AZRE',
+    name: 'AZARETHER',
+    tokenAddress: '0x91c0651bcadf7b6a231a505e552c12058f5dafb4',
+    tokenDecimals: 1,
+    exchangeAddress: '0x88c0a9cce487f7ac927f4f289a6e55ab037a8388'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x0f88a6cbeb3bd153c0584c7136fbcc86c2dd657f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa5a36b613030ee69e8cd2c78b2c2ad93662b77db'
+  },
+  {
+    symbol: '0xESV',
+    name: '0xETH SV',
+    tokenAddress: '0x8e9c3d1f30904e91764b7b8bbfda3a429b886874',
+    tokenDecimals: 8,
+    exchangeAddress: '0x14aaa76ae91641c3837f5f0ddbcd60dcc24284c4'
+  },
+  {
+    symbol: 'XWO',
+    name: 'WooshCoin',
+    tokenAddress: '0x5cc00cca0692b9b34af816e5439cdb47d3b63691',
+    tokenDecimals: 18,
+    exchangeAddress: '0xef0f0750d2d57167c29688e8fb11d0eab23d008b'
+  },
+  {
+    symbol: 'ESH',
+    name: 'Switch',
+    tokenAddress: '0xd6a55c63865affd67e2fb9f284f87b7a9e5ff3bd',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5e342e9d0ebb3861863a6aae1840f39a023b98e9'
+  },
+  {
+    symbol: 'GEX',
+    name: 'GLOBEX',
+    tokenAddress: '0x66142b81db17d7c0bd91f502d00382e326a24c2a',
+    tokenDecimals: 8,
+    exchangeAddress: '0x113247c657cd806c0b76ea94d6b33d1a73843a26'
+  },
+  {
+    symbol: 'REALTOKEN-10024-10028-APPOLINE-ST-DETROIT-MI',
+    name: 'RealToken 10024-10028 Appoline Street Detroit MI',
+    tokenAddress: '0x5807ca447851c98569c567963b25b1c83d41bebc',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0620e472ea092adaffd70e928d706b4a53adf6c8'
+  },
+  {
+    symbol: 'REALTOKEN-9336-PATTON-ST-DETROIT-MI',
+    name: 'RealToken 9336 Patton Street Detroit MI',
+    tokenAddress: '0xed42cedcadbfbcaa3e6f411b09567c2c0b5ad28f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9016aa99b98128ba990097ea3f3d60b5e40775e4'
+  },
+  {
+    symbol: 'SNGX',
+    name: 'SingularX',
+    tokenAddress: '0x78774d1c3277b83459c730921bff11019017b233',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6e04c36ea43567fdca1624dc510404ee8c0320bb'
+  },
+  {
+    symbol: 'FOUR',
+    name: 'The 4th Pillar Token',
+    tokenAddress: '0x4730fb1463a6f1f44aeb45f6c5c422427f37f4d0',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc0ed2870b0086394b7feaa012985c12dc99e4841'
+  },
+  {
+    symbol: 'GNJ',
+    name: 'Ganja Token',
+    tokenAddress: '0xed0f59d483977b2bde55fecc81e7534fe7e605e7',
+    tokenDecimals: 18,
+    exchangeAddress: '0x7a6486000acedd20e393586313a59fba146be8d2'
+  },
+  {
+    symbol: 'GEN',
+    name: 'Genesis',
+    tokenAddress: '0x9dfe4643c04078a46803edcc30a3291b76d4c20c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8010495d67e41d434e517f79e9a55ceaaa6018b9'
+  },
+  {
+    symbol: 'LibraF',
+    name: 'LibraFace',
+    tokenAddress: '0x062e1ab8cb801fa51e5c12ec8c79089e9cfebae1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x2a78359ef076d975a081872f2dd9a18f5c868ad1'
+  },
+  {
+    symbol: 'MFTU',
+    name: 'MFTU',
+    tokenAddress: '0x05d412ce18f24040bb3fa45cf2c69e506586d8e8',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6d72cb1e0079acfca31ae966fd6caea1d8cc7387'
+  },
+  {
+    symbol: 'DYX',
+    name: 'DYXToken',
+    tokenAddress: '0x042f972ac93404f0fcbe4e3a0729f0b395232106',
+    tokenDecimals: 8,
+    exchangeAddress: '0xe8354e16f6bc76ee38b4ae641297fa45815095a3'
+  },
+  {
+    symbol: 'KEVIN',
+    name: 'KEVIN',
+    tokenAddress: '0x8f464bfe2292748a0fed58bb53d3838b4ce018b0',
+    tokenDecimals: 4,
+    exchangeAddress: '0xc3118801f8ba84c4ab9aedc10c5403a377519729'
+  },
+  {
+    symbol: 'LTB',
+    name: 'Litbinex Coin',
+    tokenAddress: '0xa105c740bc012a43a342ab4a0ef40143452c8e89',
+    tokenDecimals: 18,
+    exchangeAddress: '0x63f159caa45c02054fa502c35c43398c3524c567'
+  },
+  {
+    symbol: 'BB',
+    name: 'barry',
+    tokenAddress: '0x525e58c45f8ab1dceabedeb3fae75040c21132cc',
+    tokenDecimals: 18,
+    exchangeAddress: '0x2dea18ff7444a10979fa559e7e1db12c200dd5c6'
+  },
+  {
+    symbol: 'BTCH',
+    name: 'Botchcoin',
+    tokenAddress: '0x995ecb39c06b25ccf520d1c4ae9f4111d1c9a752',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8d2e329e9a96832ee25e215522a29673b8924805'
+  },
+  {
+    symbol: 'TP',
+    name: 'Perry Token',
+    tokenAddress: '0x64c2e1ea1d1a2c02902f15181e163ecfcf59de8c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0bba6f6f032305be42828011089926af4d597a46'
+  },
+  {
+    symbol: 'JD',
+    name: 'James Deus',
+    tokenAddress: '0xdaf67599b8fa7328758881f862f171629381f221',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf8153a198a60155f6f2a1b7fc6fc8facbe5ddb13'
+  },
+  {
+    symbol: 'CRY',
+    name: 'Cryto',
+    tokenAddress: '0x6abc8b6365f02cd920afa0f0529ac1ae2d0ad72f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xacc56f297e4563d7546382b40ec21273cec8c5f7'
+  },
+  {
+    symbol: 'YEET',
+    name: 'Yeet Coin',
+    tokenAddress: '0x1b04110215e3833f72810aa74548a60688fea71e',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe7f6582af1acbf8a7d0e70e525a4fff2d1dcb64c'
+  },
+  {
+    symbol: 'MTBX',
+    name: 'MY TOKΞN BOX',
+    tokenAddress: '0x9ae869c48d8a8eb7cd0a861226c28834da7e83d9',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa3b55a56b12465f5ca5b03114252723e00da23b8'
+  },
+  {
+    symbol: 'LOLBIN',
+    name: 'Presoz Token',
+    tokenAddress: '0x66364619df268baa1f5fddc54f810d152af4e67c',
+    tokenDecimals: 18,
+    exchangeAddress: '0xda898208c79f15d50a4356bf42c2174b2a2e8df7'
+  },
+  {
+    symbol: 'SDBL',
+    name: 'SD Blockchain',
+    tokenAddress: '0x85843d445784307ced60bf351a2fe0416d0a266b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x71bf98dbff21b4d1580337f4aa017e785e5fda48'
+  },
+  {
+    symbol: 'KPT',
+    name: 'krypital',
+    tokenAddress: '0x814d76b36a7d34df364f4fc6b075ba47f9ba1f47',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd30ebbbb823fe8f14ce3d0e1c1ed383cb8b71708'
+  },
+  {
+    symbol: 'TXL',
+    name: 'Textil',
+    tokenAddress: '0x8711cf7764d23d32092c0dcedfdac63ece1e6cf3',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe6a74851b6dcaabf074ceaed72f23979417d3db5'
+  },
+  {
+    symbol: 'EGG',
+    name: 'Egg Token',
+    tokenAddress: '0x999aa6488f076e6765448f090aba83fbb470fc99',
+    tokenDecimals: 18,
+    exchangeAddress: '0x858c96b832d0e671664f0040d6e36cd49d809161'
+  },
+  {
+    symbol: 'PLU',
+    name: 'Pluton',
+    tokenAddress: '0xd8912c10681d8b21fd3742244f44658dba12264e',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0e70840ed7ad77d61cdd91c443afacba25befe95'
+  },
+  {
+    symbol: 'DEV',
+    name: 'Dev',
+    tokenAddress: '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26',
+    tokenDecimals: 18,
+    exchangeAddress: '0x07541e453da49e948c63fe3a78e96ec8cfa3ba45'
+  },
+  {
+    symbol: 'GVT',
+    name: 'Genesis Vision Token',
+    tokenAddress: '0x103c3a209da59d3e7c4a89307e66521e081cfdf0',
+    tokenDecimals: 18,
+    exchangeAddress: '0xcb4496f9ba213f390fa9106dafdd49145db0bf19'
+  },
+  {
+    symbol: 'TOM',
+    name: 'Memes by Tom',
+    tokenAddress: '0x9cda02b2a43f16f11c6860a8630672de9854d6f7',
+    tokenDecimals: 18,
+    exchangeAddress: '0xad0bfed28c522f7143a3e842ba1f552481d22b44'
+  },
+  {
+    symbol: 'bDAI',
+    name: 'BTU Incentivized DAI',
+    tokenAddress: '0x6a4ffaafa8dd400676df8076ad6c724867b0e2e8',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbbf511d2232dfc6d22213b5a02b27139b1ea2fef'
+  },
+  {
+    symbol: 'BCIO',
+    name: 'Blockchain.io',
+    tokenAddress: '0xcdc412f306e0c51e3249b88c65423cd16b322673',
+    tokenDecimals: 18,
+    exchangeAddress: '0x29a20b7489898db4022623f719212cb66ebfa468'
+  },
+  {
+    symbol: 'AIR',
+    name: 'AIRWALLET',
+    tokenAddress: '0x1bc0bd5f8bec6cedaaf817d64ec0a84acbbb09aa',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb0ac3c451f22ec0c9ba6e861527aa2a41efba627'
+  },
+  {
+    symbol: 'DOM',
+    name: 'DomToken',
+    tokenAddress: '0x5a096c19470379f3e66f1e6d664a2112fb285287',
+    tokenDecimals: 9,
+    exchangeAddress: '0x9f2709930310fe05b2df29a718d4fcbeb7b8169e'
+  },
+  {
+    symbol: 'SHIT',
+    name: 'ShitCoin',
+    tokenAddress: '0xdef08628195dbd1b54cd8aa1d7fd5dac99f79c19',
+    tokenDecimals: 18,
+    exchangeAddress: '0x936ad5a77ddf9d60ad00eeb960f879206e57cee4'
+  },
+  {
+    symbol: 'GD',
+    name: 'Gold Diamond',
+    tokenAddress: '0x13b7d2bf5e1a72938facf660e0d0b270b0e1fe16',
+    tokenDecimals: 10,
+    exchangeAddress: '0x0ded2ea132a365c20c7178abdb375425b001a790'
+  },
+  {
+    symbol: 'KITT',
+    name: 'Kitty Token',
+    tokenAddress: '0xbd9515ff22188ecebaac76946cc9c7afcb52b6b3',
+    tokenDecimals: 0,
+    exchangeAddress: '0x9e53b75ae3141213f1231b9306782e863cef14d6'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x26cc0eab6cb650b0db4d0d0da8cb5bf69f4ad692',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc67bf268b8f59303b97da7016e050f183bf25a47'
+  },
+  {
+    symbol: 'TALE',
+    name: 'TALE',
+    tokenAddress: '0x444fb48856adba02edb16582f89e82b210cfb416',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9ec27187ec17db3b962391e7d3884ed5322122c3'
+  },
+  {
+    symbol: 'XRPGSW',
+    name: 'Ripple Gold Token SW',
+    tokenAddress: '0x45526c392009cf7020ac10a10c1979e340a8a9dc',
+    tokenDecimals: 8,
+    exchangeAddress: '0x6b731453d6418a53e391926f0d082fb39c575387'
+  },
+  {
+    symbol: 'DFT',
+    name: 'DFT',
+    tokenAddress: '0xa2a54f1ec1f09316ef12c1770d32ed8f21b1fb6a',
+    tokenDecimals: 8,
+    exchangeAddress: '0xfa8112cb01099389f688fef4c5f526acc7273c84'
+  },
+  {
+    symbol: 'VIKKY',
+    name: 'Vikky Token',
+    tokenAddress: '0xd2946be786f35c3cc402c29b323647abda799071',
+    tokenDecimals: 8,
+    exchangeAddress: '0x0d93ea00212ebc7f406f23c200904e6ba3679929'
+  },
+  {
+    symbol: '7BA',
+    name: 'Seven Art Token',
+    tokenAddress: '0x7ae6378c1b794763dc33e06d0b83dd01a698b2b0',
+    tokenDecimals: 0,
+    exchangeAddress: '0x5ea48b74c34ac6a8cd355184856f0d2f1d0b506c'
+  },
+  {
+    symbol: 'ZOM',
+    name: 'ZOM',
+    tokenAddress: '0x42382f39e7c9f1add5fa5f0c6e24aa62f50be3b3',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb3e0804006d270fd243f5799871f73dd9a1312e3'
+  },
+  {
+    symbol: 'SHR',
+    name: 'ShareToken',
+    tokenAddress: '0xee5fe244406f35d9b4ddb488a64d51456630befc',
+    tokenDecimals: 2,
+    exchangeAddress: '0xc978ba96a1453dc74daa5def8fa0c38e75a959b4'
+  },
+  {
+    symbol: '0xECH',
+    name: '0xETH Cash',
+    tokenAddress: '0xac8491258d2d93228e8b49aac2e332a96f04e56c',
+    tokenDecimals: 8,
+    exchangeAddress: '0xef0c41b0fddd6d4979016818278aa6f03854c887'
+  },
+  {
+    symbol: 'tBRL',
+    name: 'Brasil token coin',
+    tokenAddress: '0xe6536e317af33986e4f341849e78d5f0916936ef',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb9e63577e371ccf6cc4928d138877175d6b8dd6c'
+  },
+  {
+    symbol: 'DECENT',
+    name: 'Decentribe governance token',
+    tokenAddress: '0x900b1998a226cfe238ba1a14f03eb934c513c20b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5e9c12cdbc352835a78caf6e8b386a67ab0d8376'
+  },
+  {
+    symbol: 'SNTVT',
+    name: 'Sentivate',
+    tokenAddress: '0x7865af71cf0b288b4e7f654f4f7851eb46a2b7f8',
+    tokenDecimals: 18,
+    exchangeAddress: '0x27e3fd3ff2320c5247b141668ef0cc953396ca11'
+  },
+  {
+    symbol: 'NCOV',
+    name: 'CoronaCoin',
+    tokenAddress: '0x10ef64cb79fd4d75d4aa7e8502d95c42124e434b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5cdc4f8b2e8f9dc4ea31d0915fa454a552cbecd1'
+  },
+  {
+    symbol: 'KNEE',
+    name: 'KneePads',
+    tokenAddress: '0x1b8967fc1051b15672474c042f05d1f6734e49e9',
+    tokenDecimals: 18,
+    exchangeAddress: '0x210a64999826dc93369950145a2fb3bfa4ad2a53'
+  },
+  {
+    symbol: 'EBTC',
+    name: 'eBTC',
+    tokenAddress: '0xeb7c20027172e5d143fb030d50f91cece2d1485d',
+    tokenDecimals: 8,
+    exchangeAddress: '0xc82c8c4f61462c20da29cf164124a435129bb7b2'
+  },
+  {
+    symbol: 'CCDE',
+    name: 'CCDE Token',
+    tokenAddress: '0x67be98298c4445aa08d370120059f491c5396901',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0647df237861403f176ead2a53dd2d2c39dfbd6d'
+  },
+  {
+    symbol: 'VIX',
+    name: 'VianeX',
+    tokenAddress: '0x86c31e6da2190a1ffd39a36990a44174d0a8be15',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3119276fc737e692dafd40b88286e7e23528cf74'
+  },
+  {
+    symbol: 'PTH',
+    name: 'Prether',
+    tokenAddress: '0xb17694da33c2ac8b911850d823b32087a61bc9d2',
+    tokenDecimals: 0,
+    exchangeAddress: '0x98a6d27318a0841c981f6e38f16cefde4ea2b49c'
+  },
+  {
+    symbol: 'SHIP',
+    name: 'ShipChain SHIP',
+    tokenAddress: '0xe25b0bba01dc5630312b6a21927e578061a13f55',
+    tokenDecimals: 18,
+    exchangeAddress: '0x75681c9603957022657d9a79cd643b03d46d5d99'
+  },
+  {
+    symbol: 'MTC',
+    name: 'Medical Token Currency',
+    tokenAddress: '0x905e337c6c8645263d3521205aa37bf4d034e745',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf339df4a5752a6fb63e47a91c1a3cd27789de303'
+  },
+  {
+    symbol: 'null',
+    name: 'null',
+    tokenAddress: '0x5408cf4c018be910b7e1a12681a04097d1638532',
+    tokenDecimals: null,
+    exchangeAddress: '0x044205ad879049a41796a8b5026d050ff5124b91'
+  },
+  {
+    symbol: 'null',
+    name: 'null',
+    tokenAddress: '0x6e8205e831392a775749112cfc9bc94c8d8cce56',
+    tokenDecimals: null,
+    exchangeAddress: '0x035049a35a4fd93fa3b425d74ac408623bccb4f0'
+  },
+  {
+    symbol: 'CEC',
+    name: 'CECI',
+    tokenAddress: '0xe03f415c0e69d3f06953d70bb27f5441a16e6c9d',
+    tokenDecimals: 2,
+    exchangeAddress: '0x5f852ea868a72697ae5057a848efaaf447df6166'
+  },
+  {
+    symbol: 'WEED',
+    name: 'WidCoin',
+    tokenAddress: '0x38ac393da4765a94e96998b556bf463876375662',
+    tokenDecimals: 10,
+    exchangeAddress: '0xebc09ab62a74872a164b371384936a4eb3052ca1'
+  },
+  {
+    symbol: 'DX',
+    name: 'DxChain Token',
+    tokenAddress: '0x973e52691176d36453868d9d86572788d27041a9',
+    tokenDecimals: 18,
+    exchangeAddress: '0x624aab1e03827043c6c5ef2a9c0afdf3a7a21b93'
+  },
+  {
+    symbol: 'UNC',
+    name: 'Uncloak',
+    tokenAddress: '0x25bceaf96191d34c6a135a26ae8d7281dacf8ff0',
+    tokenDecimals: 18,
+    exchangeAddress: '0x2a9d9051cc3ab6e87b7758c0da0bbc9e238b17be'
+  },
+  {
+    symbol: 'UUU',
+    name: 'UNetworkToken',
+    tokenAddress: '0x3543638ed4a9006e4840b105944271bcea15605d',
+    tokenDecimals: 18,
+    exchangeAddress: '0x51b159831ca99ea0c2efffddee108a7ba8f83d9a'
+  },
+  {
+    symbol: 'ULTRA',
+    name: 'Ultrachain',
+    tokenAddress: '0x87f2a5d243c6683a6ba0686b2fb3e38b31c6e1da',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe71341a529a92d53c9a3d8bc452af3a3e8039289'
+  },
+  {
+    symbol: 'FOX',
+    name: 'Fox Token',
+    tokenAddress: '0xf8db8ad0aa9b8b435ff3ab5aaa3b8db77b0b7c0b',
+    tokenDecimals: 7,
+    exchangeAddress: '0xf4073f8f5661762a69bdb3ce946356b37d03188b'
+  },
+  {
+    symbol: 'RGA',
+    name: 'Royal Gold Academy Token',
+    tokenAddress: '0xa62a3fab2dc0359f26410d078e76c7200d91501d',
+    tokenDecimals: 8,
+    exchangeAddress: '0xe9e0823bd64f5af200a83db17bf9b423dd2f1ef9'
+  },
+  {
+    symbol: 'TEL',
+    name: 'Telcoin',
+    tokenAddress: '0x85e076361cc813a908ff672f9bad1541474402b2',
+    tokenDecimals: 2,
+    exchangeAddress: '0x6d3b64703631c47b45afb62dee9b7b97d1324e2e'
+  },
+  {
+    symbol: 'SEDO',
+    name: 'SEDO PoW Token',
+    tokenAddress: '0x0f00f1696218eaefa2d2330df3d6d1f94813b38f',
+    tokenDecimals: 8,
+    exchangeAddress: '0xfc1b37de8313d4659527628aa682e24ed0907a68'
+  },
+  {
+    symbol: 'GUP',
+    name: 'Guppy',
+    tokenAddress: '0xf7b098298f7c69fc14610bf71d5e02c60792894c',
+    tokenDecimals: 3,
+    exchangeAddress: '0x64f3f36a7b7c0acc04d516d8f01df78723477b82'
+  },
+  {
+    symbol: 'BNEX',
+    name: 'HashingAds',
+    tokenAddress: '0xcb8251636b24ea85284b72b0fee3a51359d0f296',
+    tokenDecimals: 18,
+    exchangeAddress: '0xda8e957e4de8488012db83b9ed981fdfff90005e'
+  },
+  {
+    symbol: 'acc',
+    name: 'acc',
+    tokenAddress: '0xcd32c2d1fdbf9208c0833cb3f5fc9543c3d85f62',
+    tokenDecimals: 12,
+    exchangeAddress: '0xd46ef52b5acaa12517ba8611cb475d71c833d212'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x05cde89ccfa0ada8c88d5a23caaa79ef129e7883',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9cc5a926b0a6f7719ff089f8b13838f3aa6f5b78'
+  },
+  {
+    symbol: 'SWAGG',
+    name: 'SWAGG',
+    tokenAddress: '0xa19a40fbd7375431fab013a4b08f00871b9a2791',
+    tokenDecimals: 4,
+    exchangeAddress: '0x0be5be4f1999e5a4f955d32cc42ea8990af49d2b'
+  },
+  {
+    symbol: 'COB',
+    name: 'Cobinhood Token',
+    tokenAddress: '0xb2f7eb1f2c37645be61d73953035360e768d81e6',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1d704dc0cebc7f8ffbfe531e06a3c7c39bdc6ea8'
+  },
+  {
+    symbol: 'PAUL',
+    name: 'Paul Razvan Berg',
+    tokenAddress: '0x8db6da2120b346faa7f206841f2fb005bbe0dfd8',
+    tokenDecimals: 4,
+    exchangeAddress: '0xf5498595586b0a83223ea3a369b88e11b9cc1f13'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x4d2f5cfba55ae412221182d8475bc85799a5644b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x7fed0786b3706a5f1ed03949af3565bb3cbd1567'
+  },
+  {
+    symbol: 'RODZ',
+    name: 'RODZ',
+    tokenAddress: '0xa685d6f87e3be27d72ce216842147c4149e0ce9a',
+    tokenDecimals: 4,
+    exchangeAddress: '0x1b78dea5092bba25e73ecd5997c81bb1f81eb1aa'
+  },
+  {
+    symbol: 'GQ',
+    name: 'Goose Queue',
+    tokenAddress: '0x2dae7da77d3ea6f83e1ea81ca2604c30d0b1cb00',
+    tokenDecimals: 18,
+    exchangeAddress: '0x997bb3e4629cadc94d4b8b678ba3e5489e2d1024'
+  },
+  {
+    symbol: 'EOZ',
+    name: 'Ethinoz Coin',
+    tokenAddress: '0x0c0be494b95ededcd25ebd4dd74b3ac670ef74d1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1479a35e9a8ae5c741512f24a162969e3b3543dc'
+  },
+  {
+    symbol: 'VIBE',
+    name: 'Vibe Coin',
+    tokenAddress: '0xe8ff5c9c75deb346acac493c463c8950be03dfba',
+    tokenDecimals: 18,
+    exchangeAddress: '0x061e80245f7d5294147751207264498cdde3d788'
+  },
+  {
+    symbol: 'MTH',
+    name: 'Monetha',
+    tokenAddress: '0xaf4dce16da2877f8c9e00544c93b62ac40631f16',
+    tokenDecimals: 5,
+    exchangeAddress: '0x541ee05ca33ab058e73f15ade9baab6ca2470d99'
+  },
+  {
+    symbol: 'QKC',
+    name: 'QuarkChain Token',
+    tokenAddress: '0xea26c4ac16d4a5a106820bc8aee85fd0b7b2b664',
+    tokenDecimals: 18,
+    exchangeAddress: '0x704696a53d4b55c07412e03d1b43a470c102f1db'
+  },
+  {
+    symbol: 'BIGO',
+    name: 'BIGO Token',
+    tokenAddress: '0x2ab23c59a621607349d00458a29682c9dcfe1f64',
+    tokenDecimals: 0,
+    exchangeAddress: '0x8c0837118e72fe2eb875d143803c35b52392917a'
+  },
+  {
+    symbol: 'EXMR',
+    name: 'EXMR FDN.',
+    tokenAddress: '0x331fa6c97c64e47475164b9fc8143b533c5ef529',
+    tokenDecimals: 18,
+    exchangeAddress: '0x80620d4bc2a5127ace9194c33e4812a1a6492afe'
+  },
+  {
+    symbol: 'ELTCOIN',
+    name: 'ELTCOIN',
+    tokenAddress: '0x44197a4c44d6a059297caf6be4f7e172bd56caaf',
+    tokenDecimals: 8,
+    exchangeAddress: '0xd5cde2c55d1db6ca8202f790a7b4880f90bb73ec'
+  },
+  {
+    symbol: 'BTCM',
+    name: 'BTCMoon',
+    tokenAddress: '0xa9aad2dc3a8315caeee5f458b1d8edc31d8467bd',
+    tokenDecimals: 18,
+    exchangeAddress: '0x11cf8911f08b1a36bd0c458e8933a7a1ccd40f73'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0xe9cf7887b93150d4f2da7dfc6d502b216438f244',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa0cdabf1fed8ea8352fa2a2b438d5ffd9742ff0e'
+  },
+  {
+    symbol: 'DACC',
+    name: 'Decentralized Accessible Content Chain',
+    tokenAddress: '0xf8c595d070d104377f58715ce2e6c93e49a87f3c',
+    tokenDecimals: 6,
+    exchangeAddress: '0x48a4cb0b34e8fbfff210ccf54dc4fbcc7ca0c9f0'
+  },
+  {
+    symbol: 'WORTH',
+    name: 'Worthy',
+    tokenAddress: '0xb94d7eb7b3e993c59e6084623b5debe09ad45611',
+    tokenDecimals: 4,
+    exchangeAddress: '0xa1dd55eebc8c7994ac94c591384c293d0bc8ad6c'
+  },
+  {
+    symbol: 'Newco Token',
+    name: 'NEWC',
+    tokenAddress: '0x5642a6665d9af993fb3b02d272d4a214cd5c52e4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x417511ca57f7aec22f020ba843dda451326b2453'
+  },
+  {
+    symbol: 'XVZ',
+    name: 'Verza',
+    tokenAddress: '0xee2d318462fdb587b96f7e69606c6afd0e2ff633',
+    tokenDecimals: 18,
+    exchangeAddress: '0x70bcd0cc9870200bf3c3321e65c4a6b2d0917d8b'
+  },
+  {
+    symbol: 'ocDai',
+    name: 'Opyn Compound Dai',
+    tokenAddress: '0x9ac585788c6a52caac0f8ccdc1df77eb62f8acc8',
+    tokenDecimals: 8,
+    exchangeAddress: '0x8cebc976b1e881ba0b7bd81a6b751411ecb1eb26'
+  },
+  {
+    symbol: 'ocUSDC',
+    name: 'Opyn Compound USDC',
+    tokenAddress: '0x8413fc80ac9a43a85bddde99710f522fa30b005b',
+    tokenDecimals: 8,
+    exchangeAddress: '0x40e7337f1e06658cac8b087a397db16aba846a41'
+  },
+  {
+    symbol: 'RLSS',
+    name: 'Relentless',
+    tokenAddress: '0xdbde8e7739cb273ce5b32cb5a28d1440e77b00a5',
+    tokenDecimals: 0,
+    exchangeAddress: '0x1dbcdf97d1a85687a9f32a7d91b29457ec89afe4'
+  },
+  {
+    symbol: 'FUEL',
+    name: 'Fuel Token',
+    tokenAddress: '0xea38eaa3c86c8f9b751533ba2e562deb9acded40',
+    tokenDecimals: 18,
+    exchangeAddress: '0xda674f8929ae00d50e3aecb17567f645ff898756'
+  },
+  {
+    symbol: 'PLC',
+    name: 'PlusCoin',
+    tokenAddress: '0x0835ecd15ddf08d4786304d71b4672dc5c40f011',
+    tokenDecimals: 18,
+    exchangeAddress: '0x79c472a7a8b0ce3a459903eabb3e680a226af7dc'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x7cfab87aac0899c093235b342ac0e5b1acf159eb',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc0a56e98eef3235a8898d6a3e86a04fc1cc11427'
+  },
+  {
+    symbol: 'MANA',
+    name: 'Mana',
+    tokenAddress: '0x35a9b440da4410dd63df8c54672b728970560328',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd20b9c7644d3c4760a355c5a87244043542cbe2e'
+  },
+  {
+    symbol: 'FLC',
+    name: 'FlowchainCoin',
+    tokenAddress: '0x5b53f9755f82439cba66007ec7073c59e0da4a7d',
+    tokenDecimals: 18,
+    exchangeAddress: '0x30f07ed7605d2a295051ce2ec33fb7efce72e580'
+  },
+  {
+    symbol: 'TAD',
+    name: 'Tantum Digital',
+    tokenAddress: '0xc9aee96bcc6d545d09d353573867dcc47ead18b3',
+    tokenDecimals: 0,
+    exchangeAddress: '0x441863620579af688319d6caf6023f6654809b54'
+  },
+  {
+    symbol: 'RDR',
+    name: 'RADAR',
+    tokenAddress: '0x3c9ca73d5309d38c6f2c21b78b9ae1f4b2441188',
+    tokenDecimals: 4,
+    exchangeAddress: '0x0385619bbeaed92ac451806a7ab79905973ce806'
+  },
+  {
+    symbol: 'cUSD',
+    name: 'cUSD Currency',
+    tokenAddress: '0x5c406d99e04b8494dc253fcc52943ef82bca7d75',
+    tokenDecimals: 6,
+    exchangeAddress: '0x6dd417d7f277adb70e93e97b04ebf7d8a812cf98'
+  },
+  {
+    symbol: 'ocDai',
+    name: 'Opyn cDai Insurance',
+    tokenAddress: '0xddac4aed7c8f73032b388efe2c778fc194bc81ed',
+    tokenDecimals: 8,
+    exchangeAddress: '0x8a0976500eed661202810bab030a057df15c4cc9'
+  },
+  {
+    symbol: 'PDC',
+    name: 'Project Decorum Coin',
+    tokenAddress: '0x059d44edd2c15fd0050feb8cc97b3e93e5837506',
+    tokenDecimals: 8,
+    exchangeAddress: '0x890055b5f02204097c17fd47b9e8518e07891534'
+  },
+  {
+    symbol: 'ocUSDC',
+    name: 'Opyn cUSDC Insurance',
+    tokenAddress: '0x8ed9f862363ffdfd3a07546e618214b6d59f03d4',
+    tokenDecimals: 8,
+    exchangeAddress: '0xe3a0a2431a093fed99037987ed0a88550e5e79aa'
+  },
+  {
+    symbol: 'BSTRP',
+    name: 'Bootstrap Fund',
+    tokenAddress: '0x34e92adc107a565ae6cb10fd126132d9f3f72092',
+    tokenDecimals: 18,
+    exchangeAddress: '0x269b91a489128c7d9ae47d7ef321743cb649c66c'
+  },
+  {
+    symbol: 'GST',
+    name: 'Gastoken.io',
+    tokenAddress: '0xa29c1c9a36e4d5abe72f8478fa16a10b35087d1b',
+    tokenDecimals: 2,
+    exchangeAddress: '0x12b9ec8dcc8474a908ac0cdbc23c638c36d7065d'
+  },
+  {
+    symbol: 'ETHA1D1',
+    name: 'Attractor Shell',
+    tokenAddress: '0x093182e3d3eebc9257480da2045bdd5e7951de18',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa0a72afd2c587aa3c4d364f8ba8cd577797fdb04'
+  },
+  {
+    symbol: 'XMX',
+    name: 'XMAX',
+    tokenAddress: '0x0f8c45b896784a1e408526b9300519ef8660209c',
+    tokenDecimals: 8,
+    exchangeAddress: '0xaa282363bcf796b8e396978cb36dc741a0cc49e9'
+  },
+  {
+    symbol: 'EOST',
+    name: 'EOS TRUST',
+    tokenAddress: '0x10923806eb6acbe01cd91fb616e7f0325e48c67b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x39e0e3d01e34fca871f4a0e76e44a99357a13cd6'
+  },
+  {
+    symbol: 'AVINOC',
+    name: 'AVINOC Token',
+    tokenAddress: '0xf1ca9cb74685755965c7458528a36934df52a3ef',
+    tokenDecimals: 18,
+    exchangeAddress: '0x09d4c0be8f80e3c99c69dac04987a93d690bad3e'
+  },
+  {
+    symbol: 'FVR',
+    name: 'Favor Token',
+    tokenAddress: '0xd7362318a19bee70d1dad79fabe1d2b9f5ea722a',
+    tokenDecimals: 3,
+    exchangeAddress: '0x1495eda011a9dbbd77d0f5a949e04403e6bc2698'
+  },
+  {
+    symbol: 'HERC',
+    name: 'Hercules',
+    tokenAddress: '0x2e91e3e54c5788e9fdd6a181497fdcea1de1bcc1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x75e62639cad23116b26d462db05a76faa4f2e51d'
+  },
+  {
+    symbol: 'CAMI',
+    name: 'CAMI',
+    tokenAddress: '0xa809cedee9b61956c768eaa10272dd5e0fd1a985',
+    tokenDecimals: 4,
+    exchangeAddress: '0x36bfbedc15f822a78940965ebb772a55b6a38a81'
+  },
+  {
+    symbol: 'USDA',
+    name: 'USDA',
+    tokenAddress: '0x3c7b464376db7c9927930cf50eefdea2eff3a66a',
+    tokenDecimals: 8,
+    exchangeAddress: '0xc04c321d69d7162bf56461a998f8094942ca44b6'
+  },
+  {
+    symbol: 'CBD',
+    name: 'CBDCoin',
+    tokenAddress: '0x0d73759437562a66c56da633bb948cc50291e157',
+    tokenDecimals: 18,
+    exchangeAddress: '0x05d16f95cf2777d6974babdd5a7df7c6cdb3300c'
+  },
+  {
+    symbol: 'CPR',
+    name: 'Cipher',
+    tokenAddress: '0x20ae0ca9d42e6ffeb1188f341a7d63450452def6',
+    tokenDecimals: 18,
+    exchangeAddress: '0x41787157689ff0d16042f1f0f31fda57abad234d'
+  },
+  {
+    symbol: 'Dane Token',
+    name: 'DANE',
+    tokenAddress: '0xfad09fca05d00cde1c038fe9a72b58659c78a157',
+    tokenDecimals: 18,
+    exchangeAddress: '0x18a8c0381735d102178110b3c72d42553d68d099'
+  },
+  {
+    symbol: 'BTM',
+    name: 'Bytom',
+    tokenAddress: '0xcb97e65f07da24d46bcdd078ebebd7c6e6e3d750',
+    tokenDecimals: 8,
+    exchangeAddress: '0x7a48f9a2cfb0cb74d85866ded24e48b73dd243cb'
+  },
+  {
+    symbol: 'URBEN',
+    name: 'UrBen',
+    tokenAddress: '0xd0bf154768b0f1f8cba50daa8960c285ce4c67f2',
+    tokenDecimals: 4,
+    exchangeAddress: '0x036697e1576f6f6c5d94620eadcde1969407314a'
+  },
+  {
+    symbol: 'VIXLBC',
+    name: 'VIX LBRY Credits',
+    tokenAddress: '0xe7ee20bc30cc2564decb071ecee1b15ed71e3e6b',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf166afb17a07027631088b7f143bdd3d0303ec42'
+  },
+  {
+    symbol: 'WGU',
+    name: 'Wrapped Gods Unchained Cards',
+    tokenAddress: '0x22086294a7de92dfb492ab223658a3349cb756eb',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe125a0434bc8f56b7da941e15fecbea671a89ab3'
+  },
+  {
+    symbol: 'BURN',
+    name: 'BURNI',
+    tokenAddress: '0x64d56f087d87cdaeac8119c69c48d0d440d560a7',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6614a8b47247bd63849c73aaaf60c939a991b3f9'
+  },
+  {
+    symbol: 'BBY',
+    name: 'BlocBuy',
+    tokenAddress: '0xaf5e6afa14a5de9a48395869f4f887a63f7f755f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x439e209d3cd7c20f5730e93d7a4acf0b6ab2b602'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0xd6c8e96d3cdebabea1a339a34a7e0c76975a504c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x42f51a3eb586dff7267d4651d7575feb73f5a4f9'
+  },
+  {
+    symbol: 'FND',
+    name: 'Insula Elba',
+    tokenAddress: '0x9f73d7874aa731a6e3185e2fdc201a07c736f45b',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb47500d62cf7e8d5f0fb52dd11df33d6b566e7e8'
+  },
+  {
+    symbol: 'BTV',
+    name: 'Bitcoin EVO',
+    tokenAddress: '0x3917e933bd430c08304cae2aa6d9746b806406c2',
+    tokenDecimals: 8,
+    exchangeAddress: '0xcb8b6e1373f86f2563d5b34522768b63cf35920d'
+  },
+  {
+    symbol: 'WTC',
+    name: 'Walton Token',
+    tokenAddress: '0xb7cb1c96db6b22b0d3d9536e0108d062bd488f74',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb4467f6ed20f5bdfced03337bf1e9b524396d50d'
+  },
+  {
+    symbol: 'FND',
+    name: 'Insula Sark',
+    tokenAddress: '0x10603633e9a021b8dbc1f0ccb172178b07dfb1f4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x01a700dc924d837740b2cf5ea8c9fc46a5a76a3a'
+  },
+  {
+    symbol: 'COV',
+    name: 'Covesting',
+    tokenAddress: '0xe2fb6529ef566a080e6d23de0bd351311087d567',
+    tokenDecimals: 18,
+    exchangeAddress: '0x77857c0c945d951f95ac18c9f5dcaf4df9bbec32'
+  },
+  {
+    symbol: 'RESQ',
+    name: 'Rescue Education Sanctuary & Quarantine',
+    tokenAddress: '0x82b5590ecc9231b3a3f518b907557b5961f14242',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1fd92be6317f01568059e310659d410f26780c5c'
+  },
+  {
+    symbol: 'DOOM',
+    name: 'DOOMER TOKEN',
+    tokenAddress: '0xf4a96aa4daa6428d5b0849ef876646c03486ee53',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe0dd02a435a3b5e44fb326aa7490d11dc2884209'
+  },
+  {
+    symbol: 'HYPE',
+    name: 'Hyper Token',
+    tokenAddress: '0xf438e3a0c1bb9dc0ef6da672c97a282236d3f233',
+    tokenDecimals: 18,
+    exchangeAddress: '0x52f67623e3cbf0166fbd8bc560ab83e8970f800c'
+  },
+  {
+    symbol: 'EXY',
+    name: 'Experty Token',
+    tokenAddress: '0x5c743a35e903f6c584514ec617acee0611cf44f3',
+    tokenDecimals: 18,
+    exchangeAddress: '0x659fc13990316de24706d99a143b18b9f45d0e0b'
+  },
+  {
+    symbol: 'mETH',
+    name: 'Mini Ethereum',
+    tokenAddress: '0x6c158864d3b06113bfd9f5f2c219725fd5bc3923',
+    tokenDecimals: 0,
+    exchangeAddress: '0xb9cb15e17dd9b8b99b86d87a62627cd96dad30f6'
+  },
+  {
+    symbol: 'GTX',
+    name: 'GoalTime N',
+    tokenAddress: '0x916885426255235da7a0bd90447986c00675f9ec',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf6c2fc4147b321c9823548289d5320f23f32baeb'
+  },
+  {
+    symbol: 'WST',
+    name: 'Winsor token',
+    tokenAddress: '0x2cf2f4e07ecc54740293df6d6fb4150d725a919f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x364d93cfdd3ef09c1485c901a8bd06585cff5a60'
+  },
+  {
+    symbol: 'BTF',
+    name: 'BIT FOODIE',
+    tokenAddress: '0x819860c8e60ac7a0e8b62e31e084568a430fedaf',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf6f018ceab243c08e403b5c4e9c60c43c6b19ad3'
+  },
+  {
+    symbol: '999',
+    name: '999',
+    tokenAddress: '0xbf05571988daab22d33c28bbb13566eae9dee626',
+    tokenDecimals: 3,
+    exchangeAddress: '0x7fe4c3e048a657ea2ccb146861318301e9d36ff9'
+  },
+  {
+    symbol: 'xx',
+    name: 'xx coin',
+    tokenAddress: '0x89dd0a221a9ff138b4182826038605d7d3ffacc8',
+    tokenDecimals: 0,
+    exchangeAddress: '0x75b3e186e800ed21d62d9a7eafa2dcd301bacb07'
+  },
+  {
+    symbol: 'POE',
+    name: 'Po.et',
+    tokenAddress: '0x0e0989b1f9b8a38983c2ba8053269ca62ec9b195',
+    tokenDecimals: 8,
+    exchangeAddress: '0xef5fe5ffd7dcd0182886f3356eee2e82cb79883e'
+  },
+  {
+    symbol: 'LIT',
+    name: 'LIUM',
+    tokenAddress: '0xf525cc44ba797d91413a490a3a7bf5532c8fd378',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd98755c56d7806f155db12b24282e96a6ff00071'
+  },
+  {
+    symbol: 'RIDE',
+    name: 'RideNode',
+    tokenAddress: '0x1d6364000dcae6c800aff1a7086a2cd7c56f88c1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x02619126d2f0fd5ec06619e22db4c2ee81194971'
+  },
+  {
+    symbol: 'NBC',
+    name: 'Niobium',
+    tokenAddress: '0x9f195617fa8fbad9540c5d113a99a0a0172aaedc',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf758eef8711df5a95aa435506c86b8b722e35de8'
+  },
+  {
+    symbol: 'SCOTT',
+    name: 'Scott Shapiro',
+    tokenAddress: '0xdf5ce35bf71bf78e8d2233f7ac8b73c34d6735f4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x7216579c34f257ae86137cfb7f8fa8c4d5b9af6e'
+  },
+  {
+    symbol: 'BRI',
+    name: 'Britency',
+    tokenAddress: '0x2f6f9ae909c1279f4281d0a7cd6fa146c949fc93',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3416535051c57ebc67157d8e62141a3bac208dbe'
+  },
+  {
+    symbol: 'STRU',
+    name: 'UniStrudel',
+    tokenAddress: '0x2882173e5afff3740a3615ede79ce81f357c44e6',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6212d4358c9402ca6ca22f7d8798323de55c3ac8'
+  },
+  {
+    symbol: 'KH',
+    name: 'KH Token',
+    tokenAddress: '0xcb182bcfbc6e3b71dc11ca7e5a3273842ae71421',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6b099e9ac8dc9f3c0fbb56087a90768e8c801364'
+  },
+  {
+    symbol: 'ELAMA',
+    name: 'ELA Coin',
+    tokenAddress: '0xfb444c1f2b718ddfc385cb8fd9f2d1d776b24668',
+    tokenDecimals: 18,
+    exchangeAddress: '0x054596f340e0aba794e924b19f7fddcd283fbce6'
+  },
+  {
+    symbol: 'FXT',
+    name: 'FuzeX Token',
+    tokenAddress: '0x1829aa045e21e0d59580024a951db48096e01782',
+    tokenDecimals: 18,
+    exchangeAddress: '0xee78e75ccf5d4de03a94ec127f23764be3f7a870'
+  },
+  {
+    symbol: 'QCAD',
+    name: 'QCAD',
+    tokenAddress: '0x4a16baf414b8e637ed12019fad5dd705735db2e0',
+    tokenDecimals: 2,
+    exchangeAddress: '0xf2cb7c71bfaeeb09d45dda8d31ed82fb09e596e3'
+  },
+  {
+    symbol: 'XUC',
+    name: 'Exchange Union Coin',
+    tokenAddress: '0xc324a2f6b05880503444451b8b27e6f9e63287cb',
+    tokenDecimals: 18,
+    exchangeAddress: '0x86a644453afe3401a243c0d994e77937c75d3023'
+  },
+  {
+    symbol: 'MBL',
+    name: 'MovieBloc',
+    tokenAddress: '0xb879da8b24c9b8685de8526cf492e954f165d74b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9946a4227d53d6b75165c5f9b7fd01d952b6d7e2'
+  },
+  {
+    symbol: 'IDH',
+    name: 'indaHash Coin',
+    tokenAddress: '0x5136c98a80811c3f46bdda8b5c4555cfd9f812f0',
+    tokenDecimals: 6,
+    exchangeAddress: '0x08444a961f9d5bfef8954bd665dd9b2d5e047f23'
+  },
+  {
+    symbol: 'ENK',
+    name: 'EnkronosToken',
+    tokenAddress: '0x92b914f1ddcbb1d117a718e83c9ed7eb32fc44d1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9eff0f159e2d62cc00303f5588cf5bb359b9fbdc'
+  },
+  {
+    symbol: 'GREEN',
+    name: 'Green',
+    tokenAddress: '0xb2089a7069861c8d90c8da3aacab8e9188c0c531',
+    tokenDecimals: 8,
+    exchangeAddress: '0xbfd3283102ce21dd2977e5d432e78e4523f7647e'
+  },
+  {
+    symbol: 'AQU',
+    name: 'Aquest Token',
+    tokenAddress: '0x7756edf05ef3c2b321a85d77b5cbf7c8a9a7c247',
+    tokenDecimals: 18,
+    exchangeAddress: '0x45fae25fb18f26c91d306c135254bb3ce35e26ca'
+  },
+  {
+    symbol: 'UGT',
+    name: 'UG Token',
+    tokenAddress: '0x43ee79e379e7b78d871100ed696e803e7893b644',
+    tokenDecimals: 18,
+    exchangeAddress: '0x109739630dd14f1430da59800b3b3e3a9f7ed835'
+  },
+  {
+    symbol: 'ATCT',
+    name: 'Atomic Core Token',
+    tokenAddress: '0xfe01807f119d77c0c11bbe26b7a7bacfa391f8e4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x54eebce18f37b34de860140e39b5261db2714777'
+  },
+  {
+    symbol: 'ALN',
+    name: 'AlunaToken',
+    tokenAddress: '0x1b7b723e66a0dd33e8f5e8ec039b51acafcd66a5',
+    tokenDecimals: 18,
+    exchangeAddress: '0xcf33b8b2fe77ce4f47fd40ae6f8a1140cbd3d17d'
+  },
+  {
+    symbol: 'FRM',
+    name: 'Ferrum Network Token',
+    tokenAddress: '0xe5caef4af8780e59df925470b050fb23c43ca68c',
+    tokenDecimals: 6,
+    exchangeAddress: '0xc4fc6d02db8283ef0006775025c71a08241d330d'
+  },
+  {
+    symbol: 'DICK',
+    name: 'DickheadCash',
+    tokenAddress: '0x4310f1c214bd170e5ab0832534997689453c9a43',
+    tokenDecimals: 0,
+    exchangeAddress: '0x0b8216214953429116278e6bc734af7c731c3454'
+  },
+  {
+    symbol: '∞',
+    name: 'Good Karma',
+    tokenAddress: '0xae616e72d3d89e847f74e8ace41ca68bbf56af79',
+    tokenDecimals: 6,
+    exchangeAddress: '0x77e622027b37e08a3745129da7e350cb64b70034'
+  },
+  {
+    symbol: 'DAG',
+    name: 'Constellation',
+    tokenAddress: '0xa8258abc8f2811dd48eccd209db68f25e3e34667',
+    tokenDecimals: 8,
+    exchangeAddress: '0xdc67b478442a1acaa1c659dd41cdefbabe2eda4b'
+  },
+  {
+    symbol: 'BND',
+    name: 'FUNGIBLEBOND',
+    tokenAddress: '0x5aa562496a59984980db181e581da1729b37dba2',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc3e06fa778ccbccf7b303d8f92b3a28c01d2be1e'
+  },
+  {
+    symbol: 'EAE',
+    name: 'selfdrop.eu',
+    tokenAddress: '0x7012f2a25840c7ece77d737f360fa0b8da89b65b',
+    tokenDecimals: 0,
+    exchangeAddress: '0x43c652474132dd1aa9750de7cf5444bbab350fa1'
+  },
+  {
+    symbol: 'PPL',
+    name: 'Qripplex',
+    tokenAddress: '0x36dd88a0a0f53c90555087e57f758383978e64b5',
+    tokenDecimals: 18,
+    exchangeAddress: '0xca53e1e7fd42f8a70e667aeac170db7dfd089534'
+  },
+  {
+    symbol: 'FORK',
+    name: 'GastroAdvisorToken',
+    tokenAddress: '0x5bb1632fa0023e1aa76a1ae92b4635c8dba49fa2',
+    tokenDecimals: 18,
+    exchangeAddress: '0x58c2b4313be743e228d7f89733233239a1046a97'
+  },
+  {
+    symbol: 'UNIT',
+    name: 'UNIT',
+    tokenAddress: '0xa6121f235e68fcfb55ef1fc2de88b60f6dfc2699',
+    tokenDecimals: 18,
+    exchangeAddress: '0x111604ad5f8f6a4ad22b92772b42b03523c9b1d2'
+  },
+  {
+    symbol: 'GOAT',
+    name: 'GoatCash',
+    tokenAddress: '0x9f452e458b024e82d6e3ff50a07b8de74c988523',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8f489294a8dbffac155080a1ea8c5ec9db702936'
+  },
+  {
+    symbol: 'DOWNDAI',
+    name: 'Down Dai',
+    tokenAddress: '0xef51576000b972569154e4372e8f636caf810784',
+    tokenDecimals: 18,
+    exchangeAddress: '0xcb34bb3bea8e133a4a1b33c33c94224abdec93c8'
+  },
+  {
+    symbol: 'RIC',
+    name: 'RIC',
+    tokenAddress: '0xe2247cd82e431131f15b8c310547b92e6f89e7bb',
+    tokenDecimals: 0,
+    exchangeAddress: '0x79a4328b04038ec3029af5df45d3a0c9c43b22b2'
+  },
+  {
+    symbol: 'BENJA',
+    name: 'benjaCoin',
+    tokenAddress: '0x38968746147bbaeb882f356ad9a57594bb158235',
+    tokenDecimals: 8,
+    exchangeAddress: '0x9d21dc709ad0951f25a9c5f1af4119de2d31c30f'
+  },
+  {
+    symbol: 'UPDAI',
+    name: 'Up Dai',
+    tokenAddress: '0x78ff871ecdbc2dab4212772192b48cae1ec74b8e',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1f4488e2569b78c5df38c0eefdbc25a205931305'
+  },
+  {
+    symbol: 'BCAP',
+    name: 'BCAP',
+    tokenAddress: '0x1f41e42d0a9e3c0dd3ba15b527342783b43200a9',
+    tokenDecimals: 0,
+    exchangeAddress: '0x773518be6a946d634de27a44daabbc624b689b54'
+  },
+  {
+    symbol: 'eBTG',
+    name: 'eBGOLD',
+    tokenAddress: '0xc51c938c4d513780c66c722a41c197d3a89fa9a8',
+    tokenDecimals: 8,
+    exchangeAddress: '0xa49ff527004adac0018643f596b4c4e3e0a8396c'
+  },
+  {
+    symbol: 'DOWNDAI',
+    name: 'Down Dai',
+    tokenAddress: '0xbc95fd0847e5982052f246402c9ca07d6b147139',
+    tokenDecimals: 18,
+    exchangeAddress: '0x70e76de7a90a77f2bdaa3a6fe7950c247591c5ba'
+  },
+  {
+    symbol: 'COHETH:DAI',
+    name: 'cohETH 270:1 DAI',
+    tokenAddress: '0x3d291c0f8cc7ec762ed70264e076252ba41731ba',
+    tokenDecimals: 18,
+    exchangeAddress: '0x025c1413da2db00cf66f566206d6d9cc1667efc4'
+  },
+  {
+    symbol: 'BURN',
+    name: 'Burni',
+    tokenAddress: '0x076a7c93343579355626f1426de63f8827c9b9b2',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf162becaf8be6a2aa5d050e35e3489d1b440e5bb'
+  },
+  {
+    symbol: 'PEG',
+    name: 'PegNet Token',
+    tokenAddress: '0x996b396b88cc4a1d8df3dbd1c088cdfaee17e6d4',
+    tokenDecimals: 8,
+    exchangeAddress: '0xfcaf3b46118024e5fb46fcf2daab8356bed7bb1f'
+  },
+  {
+    symbol: 'SSLE',
+    name: 'Scott Stevenson Legal Engineering',
+    tokenAddress: '0xbdbf67d9bcb35e2bb7e4951002c6d70013196972',
+    tokenDecimals: 18,
+    exchangeAddress: '0x42d0239c1a20e66bd92735189e5cdd92f64e8b7a'
+  },
+  {
+    symbol: 'DOWNDAI',
+    name: 'Down Dai',
+    tokenAddress: '0xa1845c1bb4f76e8dfab032a0f2f6b237c114ecc2',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb3ab20695cb498698da938a7bab828f5ebd5ae48'
+  },
+  {
+    symbol: 'ECO',
+    name: 'ZeroWaste',
+    tokenAddress: '0xae3d5e21ffe1a13529e6dc0a428d5fc351580363',
+    tokenDecimals: 8,
+    exchangeAddress: '0xe7b5116729856bd6d33c149b04b360278c379c47'
+  },
+  {
+    symbol: 'FORM',
+    name: 'ContactForm',
+    tokenAddress: '0x4f64d8ed0b0acbb5a24bfc4bf22ff5011469bbdd',
+    tokenDecimals: 10,
+    exchangeAddress: '0x8dbd301cc67b41a19587ce3416a4664672e37c5b'
+  },
+  {
+    symbol: 'SPACE',
+    name: 'Space Bucks',
+    tokenAddress: '0x965714ad80bc87c2ebcb83fcea19d24543db6174',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0364256c46019c2a0d492ca729d7100992a18d4f'
+  },
+  {
+    symbol: 'CCC',
+    name: 'Coinect core coin',
+    tokenAddress: '0x9950ca72131f82884ff6513367aacce69ba18a81',
+    tokenDecimals: 18,
+    exchangeAddress: '0x05ab2dd0af6796553a2921dd2d0d7262fc02c9e3'
+  },
+  {
+    symbol: 'DOGEX',
+    name: 'DOGEX',
+    tokenAddress: '0xf8d47138161c8175538ea1300e7bf7afc073445a',
+    tokenDecimals: 0,
+    exchangeAddress: '0x4612bb20d8a73cf616b78b1841a4451228619e11'
+  },
+  {
+    symbol: 'DOGEX',
+    name: 'DogeX',
+    tokenAddress: '0x2b6237d6ff66d4af737a1491841fe7cad6602bea',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5f192d8f4348cf76e1be0bfdc0a2b31ded0f4d08'
+  },
+  {
+    symbol: 'KEE',
+    name: 'Kee Dollars',
+    tokenAddress: '0x43c5bccb0233fcb6a9f5c6720fb7a195f15895e0',
+    tokenDecimals: 18,
+    exchangeAddress: '0x12f81b9e47770478f76e304526e45b7ebda3629a'
+  },
+  {
+    symbol: 'LEO',
+    name: 'LEO Token',
+    tokenAddress: '0x3cca052c998e0fd76d67892cff43b462ada9dedf',
+    tokenDecimals: 18,
+    exchangeAddress: '0xee4b44e3a8bdbb19aaf6439983f2d5adffe7c3f7'
+  },
+  {
+    symbol: 'OXY',
+    name: 'OXY',
+    tokenAddress: '0xd83a162d4808c370a1445646e64cc4861eb60b92',
+    tokenDecimals: 8,
+    exchangeAddress: '0x3324051c9a8f131bd4e883ae178ea0ffe3b7a51c'
+  },
+  {
+    symbol: 'VGTN',
+    name: 'Video Games Token',
+    tokenAddress: '0xb52fc0f17df38ad76f290467aab57cabaeeada14',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd37bbd1daa4540bfd24145663c0b1010502fc80c'
+  },
+  {
+    symbol: 'XPAYPro',
+    name: 'XPAY Pro Token',
+    tokenAddress: '0x565ac8639e53a4bff4afb34ac63a49d7bf01500e',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6d0f127f96473e77416c5b6d68b32bc6945a1211'
+  },
+  {
+    symbol: 'BTHR',
+    name: 'Bethereum',
+    tokenAddress: '0xa02e3bb9cebc03952601b3724b4940e0845bebcf',
+    tokenDecimals: 18,
+    exchangeAddress: '0xaf7c3dc8721b286ea89c8bda79f16b77fe08b31e'
+  },
+  {
+    symbol: 'FETH',
+    name: 'Flash Ether v0.1',
+    tokenAddress: '0x659d82b4f4c23c40feff2e3d65e4e1c7a38e20fd',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0be9b33670f1ce97fe49aa3729905c3fec8cc969'
+  },
+  {
+    symbol: 'iETH',
+    name: 'Fulcrum ETH iToken',
+    tokenAddress: '0x77f973fcaf871459aa58cd81881ce453759281bc',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8994f572d84c51a7c38acdba8a5490579b919ddc'
+  },
+  {
+    symbol: 'SLV',
+    name: 'Silverway',
+    tokenAddress: '0x4c1c4957d22d8f373aed54d0853b090666f6f9de',
+    tokenDecimals: 18,
+    exchangeAddress: '0x7cccbe696a89015980e1b6ff3262c534a519a4ed'
+  },
+  {
+    symbol: 'Only',
+    name: 'OnlyChain',
+    tokenAddress: '0x9eec65e5b998db6845321baa915ec3338b1a469b',
+    tokenDecimals: 18,
+    exchangeAddress: '0xfa4bc27eae86b39c9259338cdd543c29c58d8ddb'
+  },
+  {
+    symbol: 'A',
+    name: 'Alpha',
+    tokenAddress: '0xffc63b9146967a1ba33066fb057ee3722221acf0',
+    tokenDecimals: 18,
+    exchangeAddress: '0x63854180bf254bf6a25e273d878135938116564a'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x2e642b8d59b45a1d8c5aef716a84ff44ea665914',
+    tokenDecimals: 18,
+    exchangeAddress: '0x049116640a05944113a6fb466812aaf3abab9052'
+  },
+  {
+    symbol: 'SYB7',
+    name: 'SYB7ERC20',
+    tokenAddress: '0x86a49f08ab6531a3e0e814c75f36de661b986ca1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x985c3a340366d1f681d7d07a4dcf5a8732a18dc3'
+  },
+  {
+    symbol: 'AXPR',
+    name: 'aXpire',
+    tokenAddress: '0xc39e626a04c5971d770e319760d7926502975e47',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc02c04456c71ffb70086ce5582f4784bed111718'
+  },
+  {
+    symbol: 'KCR',
+    name: 'KreditCrown',
+    tokenAddress: '0x71cd2663787acc816716c565d4facc443dd933f7',
+    tokenDecimals: 10,
+    exchangeAddress: '0xbdecd7b4650d54cf9b1b1c356cdb13e2eb1d2e68'
+  },
+  {
+    symbol: 'PAT',
+    name: 'PATRON',
+    tokenAddress: '0xf3b3cad094b89392fce5fafd40bc03b80f2bc624',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe9c282690358f9e6366fd7c61e2aa74443dda96e'
+  },
+  {
+    symbol: 'MANU',
+    name: 'ManuCoin',
+    tokenAddress: '0x7cad0ed5a0b71c726353a6bad37ba7cfa4ce0e60',
+    tokenDecimals: 18,
+    exchangeAddress: '0xcd7f46d27d51a7101574b445b42a61bc1a99a612'
+  },
+  {
+    symbol: 'SHOP',
+    name: 'Shopin Token',
+    tokenAddress: '0x91edfc9e48a6f9a2da28a3dcdad310fb928641db',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa67ca08d5605f8a3c6624dbdc46f38fd1c1ff36f'
+  },
+  {
+    symbol: 'TP3',
+    name: 'Token Play',
+    tokenAddress: '0x9f76ff3336597feab30f5a66a053ae4a4a7ebe13',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0df6a571b25d6ae6a66ba87cbe8ce4bddc0fbd63'
+  },
+  {
+    symbol: 'BXC',
+    name: 'BtcEX Coin',
+    tokenAddress: '0x1bbe0d2d0a284ef9118ee69d356fcdd5948bacf4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x50a521982f6665d71b82a7adef0af247fcfaac0f'
+  },
+  {
+    symbol: 'ARX',
+    name: 'ARXToken',
+    tokenAddress: '0x9b7d9aaef003c0cba76a6556e0ebbc117144e9f9',
+    tokenDecimals: 6,
+    exchangeAddress: '0x18fd2536f936c77f50554924db3dd741929641bf'
+  },
+  {
+    symbol: 'RET',
+    name: 'Reearn Token',
+    tokenAddress: '0xd68515dbb439ac30befaedaff7487b3a00b57659',
+    tokenDecimals: 18,
+    exchangeAddress: '0x395bd29a994d2528c1161543b2f7858a735aa9e7'
+  },
+  {
+    symbol: 'PAN',
+    name: 'Pantos Token',
+    tokenAddress: '0x536381a8628dbcc8c70ac9a30a7258442eab4c92',
+    tokenDecimals: 8,
+    exchangeAddress: '0x4991c918f9658a3a4f0af0a1d77d7799da5e3ad8'
+  },
+  {
+    symbol: 'XRT',
+    name: 'Robonomics',
+    tokenAddress: '0x7de91b204c1c737bcee6f000aaa6569cf7061cb7',
+    tokenDecimals: 9,
+    exchangeAddress: '0x76cc30859542dbba23c83b2582e09c5212a84f70'
+  },
+  {
+    symbol: 'RDL',
+    name: 'Rob Leonhard',
+    tokenAddress: '0x16aa3823ba0702b209874dff0a123221880b2214',
+    tokenDecimals: 18,
+    exchangeAddress: '0xef8f7453dc9c6d0233b3b56d6e6110cc5021b97c'
+  },
+  {
+    symbol: 'Pesino',
+    name: 'PESOANDINO',
+    tokenAddress: '0x36d1ce91941ce0690dd0ea593b0f0472003742e3',
+    tokenDecimals: 4,
+    exchangeAddress: '0x38b62de296447c520011705f919cb26e1549a08d'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0xa2881a90bf33f03e7a3f803765cd2ed5c8928dfb',
+    tokenDecimals: 18,
+    exchangeAddress: '0x683f0f9c89cef1aeeae612244147e421b5759767'
+  },
+  {
+    symbol: 'RORY',
+    name: 'Rorys',
+    tokenAddress: '0x5a03a6f0a8ce6c29088979a6e0cf1ccd9ba985a3',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa57a6a8b00dd29271deffa7ae5b8571ec787459d'
+  },
+  {
+    symbol: 'ETHTC',
+    name: 'ETHTC',
+    tokenAddress: '0xb6fdd8a5b6069de409288bc30c69c5856dc67ac8',
+    tokenDecimals: 2,
+    exchangeAddress: '0x3e469f2257768b98f98501781137dbbe214ed7b1'
+  },
+  {
+    symbol: 'TCH',
+    name: 'Teacher Coin',
+    tokenAddress: '0x3b4b29c4c1872a60d09937686bd2b358db9dee8a',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5abcc0f3c82d9d6326f87712a29d30cbe3a04140'
+  },
+  {
+    symbol: 'BKC',
+    name: 'Bankcoin Cash',
+    tokenAddress: '0xc88be04c809856b75e3dfe19eb4dcf0a3b15317a',
+    tokenDecimals: 8,
+    exchangeAddress: '0xc2ab6fa66e5adaf31bd84407cfa0928b550da6f6'
+  },
+  {
+    symbol: 'TOKEN',
+    name: 'Free Token',
+    tokenAddress: '0x0f5adb011abd9d2802d422971e992854abf47e7c',
+    tokenDecimals: 18,
+    exchangeAddress: '0xeb260b39199a79ca9f7959ca2062abc64feb773c'
+  },
+  {
+    symbol: 'ocDai',
+    name: 'Opyn cDai Insurance',
+    tokenAddress: '0x98cc3bd6af1880fcfda17ac477b2f612980e5e33',
+    tokenDecimals: 8,
+    exchangeAddress: '0xa6923533a6362008e9b536271c2bdc0ff1467d3c'
+  },
+  {
+    symbol: 'VER',
+    name: 'Versus',
+    tokenAddress: '0x8354954c51d77b26fe7cd03c93ed075d0c2deba7',
+    tokenDecimals: 18,
+    exchangeAddress: '0x48ce7d1d2a26e3b7c3f5233fcd31f9691d56be9b'
+  },
+  {
+    symbol: 'ATL',
+    name: 'ATLANT Token',
+    tokenAddress: '0x78b7fada55a64dd895d8c8c35779dd8b67fa8a05',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe20c242133e8f24d45cfef2114c3a1568a4264ef'
+  },
+  {
+    symbol: 'PSC',
+    name: 'Polar Stern Capital',
+    tokenAddress: '0x3936f0968a576e112b3cbbc439855c353158b0e5',
+    tokenDecimals: 8,
+    exchangeAddress: '0x2bdb24c1cdcd22da0bad2dc1fa431dc242034ce8'
+  },
+  {
+    symbol: 'PWZ',
+    name: 'Powerlight',
+    tokenAddress: '0x86b9018bd65629e047d4bee2a96cbea8931d6ea1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1ad2e00ee484eb3c1fe4a0da69a481a681a7c229'
+  },
+  {
+    symbol: 'INS',
+    name: 'INS Token',
+    tokenAddress: '0x5b2e4a700dfbc560061e957edec8f6eeeb74a320',
+    tokenDecimals: 10,
+    exchangeAddress: '0x4b6c78ca78776255628bd514ff23db13aea39e89'
+  },
+  {
+    symbol: 'POLY',
+    name: 'Polymath',
+    tokenAddress: '0x9992ec3cf6a55b00978cddf2b27bc6882d88d1ec',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3645bf7cbf0a0bbb182cf2672477d6558419fda0'
+  },
+  {
+    symbol: 'UND',
+    name: 'United Network Distribution',
+    tokenAddress: '0xbe6ac6b50f577205c9d107f37b6e205aa6acc5d4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5fe46d0031993b600b79003cfcd41aae729b162c'
+  },
+  {
+    symbol: 'fmETH',
+    name: 'Flash-Mintable ETH',
+    tokenAddress: '0xd1528d08bf8e14e5573b487b6cfbdbfc0f0bd2aa',
+    tokenDecimals: 18,
+    exchangeAddress: '0xfb015575c4503765d960aab8480c0bfa171ef307'
+  },
+  {
+    symbol: 'FlashNMR',
+    name: 'FlashNumeraire',
+    tokenAddress: '0xc909b390bf33422d1ea2e23086d08b54b6047128',
+    tokenDecimals: 18,
+    exchangeAddress: '0xfd8ee010dedc91393ecc531c9f30321026830752'
+  },
+  {
+    symbol: 'FlashDAI',
+    name: 'FlashDai Stablecoin',
+    tokenAddress: '0x1b7d409afc87b330aa52ca87892cddab50e47cf7',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbd6187f376879476bf7eeeb1148316eda1c9a8d5'
+  },
+  {
+    symbol: 'FlashUSDT',
+    name: 'FlashTether USD',
+    tokenAddress: '0x433faefc9c56757b79ace724632525d024a2b5a1',
+    tokenDecimals: 6,
+    exchangeAddress: '0x68f7fa6bef2df37804a2693c10601e7000b173d1'
+  },
+  {
+    symbol: 'FlashUSDC',
+    name: 'FlashUSDC',
+    tokenAddress: '0x0a867b1ba154a641a6cf4d9c8ba994f590793150',
+    tokenDecimals: 6,
+    exchangeAddress: '0x75bc266c750ef8467f84ef8aac75c26d9c6cd40b'
+  },
+  {
+    symbol: 'UTK',
+    name: 'UTRUST Token',
+    tokenAddress: '0x70a72833d6bf7f508c8224ce59ea1ef3d0ea3a38',
+    tokenDecimals: 18,
+    exchangeAddress: '0x94d81fbd070138905de0d861bff97fc76a630099'
+  },
+  {
+    symbol: 'FlashFlashDAI',
+    name: 'FlashFlashDai Stablecoin',
+    tokenAddress: '0xaa8e7c65a895408f9a6944b07a6f83d1871e6fd6',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd8dba165cde1e09aa49fcf084d09fa3dc4b9c020'
+  },
+  {
+    symbol: 'XEN',
+    name: 'XENIACOIN',
+    tokenAddress: '0x4bb98d82fd0058e1ce97b71dc5c54b6d98c8c531',
+    tokenDecimals: 13,
+    exchangeAddress: '0x4f8b891552f4932f1071412bba64a2b1620f2c9e'
+  },
+  {
+    symbol: 'DMEX',
+    name: 'DMEX',
+    tokenAddress: '0x6263e260ff6597180c9538c69af8284edeacec80',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb79bd0217737d240a075ad7275746f386a453e45'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x929507cd3d90ab11ec4822e9eb5a48eb3a178f19',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9b5592c034dff5241d36821edc8378753c98094e'
+  },
+  {
+    symbol: 'BOX',
+    name: 'BOX Token',
+    tokenAddress: '0x63f584fa56e60e4d0fe8802b27c7e6e3b33e007f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1ed8e2e5ce43da4e3aa1d6e4070af996985bcdf1'
+  },
+  {
+    symbol: 'Suter',
+    name: 'Suterusu',
+    tokenAddress: '0xba8c0244fbdeb10f19f6738750daeedf7a5081eb',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbb2f842bccb1450b2526f36e03cd780f5dc4e140'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x9b5592c034dff5241d36821edc8378753c98094e',
+    tokenDecimals: 18,
+    exchangeAddress: '0x49d31c03980d8d41b7f60889af9e73f4d7dd2caf'
+  },
+  {
+    symbol: 'ZLA',
+    name: 'Zilla Token',
+    tokenAddress: '0xfd8971d5e8e1740ce2d0a84095fca4de729d0c16',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf38803116e94d8ad19ba421b5039e3f435b79179'
+  },
+  {
+    symbol: 'XMOO',
+    name: 'MOO token',
+    tokenAddress: '0x221535cbced4c264e53373d81b73c29d010832a5',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6a6ae1e7a865e00f7d94be16263ab86ec2085817'
+  },
+  {
+    symbol: 'ICNQ',
+    name: 'Iconiq Lab Token',
+    tokenAddress: '0xb3e2cb7cccfe139f8ff84013823bf22da6b6390a',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc000fd75e5572d419b231c2e42e5d000408b4d22'
+  },
+  {
+    symbol: 'NLINK',
+    name: 'NuLink',
+    tokenAddress: '0x493c8d6a973246a7b26aa8ef4b1494867a825de5',
+    tokenDecimals: 3,
+    exchangeAddress: '0xc31e9177e6a6967b6265f83c4593658c8e2e4cb2'
+  },
+  {
+    symbol: 'OBTC',
+    name: 'ObitanChain',
+    tokenAddress: '0x8fc01e6cbdffaf09b54f423f9bb1f856b22e47b2',
+    tokenDecimals: 8,
+    exchangeAddress: '0x52b20714ecd98776d6c878bdda5245d7b126cb11'
+  },
+  {
+    symbol: 'oyDai',
+    name: 'Opyn iearnDai insurance',
+    tokenAddress: '0xc714cea4daaed7fbc66f936b69e79ec0ee998d93',
+    tokenDecimals: 15,
+    exchangeAddress: '0xa61f4069b9a4be178254e79cdd7269c58c93708b'
+  },
+  {
+    symbol: 'fmETH',
+    name: 'Flash-Mintable ETH',
+    tokenAddress: '0x09b4c8200f0cb51e6d44a1974a1bc07336b9f47f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe04c5b953c2b2f48e4826b1da0e468073995fb98'
+  },
+  {
+    symbol: 'FlashcDAI',
+    name: 'FlashCompound Dai',
+    tokenAddress: '0x7813f2de421ac374dffdef2b20ed32770a1ed6ce',
+    tokenDecimals: 8,
+    exchangeAddress: '0x57ef0897bf35604d87d7939cb7fa1b1433184fbd'
+  },
+  {
+    symbol: 'KERN',
+    name: 'KernCoin',
+    tokenAddress: '0x46621967eff9ac56b4c12d39548a96aad99e4966',
+    tokenDecimals: 2,
+    exchangeAddress: '0x7035e6159e1c1503e39589e2fa465ce1ac7178e7'
+  },
+  {
+    symbol: 'HMQ',
+    name: 'Humaniq',
+    tokenAddress: '0xcbcc0f036ed4788f63fc0fee32873d6a7487b908',
+    tokenDecimals: 8,
+    exchangeAddress: '0x1edf95301078902e1a983dc26726c810549a91a3'
+  },
+  {
+    symbol: 'OMX',
+    name: 'Omix',
+    tokenAddress: '0xb5dbc6d3cf380079df3b27135664b6bcf45d1869',
+    tokenDecimals: 8,
+    exchangeAddress: '0xdc73cb3138dc4a2f4db1b55c4f55207f87511174'
+  },
+  {
+    symbol: 'NCT',
+    name: 'Nectar',
+    tokenAddress: '0x9e46a38f5daabe8683e10793b06749eef7d733d1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0d3a89dd6013fa16f5826195b12b0d4c64b3cf40'
+  },
+  {
+    symbol: 'PASS',
+    name: 'Blockpass',
+    tokenAddress: '0xee4458e052b533b1aabd493b5f8c4d85d7b263dc',
+    tokenDecimals: 6,
+    exchangeAddress: '0x67949696c8ab677333e6eb7da6c8e7062f5eac4f'
+  },
+  {
+    symbol: 'OSPV',
+    name: 'Onyx S&P 500',
+    tokenAddress: '0xfcce9526e030f1691966d5a651f5ebe1a5b4c8e4',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa977a299ec60ae113e2bc79534bc4f788dfb3752'
+  },
+  {
+    symbol: 'EUM',
+    name: 'Elitium',
+    tokenAddress: '0x6ab4a7d75b0a42b6bc83e852dab9e121f9c610aa',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc6ed5e59f75220b3eabcbfa20a7805db015353de'
+  },
+  {
+    symbol: '0xLTC',
+    name: '0xLitecoin Token',
+    tokenAddress: '0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d',
+    tokenDecimals: 8,
+    exchangeAddress: '0x6eecc267c9aeb3f6199926487e30f3cb370032f8'
+  },
+  {
+    symbol: 'OSPVS',
+    name: 'Onyx S&P 500 Short',
+    tokenAddress: '0xf7d1f35518950e78c18e5a442097ca07962f4d8a',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb7cb61870dacc9f643c9825a0b9b5b63f3ad89f8'
+  },
+  {
+    symbol: 'Seele',
+    name: 'SeeleToken',
+    tokenAddress: '0xb1eef147028e9f480dbc5ccaa3277d417d1b85f0',
+    tokenDecimals: 18,
+    exchangeAddress: '0x305b72523891ca145e1ae7eb3fb917f8d2ac72c5'
+  },
+  {
+    symbol: 'NKL',
+    name: 'Nickel Token',
+    tokenAddress: '0x3bd85455ac58cd787e327ed993f8d92225f08f68',
+    tokenDecimals: 18,
+    exchangeAddress: '0x450e41832a0ca6bd8bb69695c30eed43ccf96282'
+  },
+  {
+    symbol: 'MITx',
+    name: 'Morpheus Infrastructure Token',
+    tokenAddress: '0x4a527d8fc13c5203ab24ba0944f4cb14658d1db6',
+    tokenDecimals: 18,
+    exchangeAddress: '0x65c70b31425d3547fb132813b56634bb261238d2'
+  },
+  {
+    symbol: 'oCRV',
+    name: 'Opyn y.curve.fi Insurance',
+    tokenAddress: '0x4ba8c6ce0e855c051e65dfc37883360efaf7c82b',
+    tokenDecimals: 15,
+    exchangeAddress: '0x21f5e9d4ec20571402a5396084b1634314a68c97'
+  },
+  {
+    symbol: 'TING',
+    name: 'Tingles',
+    tokenAddress: '0xd1b183f425f7e6a0c83ab1cd84cfde2d84ba049d',
+    tokenDecimals: 4,
+    exchangeAddress: '0x2682867c58a18342cef4f57493a93c6e9799a4e9'
+  },
+  {
+    symbol: 'CSO',
+    name: 'COINSTO',
+    tokenAddress: '0x2a469a22101f1f672b745d729d13ab8dbd203c9b',
+    tokenDecimals: 8,
+    exchangeAddress: '0x72f0b15771e45953589668a266f6cd489e7285e9'
+  },
+  {
+    symbol: 'TIME',
+    name: 'James McCall',
+    tokenAddress: '0xaba2b920db501dbeb8651bcec8660cb871cecac1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0122fc49393761e0cd8feea831125b80ffaf4c52'
+  },
+  {
+    symbol: 'BFT',
+    name: 'BF Token',
+    tokenAddress: '0x01ff50f8b7f74e4f00580d9596cd3d0d6d6e326f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb4d6568271c96304fb246182bb8abcb2db4735f0'
+  },
+  {
+    symbol: 'MAL',
+    name: 'marble',
+    tokenAddress: '0xe583844f643577a1fcad644ca1b925ad1742f9cf',
+    tokenDecimals: 18,
+    exchangeAddress: '0x45be020931314205636b801bc98f4954b558b964'
+  },
+  {
+    symbol: 'NOME',
+    name: 'Nome',
+    tokenAddress: '0x04dec15e5178153997013c075e80cd0132840736',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6642ec01da6d149324c8688d7e7666dfad2a12de'
+  },
+  {
+    symbol: 'BCPT',
+    name: 'BLOCKMASON CREDIT PROTOCOL TOKEN',
+    tokenAddress: '0x1c4481750daa5ff521a2a7490d9981ed46465dbd',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0e1f41f9a835c6cdd7d0e974d32b08482ad08202'
+  },
+  {
+    symbol: 'MAX',
+    name: 'Max',
+    tokenAddress: '0x110cb817090c363b66f548bed8db74bedeafebb7',
+    tokenDecimals: 18,
+    exchangeAddress: '0x096659a001e8e13778d741634fdbc3ac976b0700'
+  },
+  {
+    symbol: 'Tive',
+    name: 'Tidal Wave',
+    tokenAddress: '0x0df0a47a100ca5c1dab64da49b0950a6139f36cd',
+    tokenDecimals: 18,
+    exchangeAddress: '0xfe7ba5add67e7698a195069c9c758b18d2d95b7b'
+  },
+  {
+    symbol: 'NET',
+    name: 'Nordic Energy Token',
+    tokenAddress: '0x4d0a4c762bd7f742096daaf5911dcf9c94b9ea95',
+    tokenDecimals: 8,
+    exchangeAddress: '0x7b0f43be88432b4d3c2258b5e31be7e2fa02434a'
+  },
+  {
+    symbol: 'WHALE',
+    name: 'WhaleCoin',
+    tokenAddress: '0x804e26c4eff0bb196b805bdfb5b29ab828cf0b1f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd5af8eec29b73fd3f95df25c67d4e5fd7251fd40'
+  },
+  {
+    symbol: 'OUSD',
+    name: 'Onyx USD',
+    tokenAddress: '0xd2d01dd6aa7a2f5228c7c17298905a7c7e1dfe81',
+    tokenDecimals: 18,
+    exchangeAddress: '0x06cabd84c20fdd327142fbca1ff5a02f82576dd4'
+  },
+  {
+    symbol: 'Nlink',
+    name: 'New Link coin',
+    tokenAddress: '0xf1252560e9bf579550622f25c533fea1279e10a1',
+    tokenDecimals: 8,
+    exchangeAddress: '0x6ab4035a97508ee9627d8ace430a713f7e60dd58'
+  },
+  {
+    symbol: 'DEng',
+    name: 'DEng Coin',
+    tokenAddress: '0x6957cfb6f6400279aa56f6de9b172ab5462034ff',
+    tokenDecimals: 3,
+    exchangeAddress: '0x1910b8a9e335161d62bf9f1454dbb753f2ab413d'
+  },
+  {
+    symbol: 'ABE',
+    name: 'Abes',
+    tokenAddress: '0x5cb2b272b2d83e8ccc140a4441d45464af6d9f9a',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf152d7c042ff3dc406603a5a6a76ab3f044d24c0'
+  },
+  {
+    symbol: 'ATH',
+    name: 'Athencoin',
+    tokenAddress: '0xd8b28668bba84cf48e19805c9f58758b01844b41',
+    tokenDecimals: 8,
+    exchangeAddress: '0x5346dfccadcf60d8013e6431a9cab4dac77e475a'
+  },
+  {
+    symbol: 'ATH',
+    name: 'Athencoin',
+    tokenAddress: '0xe15ae1cf8bc11cd3c7e43f6422279cd23e679338',
+    tokenDecimals: 8,
+    exchangeAddress: '0xf47178efbae7a28d6eaaf24f7c5df93f5b5531fd'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0xd7f69554c3239ba358db5366465ddbd441ece210',
+    tokenDecimals: 18,
+    exchangeAddress: '0xdf2607f04a0d60bdeacddf53bd96e1f18d1bb53d'
+  },
+  {
+    symbol: 'ETHM',
+    name: 'Ethereum Meta',
+    tokenAddress: '0xd5dad1db7f112037c0c6cf0792dc2a7866bfd136',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3fa0133c31a479c9d482ab0963db7d0012fc007c'
+  },
+  {
+    symbol: 'TGRM',
+    name: 'MWAVS',
+    tokenAddress: '0x587b6e61f7c7b1173eb283205d03cafab7cc57e1',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd2b40ff04aecc42bd2b9402e1cd591782582072d'
+  },
+  {
+    symbol: 'AKT',
+    name: 'Akropolis',
+    tokenAddress: '0x395f47e890cd81307c5fa8814771b93100283daa',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe79b18611d4af9d31eb531b1c2f97fbd1a4c5cdd'
+  },
+  {
+    symbol: 'BETHER',
+    name: 'Bethereum',
+    tokenAddress: '0x14c926f2290044b647e1bf2072e67b495eff1905',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb4614615092d4a924f066f35c5dc7753e2d131c3'
+  },
+  {
+    symbol: 'CDA.ONE',
+    name: 'CommunityDigitalAsset',
+    tokenAddress: '0x3a24bd487e9459f8eb2334e466510cd55ff3197c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x54fb1444f6a81b5050144172114447755d20db63'
+  },
+  {
+    symbol: 'CANDY',
+    name: 'CandyHCoin',
+    tokenAddress: '0x45555629aabfea138ead1c1e5f2ac3cce2add830',
+    tokenDecimals: 8,
+    exchangeAddress: '0x103953f7e2d3931ceccf416da0c2a25bb69e58fa'
+  },
+  {
+    symbol: 'AMGCASH',
+    name: 'AMGCASH',
+    tokenAddress: '0xf104c21e2fb98ed486147ac0cecdcbc2ab813d6c',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbe8d7b0c31875a6757ee82a38262c98ffd900e39'
+  },
+  {
+    symbol: 'TRB',
+    name: 'Tellor',
+    tokenAddress: '0x508e3534bbc393e8bc55286a089f42d2b89e4fd5',
+    tokenDecimals: 18,
+    exchangeAddress: '0x066b8b936412ec57d2549801138f3b58e0225d57'
+  },
+  {
+    symbol: 'FLL',
+    name: 'Feellike',
+    tokenAddress: '0x9235bda06b8807161b8fbb1e102cb654555b212f',
+    tokenDecimals: 3,
+    exchangeAddress: '0x1d7a1ec79fd43a7b45be2e7bdac6fed50b6baba1'
+  },
+  {
+    symbol: 'NOME',
+    name: 'Nome',
+    tokenAddress: '0xe3af86083c19d92290104cbf4f8099cce6048a2f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xcc798ecbbdf3370729a237f8b02486fcd08565b5'
+  },
+  {
+    symbol: 'CTA',
+    name: 'cryptomania.',
+    tokenAddress: '0x04ab12236af35736e2124ac0eff1944bd5e82633',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf1b699b6405826543000cdf366bb2feba9ccfe75'
+  },
+  {
+    symbol: 'DROP',
+    name: 'Dropil',
+    tokenAddress: '0x4672bad527107471cb5067a887f4656d585a8a31',
+    tokenDecimals: 18,
+    exchangeAddress: '0x10811d1dba4cf9505755570a780cc25bab637e80'
+  },
+  {
+    symbol: 'DYT',
+    name: 'DoYourTip',
+    tokenAddress: '0x740623d2c797b7d8d1ecb98e9b4afcf99ec31e14',
+    tokenDecimals: 18,
+    exchangeAddress: '0x095ca83bbdc0671ee09f8c57a8254ea539c0d2c6'
+  },
+  {
+    symbol: 'COVA',
+    name: 'Covalent Token',
+    tokenAddress: '0xb37a769b37224449d92aac57de379e1267cd3b00',
+    tokenDecimals: 18,
+    exchangeAddress: '0xde70937d291f2a09b2ab40e6f42ac9f35c99bcc7'
+  },
+  {
+    symbol: 'FOOD',
+    name: 'Biolokio',
+    tokenAddress: '0xd448898c884e4e8357c17c790a6d1bef8db1a08b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x7ab598e4159b0dc453250925b635073a3a368435'
+  },
+  {
+    symbol: 'KRWb',
+    name: 'KRWb Token',
+    tokenAddress: '0xf9fd7a89bfb8a07a225080236e5ca570ee2a76a1',
+    tokenDecimals: 2,
+    exchangeAddress: '0x88fa8e4c2558e4a99265638983d373e0b4fe29b2'
+  },
+  {
+    symbol: '2GB',
+    name: '2GetherBounty',
+    tokenAddress: '0x0bd344cade9a06d1798140023f56fb0f56d48afe',
+    tokenDecimals: 18,
+    exchangeAddress: '0x35b52aeb020429ecd18374e6c69328c527bd92d7'
+  },
+  {
+    symbol: 'GALO',
+    name: 'GalboCoin',
+    tokenAddress: '0xf90f1c360077e05fe3b5dcdd1420ac3c0b47d088',
+    tokenDecimals: 18,
+    exchangeAddress: '0xaee49fc70da1cf7fbbae33b0dfbfa641684e3f56'
+  },
+  {
+    symbol: 'CMT',
+    name: 'CyberMiles Token',
+    tokenAddress: '0xf85feea2fdd81d51177f6b8f35f0e6734ce45f5f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x2dd675adac06a14b291abbe2095ba86b430e8e8a'
+  },
+  {
+    symbol: 'NLC',
+    name: 'NLC Token',
+    tokenAddress: '0x05007434b72a5e99348186f45fcd3660917da683',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe809c1fb30bb59d50b079ecafea0795020618676'
+  },
+  {
+    symbol: 'G4D',
+    name: 'Give4Dream',
+    tokenAddress: '0x639cff3936ba73fced75f9ace328b7e72d85d933',
+    tokenDecimals: 18,
+    exchangeAddress: '0x27c3106a5e864430f59daa6efb5ae81a78d6fcd2'
+  },
+  {
+    symbol: 'CANDY',
+    name: 'CANDY',
+    tokenAddress: '0x4d88238468e70673133090e3893b8770457361e1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x6c34e26cc6df9c03ac92d05d7fc269c09e00ea88'
+  },
+  {
+    symbol: 'FRFT',
+    name: 'Firefly Token',
+    tokenAddress: '0xec29851be2af7350f0a8f8998b88a22586dda717',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8c8e9cd122af539d86c109ab8f0d6a6faaeba018'
+  },
+  {
+    symbol: 'aUSDC',
+    name: 'Aave Interest bearing USDC',
+    tokenAddress: '0x9ba00d6856a4edf4665bca2c2309936572473b7e',
+    tokenDecimals: 6,
+    exchangeAddress: '0x053319a375b464cd72de8bbcf45eb6d2efa6f6d3'
+  },
+  {
+    symbol: 'aSUSD',
+    name: 'Aave Interest bearing SUSD',
+    tokenAddress: '0x625ae63000f46200499120b906716420bd059240',
+    tokenDecimals: 18,
+    exchangeAddress: '0x30d731beb921912b55d00b6427df32fa9a475833'
+  },
+  {
+    symbol: 'aTUSD',
+    name: 'Aave Interest bearing TUSD',
+    tokenAddress: '0x4da9b813057d04baef4e5800e36083717b4a0341',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa45937d10aee52bfde8eb6025ef0c863ae5bec87'
+  },
+  {
+    symbol: 'aBAT',
+    name: 'Aave Interest bearing BAT',
+    tokenAddress: '0xe1ba0fb44ccb0d11b80f92f4f8ed94ca3ff51d00',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc91fea7bc9b809be3179567707f64c0479a7e29a'
+  },
+  {
+    symbol: 'UP',
+    name: 'UpToken',
+    tokenAddress: '0x6ba460ab75cd2c56343b3517ffeba60748654d26',
+    tokenDecimals: 8,
+    exchangeAddress: '0xe510c65269e8d326db175243add3e0f439d848f3'
+  },
+  {
+    symbol: 'pUSD',
+    name: 'US Dollar',
+    tokenAddress: '0x93d3296cac208422bf587c3597d116e809870f2b',
+    tokenDecimals: 8,
+    exchangeAddress: '0x266019f122bc9f939bb714a12ff68ff83aae06b5'
+  },
+  {
+    symbol: 'ING',
+    name: 'IUNGO token',
+    tokenAddress: '0x24ddff6d8b8a42d835af3b440de91f3386554aa4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9f1a5f36c9ba2358b915bcc864ebccddcf8e7b30'
+  },
+  {
+    symbol: 'aLINK',
+    name: 'Aave Interest bearing LINK',
+    tokenAddress: '0xa64bd6c70cb9051f6a9ba1f163fdc07e0dfb5f84',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe51bdcd0aefd9f4c512dd7abdaa6ad94a35fb470'
+  },
+  {
+    symbol: 'aSNX',
+    name: 'Aave Interest bearing SNX',
+    tokenAddress: '0x328c4c80bc7aca0834db37e6600a6c49e12da4de',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0c0804b314fd3a32667a9624d2f94d31ef86e768'
+  },
+  {
+    symbol: 'aMANA',
+    name: 'Aave Interest bearing MANA',
+    tokenAddress: '0x6fce4a401b6b80ace52baaefe4421bd188e76f6f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1203498b1e59822b6e45f8f96bea55eacca214fc'
+  },
+  {
+    symbol: 'aREP',
+    name: 'Aave Interest bearing REP',
+    tokenAddress: '0x71010a9d003445ac60c4e6a7017c1e89a477b438',
+    tokenDecimals: 18,
+    exchangeAddress: '0xfa7d563f150b8276e3e6c39ed2a61e2dd3b6782c'
+  },
+  {
+    symbol: 'aZRX',
+    name: 'Aave Interest bearing ZRX',
+    tokenAddress: '0x6fb0855c404e09c47c3fbca25f08d4e41f9f062f',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf3b1e2fcdc54601280ca98e550ff9874bd6b5d47'
+  },
+  {
+    symbol: 'iUSDC',
+    name: 'Fulcrum USDC iToken',
+    tokenAddress: '0xf013406a0b1d544238083df0b93ad0d2cbe0f65f',
+    tokenDecimals: 6,
+    exchangeAddress: '0xaed32f3df396aec2c1e7203ffcb540475124926d'
+  },
+  {
+    symbol: 'iSUSD',
+    name: 'Fulcrum sUSD iToken',
+    tokenAddress: '0x49f4592e641820e928f9919ef4abd92a719b4b49',
+    tokenDecimals: 18,
+    exchangeAddress: '0x860f7c6bd5e962810fb291b4e0d585466062b510'
+  },
+  {
+    symbol: 'iKNC',
+    name: 'Fulcrum KNC iToken',
+    tokenAddress: '0x1cc9567ea2eb740824a45f8026ccf8e46973234d',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf7cc3f0c1153f95808105b81729d3d709d575c47'
+  },
+  {
+    symbol: 'aWBTC',
+    name: 'Aave Interest bearing WBTC',
+    tokenAddress: '0xfc4b8ed459e00e5400be803a9bb3954234fd50e3',
+    tokenDecimals: 8,
+    exchangeAddress: '0xb6191f5f595e5580ce9c7273925df4a20ddcc27b'
+  },
+  {
+    symbol: 'iREP',
+    name: 'Fulcrum REP iToken',
+    tokenAddress: '0xbd56e9477fc6997609cf45f84795efbdac642ff1',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3cb6b8f13c4bb0f6d64f2c5a0917008c150235e3'
+  },
+  {
+    symbol: 'iZRX',
+    name: 'Fulcrum ZRX iToken',
+    tokenAddress: '0xa7eb2bc82df18013ecc2a6c533fc29446442edee',
+    tokenDecimals: 18,
+    exchangeAddress: '0x55bcc801208e9c6febf36a6305e30e3a80245de1'
+  },
+  {
+    symbol: 'iLINK',
+    name: 'Fulcrum LINK iToken',
+    tokenAddress: '0x1d496da96caf6b518b133736beca85d5c4f9cbc5',
+    tokenDecimals: 18,
+    exchangeAddress: '0x76c40b3c47d8e9fb8573cae4cee612cbb0f38c5c'
+  },
+  {
+    symbol: 'iWBTC',
+    name: 'Fulcrum WBTC iToken',
+    tokenAddress: '0xba9262578efef8b3aff7f60cd629d6cc8859c8b5',
+    tokenDecimals: 8,
+    exchangeAddress: '0xc6b93b71d3254598933b2f498dd8bc93a93b41e0'
+  },
+  {
+    symbol: 'FRFY',
+    name: 'Firefly Token',
+    tokenAddress: '0x4ed040f2896761d1688af5d772cc9138722ab9ec',
+    tokenDecimals: 18,
+    exchangeAddress: '0x47e830a8f58e601864aab0742b2423f6089ffa93'
+  },
+  {
+    symbol: 'LOST',
+    name: 'lost',
+    tokenAddress: '0x799bab17caa7bec45c9e0e2d5d600125c13eabe1',
+    tokenDecimals: 6,
+    exchangeAddress: '0x69ea67d2e064cbc09693cf582afa22b42cef461b'
+  },
+  {
+    symbol: 'AHT',
+    name: 'AHA',
+    tokenAddress: '0xdff06a2ab3208087652ca87e30ff0825b39d2465',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbcf6b28999f5a9485c12d7dba571797e92e480b9'
+  },
+  {
+    symbol: 'RSR',
+    name: 'Reserve Rights',
+    tokenAddress: '0x0c226d8dae08cf021f2f03afc2eff5c9c0b24671',
+    tokenDecimals: 18,
+    exchangeAddress: '0x36228370d9bc3532742190c91a040a6b2217e41d'
+  },
+  {
+    symbol: 'TLX',
+    name: 'Tracklish',
+    tokenAddress: '0x64872e4a1f21a16eacad8840d0f13ef256625cf6',
+    tokenDecimals: 18,
+    exchangeAddress: '0x81078deb40995d2991f5b3538346932e5a5063d0'
+  },
+  {
+    symbol: 'AC',
+    name: 'AIRDROP COIN',
+    tokenAddress: '0x9e115f7d5625b111fee987dbecb35de2257157b4',
+    tokenDecimals: 8,
+    exchangeAddress: '0x7ace512c5e16caed36a30fb7543547acdd293546'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x3cccaf9826f23fa749a85644f4924e627405f338',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1df85c89d479679b4cc8a99ca4bf7a237775d064'
+  },
+  {
+    symbol: 'NL Token',
+    name: 'NL',
+    tokenAddress: '0x0360b415b56bd77def7ffd64ab9c0a9f63a84e4f',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8e1eeaa8090e14cd5cd70012504834480bcf109a'
+  },
+  {
+    symbol: 'LNKF',
+    name: 'Link Fire',
+    tokenAddress: '0xe885593892baa73d9639fbc798002f5b226adbf4',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3c23cab21db98249879ea473a27bbd88a3152658'
+  },
+  {
+    symbol: 'OVX',
+    name: 'ZEROVIIIX',
+    tokenAddress: '0x863682ec5a934c308174dda9634cca095ad4f4fc',
+    tokenDecimals: 3,
+    exchangeAddress: '0xc64c80adde0e8e3e491d0b3253265359f1b30882'
+  },
+  {
+    symbol: 'SPeso',
+    name: 'Super Peso',
+    tokenAddress: '0x7209d0330ffe84d5f669b8f83192aa2030778450',
+    tokenDecimals: 8,
+    exchangeAddress: '0x85be96057e5abc984078f72e7424e97c120ee7e2'
+  },
+  {
+    symbol: 'IND',
+    name: 'LinkIndia',
+    tokenAddress: '0xe42386262691083ed90c7a07836695f9c0f5b6b6',
+    tokenDecimals: 18,
+    exchangeAddress: '0xedadb7cca75a13be4247bfda512aed39d1246538'
+  },
+  {
+    symbol: 'DIASPORA',
+    name: 'Diaspora',
+    tokenAddress: '0xd3de2cfbd3f8b7d9364a02b5c103530cae870d82',
+    tokenDecimals: 8,
+    exchangeAddress: '0xfa12724bb85dd04c4c0e696e0740983cec711e61'
+  },
+  {
+    symbol: 'KLAY',
+    name: 'Klaytn',
+    tokenAddress: '0x089fa00784cca541409947e9bd098ae816d00822',
+    tokenDecimals: 18,
+    exchangeAddress: '0xae449de1aa3869167fa0c65857952d43beff4a5a'
+  },
+  {
+    symbol: 'iXRP',
+    name: 'Synth iXRP',
+    tokenAddress: '0x9f63a4d498bfb6591145fc8494e7ad82afe28de5',
+    tokenDecimals: 18,
+    exchangeAddress: '0x31acf53378010d907e0a2c65ef90da2cbf48d9b4'
+  },
+  {
+    symbol: 'BACK',
+    name: 'BlockAid',
+    tokenAddress: '0x4120030e090dae5aefd9ed1c01e55031fdd1a113',
+    tokenDecimals: 18,
+    exchangeAddress: '0x783e92ab7d31d358ed1fdd4a65b095dcc1574c89'
+  },
+  {
+    symbol: 'RPT',
+    name: 'RealPropToken',
+    tokenAddress: '0xb7d1628141985015f6b71a88906121827b620acc',
+    tokenDecimals: 4,
+    exchangeAddress: '0xeaab309b080136f9fe092bfec076b1924eee534c'
+  },
+  {
+    symbol: 'VOCO',
+    name: 'Provoco Token',
+    tokenAddress: '0xb5ca46cf1da09248126682a7bd72401fd7a6b151',
+    tokenDecimals: 18,
+    exchangeAddress: '0x46144a869aa487a5584e05e5141f235127430c1d'
+  },
+  {
+    symbol: 'CRU',
+    name: 'CRU',
+    tokenAddress: '0x527b9715d99acfb7e1b01c6c864dc8402f2a3c3b',
+    tokenDecimals: 8,
+    exchangeAddress: '0xa6bd8bc654482ea09fc02465b15ae31eb6390b2d'
+  },
+  {
+    symbol: 'MTT',
+    name: 'MyTestToken',
+    tokenAddress: '0x58455560832b8da11fe2746fb5e1cc3894b5efb7',
+    tokenDecimals: 18,
+    exchangeAddress: '0x46c7c065326f7fac23fe5deb12e1cb7e9ac84422'
+  },
+  {
+    symbol: 'LOO',
+    name: 'Loops',
+    tokenAddress: '0x7336a2f392d14cc5b1fa324c3610434a490be862',
+    tokenDecimals: 18,
+    exchangeAddress: '0xf8d2f5fcd11a7d15d5edc80ac8be309534dd3e9c'
+  },
+  {
+    symbol: 'NuLINK',
+    name: 'NuChainLink Token',
+    tokenAddress: '0x44a718ac1bbff570b8a0d9a25a0ba8f317e049b7',
+    tokenDecimals: 18,
+    exchangeAddress: '0x4a6e6e609cb5d6d8b396c41e32bdcbde513563e2'
+  },
+  {
+    symbol: 'LCR',
+    name: 'LUCRE',
+    tokenAddress: '0x4ac583bb9c55658ebb17805f1cc8c1fa75c210d8',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa2e3db305f6768cdd27939be3b7cd9314261f951'
+  },
+  {
+    symbol: 'GGBE',
+    name: 'azaa',
+    tokenAddress: '0x0935ebfca49ff1652cae5b299ff2cc9b4e79adeb',
+    tokenDecimals: 18,
+    exchangeAddress: '0x40da57bea00afe1c01b50775f5124c3c008b7163'
+  },
+  {
+    symbol: 'WIN',
+    name: 'WINSTEX',
+    tokenAddress: '0x4cac2515716ab2531402ca8f992e235189f29c5a',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0b3c9ced88a4974c962d959a8535d77f81796787'
+  },
+  {
+    symbol: 'B2W',
+    name: 'Bit2Win',
+    tokenAddress: '0xd13a51b8cd275f0ed865c1b3ea87e3c3b615cc4e',
+    tokenDecimals: 18,
+    exchangeAddress: '0x898ca970f37fa9f3c0868ecc1f8287b683718ef7'
+  },
+  {
+    symbol: 'WCM',
+    name: 'WCM token',
+    tokenAddress: '0x5a2b6f0c3a5f9189ff318d8ce34c386ec4d56801',
+    tokenDecimals: 18,
+    exchangeAddress: '0xdaaef86d66ecf6f0f0eddd8b255b188868bd0477'
+  },
+  {
+    symbol: 'EVOT',
+    name: 'EVOAI',
+    tokenAddress: '0x5de805154a24cb824ea70f9025527f35facd73a1',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd056fd97705983c261a58fbc55647adda5eb3d88'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0xa1ecdcca26150cf69090280ee2ee32347c238c7b',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3974b0a9b2e4349b4b215429a670f243c423b637'
+  },
+  {
+    symbol: 'CRC',
+    name: 'CR Coin',
+    tokenAddress: '0xfb19c03a02a519a44542343803f3d42578cbc243',
+    tokenDecimals: 8,
+    exchangeAddress: '0xac224694ff8f6bfe35ad85e17697b90684601f31'
+  },
+  {
+    symbol: 'RPT',
+    name: 'RealPropToken',
+    tokenAddress: '0x1f5fa1a25a17e6562cd634df2be9109d43c87372',
+    tokenDecimals: 4,
+    exchangeAddress: '0xe03ae39782fcc21b3bad26b04706f2346378664a'
+  },
+  {
+    symbol: 'PTF',
+    name: 'Portfolio',
+    tokenAddress: '0x5a024226ba64860a1927552d23d6c4184abae4c7',
+    tokenDecimals: 16,
+    exchangeAddress: '0x920272f1892a251316c82fad50419cb3ce15ada1'
+  },
+  {
+    symbol: 'XPS',
+    name: 'Payshares',
+    tokenAddress: '0x32eab29aa859e40365873c8a7562710e2250f640',
+    tokenDecimals: 8,
+    exchangeAddress: '0x200d263f91f3acdcc572893ac31bb1c1dd329441'
+  },
+  {
+    symbol: 'NEST',
+    name: 'NEST',
+    tokenAddress: '0x04abeda201850ac0124161f037efd70c74ddc74c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x27113587cc9e5524f932be331f7fd4e160d55ff8'
+  },
+  {
+    symbol: 'FYS',
+    name: 'Fysical',
+    tokenAddress: '0x587e276dc7f2c97d986e8adf9b82d3f14d6cd8d2',
+    tokenDecimals: 9,
+    exchangeAddress: '0x703d249d7d1dad3405f058db9ff2a4d1619e2f69'
+  },
+  {
+    symbol: 'RDG',
+    name: 'RotasDoGarimpo',
+    tokenAddress: '0x47740a5ac376f6e95464a1faffb0d980944cf4bf',
+    tokenDecimals: 8,
+    exchangeAddress: '0x43d696d992e40536ba24cf779d3f4c07f9f43156'
+  },
+  {
+    symbol: 'ERD',
+    name: 'Elrond',
+    tokenAddress: '0xf9986d445ced31882377b5d6a5f58eaea72288c3',
+    tokenDecimals: 18,
+    exchangeAddress: '0x2655bc9f2d67f47d10b0bfb5bc385e4e64ef204f'
+  },
+  {
+    symbol: 'YUMI',
+    name: 'Yumi',
+    tokenAddress: '0x25859743ed0861665611b81e47682e889b48313b',
+    tokenDecimals: 4,
+    exchangeAddress: '0xd608ba0e93805b2b860794ecaeb1ed9b905e4f95'
+  },
+  {
+    symbol: 'ETHBULL',
+    name: ' 3X Long Ethereum Token',
+    tokenAddress: '0x871baed4088b863fd6407159f3672d70cd34837d',
+    tokenDecimals: 18,
+    exchangeAddress: '0x017a0510c54884aca164e2d3431f1441b9984da9'
+  },
+  {
+    symbol: 'KAU',
+    name: 'Kauri',
+    tokenAddress: '0xe172f366678ec7b559f6c2913a437baadfd4e6c8',
+    tokenDecimals: 8,
+    exchangeAddress: '0x5402ed190aa5fa3001b0155841f6c78c8c803ad7'
+  },
+  {
+    symbol: 'TUNE',
+    name: 'TuneToken',
+    tokenAddress: '0x6b4e0684806fe53902469b6286024db9c6271f53',
+    tokenDecimals: 18,
+    exchangeAddress: '0x35490cc5dbded3c9e1806198aa334aeb3a41dd1d'
+  },
+  {
+    symbol: 'NFTP',
+    name: 'NFTPromotion',
+    tokenAddress: '0x3c6990841a137caafefa2b2e10397acec445087c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x8f267171e85c34e69c856c377b0a78247369c28c'
+  },
+  {
+    symbol: 'ADA',
+    name: 'ADA',
+    tokenAddress: '0x43110d4f2113d50574412e852ebd96f1593179e4',
+    tokenDecimals: 4,
+    exchangeAddress: '0x7a9846e3ec583e8ce6a6374d0e91d6abfd9a6150'
+  },
+  {
+    symbol: 'TSH',
+    name: 'TASOHA',
+    tokenAddress: '0x4c5e9c0c0bf644cd265c9500e1aad0bae0977b78',
+    tokenDecimals: 18,
+    exchangeAddress: '0xe240876372c2dcc6534c2136d068c513641b7b9a'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x0d3a89dd6013fa16f5826195b12b0d4c64b3cf40',
+    tokenDecimals: 18,
+    exchangeAddress: '0x346829a7224850b79193ec355d52107ff576b451'
+  },
+  {
+    symbol: 'STPT',
+    name: 'STPT',
+    tokenAddress: '0xde7d85157d9714eadf595045cc12ca4a5f3e2adb',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc1310677e746a7cf810949fdc29727900bb33c47'
+  },
+  {
+    symbol: 'UNI-V1',
+    name: 'Uniswap V1',
+    tokenAddress: '0x97dec872013f6b5fb443861090ad931542878126',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbe7a5f13178680089c4b997076affcacb6741249'
+  },
+  {
+    symbol: 'TRS',
+    name: 'TREASURE',
+    tokenAddress: '0xd962d9c7fef2638a83a28f72e291ecf3d13c208e',
+    tokenDecimals: 18,
+    exchangeAddress: '0xd214a4b97484a62b2675f9326a52237b02850ad3'
+  },
+  {
+    symbol: 'BEE',
+    name: 'BEE TOKEN',
+    tokenAddress: '0x48294aef8d2c9c109196ab3067c0b72e9b0f79ce',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbcdd33865534c4edb153365d503b0e81de1a132c'
+  },
+  {
+    symbol: 'MM',
+    name: 'Moon Money Chain',
+    tokenAddress: '0xcd23ef2cba177a1b5f5d3818d055868e4b599d18',
+    tokenDecimals: 18,
+    exchangeAddress: '0x253e1d477c653725c5b3731d20d6fddda5523257'
+  },
+  {
+    symbol: 'JBG',
+    name: 'JBG',
+    tokenAddress: '0xe85d69d5e7b91b1a0d2e93a3678315e6915197b2',
+    tokenDecimals: 4,
+    exchangeAddress: '0x55e97572c9625ed0eef523f696c3b01eb90511ed'
+  },
+  {
+    symbol: 'TLBC',
+    name: 'TuoLuoblockchain',
+    tokenAddress: '0xdd460be411f2c00fa4a497904e978af7e66010af',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb0a7becad3ea29a96cd1d979bc11dc62c5f1cb08'
+  },
+  {
+    symbol: 'CRU',
+    name: 'Crypto Unit Token',
+    tokenAddress: '0xfbc1473e245b8afbba3b46116e0b01f91a026633',
+    tokenDecimals: 0,
+    exchangeAddress: '0xd03c0d81257af20f3cf79b3dd4f0ae3633695573'
+  },
+  {
+    symbol: 'DFGB',
+    name: 'DeFiGroup.ch Bond',
+    tokenAddress: '0xb6c28a66b131d7ecc5406769653653c4f108115e',
+    tokenDecimals: 6,
+    exchangeAddress: '0x19a52588e125ed1efa5815ea013e74bcf3782605'
+  },
+  {
+    symbol: 'DIGI',
+    name: 'Digiverse',
+    tokenAddress: '0xe03b4386b75e121e04d580d6b8376ceee0615ca8',
+    tokenDecimals: 18,
+    exchangeAddress: '0x3fba8d3e180c45de250e70e75e6b96d451f3b3e5'
+  },
+  {
+    symbol: 'BNG',
+    name: 'BUNGEE TOKEN',
+    tokenAddress: '0x1a744afb814d97f4519fb8c8720b47c92037adb5',
+    tokenDecimals: 4,
+    exchangeAddress: '0x38a5f47cafac1bcd56fd53b6fac2ca50560ca2cc'
+  },
+  {
+    symbol: 'CAN',
+    name: 'Content and Ad Network',
+    tokenAddress: '0x5f3789907b35dce5605b00c0be0a7ecdbfa8a841',
+    tokenDecimals: 18,
+    exchangeAddress: '0x164d59e4ba623310eaf7ec61a3e5f8de0350638f'
+  },
+  {
+    symbol: 'IZI',
+    name: 'IZIChain',
+    tokenAddress: '0xdf59c8ba19b4d1437d80836b45f1319d9a429eed',
+    tokenDecimals: 4,
+    exchangeAddress: '0xbaa2a9ef548e942f49d6348e110fc21c006b7ce6'
+  },
+  {
+    symbol: 'yDAI',
+    name: 'iearn DAI',
+    tokenAddress: '0x16de59092dae5ccf4a1e6439d611fd0653f0bd01',
+    tokenDecimals: 18,
+    exchangeAddress: '0x12d0771d3c1f83a8d0ff9ba13371e9d8cc500ef4'
+  },
+  {
+    symbol: 'C',
+    name: 'Carbon',
+    tokenAddress: '0x00209c82709aa78b91e073002e5f2d3455c0e96d',
+    tokenDecimals: 18,
+    exchangeAddress: '0x62e5c832a277a3d4fb6204233351eb04222b123e'
+  },
+  {
+    symbol: 'LEX',
+    name: 'TLDR',
+    tokenAddress: '0x8cede32bbbce5854992e151fe215f2887e522553',
+    tokenDecimals: 18,
+    exchangeAddress: '0xb51a747845ae0e3e2c6e76665fab5c9fc73f906f'
+  },
+  {
+    symbol: 'TBL',
+    name: 'Blotto',
+    tokenAddress: '0x9f7b5f851f26a34e510979901579a352c92a5d0c',
+    tokenDecimals: 1,
+    exchangeAddress: '0xc64670fb3362f805d6a768a979790daa142f893c'
+  },
+  {
+    symbol: 'TIKTOK',
+    name: 'TIKTOK COIN',
+    tokenAddress: '0xf4eda77f0b455a12f3eb44f8653835f377e36b76',
+    tokenDecimals: 0,
+    exchangeAddress: '0x1b627230df2ee5c181e3f729b443f4cf96b21375'
+  },
+  {
+    symbol: 'BTCS',
+    name: 'Bitcoin Silver',
+    tokenAddress: '0xd96b9fd7586d9ea24c950d24399be4fb65372fdd',
+    tokenDecimals: 18,
+    exchangeAddress: '0x452f7809b5f8a986829f7b5d24b289fef464cf95'
+  },
+  {
+    symbol: 'ETHERA',
+    name: 'ETHERA',
+    tokenAddress: '0xf377745e14bc6963a7e28acb23675081be81dc44',
+    tokenDecimals: 18,
+    exchangeAddress: '0x5d5aada17883c506e7383852df3a5f7481da09e1'
+  },
+  {
+    symbol: 'GTX',
+    name: 'GoalTime X',
+    tokenAddress: '0x4f2f4fda29450d5c33842bf964525132c6baf877',
+    tokenDecimals: 18,
+    exchangeAddress: '0x1885ab9a72a6113b9a678d2404fc5768ce8f3d64'
+  },
+  {
+    symbol: 'GIIP',
+    name: 'giip Token',
+    tokenAddress: '0x33be026eff080859eb9dfff6029232b094732c52',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc4a7dec7455cf795940f75a2b35d55352f0c3057'
+  },
+  {
+    symbol: 'BNG',
+    name: 'Bravenge',
+    tokenAddress: '0x925044c51db653459a23dcd7ac3e30afea51e54a',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9e9655289044f8083168df3ad9c775911735a1c2'
+  },
+  {
+    symbol: 'XTRD',
+    name: 'XTRD',
+    tokenAddress: '0x9c794f933b4dd8b49031a79b0f924d68bef43992',
+    tokenDecimals: 18,
+    exchangeAddress: '0xbbf441014115a97820a08489cac93e0e40971424'
+  },
+  {
+    symbol: 'DIKO',
+    name: 'Diko',
+    tokenAddress: '0x841c40f0ad007c44c7193ab705f8032d4ec07b0b',
+    tokenDecimals: 0,
+    exchangeAddress: '0x42ca92ffa594e2c3b3f82ae3a81365833dc920ad'
+  },
+  {
+    symbol: 'BTE',
+    name: 'Bitcoineum',
+    tokenAddress: '0x73dd069c299a5d691e9836243bcaec9c8c1d8734',
+    tokenDecimals: 8,
+    exchangeAddress: '0xd37394b642ed752851898820621d9d4c95d507e1'
+  },
+  {
+    symbol: 'ONG',
+    name: 'onG',
+    tokenAddress: '0xd341d1680eeee3255b8c4c75bcce7eb57f144dae',
+    tokenDecimals: 18,
+    exchangeAddress: '0x95070fd01646653dcf6598e8dafce8570f7a58cb'
+  },
+  {
+    symbol: 'BRT',
+    name: 'Bankroll Token v01',
+    tokenAddress: '0x22ccf4ee20b0bd4d02795bf70dfe6d74567cc9c8',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa81b10c34a7f8780d655257d94d966c7df92c3bc'
+  },
+  {
+    symbol: 'ANG',
+    name: 'Aureus Nummus Gold',
+    tokenAddress: '0x130914e1b240a7f4c5d460b7d3a2fd3846b576fa',
+    tokenDecimals: 18,
+    exchangeAddress: '0xa056320c8de334a272718f85ae23e3608b064c1b'
+  },
+  {
+    symbol: 'TST',
+    name: 'TBC Shopping Token',
+    tokenAddress: '0xf67041758d3b6e56d6fdafa5b32038302c3634da',
+    tokenDecimals: 18,
+    exchangeAddress: '0x7889645db7bb60c927a4b16c3993c832c56b2193'
+  },
+  {
+    symbol: 'SAB',
+    name: 'Sabiha Coin',
+    tokenAddress: '0x911a158850e34e5ffaa2431a28a159db5730e67a',
+    tokenDecimals: 8,
+    exchangeAddress: '0x492ba02fc81de37a089f89f2af8da52a1b9ae8c2'
+  },
+  {
+    symbol: 'SFT',
+    name: 'Soft Token',
+    tokenAddress: '0x2d476a9126d2d4135fb310acf029f9aacd4f85a2',
+    tokenDecimals: 18,
+    exchangeAddress: '0x21080da6f5fef92c178af388de2d586f1c2dee62'
+  },
+  {
+    symbol: 'dema',
+    name: 'demetracoin',
+    tokenAddress: '0x229d1ed07310a9aaaf7bda570825b0c4089b88ad',
+    tokenDecimals: 18,
+    exchangeAddress: '0xc0ea8272c0a0200a4da787378e460c6d5859c5be'
+  },
+  {
+    symbol: 'null',
+    name: 'null',
+    tokenAddress: '0x4b125f8d8c2a1a7da43c48534bd16c7874c783db',
+    tokenDecimals: null,
+    exchangeAddress: '0x093a83e12eb0e016c78df190bf7217b4380b4ae8'
+  },
+  {
+    symbol: 'APM',
+    name: 'APM Coin',
+    tokenAddress: '0xc8c424b91d8ce0137bab4b832b7f7d154156ba6c',
+    tokenDecimals: 18,
+    exchangeAddress: '0x7f04c59aa9fd2dabf1f5352b79061582a2682306'
+  },
+  {
+    symbol: 'DEF',
+    name: 'DeFlash',
+    tokenAddress: '0xe870bd7c40c1f1227637ded7b60456501d25a7b8',
+    tokenDecimals: 18,
+    exchangeAddress: '0x0353495a34eaddd0da71dad5c085ab6a938bd875'
+  },
+  {
+    symbol: 'QLP',
+    name: 'QLP',
+    tokenAddress: '0x0b150524707e66a3d85f15de9ab3865572e4e5f4',
+    tokenDecimals: 8,
+    exchangeAddress: '0x6cf8f2f078f3f99c929ffd28380ad1298fabf88d'
+  },
+  {
+    symbol: 'RHC',
+    name: 'Rich Human Crypto',
+    tokenAddress: '0x435d4183ae0aeb1babc31bd25a815d6244fc3562',
+    tokenDecimals: 2,
+    exchangeAddress: '0xce7784ebc2152c720022efcd1ec9f63b6beaf47c'
+  },
+  {
+    symbol: 'sBTC',
+    name: 'Siambitcoin',
+    tokenAddress: '0xb8e103b60a33597136ea9511f46b6dbeb643a3a5',
+    tokenDecimals: 18,
+    exchangeAddress: '0x566c633a01e5b1dc45ee8886aa3ee1e4783bb644'
+  },
+  {
+    symbol: 'ETHS',
+    name: 'EtherStone',
+    tokenAddress: '0xf5ba8a8c87f976b79b17ccd25ee8dc2f8e82fb59',
+    tokenDecimals: 18,
+    exchangeAddress: '0x9354d836159a8277bce122c1be8d7fb9d89ef403'
+  },
+  {
+    symbol: "CYBR",
+    name: "CYBR - Cyber Security Ecosystem Token",
+    tokenAddress: "0xaeaabb69dcb0fe926b1979f0b032fcd17fd7b2e0",
+    tokenDecimals: 18,
+    exchangeAddress: "0x7348bc5c6adc314020b65d73e407623f4e7e5577"
+  },
+  {
+    symbol: "PXT",
+    name: "Populous XBRL token",
+    tokenAddress: "0xc14830e53aa344e8c14603a91229a0b925b0b262",
+    tokenDecimals: 8,
+    exchangeAddress: "0xa69f6e2e981ce9f0a772485d95503ac478440dee"
+  },
+  {
+    symbol: "TOM",
+    name: "The Orion Mint",
+    tokenAddress: "0x731c8c257c94d938cb45931e2be4ad54e5d15611",
+    tokenDecimals: 18,
+    exchangeAddress: "0x0b31f410403821790a0fed543ed1fa1af35d032a"
+  },
+  {
+    symbol: "SUBS",
+    name: "SubSudio",
+    tokenAddress: "0xd7d7e034b5a9037a88659f734bc216e7df56e6fd",
+    tokenDecimals: 8,
+    exchangeAddress: "0x5b4b1c30fbad403a4b61802b3115825179c6a1ed"
+  },
+  {
+    symbol: "ECD",
+    name: "Easy Coin DF",
+    tokenAddress: "0x37b73a244bbe53ade2cc4824e34aebe8f418ba3b",
+    tokenDecimals: 18,
+    exchangeAddress: "0x21a52a62e1d85a4fab2c3c9db5ac7d703a97d918"
+  },
+  {
+    symbol: "B1P",
+    name: "B One Payment",
+    tokenAddress: "0x4b742b5bdb1d252907ae7f399a891d4a178dbc24",
+    tokenDecimals: 18,
+    exchangeAddress: "0x044d8d8e76ad40a27d0f34b509c6554665c069fb"
+  },
+  {
+    symbol: "WEENUS",
+    name: "Weenus 💪",
+    tokenAddress: "0x2823589ae095d99bd64deea80b4690313e2fb519",
+    tokenDecimals: 18,
+    exchangeAddress: "0x622d56bfea4c98a9b40e6f488af043d7e48c5aaf"
+  },
+  {
+    symbol: "ADR",
+    name: "ANDREA",
+    tokenAddress: "0x44cca682df6fbb95cbec3ddd6c40554b065980b4",
+    tokenDecimals: 18,
+    exchangeAddress: "0x4428f22cc70b28863b7bc8e9d9fcb659c1005e7c"
+  },
+  {
+    symbol: "ISP",
+    name: "iShop Plus",
+    tokenAddress: "0x3db1678170418d1014012f855e2dda492f35c289",
+    tokenDecimals: 18,
+    exchangeAddress: "0xaaa8ce8811f0f0c423df8e3d8b6466d77b07ae04"
+  },
+  {
+    symbol: "IST",
+    name: "iShop Token",
+    tokenAddress: "0x7a4d70528c0b8d376c206b0fb2c9db1d26315c2d",
+    tokenDecimals: 18,
+    exchangeAddress: "0x472701c91fb79c7b293db4ea3a7fee6516252731"
+  },
+  {
+    symbol: "RVT",
+    name: "RvT",
+    tokenAddress: "0x3d1ba9be9f66b8ee101911bc36d3fb562eac2244",
+    tokenDecimals: 18,
+    exchangeAddress: "0x99714bbe39fbcac445748f41ba5353b39b8a0def"
   },
   {
     symbol: "BITS",
-    name: "Ethereum Bits",
-    tokenAddress: "0x890196c13906ccbcc604ccb0ba48938c1217db5c",
-    tokenDecimals: 0,
-    exchangeAddress: "0x4355fdeac69301db38493a5c65f41fd4e4f06184"
-  },
-  {
-    symbol: "MNFT",
-    name: "MNFT",
-    tokenAddress: "0xdb7eb3ede973665b1bb9f3016861e3255062e4ed",
-    tokenDecimals: 4,
-    exchangeAddress: "0x6ad2fb782ff5feba6acc6321bfd24e14d6db4f5e"
-  },
-  {
-    symbol: "PYRO",
-    name: "PYRO Network",
-    tokenAddress: "0x14409b0fc5c7f87b5dad20754fe22d29a3de8217",
-    tokenDecimals: 18,
-    exchangeAddress: "0xf9a489e82cf4a090fd1fc766eb21edec249d7e71"
-  },
-  {
-    symbol: "VOKE",
-    name: "Voke",
-    tokenAddress: "0xd858c11a1e990d7d02e0897b9b19dadef8171832",
-    tokenDecimals: 4,
-    exchangeAddress: "0x488e9d8195a08acabb30c14fddd35bab3a15be0f"
-  },
-  {
-    symbol: "BERT",
-    name: "Bertbit",
-    tokenAddress: "0x6e9de2e85a8c1188995fecea289b3f22e489bb12",
-    tokenDecimals: 4,
-    exchangeAddress: "0x0476ceda88b20b5e0af1a598530db64667b03507"
-  },
-  {
-    symbol: "PUBLX",
-    name: "PUBLX",
-    tokenAddress: "0x1a6658f40e51b372e593b7d2144c1402d5cf33e8",
-    tokenDecimals: 18,
-    exchangeAddress: "0x51178a657a183ac593c58e9b961eefd8e20bc9c2"
-  },
-  {
-    symbol: "$PEW:DAI",
-    name: "PEW PEW PUT",
-    tokenAddress: "0x51c5faedc00b0649918d2f26b6237646eeca1951",
-    tokenDecimals: 18,
-    exchangeAddress: "0xbcdf3d061bbcd6591e9fed1ad46c3f07d43654dc"
-  },
-  {
-    symbol: "WYS",
-    name: "wys Token",
-    tokenAddress: "0xd8950fdeaa10304b7a7fd03a2fc66bc39f3c711a",
-    tokenDecimals: 18,
-    exchangeAddress: "0xb69f24efa39eace10055984c8f25bcfea1a94baa"
-  },
-  {
-    symbol: "aETH",
-    name: "Aave Interest bearing ETH",
-    tokenAddress: "0x3a3a65aab0dd2a17e3f1947ba16138cd37d08c04",
-    tokenDecimals: 18,
-    exchangeAddress: "0xdf9da8616d462985f3207aebbc2fe1500087f1b6"
-  },
-  {
-    symbol: "STO",
-    name: "storeum",
-    tokenAddress: "0xcb39c3502415152b2ec90ff07ee18cc94f681a72",
-    tokenDecimals: 18,
-    exchangeAddress: "0xc3e7d05555afcb36fac93fd42fe8692129074720"
-  },
-  {
-    symbol: "MAGIC",
-    name: "PET3R USES THE FORCE",
-    tokenAddress: "0x51876a15aff97a68ed7df051ce11fade0b91b384",
-    tokenDecimals: 1,
-    exchangeAddress: "0x26b7ea8b1c8c5709c0852bf8fd8136afda4e9ed3"
-  },
-  {
-    symbol: "TSD",
-    name: "TimesDollar",
-    tokenAddress: "0xe9865ee5fb3b9c4c99cfe865beb5c303ab4d9539",
-    tokenDecimals: 5,
-    exchangeAddress: "0x4565e521ec1ca1c32786e51c8062a94fcdf06581"
-  },
-  {
-    symbol: "CYMT",
-    name: "CyberMusic",
-    tokenAddress: "0x78c292d1445e6b9558bf42e8bc369271ded062ea",
+    name: "Bitsoko Community",
+    tokenAddress: "0xb72627650f1149ea5e54834b2f468e5d430e67bf",
     tokenDecimals: 8,
-    exchangeAddress: "0x1ed0fa36e0c411c2052a81702cbbfce772675729"
+    exchangeAddress: "0xca2e92d3cc5db5248ea21704bce749f330c389ad"
   },
   {
-    symbol: "MGC",
-    name: "More Gold Coin",
-    tokenAddress: "0x174bfa6600bf90c885c7c01c7031389ed1461ab9",
+    symbol: "LVLY",
+    name: "LovelyBonz",
+    tokenAddress: "0xf8b8ba4bcb4f7175e35d4a74a63cf79f03d7cd26",
+    tokenDecimals: 4,
+    exchangeAddress: "0x45c0e4891a99953cc93e869c8e342b5f82de34ea"
+  },
+  {
+    symbol: "TRENK",
+    name: "TRENK",
+    tokenAddress: "0x87328eea472bf8a3792ba3208c2ef699455ba212",
     tokenDecimals: 18,
-    exchangeAddress: "0x385eb222c05e9251a6979a076c54cd5a3b199ded"
+    exchangeAddress: "0x5c3e8b633b7400d55e0d60b0f68e62130249e78d"
   },
   {
-    symbol: "NANA",
-    name: "nana token",
-    tokenAddress: "0x00fb4ce3f7edb8dd1a0ec5c6b2e6a656219e2ced",
-    tokenDecimals: 2,
-    exchangeAddress: "0x06f52a0a0620bc9ee5a6229d99a8c98336e1b19d"
-  },
-  {
-    symbol: "iBBT",
-    name: "iBBT Utility Token",
-    tokenAddress: "0x691c25c461dafc47792b6e4d674fbb637bca1c6f",
+    symbol: "sXTZ",
+    name: "Synth sXTZ",
+    tokenAddress: "0xf45b14ddabf0f0e275e215b94dd24ae013a27f12",
     tokenDecimals: 18,
-    exchangeAddress: "0xfc3155e9789c6ada9078e96c9fbf812b521f4087"
+    exchangeAddress: "0x512fdd40b8712336bbfd44a4c8646aaa032ef109"
   },
   {
-    symbol: "MDT",
-    name: "MillionDollarToken",
-    tokenAddress: "0x37f014c64d186eaf879c0033846b51924ce42584",
-    tokenDecimals: 0,
-    exchangeAddress: "0x35e0b74a6828afe72972a35ecc19305a7837fd2c"
+    symbol: "BUZZ",
+    name: "BUZZ",
+    tokenAddress: "0x00d270d9a41886a8e6e433911ae2f7d257b60051",
+    tokenDecimals: 4,
+    exchangeAddress: "0x6c340363da8785d451ab2e4e6a6aa3debb93afe5"
   },
   {
-    symbol: "DEC",
-    name: "DarkEnergyCrystals",
-    tokenAddress: "0x9393fdc77090f31c7db989390d43f454b1a6e7f3",
+    symbol: "FAZR",
+    name: "Fazer",
+    tokenAddress: "0x6e4d93efc2beac20992197278ad41f8d10b3efaa",
+    tokenDecimals: 18,
+    exchangeAddress: "0x1e7f38debc0c78298e9ce2f0f52fc5b003321002"
+  },
+  {
+    symbol: "PRIVATE",
+    name: "Buccaneer",
+    tokenAddress: "0x17540494ad5e39aefd49901774528e9ff17fe40b",
     tokenDecimals: 3,
-    exchangeAddress: "0x32a40bf367bbf528c1b5605003cd2e33e00d6ad4"
+    exchangeAddress: "0x9ff9af11c58756c8f49a5878001bea9acbbc971d"
   },
   {
-    symbol: "ZAPH",
-    name: "ZAPH Token",
-    tokenAddress: "0x9f675e2c53ed88168e5928747caf31062da24f21",
-    tokenDecimals: 4,
-    exchangeAddress: "0xe042cb321e2fdb520ccc047337b7298f4972e7cb"
-  },
-  {
-    symbol: "AMIR",
-    name: "Amir",
-    tokenAddress: "0xe8ed6fe37def6d06d8f3b7af06aafb5da6541094",
-    tokenDecimals: 6,
-    exchangeAddress: "0xa4cc94a1d23564da127d87d5602f0ab00539fafd"
-  },
-  {
-    symbol: "BOO",
-    name: "Bamboo Token",
-    tokenAddress: "0x4336a5629bf30bee8bf571a6243cf50487b0de21",
-    tokenDecimals: 10,
-    exchangeAddress: "0x9afbdf81a5e6d00b1d04c915998a5aea88ab71f4"
-  },
-  {
-    symbol: "HBC",
-    name: "HOPE BILLION COIN",
-    tokenAddress: "0xc7c9f20a6268cfe4b3f28f279c2da273f7ec189a",
+    symbol: "HODL",
+    name: "HodlToken",
+    tokenAddress: "0x95012835d927235d8bdfb653e2d425bffeaa7fa2",
     tokenDecimals: 18,
-    exchangeAddress: "0xadf852e0ce8b611a38b2d15b946f33ec646c444b"
+    exchangeAddress: "0x5cbde2c854376d3db0194c44ac26a240bb457f74"
   },
   {
-    symbol: "YGG",
-    name: "YGG",
-    tokenAddress: "0xc254664c7408dde413969fbcd593328f6099e32f",
-    tokenDecimals: 4,
-    exchangeAddress: "0xda556c0c74e66039ca9fe257ce3ddeb72f77a2e3"
-  },
-  {
-    symbol: "LIB",
-    name: "BankLife",
-    tokenAddress: "0x3fd2e747cea0e8a78f1827ea2ffd3334628a600b",
+    symbol: "COMP",
+    name: "Compound",
+    tokenAddress: "0xc00e94cb662c3520282e6f5717214004a7f26888",
     tokenDecimals: 18,
-    exchangeAddress: "0x197155ec827864075f3c83e9597d005c69e63b80"
+    exchangeAddress: "0xdaf005507e257d34cf5b9d52d01e7e1c0876cf5f"
   },
   {
-    symbol: "SWL",
-    name: "Swiftlance token",
-    tokenAddress: "0x8cd480260a47f04589670a313d27a15b321ad266",
-    tokenDecimals: 8,
-    exchangeAddress: "0xe1048f6b00565b2e575b6f4f0c26ff3ac25e98f8"
-  },
-  {
-    symbol: "BFF",
-    name: "BffDoom",
-    tokenAddress: "0xcabf96a41a4d98ee91d4fb1004dc4b3b8548cb53",
-    tokenDecimals: 8,
-    exchangeAddress: "0xffaa84a2c03e7ac86626d0b0e37f0e3fe1b78e00"
-  },
-  {
-    symbol: "TMB",
-    name: "TemboCoin",
-    tokenAddress: "0x1de09690e0d3c75c22cd19acc1aebde46bbc7d25",
+    symbol: "KOZ",
+    name: "KozKoin",
+    tokenAddress: "0xe9d8a9fe2966db75c98fcb3829159daa31ceae64",
     tokenDecimals: 0,
-    exchangeAddress: "0x64d80812093be374e014406b73caf60994b2be96"
+    exchangeAddress: "0x4506d1da2e8851054c48e17017260643f76aa365"
   },
   {
-    symbol: "coby",
-    name: "coby Token",
-    tokenAddress: "0xd3b5c0d63475309201ef9acd0f6a4542db119335",
-    tokenDecimals: 1,
-    exchangeAddress: "0xa0619040bc67668c27e10b6dbb5f132815fd5575"
-  },
-  {
-    symbol: "SIM",
-    name: "SimpleToken",
-    tokenAddress: "0x8f1b950d4eed71fa5f7d16e01e7905a518fbed4a",
+    symbol: "ZYBE",
+    name: "Zyberos",
+    tokenAddress: "0x9e1e92a02abadc9bc71bce83a94d5c8cd3151676",
     tokenDecimals: 18,
-    exchangeAddress: "0x0d0d9fef65f845551f50b9c12bdea611507d1569"
+    exchangeAddress: "0xcaa217c5b6020ac9033a0b1262d445ad604cd9d8"
   },
   {
-    symbol: "JULIEN",
-    name: "Julien",
-    tokenAddress: "0xe6710e0cda178f3d921f456902707b0d4c4a332b",
-    tokenDecimals: 4,
-    exchangeAddress: "0x4ce8d670c0ccea741829551b347e2ebabdba638f"
-  },
-  {
-    symbol: "PLAT",
-    name: "BitGuild PLAT",
-    tokenAddress: "0x7e43581b19ab509bcf9397a2efd1ab10233f27de",
+    symbol: "EPLUS",
+    name: "EuroPlus",
+    tokenAddress: "0xec78d8485a878aa677f6aea1603a43d3cc970636",
     tokenDecimals: 18,
-    exchangeAddress: "0x9b40c045cc0e2e8ed958cb79f8b7c403bf960f2f"
+    exchangeAddress: "0x112faf002f18dd1a4470c9241344221233a14631"
   },
   {
-    symbol: "ZXC",
-    name: "0xcert Protocol Token",
-    tokenAddress: "0x83e2be8d114f9661221384b3a50d24b96a5653f5",
-    tokenDecimals: 18,
-    exchangeAddress: "0xb263893655286dafc58c1d1ee0670ef296c2488c"
-  },
-  {
-    symbol: "IAN",
-    name: "Ian Coin",
-    tokenAddress: "0x19c506211a26a67ad7e6d45cd274bad1863f8667",
-    tokenDecimals: 18,
-    exchangeAddress: "0x649281c5ae2134cab9834cca30653e5c63424051"
-  },
-  {
-    symbol: "MARS",
-    name: "Mars",
-    tokenAddress: "0x5d3a4b00db536f7e2be988bc84d92598ed116217",
-    tokenDecimals: 18,
-    exchangeAddress: "0x8debd17284a21865819d1ce1fb2dbcef2a86a616"
-  },
-  {
-    symbol: "LAW",
-    name: "Plutocracy",
-    tokenAddress: "0x9b03f09d259fba1ad3111729bdb8ffa55f49190f",
-    tokenDecimals: 0,
-    exchangeAddress: "0x33e0a5a6727ebd1b0c6874e1332c557916d0b047"
-  },
-  {
-    symbol: "YOT",
-    name: "Yo Token",
-    tokenAddress: "0xa817a9bcccb3cc79a588879214357e0b4a1a2e28",
-    tokenDecimals: 18,
-    exchangeAddress: "0x529744fd99f9684c9bfa73dc0adb873238dcd1b4"
-  },
-  {
-    symbol: "YUNG",
-    name: "YUNG",
-    tokenAddress: "0xbe47f50c85d9f3da055bc8cddaa33dea16926d9d",
-    tokenDecimals: 18,
-    exchangeAddress: "0xbb51faef044941f996f2db81cf7270845a76156d"
-  },
-  {
-    symbol: "YGG",
-    name: "YGG",
-    tokenAddress: "0x4ff2b0f58bc8f24e5cfb2a3ef4500162ada1f6da",
-    tokenDecimals: 4,
-    exchangeAddress: "0xaae7426b8d24cda480329609379cea29f76c2cb3"
-  },
-  {
-    symbol: "TRUSD",
-    name: "TrustUSD",
-    tokenAddress: "0xdd436a0dce9244b36599ae7b22f0373b4e33992d",
-    tokenDecimals: 18,
-    exchangeAddress: "0x041ac4e52e8e83f3f389fe7e419fa4eecd4dfb2b"
-  },
-  {
-    symbol: "WEEBS",
-    name: "Weebs",
-    tokenAddress: "0x1074608e45b42eb25d1e97382e8a1d151987eaba",
-    tokenDecimals: 4,
-    exchangeAddress: "0x4d11123334ac820862162bfbc010fffc2a73ee57"
-  },
-  {
-    symbol: "CALVIN",
-    name: "Calvin",
-    tokenAddress: "0xdc8092aaf83e00ebf9b01a2e90b7b7ef867ba503",
-    tokenDecimals: 4,
-    exchangeAddress: "0x657de502ee9fed80d5496a1da0007fe72b2bd18b"
-  },
-  {
-    symbol: "DRPU",
-    name: "DRP Utility",
-    tokenAddress: "0xe30e02f049957e2a5907589e06ba646fb2c321ba",
+    symbol: "INXT",
+    name: "Internxt",
+    tokenAddress: "0xa8006c4ca56f24d6836727d106349320db7fef82",
     tokenDecimals: 8,
-    exchangeAddress: "0x0fee4ac8f7e8239e02dc1c6cdc02b78e1b289839"
+    exchangeAddress: "0x05c95072e94d57c0d76eed9392b7cb657b238ecc"
   },
   {
-    symbol: "ZERO",
-    name: "Zero Coin",
-    tokenAddress: "0xc975ebf130ad3ded5545216aaf23191aba69f291",
-    tokenDecimals: 0,
-    exchangeAddress: "0x901cb3a323221fe4a2b392c0a5c59027cec08ae6"
+    symbol: "eINV",
+    name: "eINV",
+    tokenAddress: "0x09a8f2041be23e8ec3c72790c9a92089bc70fbca",
+    tokenDecimals: 18,
+    exchangeAddress: "0x009211344ee05ff3f69d9aadf0d3a0ab099c5363"
   },
   {
-    symbol: "XAI",
-    name: "AICoin",
-    tokenAddress: "0x268b7976e94e84a48bf8b2b57ba34b59ed836a74",
+    symbol: "BTE",
+    name: "Bit Energy",
+    tokenAddress: "0x267ba09fe3a8a16c7dc8a9b07b5f2c4ac0adf1c0",
     tokenDecimals: 8,
-    exchangeAddress: "0x0573cd872ff6b6efd20f00e7a9fb02fcd7cd9faf"
+    exchangeAddress: "0x410e90263f06d99d5b2410b37e9a0e16c4b79d1d"
   },
   {
-    symbol: "BLAQ",
-    name: "BLAQUE",
-    tokenAddress: "0x7a7f8d1a19e9a9547035e494d204448bb1388fb5",
+    symbol: "MGT",
+    name: "Meme Gift Token",
+    tokenAddress: "0xac4b0f55624e405f60c21316b6eba7a3a0c67eb2",
     tokenDecimals: 18,
-    exchangeAddress: "0xaa3eed5178d3239a8d9faf11f16ae3adbbc7ea7e"
+    exchangeAddress: "0x72e3292732331dacc7525c484f3544a1ca393800"
   },
   {
-    symbol: "BRC",
-    name: "Brettcoin",
-    tokenAddress: "0x4777819cccf1a8d1964a27963b7341c3aa653051",
+    symbol: "BIFC",
+    name: "BIFcoin",
+    tokenAddress: "0xd2dfc2f9d3ab26356a05898540bb9180c6f806a5",
     tokenDecimals: 18,
-    exchangeAddress: "0x868c87253a02c48ea3c3b1364587620cbc680627"
+    exchangeAddress: "0x93eb88f2a07a601b9c8c28955f3beaa3d1c7b0c8"
   },
   {
-    symbol: "TRD",
-    name: "Thirdhalf.com Token",
-    tokenAddress: "0x4a479bc7330719bf843634f8fb1c53ea88884e8f",
+    symbol: "iXTZ",
+    name: "Synth iXTZ",
+    tokenAddress: "0x8deef89058090ac5655a99eeb451a4f9183d1678",
     tokenDecimals: 18,
-    exchangeAddress: "0x5a463b374b486c2055e6f392c8895dd3e1b2e656"
+    exchangeAddress: "0x1fbc5c961c5f9eb5ebf28fefc16e1864a12cfe47"
   },
   {
-    symbol: "DM",
-    name: "Digitale Mark",
-    tokenAddress: "0xbd5dd4d4c51137ee47d080d19cd13670c90df2e9",
-    tokenDecimals: 2,
-    exchangeAddress: "0xa150f7e63e3f2053fc493153b7a43d14d9698ff8"
+    symbol: "NASA",
+    name: "OG NASA Rap",
+    tokenAddress: "0x4bdb811696ede769848d873bae7ba770fa0993d1",
+    tokenDecimals: 7,
+    exchangeAddress: "0x59df405a94577f4b0273f307f4699bc47fb63e36"
   },
   {
-    symbol: "AIRDROP",
-    name: "AirdropToken",
-    tokenAddress: "0xba7435a4b4c747e0101780073eeda872a69bdcd4",
+    symbol: "STK",
+    name: "STK Token",
+    tokenAddress: "0xae73b38d1c9a8b274127ec30160a4927c4d71824",
     tokenDecimals: 18,
-    exchangeAddress: "0x6acb64fc1e111c47ac9a7c2767459d9d3ed062d9"
+    exchangeAddress: "0x5bbd235a4d663ee585bbada8684b822a618adc1c"
   },
   {
-    symbol: "DGO",
-    name: "Dinngo",
-    tokenAddress: "0x6d38574be6c230272daad16fa5f291f825bd0da1",
-    tokenDecimals: 18,
-    exchangeAddress: "0xf04f5df7e9754482cf9dd76b52bc3693e231e399"
-  },
-  {
-    symbol: "CTO",
-    name: "CotteToken",
-    tokenAddress: "0x7fd483c9f72cf1bf9be2852810e50def29ff2f7f",
-    tokenDecimals: 18,
-    exchangeAddress: "0xcb4c79e50da5aa01d8016218bcdb8b2e1c3f191f"
-  },
-  {
-    symbol: "SLI",
-    name: "Sleipnirwallet",
-    tokenAddress: "0x625ce07842a307f190c93316e8215073ce6bd4c4",
-    tokenDecimals: 6,
-    exchangeAddress: "0x1ac7f6257710c788631ec4e35fda7bdd27f82e0b"
-  },
-  {
-    symbol: "CAMO",
-    name: "CAMO",
-    tokenAddress: "0xe86a746330b0b691323d2cbb5c140f77d7f198a4",
-    tokenDecimals: 4,
-    exchangeAddress: "0xe5f208b9f709d42c0e43658f34b9b6d6f531e39f"
-  },
-  {
-    symbol: "HLS",
-    name: "Hungry of Loves",
-    tokenAddress: "0x3a32a83b1a0a6f266bc54069e8677fefc4059da9",
-    tokenDecimals: 18,
-    exchangeAddress: "0x406153404823e61003d6f302089621c264bdb728"
-  },
-  {
-    symbol: "FDAI",
-    name: "Fake DAI",
-    tokenAddress: "0x69215a5c0cf2e69b0803ca283a5ad6dcc0a105bc",
-    tokenDecimals: 18,
-    exchangeAddress: "0x97a5df8bcc5c297067fb807409139b5038684111"
-  },
-  {
-    symbol: "MP",
-    name: "Mark Powell",
-    tokenAddress: "0x344c00d6ef1eaf1c0d592915ca976a71a7a95715",
-    tokenDecimals: 18,
-    exchangeAddress: "0x6445075bbf02c597a5a2ab29c73292e64fc7ede9"
-  },
-  {
-    symbol: "MTX",
-    name: "Matrix",
-    tokenAddress: "0x3154bf7cbb077e1a46eadf4c1ed019157e8e0687",
-    tokenDecimals: 18,
-    exchangeAddress: "0x8313d98f9ed87e37341c72d47271c6a197d878cf"
-  },
-  {
-    symbol: "MCX",
-    name: "MachiX Token",
-    tokenAddress: "0xd15ecdcf5ea68e3995b2d0527a0ae0a3258302f8",
-    tokenDecimals: 18,
-    exchangeAddress: "0xc4c18dec88a6576a8e345887fb1a229e97ba55e7"
-  },
-  {
-    symbol: "BOL",
-    name: "Freight Trust Protocol",
-    tokenAddress: "0xefe98765da3824ef4a5358ba798cec87c13d8c62",
-    tokenDecimals: 18,
-    exchangeAddress: "0xe0759863816a0fa5ece145336ae8b72ad2fc3d2f"
-  },
-  {
-    symbol: "AS1",
-    name: "Andy Simon",
-    tokenAddress: "0xe3dc650b0054c5fd4aea05cb110c1c19733bfe05",
-    tokenDecimals: 18,
-    exchangeAddress: "0xd78ef5938ffbec6edde49d2524bde929cf47ec8a"
-  },
-  {
-    symbol: "UNI-V1",
-    name: "Uniswap V1",
-    tokenAddress: "0x9bf7805f5deb58dbb881e05b1af09819f8e90eaa",
-    tokenDecimals: 18,
-    exchangeAddress: "0x6e48a8c8a0407652261564e49ed2a6915a48f028"
-  },
-  {
-    symbol: "ROOBEE",
-    name: "ROOBEE",
-    tokenAddress: "0xa31b1767e09f842ecfd4bc471fe44f830e3891aa",
-    tokenDecimals: 18,
-    exchangeAddress: "0xc48ded68b38efb8f9f221d17d7820ba99c58b7cb"
-  },
-  {
-    symbol: "LBRTY",
-    name: "LIBERTY",
-    tokenAddress: "0xb1f2b122139dacd2ad29840e92cbc38716568994",
-    tokenDecimals: 18,
-    exchangeAddress: "0xc86b9736d32eefa307282e7da92d6b734bb345ef"
-  },
-  {
-    symbol: "NINA",
-    name: "Christina",
-    tokenAddress: "0x17b76cc75d3e2d8e2d3e595e5b20b8b1d83fcbde",
-    tokenDecimals: 18,
-    exchangeAddress: "0x1418f2134ed80dc06c0159f5ab4e235fa2a03f94"
-  },
-  {
-    symbol: "DMEX",
-    name: "DMEX Token",
-    tokenAddress: "0x45fcf164baffbefaee70a368c96de6f33bdccab0",
-    tokenDecimals: 18,
-    exchangeAddress: "0x6ca505899b49533d23a26737c2efbefc3e5e7350"
-  },
-  {
-    symbol: "SEM",
-    name: "Sem",
-    tokenAddress: "0xd129364a82eb0d901ac7ee1998f39b4419f7721c",
-    tokenDecimals: 18,
-    exchangeAddress: "0xd8f656799bb28608beb168709199913c1ffcdd63"
-  },
-  {
-    symbol: "ELIX",
-    name: "elixir",
-    tokenAddress: "0xc8c6a31a4a806d3710a7b38b7b296d2fabccdba8",
-    tokenDecimals: 18,
-    exchangeAddress: "0x1bafbe8963131289f466638b8b948a25236c893a"
-  },
-  {
-    symbol: "UQn",
-    name: "Uqinzen",
-    tokenAddress: "0xac298353ab790e668986ac9e2d3a9ddfc600ff78",
-    tokenDecimals: 2,
-    exchangeAddress: "0x2298a208c509a7ab0879b8d37100cd1474b136ca"
-  },
-  {
-    symbol: "CALLIL",
-    name: "CALLIL",
-    tokenAddress: "0x92c5fb8031d6d0caaf053e88b099c5e1701c1116",
-    tokenDecimals: 18,
-    exchangeAddress: "0xb3899d8b45ac320ffd07d8e3cf1a26086faaddde"
-  },
-  {
-    symbol: "JJJ",
-    name: "Jonathan Joseph",
-    tokenAddress: "0x3c35132d0b129f068fdfa65b2c4d265fa5d8cea6",
-    tokenDecimals: 4,
-    exchangeAddress: "0xb94ca1547e01376b1fbae749928b3db4bd22d2cc"
-  },
-  {
-    symbol: "UKI",
-    name: "UK Investments",
-    tokenAddress: "0xbdf46502dd5001ed841ad741c8aac4b4e322b320",
-    tokenDecimals: 10,
-    exchangeAddress: "0x08f38eaa40c7089960591baa2b3aa912c6b7a98a"
-  },
-  {
-    symbol: "EAI",
-    name: "ethereumAI Token",
-    tokenAddress: "0x2f102963f61acf1ca4badfe82057b440f2fc722c",
-    tokenDecimals: 6,
-    exchangeAddress: "0x390f0c2bd0fbf2e876a2269a14700f0183ce9b28"
-  },
-  {
-    symbol: "GST",
-    name: "GAMESTARS TOKEN",
-    tokenAddress: "0x67a9099f0008c35c61c00042cd9fb03684451097",
-    tokenDecimals: 18,
-    exchangeAddress: "0xd8c676ee01d6429b94d1b4b6b328907dbc613f3b"
-  },
-  {
-    symbol: "SRH",
-    name: "SRH",
-    tokenAddress: "0xc350e846e2c57f9eece90febc253d14c8080871b",
-    tokenDecimals: 18,
-    exchangeAddress: "0x685a4a592bfac11a91c8c940bf34f7cd7be6f6f8"
-  },
-  {
-    symbol: "BNANA",
-    name: "Chimpion",
-    tokenAddress: "0x07ef9e82721ac16809d24dafbe1792ce01654db4",
-    tokenDecimals: 18,
-    exchangeAddress: "0xab9488f145aaa84d57f2b7b595e14ff6cb810674"
-  },
-  {
-    symbol: "CRAD",
-    name: "CRAD CASH",
-    tokenAddress: "0x608f006b6813f97097372d0d31fb0f11d1ca3e4e",
-    tokenDecimals: 18,
-    exchangeAddress: "0xd883926830cc566f8ecc415ae6513d2829422574"
-  },
-  {
-    symbol: "WOPS",
-    name: "Westerops",
-    tokenAddress: "0x87ee5f6fa770311842c007a748260ddbe2ca930f",
-    tokenDecimals: 6,
-    exchangeAddress: "0x237c8060b3c5a63cc3080ad8f4aabca03ecf4d11"
-  },
-  {
-    symbol: "STS",
-    name: "Status Security",
-    tokenAddress: "0x2193b9f2b5e5051e41c32c71b25587d6a6f045c8",
-    tokenDecimals: 18,
-    exchangeAddress: "0xa192439e9510cb9198b11132cd823842b13f7839"
-  },
-  {
-    symbol: "TEN",
-    name: "Tithe",
-    tokenAddress: "0xb45cecdf04a0cd7dc30181572e2352b510ef7b93",
-    tokenDecimals: 18,
-    exchangeAddress: "0x6914e8e0179d6dca70b2c3c76f5ff502a2d8b023"
-  },
-  {
-    symbol: "EDO",
-    name: "Eidoo Token",
-    tokenAddress: "0xced4e93198734ddaff8492d525bd258d49eb388e",
-    tokenDecimals: 18,
-    exchangeAddress: "0x1e8f3b01ceb7544db5d47a251c2d7942ac257fa4"
-  },
-  {
-    symbol: "MGO",
-    name: "MobileGo Token",
-    tokenAddress: "0x40395044ac3c0c57051906da938b54bd6557f212",
+    symbol: "BSC",
+    name: "Benscoin",
+    tokenAddress: "0xab418c5a8a85f9cc0fba1802a57a30bf7db34d7c",
     tokenDecimals: 8,
-    exchangeAddress: "0x145a085a1432b86207e2d3844ea14a3679cf6112"
+    exchangeAddress: "0x45fca98fc0e2b1d79f3f3df500185d01b548ede2"
   },
   {
-    symbol: "DMEX",
-    name: "DMEX Token",
-    tokenAddress: "0x13bfb9164746afecdd0d5db71d037328661fc49f",
+    symbol: "pBTC",
+    name: "pTokens BTC",
+    tokenAddress: "0x5228a22e72ccc52d415ecfd199f99d0665e7733b",
     tokenDecimals: 18,
-    exchangeAddress: "0x6089e4a1ae7754334aa5a91cf5ab16a34029b518"
+    exchangeAddress: "0x5a6aefc503df1be6559d1e9850b5ce44f0aa7c4e"
   },
   {
-    symbol: "MNE",
-    name: "minereum",
-    tokenAddress: "0x1a95b271b0535d15fa49932daba31ba612b52946",
-    tokenDecimals: 8,
-    exchangeAddress: "0xd6a1271f0ea94217bb73ca813b72404c08475682"
-  },
-  {
-    symbol: "NOKU",
-    name: "NOKU",
-    tokenAddress: "0x1fc52f1abade452dd4674477d4711951700b3d27",
-    tokenDecimals: 18,
-    exchangeAddress: "0x9a20550f841e930131bf8528c6c87f3afa191629"
-  },
-  {
-    symbol: "IKTK",
-    name: "IKTkroner",
-    tokenAddress: "0x8af44e92c0236422934e4224e7e252ce0e21735b",
-    tokenDecimals: 0,
-    exchangeAddress: "0xf291dfe9d6533a7305bebc3e7a2d47f25e4123fe"
-  },
-  {
-    symbol: "SCOTT",
-    name: "SCOTT",
-    tokenAddress: "0x27fd686db10e0ae047fe8fe1de9830c0e0dc3cfa",
-    tokenDecimals: 4,
-    exchangeAddress: "0x76f455c38ab1fef84cf27f51065ee1374fa400e5"
-  },
-  {
-    symbol: "USD",
-    name: "USD",
-    tokenAddress: "0x22a39c2dd54b71ac884657bb3e37308abe2d02e1",
-    tokenDecimals: 0,
-    exchangeAddress: "0x8085d4f288d36c20a632f27361ccc74e9b4bb725"
-  },
-  {
-    symbol: "HGBT",
-    name: "CrazyBoxToken",
-    tokenAddress: "0x00471ae525110087bbc6847cb6e9691bacd13c89",
-    tokenDecimals: 8,
-    exchangeAddress: "0xe9008308f4401bde01fd55b8722fe0f7eec128ac"
-  },
-  {
-    symbol: "ETH",
-    name: "Ethereum",
-    tokenAddress: "0x390bf02a7e842ed3ffd22be931ec87430428f1d8",
-    tokenDecimals: 18,
-    exchangeAddress: "0xb8aae1eeac9485953ce7ae84a25dc992bc55feca"
-  },
-  {
-    symbol: "CARD",
-    name: "Cardstack",
-    tokenAddress: "0x954b890704693af242613edef1b603825afcd708",
-    tokenDecimals: 18,
-    exchangeAddress: "0x93d2ce3df3f79f5accadabd7647a42ffd1fe6f78"
-  },
-  {
-    symbol: "eUSD",
-    name: "Eurodollar",
-    tokenAddress: "0x8c4f045c35288f899fe7b034dbe13bab2bb454ab",
-    tokenDecimals: 18,
-    exchangeAddress: "0x91b7fd1f4d6a28d782299fabd00a6c7adff77564"
-  },
-  {
-    symbol: "B0T",
-    name: "The Emperial Currency",
-    tokenAddress: "0xdd60f9dd5b891b728955149bd59f42c6513c8dc6",
-    tokenDecimals: 18,
-    exchangeAddress: "0x1b399e4052d715997659d3a6a6507c5b22ed66b6"
-  },
-  {
-    symbol: "PLA",
-    name: "PlayChip",
-    tokenAddress: "0x0198f46f520f33cd4329bd4be380a25a90536cd5",
-    tokenDecimals: 18,
-    exchangeAddress: "0xdf28084119560321bbbd45d1da4aa83d3112e153"
-  },
-  {
-    symbol: "UTNP",
-    name: "UTN-P: Universa Token",
-    tokenAddress: "0x9e3319636e2126e3c0bc9e3134aec5e1508a46c7",
-    tokenDecimals: 18,
-    exchangeAddress: "0x020049960ca05a7e76aefe8a7dba2b557bfc3259"
-  },
-  {
-    symbol: "SKATE",
-    name: "Sk8coin",
-    tokenAddress: "0x8f01ebcdc9972cf3c7ea61ddf57d124846896db8",
-    tokenDecimals: 18,
-    exchangeAddress: "0xd7f67c9340dda558905b9f773e97e4fe86e2e3dd"
-  },
-  {
-    symbol: "USDCUSDB",
-    name: "USD//C Smart Relay Token",
-    tokenAddress: "0x976a003d2e8ba230e9c7fb65da5de448a4bc2d0d",
-    tokenDecimals: 6,
-    exchangeAddress: "0xf161855f78e71838ade1cf9ca90566220758b534"
-  },
-  {
-    symbol: "BDP",
-    name: "BidiPass",
-    tokenAddress: "0x593114f03a0a575aece9ed675e52ed68d2172b8c",
-    tokenDecimals: 18,
-    exchangeAddress: "0xa6391e46e686976cd2101c1353919211e8c00705"
-  },
-  {
-    symbol: "CURA",
-    name: "CuraDAI",
-    tokenAddress: "0x0a4b2d4b48a63088e0897a3f147ba37f81a27722",
-    tokenDecimals: 18,
-    exchangeAddress: "0xc07b2fba5ec3cb810244f8499943564455322dc9"
-  },
-  {
-    symbol: "CHSB",
-    name: "SwissBorg Token",
-    tokenAddress: "0xba9d4199fab4f26efe3551d490e3821486f135ba",
-    tokenDecimals: 8,
-    exchangeAddress: "0x897ee0b6c3ef0168052a3f599b1a74b5a02f4366"
-  },
-  {
-    symbol: "RPAI",
-    name: "Painthereum RED",
-    tokenAddress: "0x96f4c85e7830c755981c12fb7c702ef580047b2a",
-    tokenDecimals: 18,
-    exchangeAddress: "0xdb4b2df12487acf6d7a2bc8600e9a65c9ee4e60c"
-  },
-  {
-    symbol: "GPAI",
-    name: "Painthereum GREEN",
-    tokenAddress: "0x3865cb3cb00041d7e1b4f8189aa73a8cc590c28c",
-    tokenDecimals: 18,
-    exchangeAddress: "0x0d61a26bc6a7e5e9ae4f4759c5e3e5c5f1b0c69b"
-  },
-  {
-    symbol: "BPAI",
-    name: "Painthereum BLUE",
-    tokenAddress: "0x3c023a75da4635ce931778ce24a36b041e503eff",
-    tokenDecimals: 18,
-    exchangeAddress: "0xb63935e23dc8f6f7410a5d253aecd474cc3ec19a"
-  },
-  {
-    symbol: "BBSC",
-    name: "BaoBoShiCoin",
-    tokenAddress: "0xf89ba2862dfae69bc2546568d56b087d7454c9c9",
-    tokenDecimals: 18,
-    exchangeAddress: "0x7247326e46cfb46bbe704e36ff9bdf40866aeff0"
-  },
-  {
-    symbol: "PSC",
-    name: "PRODATA SHARES COIN",
-    tokenAddress: "0x6744ebb5214d06ec62a310f72a2e8e0770180fc7",
-    tokenDecimals: 18,
-    exchangeAddress: "0x6947d6b18db1a2468a3aa888a5a2d64b0f8b6dbb"
-  },
-  {
-    symbol: "HCC",
-    name: "HOPE COLLATERAL COIN",
-    tokenAddress: "0x3193271d8cb966234ca9bd1eda066fdc2dddae30",
-    tokenDecimals: 18,
-    exchangeAddress: "0xaa87891bd4c16b8cb35532a379ab40ad343375d2"
-  },
-  {
-    symbol: "PEW",
-    name: "BroFistCoin",
-    tokenAddress: "0xa701122c1b67220a8b6883d03c8ad67896b12466",
-    tokenDecimals: 8,
-    exchangeAddress: "0x80eba0fd9438b38486ca83206fc4a12951cb6cf3"
-  },
-  {
-    symbol: "BKMcoffee",
-    name: "书影币",
-    tokenAddress: "0x1ce167d0e32f05af1d7ec02769161c70bdf84609",
-    tokenDecimals: 3,
-    exchangeAddress: "0xcea1b0209ad24a10ca2b350459c358a1590693f7"
-  },
-  {
-    symbol: "CNAC",
-    name: "Crypto is not a Crime",
-    tokenAddress: "0xfb17aada497f76cae49326f9c19d6e661888d70b",
-    tokenDecimals: 18,
-    exchangeAddress: "0x5909e61cafcc8fa307ce0ba5812cd602c01ad093"
-  },
-  {
-    symbol: "real",
-    name: "realcoin",
-    tokenAddress: "0x8e656797a8c494ab9148b21e30250ced0afd9f17",
-    tokenDecimals: 3,
-    exchangeAddress: "0xff28aec0850738010cfafdeafeb388c2ac648c2d"
-  },
-  {
-    symbol: "TJL",
-    name: "Timo Lehes",
-    tokenAddress: "0xd190167c333069ba4f92f6336b884045b1160a54",
-    tokenDecimals: 18,
-    exchangeAddress: "0x5f9a13df22c691e7880e8864ce84675b3cfa8971"
-  },
-  {
-    symbol: "CNSL",
-    name: "Counsel",
-    tokenAddress: "0xea0bea4d852687c45fdc57f6b06a8a92302baabc",
-    tokenDecimals: 18,
-    exchangeAddress: "0x4389d757fa071fd714fd74afdcc7da384c9a7ede"
-  },
-  {
-    symbol: "OHFF",
-    name: "OHFF",
-    tokenAddress: "0xf0aabeacbc2d91baf21bda0006c9d65de736053a",
-    tokenDecimals: 4,
-    exchangeAddress: "0x1ea22dfec6f1022d053e7fe0909e3a42fe4167dd"
-  },
-  {
-    symbol: "null",
-    name: "HEXTEWKEN",
-    tokenAddress: "0xd495cc8c7c29c7fa3e027a5759561ab68c363609",
-    tokenDecimals: 8,
-    exchangeAddress: "0xdd1f46dbc88ba7ebcb0edcaf023643d2c5098850"
-  },
-  {
-    symbol: "JT",
-    name: "JungleToken",
-    tokenAddress: "0x285ce65705d26c28f7a720cf3bfe8b868c82a48f",
-    tokenDecimals: 18,
-    exchangeAddress: "0xa31a0b8e8a73f0cdc625436d516c9bed91529ace"
-  },
-  {
-    symbol: "BLK",
-    name: "BLANK",
-    tokenAddress: "0x6fbf4e57ec93cdd33c74762f7d99694228a68cd2",
-    tokenDecimals: 2,
-    exchangeAddress: "0xacbd1201ca450f646ff2f04bc7d73d5252fd5de5"
-  },
-  {
-    symbol: "DCO",
-    name: "Decentralized chain offer",
-    tokenAddress: "0x65668f5d2b4ec78e31eb4db47d2258320761de72",
-    tokenDecimals: 18,
-    exchangeAddress: "0x3fc9c3ad3853c54109f9ff6b262127e234d2a1df"
-  },
-  {
-    symbol: "JOB",
-    name: "Jobchain",
-    tokenAddress: "0x17280da053596e097604839c61a2ef5efb7d493f",
-    tokenDecimals: 8,
-    exchangeAddress: "0xf3311aa6c9aa3b4663343ef68aa884561afa73ef"
-  },
-  {
-    symbol: "SCS",
-    name: "Smart Contract Service",
-    tokenAddress: "0xa662e2fa780c4cdaa5134435824dc2f16ad6f329",
-    tokenDecimals: 18,
-    exchangeAddress: "0xcc788a4db4f1781eed07650ad17de90f979b7af0"
-  },
-  {
-    symbol: "FENIX",
-    name: "fenix",
-    tokenAddress: "0x0b0d58ac4ad856c4600a233c8169dba39d7326ab",
-    tokenDecimals: 18,
-    exchangeAddress: "0xd2537136e12dc2c3a89194258f8401844e2db87c"
-  },
-  {
-    symbol: "RV",
-    name: "Herve",
-    tokenAddress: "0xe97d2d78c51c277eddc110cf3869861359968b99",
-    tokenDecimals: 18,
-    exchangeAddress: "0x31c7a4fa09dfaaf0a6d595f4a0161f43da775b3d"
-  },
-  {
-    symbol: "LCX",
-    name: "LCX",
-    tokenAddress: "0x037a54aab062628c9bbae1fdb1583c195585fe41",
-    tokenDecimals: 18,
-    exchangeAddress: "0xade1a79d149aee8536cb6c422571c4bf7ec62a11"
-  },
-  {
-    symbol: "CTW",
-    name: "CTWorld Token",
-    tokenAddress: "0x29d82a45143569e02a0566f94f94b38f946858db",
-    tokenDecimals: 18,
-    exchangeAddress: "0x26a021133d1686476966f9882cae832508e3c083"
-  },
-  {
-    symbol: "CB",
-    name: "Chris Blec",
-    tokenAddress: "0x2043f5f3e44c76e6fb9266c7247cef569172d664",
-    tokenDecimals: 18,
-    exchangeAddress: "0x1fe2ee65e684c246099001751f01cd17736a8490"
-  },
-  {
-    symbol: "SREUR",
-    name: "EURO TOKEN",
-    tokenAddress: "0x7a0e91c4204355e0a6bbf746dc0b7e32dfefdecf",
-    tokenDecimals: 8,
-    exchangeAddress: "0x09212cbfcd3d2aeefb6c605de6c1a497d71f0e63"
-  },
-  {
-    symbol: "ZAM",
-    name: "Zamrud",
-    tokenAddress: "0x9d3571f685e0fec61925b248977a09f8da047f48",
-    tokenDecimals: 18,
-    exchangeAddress: "0xa301e30b899e9d8c51e71435ae472566df34c26e"
-  },
-  {
-    symbol: "CRF",
-    name: "CRYPTOFRIDGE",
-    tokenAddress: "0xdb399d5d44cfb9cb7cbbdc64be1dc3b978ca1f06",
-    tokenDecimals: 18,
-    exchangeAddress: "0x541eb6e395f2bbb5ae8deeb93af7750a252fdae7"
-  },
-  {
-    symbol: "TRON",
-    name: "Bitcoin Tron",
-    tokenAddress: "0x9693dded163393f18810c7a799c662998bf8bf3e",
-    tokenDecimals: 18,
-    exchangeAddress: "0x0b684f0755c261b027c0258bf1ff077f7b33aa0c"
-  },
-  {
-    symbol: "EVC",
-    name: "Evcoin",
-    tokenAddress: "0x6957cbcf451fd1b1dc04dc67b7682d62fba9e2ad",
-    tokenDecimals: 3,
-    exchangeAddress: "0xd4291adf8982cf9fd1aaab8fe12f398c1f10530d"
-  },
-  {
-    symbol: "ALEX",
-    name: "AlexMasmej",
-    tokenAddress: "0x8ba6dcc667d3ff64c1a2123ce72ff5f0199e5315",
-    tokenDecimals: 4,
-    exchangeAddress: "0xb49c53f2e459ce96b04318610abd77f4e83113db"
-  },
-  {
-    symbol: "SNC",
-    name: "SunContract",
-    tokenAddress: "0xf4134146af2d511dd5ea8cdb1c4ac88c57d60404",
-    tokenDecimals: 18,
-    exchangeAddress: "0x0f0c85fc12ac26059f2e991716d6ce9a9437e121"
-  },
-  {
-    symbol: "ART",
-    name: "ART Token",
-    tokenAddress: "0x33e1b26d699d923e4cdba286cc5783d3c04831c3",
-    tokenDecimals: 0,
-    exchangeAddress: "0x468188c85df476d0c4037318de0d38162d0c3786"
-  },
-  {
-    symbol: "TBCUSDB",
-    name: "ThunderBoltCoin Smart Relay Token",
-    tokenAddress: "0x323e4d8097b0a58ab8210ac6efcc4a89285cfc6b",
-    tokenDecimals: 18,
-    exchangeAddress: "0x3d3f82c19774bff701420244091bc14a75fb07da"
-  },
-  {
-    symbol: "LIT",
-    name: "LITonium",
-    tokenAddress: "0x2e3c062e16c1a3a04ddc5003c62e294305d83684",
-    tokenDecimals: 2,
-    exchangeAddress: "0x2f31baa72804ce5a32968646a1e44806162e7954"
-  },
-  {
-    symbol: "cDAIUSDC",
-    name: "Stablecoins.exchange cDAI/cUSDC",
-    tokenAddress: "0x3740fb63ab7a09891d7c0d4299442a551d06f5fd",
-    tokenDecimals: 18,
-    exchangeAddress: "0x8174c73908e5c61d7158dc291729778ea99e078a"
-  },
-  {
-    symbol: "REAK",
-    name: "Reakoin",
-    tokenAddress: "0xa5b2dbba9a3c04ec4f56cbe16520debecbf35545",
-    tokenDecimals: 18,
-    exchangeAddress: "0x6d74b580df8829f20ba570c1cde4468ddec35b7c"
-  },
-  {
-    symbol: "NMP",
-    name: "Neuromorphic",
-    tokenAddress: "0x4d6b9f281af31916a0f16d1cea2ec7384851eaab",
-    tokenDecimals: 18,
-    exchangeAddress: "0xdf6f8fdde0965862a7da5db0649e7c523b719f78"
-  },
-  {
-    symbol: "SCRO",
-    name: "JustEscrowCoin",
-    tokenAddress: "0x0a133dfa1f65ff6f834205ed43d66344306fa02c",
-    tokenDecimals: 18,
-    exchangeAddress: "0x6bbcae545a4b26e64883deaee14dab5a17b9d127"
-  },
-  {
-    symbol: "RMBC",
-    name: "RMBC",
-    tokenAddress: "0x4ad280a2f38404ce1fd75556f3b9951e63acaf03",
-    tokenDecimals: 6,
-    exchangeAddress: "0xcae4f1407ee7f129ce5f06d010260c3570bcfe28"
-  },
-  {
-    symbol: "0xETH",
-    name: "0xEthereum Token",
-    tokenAddress: "0x36d06ccc92cefd9ec38fe759d957da0b0ecc249f",
-    tokenDecimals: 8,
-    exchangeAddress: "0x918e7dcb95226f9ed937f7a05b93c1e29aeaa74b"
-  },
-  {
-    symbol: "UNI",
-    name: "Unipot",
-    tokenAddress: "0x97c795a8028b96e5e2a508468b1c132fca5caa19",
-    tokenDecimals: 8,
-    exchangeAddress: "0xb3e22422398aad8c7b12ae25766ad37e56fb8715"
-  },
-  {
-    symbol: "VTX",
-    name: "VorteX Network",
-    tokenAddress: "0xd957e08ac5421e2c28510586b57d095e5094836a",
-    tokenDecimals: 18,
-    exchangeAddress: "0x0085146bd3b67f9b80c54640cb25185d685a2d7e"
-  },
-  {
-    symbol: "DLH",
-    name: "DELHUMEAU",
-    tokenAddress: "0x0651e4a1de38691677f2c82bd89793a8d42e7293",
-    tokenDecimals: 18,
-    exchangeAddress: "0x685e22b182e4766fc28ba87eccc480cf871dd432"
-  },
-  {
-    symbol: "HD",
-    name: "Herve Delhumeau",
-    tokenAddress: "0x667e1a2f05f15897fb74331031b9f829d5d3d7e5",
-    tokenDecimals: 18,
-    exchangeAddress: "0x0f85e8ceb45bc5281834b1a80deef05ecfc7e003"
-  },
-  {
-    symbol: "FICO",
-    name: "FIND Coin",
-    tokenAddress: "0xe0132738036603760c0e9cb8aeb502a32c1b3348",
-    tokenDecimals: 18,
-    exchangeAddress: "0x44f1e90ff2a3575137810f6cfea2dc84385e9d40"
-  },
-  {
-    symbol: "HOWL",
-    name: "Howl",
-    tokenAddress: "0xd1dc64b4bdaab103a72bf4778a33740704aff380",
-    tokenDecimals: 4,
-    exchangeAddress: "0xaf1785b6f83ba096d311543f72951e040a417da2"
-  },
-  {
-    symbol: "SCT",
-    name: "SatoshiCrypto",
-    tokenAddress: "0x3f012e0ab3ff4797231faf20eb71f682240d1b1f",
-    tokenDecimals: 18,
-    exchangeAddress: "0x1a565ddf5dcbe96dc94371a814793cf9ac9d63fa"
-  },
-  {
-    symbol: "YATX",
-    name: "Yattaqi Pro",
-    tokenAddress: "0x39043aae9c48a628f5184af7a5bb925137757b15",
-    tokenDecimals: 8,
-    exchangeAddress: "0x736e8cdc62c59fcd47ad26a8e3a7d7071fbe7bb8"
-  },
-  {
-    symbol: "PSK",
-    name: "Pool of Stake Master Token",
-    tokenAddress: "0x1c5f43710a1776b0ea7191b7ead75d4b98d69858",
-    tokenDecimals: 18,
-    exchangeAddress: "0x9ad4f22817d35c645e7ae825a6b8678d2237bf21"
-  },
-  {
-    symbol: "CUBE",
-    name: "Somnium Space Cubes",
-    tokenAddress: "0xdf801468a808a32656d2ed2d2d80b72a129739f4",
-    tokenDecimals: 8,
-    exchangeAddress: "0x21e7259f42b68bd89fd85f33584eda9bdf5b7004"
-  },
-  {
-    symbol: "TXH",
-    name: "TradeX Token",
-    tokenAddress: "0x5432c580e34f590f4dd901b825ddeb92e905e826",
-    tokenDecimals: 18,
-    exchangeAddress: "0x721517009639fff86759a889d890f77f27514cbb"
-  },
-  {
-    symbol: "BRZE",
-    name: "Breeze",
-    tokenAddress: "0x77c07555af5ffdc946fb47ce15ea68620e4e7170",
-    tokenDecimals: 18,
-    exchangeAddress: "0xd164626d50983fefadce6edf934148a4fe29097f"
-  },
-  {
-    symbol: "WCF",
-    name: "Wrapped ChainFaces",
-    tokenAddress: "0x659046522c5c246a34a7eb17a814ca648436644a",
-    tokenDecimals: 18,
-    exchangeAddress: "0x8f29e4ffdeb4515e3c6ff1195a449f1fba950a6c"
-  },
-  {
-    symbol: "SPDG",
-    name: "SpeedGas",
-    tokenAddress: "0x16bc9068f98557609dc0300cd22aa627ee7f4e62",
-    tokenDecimals: 8,
-    exchangeAddress: "0xab48b8e31e6acb3e4e823d7c2b37fca48829d329"
-  },
-  {
-    symbol: "HEDG",
-    name: "HedgeTrade",
-    tokenAddress: "0xf1290473e210b2108a85237fbcd7b6eb42cc654f",
-    tokenDecimals: 18,
-    exchangeAddress: "0xb5b46a2521048d7f2f9d9603eeb1b7abf7d18886"
-  },
-  {
-    symbol: "GOU",
-    name: "Gou",
-    tokenAddress: "0xb19977b23b40d59254b8f5a0bdb67076b4fa0bc6",
-    tokenDecimals: 4,
-    exchangeAddress: "0x9845bc0f87585944207526976d83be8129d612ce"
-  },
-  {
-    symbol: "BLC",
-    name: "Black Lion Coin",
-    tokenAddress: "0x42dbc00e14f711260e606edbd4f14394ab4780d8",
-    tokenDecimals: 18,
-    exchangeAddress: "0x136a635440822482e8ccaef38760d9234328612e"
-  },
-  {
-    symbol: "ARO",
-    name: "Aeronia",
-    tokenAddress: "0x8b0b3526b414ed5019049326544c07725a30da92",
-    tokenDecimals: 18,
-    exchangeAddress: "0x7979d646644a2ff37228740dfbc8e0567856cb48"
-  },
-  {
-    symbol: "WHEN",
-    name: "WHEN Token",
-    tokenAddress: "0xf4fe95603881d0e07954fd7605e0e9a916e42c44",
-    tokenDecimals: 18,
-    exchangeAddress: "0x9e6f8d8189ac409e2d9fe4a441d673ec8b611d78"
-  },
-  {
-    symbol: "PTR",
-    name: "Petro",
-    tokenAddress: "0xe964de82b9b83915ab8591bbebf1bfc4c65bb1dc",
-    tokenDecimals: 8,
-    exchangeAddress: "0xd4125bf96b48d7efcb23fdcfd782c0cb18449de3"
-  },
-  {
-    symbol: "AETH",
-    name: "Atomic Ethereum",
-    tokenAddress: "0xb7742216e874c7c33f608c41e625b01a6f323570",
-    tokenDecimals: 1,
-    exchangeAddress: "0x1029d1ff7862fbe8fa6358dc1313488ed6885fc6"
-  },
-  {
-    symbol: "STMX",
-    name: "Crypterio Coin",
-    tokenAddress: "0xe5fe68179c71d9fb4c1fed2035f4bbff9dc7b967",
-    tokenDecimals: 18,
-    exchangeAddress: "0x3e626492cf0a1dd58b6ba4542b47134e3b64e431"
-  },
-  {
-    symbol: "aUSDT",
-    name: "Aave Interest bearing USDT",
-    tokenAddress: "0x71fc860f7d3a592a4a98740e39db31d25db65ae8",
-    tokenDecimals: 6,
-    exchangeAddress: "0x967735eb617ad99e86dfe5e13b7dd85df19ea5b1"
-  },
-  {
-    symbol: "ZDR",
-    name: "Zloadr Token",
-    tokenAddress: "0xbdfa65533074b0b23ebc18c7190be79fa74b30c2",
-    tokenDecimals: 18,
-    exchangeAddress: "0xc1a7765bdbe7cb90b8e7ac89b9a2c07a2a111880"
-  },
-  {
-    symbol: "SATURN",
-    name: "Saturn",
-    tokenAddress: "0x73dd6e972b4fce8ca611747b40006bcc8ee38e27",
-    tokenDecimals: 18,
-    exchangeAddress: "0x901f55986b1ec595d48595d57001827c98160af3"
-  },
-  {
-    symbol: "㏕₧",
-    name: "TALEGO",
-    tokenAddress: "0xfab890ed2907e860038f67b257e7f3cc75683369",
-    tokenDecimals: 18,
-    exchangeAddress: "0xc0556e0cd21ac31a98a65e572bc64c41d73892dd"
-  },
-  {
-    symbol: "DINK",
-    name: "DINKY",
-    tokenAddress: "0xec1721e6fb745217c108e6d99d7115fc251ab88b",
-    tokenDecimals: 8,
-    exchangeAddress: "0x8ea71b38759c869a1e4ce94e8e51e631b294490f"
-  },
-  {
-    symbol: "DXT",
-    name: "DataWallet Token",
-    tokenAddress: "0x8db54ca569d3019a2ba126d03c37c44b5ef81ef6",
-    tokenDecimals: 8,
-    exchangeAddress: "0x39bd9a3c5af0dd9592d0eaef2ddf34b22ec5cd10"
-  },
-  {
-    symbol: "NEOG",
-    name: "null",
-    tokenAddress: "0x449574c69f3a658794829ed81639a7a9ece041e1",
-    tokenDecimals: 0,
-    exchangeAddress: "0xa4433596eeeab8329cc6725ca266025472230c11"
-  },
-  {
-    symbol: "ETG",
-    name: "null",
-    tokenAddress: "0x28c8d01ff633ea9cd8fc6a451d7457889e698de6",
-    tokenDecimals: 0,
-    exchangeAddress: "0x69738470f8f73539fee0f6867cbd24b8c0a7e50a"
-  },
-  {
-    symbol: "UNI-V1",
-    name: "Uniswap V1",
-    tokenAddress: "0x17f11fca7a66e8049484ae0a74e0013c5719ec77",
-    tokenDecimals: 18,
-    exchangeAddress: "0x75121e3a693f8720a9cb1bf8138c85eff37665ea"
-  },
-  {
-    symbol: "UNI-V1",
-    name: "Uniswap V1",
-    tokenAddress: "0x4cdfd08c4128c48987425846763b01f1570dc825",
-    tokenDecimals: 18,
-    exchangeAddress: "0xa0b519e9026dfdf5b46eb254584397b2bf38a4c6"
-  },
-  {
-    symbol: "W0xETH",
-    name: "Wrapped 0xEthereum Token",
-    tokenAddress: "0x716523231368d43bdfe1f06afe1c62930731ab13",
-    tokenDecimals: 8,
-    exchangeAddress: "0xc1a1090c262b02b1ff26ec5d8868c78e9324a348"
-  },
-  {
-    symbol: "ARCG",
-    name: "Arch Crypton Game",
-    tokenAddress: "0xf5774f42b28f35429aac35f8eb57541c511fdd49",
-    tokenDecimals: 18,
-    exchangeAddress: "0xbfb13b8bc14ffe736e13cd3ff8c54e7c8496e596"
-  },
-  {
-    symbol: "EH2",
-    name: "EnergonX Hydrogen H₂",
-    tokenAddress: "0xa7d768ebd9915793393f117f8ab10f4a206875d8",
-    tokenDecimals: 18,
-    exchangeAddress: "0xf2ba17e87770fc2b3f5892eef234d9e5a45206a8"
-  },
-  {
-    symbol: "XMRG",
-    name: "Monero Gold",
-    tokenAddress: "0x0f598112679b78e17a4a9febc83703710d33489c",
-    tokenDecimals: 8,
-    exchangeAddress: "0xceda48d2d41a6b725c2be17ae306474db5193027"
-  },
-  {
-    symbol: "APX",
-    name: "Apex",
-    tokenAddress: "0x2b69f7c421f7b5dbda8c0c637b0f15186df50b59",
+    symbol: "ABTK",
+    name: "Air Basic",
+    tokenAddress: "0xd1ccc390f181a38faab2c818d19c5a68ba9251b7",
     tokenDecimals: 18,
-    exchangeAddress: "0x0d9e04ad1f4873ce8210f26f8f1686d9d973889f"
+    exchangeAddress: "0xfe5b5534d155a1dc3930dc9a2cd31bc6848ca7a7"
   },
   {
-    symbol: "XLM",
-    name: "Stellar",
-    tokenAddress: "0xd37f6655a53d907858efb65de16a561a1c3be751",
+    symbol: "PODDY",
+    name: "Poddy",
+    tokenAddress: "0xafbce36c2a2401b5765a066a2e2090eb3b8413ff",
     tokenDecimals: 18,
-    exchangeAddress: "0x889ffb451d55d0832b54264dea17b4f5ac1a49e4"
+    exchangeAddress: "0x27df97eb5f7f8a7b673af9b55bc047226efb29a9"
   },
   {
-    symbol: "ETC",
-    name: "Ethereum",
-    tokenAddress: "0xa1621d5ceb743bbd4c9b9e65b6ff79cc661908e9",
+    symbol: "DY",
+    name: "DouYin",
+    tokenAddress: "0x9b3502df03d20beddf429b205db26e74e62e32b3",
     tokenDecimals: 18,
-    exchangeAddress: "0xcbf2caa4e86f380139469d6dc97048a108e11d48"
+    exchangeAddress: "0xe935c6841748080094b187b5bde93e77204386cb"
   },
   {
-    symbol: "CC coinslot.com",
-    name: "Coin-coin coinslot.com",
-    tokenAddress: "0x7f3eab3491ed282197038f1b89ca33d7e5adffba",
-    tokenDecimals: 8,
-    exchangeAddress: "0x7a651d199019f1a2e737978d354106d6dd0644e1"
-  },
-  {
-    symbol: "Spark",
-    name: "Sparkles Light",
-    tokenAddress: "0x4c4c62a08eb49404ab85f3b4a0d6560488f2e216",
-    tokenDecimals: 6,
-    exchangeAddress: "0xa9b3794a48554d7008875b4e9d9b8961f5605d50"
-  },
-  {
-    symbol: "RES",
-    name: "Resfinex",
-    tokenAddress: "0x0a9f693fce6f00a51a8e0db4351b5a8078b4242e",
-    tokenDecimals: 5,
-    exchangeAddress: "0xa9a666ec585bcc8551ac7648258bbfaf936c2c25"
-  },
-  {
-    symbol: "ALU",
-    name: "ALUCHAIN",
-    tokenAddress: "0x3b2f94c251c2cccb7ad16a68f040a220cc2bdd72",
-    tokenDecimals: 8,
-    exchangeAddress: "0xd8c324c801aee42a83657887ff37ce859e6e60c6"
-  },
-  {
-    symbol: "STQ",
-    name: "Storiqa Token",
-    tokenAddress: "0x5c3a228510d246b78a3765c20221cbf3082b44a4",
-    tokenDecimals: 18,
-    exchangeAddress: "0x39a0b1cafcf65abd0df4c8d20f36391ab6a90b6a"
-  },
-  {
-    symbol: "TTT",
-    name: "Tapcoin",
-    tokenAddress: "0x9f599410d207f3d2828a8712e5e543ac2e040382",
-    tokenDecimals: 18,
-    exchangeAddress: "0x0f5d5579547b3fdc99da897135b0ff66cdb95387"
-  },
-  {
-    symbol: "ETHUSDADL4",
-    name: "ETHUSD ADL 4H Set",
-    tokenAddress: "0xb8243b4eeca27a4191e879760b88fe2270561796",
-    tokenDecimals: 18,
-    exchangeAddress: "0xa995056b1730a2c4493707dd901c17cc8b9d610c"
-  },
-  {
-    symbol: "BTCS",
-    name: "Bitcoin Solar",
-    tokenAddress: "0x5f51a196ed91fb14e3b3650c30743675c9a429be",
-    tokenDecimals: 18,
-    exchangeAddress: "0x07de855ee319d35e603e5d25d247adf3fbb44cb1"
-  },
-  {
-    symbol: "DNN",
-    name: "DNN",
-    tokenAddress: "0x9d9832d1beb29cc949d75d61415fd00279f84dc2",
-    tokenDecimals: 18,
-    exchangeAddress: "0x53109f32c4d68e0d728a541b9d7726d50a97ddbf"
-  },
-  {
-    symbol: "BRD",
-    name: "Bread Token",
-    tokenAddress: "0x558ec3152e2eb2174905cd19aea4e34a23de9ad6",
-    tokenDecimals: 18,
-    exchangeAddress: "0xb2360c3263ee0c97d5937ad4e598e57ef9923a1e"
-  },
-  {
-    symbol: "FLUZ",
-    name: "FluzFluz",
-    tokenAddress: "0x954b5de09a55e59755acbda29e1eb74a45d30175",
-    tokenDecimals: 18,
-    exchangeAddress: "0xd1028b8af0e4e54812f0d0dd726de687cd361e96"
-  },
-  {
-    symbol: "PHM",
-    name: "Phoneum",
-    tokenAddress: "0x8b6dd2144a3cc6677600735d0e62134839bb85d0",
-    tokenDecimals: 2,
-    exchangeAddress: "0xe7e2ec57aa0fe59b55e23288bc9a6d748fa4f713"
-  },
-  {
-    symbol: "UNI-V1",
-    name: "Uniswap V1",
-    tokenAddress: "0x2b7b3dd16488f906d190e241156984bb4274d269",
-    tokenDecimals: 18,
-    exchangeAddress: "0xe8a90f4a47b54988fe031bceede1449284f1de67"
-  },
-  {
-    symbol: "CBD",
-    name: "TheCBDcoin",
-    tokenAddress: "0xd02a1ed82fa5091a5639dc507f2f6130e5bc61be",
-    tokenDecimals: 18,
-    exchangeAddress: "0xf5941b6cd3c2c25c8066a14a946d41902e7efcdc"
-  },
-  {
-    symbol: "UVU",
-    name: "Comunion UVU Token",
-    tokenAddress: "0xc163eade1a642d8ccef1046bae2569a00cb647ed",
-    tokenDecimals: 8,
-    exchangeAddress: "0x696725bbf41283cad29ef421b427464a8d87dc37"
-  },
-  {
-    symbol: "STON",
-    name: "Mainston",
-    tokenAddress: "0xe31cbf04019fb9a859f9dfce6389efeb45170380",
-    tokenDecimals: 18,
-    exchangeAddress: "0xc9528eaa5f47b994df042fc623648cb07cc0e83e"
-  },
-  {
-    symbol: "XLIC",
-    name: "Lico",
-    tokenAddress: "0xe17607302cff3a5b246916e6bfd0eda7bbd2c4b0",
-    tokenDecimals: 18,
-    exchangeAddress: "0xe3412f2155fe1d49febc6f8ed605773682c502d1"
-  },
-  {
-    symbol: "BRZ",
-    name: "BRZ",
-    tokenAddress: "0x420412e765bfa6d85aaac94b4f7b708c89be2e2b",
-    tokenDecimals: 4,
-    exchangeAddress: "0xcc7662060ff05ea3ab68c8eb39653c1e52708adf"
-  },
-  {
-    symbol: "UNI",
-    name: "Unipot",
-    tokenAddress: "0x3e370a6c8255b065bd42bc0ac9255b269cfcc172",
-    tokenDecimals: 8,
-    exchangeAddress: "0x8c871606331caff597ef08f59d6fd6b97d70ba7b"
-  },
-  {
-    symbol: "DIO",
-    name: "Decimated Token",
-    tokenAddress: "0x35a5cb585d51d836922b78a9bb1f5c04635c39b6",
-    tokenDecimals: 8,
-    exchangeAddress: "0xbba5ac05ed924e27347f49bded2b7b323e3b2eb3"
-  },
-  {
-    symbol: "KAPP",
-    name: "Kappi Token",
-    tokenAddress: "0x2439c0549f1616dab533c8af5d42a77331173b3a",
-    tokenDecimals: 18,
-    exchangeAddress: "0x5f6bd82aedfc9d8e037269e65e930cdda3ade103"
-  },
-  {
-    symbol: "YGG",
-    name: "YGG",
-    tokenAddress: "0x0b686de16d57b4d2d0384d06bec6ef5d5d7dce5f",
-    tokenDecimals: 18,
-    exchangeAddress: "0x3d4b054dacd9a78dc7bb9508045ea353acc3901b"
-  },
-  {
-    symbol: "PHT",
-    name: "Phoneum Token",
-    tokenAddress: "0xbbd227e805b90b8fe8f4c01a3f4e48bdae0599af",
-    tokenDecimals: 2,
-    exchangeAddress: "0x0865f2656819f08d38d26e1e134be5e519951526"
-  },
-  {
-    symbol: "KPT",
-    name: "krypital",
-    tokenAddress: "0x814d76b36a7d34df364f4fc6b075ba47f9ba1f47",
-    tokenDecimals: 18,
-    exchangeAddress: "0xd30ebbbb823fe8f14ce3d0e1c1ed383cb8b71708"
-  },
-  {
-    symbol: "TAPS",
-    name: "TAPSPAY",
-    tokenAddress: "0x56bb6f961f2cb9947fea063df1a42c2233487903",
-    tokenDecimals: 8,
-    exchangeAddress: "0x65b88e9eae685c178c08ef9c9ebf5999b860866b"
-  },
-  {
-    symbol: "BTCN",
-    name: "Bitcoin Neo",
-    tokenAddress: "0x2976ac3d0bb67c6307a73df852c61c14cdda9863",
-    tokenDecimals: 18,
-    exchangeAddress: "0xa9c91e55dcbc0c4c7db567f752506620e44a8ba2"
-  },
-  {
-    symbol: "UNI-V1",
-    name: "Uniswap V1",
-    tokenAddress: "0xe04bc8d7c6e49ae6fb193f0a995046ef63d6526b",
-    tokenDecimals: 18,
-    exchangeAddress: "0xd180eb4f6ed4fec49916d1538446875713737fe0"
-  },
-  {
-    symbol: "CBU",
-    name: "BANQUEUNIVERSAL",
-    tokenAddress: "0xcef46305d096fa876dd23048bf80f9345282e3fc",
-    tokenDecimals: 0,
-    exchangeAddress: "0x446097f12eb3aaaf0c068827633cb516aeb5e53f"
-  },
-  {
-    symbol: "FON",
-    name: "fonetones",
-    tokenAddress: "0x5666bdc5c4f54f6ef65956e315e1a674932b68d5",
-    tokenDecimals: 6,
-    exchangeAddress: "0xb5300fa43c9cf6f3b1240b2dbc28fb155c8c5926"
-  },
-  {
-    symbol: "DiP",
-    name: "Divided Party",
-    tokenAddress: "0xa27be88ad1dce22609a4a7f4c395f861bbabeae2",
-    tokenDecimals: 8,
-    exchangeAddress: "0xd8703d9b785308174f3d6adfaf9bfa6179642f22"
-  },
-  {
-    symbol: "rDAI",
-    name: "Redeemable DAI",
-    tokenAddress: "0x261b45d85ccfeabb11f022eba346ee8d1cd488c0",
-    tokenDecimals: 18,
-    exchangeAddress: "0xbffcd1abd9c05b2b9b9a9a52768a36cfbd3a1d39"
-  },
-  {
-    symbol: "HYM",
-    name: "HYMAG Token",
-    tokenAddress: "0x9488885f5c49c86f35f9ff8fd9e3ec6eb33534fc",
+    symbol: "TIP",
+    name: "Tippi",
+    tokenAddress: "0x1aeb67a023c6dd6fca4c78a83eed6ef60fc9e837",
     tokenDecimals: 18,
-    exchangeAddress: "0x5c8c805e407a3b38359add3d777d0dbe0dcbda69"
+    exchangeAddress: "0x26d01a43c46d3d75582c3a9a5aaad01198238c5e"
   },
   {
-    symbol: "HAPI",
-    name: "HAPI",
-    tokenAddress: "0x1d0f1b6833f0ad4f363b5460e336bc129f204a76",
+    symbol: "BUZZ",
+    name: "BUZZ Token",
+    tokenAddress: "0xa4e0f0bc5fe93cf8951c7dd2c276e1fc07a32bea",
     tokenDecimals: 18,
-    exchangeAddress: "0x0a638d29c7c9cd0f5e7a330b6438b27c3bda976a"
-  },
-  {
-    symbol: "JOB",
-    name: "Jobchain",
-    tokenAddress: "0xdfbc9050f5b01df53512dcc39b4f2b2bbacd517a",
-    tokenDecimals: 8,
-    exchangeAddress: "0xb8e1a547787c20231adab691dcc2f7b01efd6552"
+    exchangeAddress: "0x91538ff62a0504996417443fc7607f6e3a679a94"
   }
 ]
