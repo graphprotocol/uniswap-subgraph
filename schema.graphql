@@ -69,7 +69,7 @@ type User @entity {
     exchangeBalances: [UserExchangeData!]!  @derivedFrom(field: "user")
 }
 
-# trading and liquidity data around a user and their activity on a given exchange 
+# trading and liquidity data around a user and their activity on a given exchange
 type UserExchangeData @entity {
     id: ID!                         # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34....
     userAddress: Bytes!
@@ -129,7 +129,7 @@ type AddLiquidityEvent implements TransactionEvent  @entity {
     transaction: Transaction! @derivedFrom(field: "addLiquidityEvents")
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
-    uniTokensMinted: BigDecimal! 
+    uniTokensMinted: BigDecimal!
 }
 
 # Note - No fee to provide liqidity
@@ -138,7 +138,7 @@ type RemoveLiquidityEvent implements TransactionEvent @entity {
     transaction: Transaction! @derivedFrom(field: "removeLiquidityEvents")
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
-    uniTokensBurned: BigDecimal! 
+    uniTokensBurned: BigDecimal!
 }
 
 type TokenPurchaseEvent implements TransactionEvent @entity {
@@ -199,7 +199,7 @@ type ExchangeDayData @entity {
     marginalEthRate: BigDecimal!            # tokenBalance / ethBalance
     ethVolume: BigDecimal!                  # Cumulative volume throughout the day
     tokenPriceUSD: BigDecimal!              # USD token price at last event within the day
-    totalEvents: BigInt!                    
+    totalEvents: BigInt!
 }
 
 # Data accumulated and condensed into day stats for all of Uniswap
@@ -240,6 +240,3 @@ type UniswapHistoricalData @entity {
 
     txCount: BigInt!
 }
-
-
-
