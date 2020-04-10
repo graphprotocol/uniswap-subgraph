@@ -662,6 +662,22 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     uniswapDayData.txCount = uniswap.txCount
     uniswapDayData.save()
 
+    /****** Update Transaction ******/
+    const txId = event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.address.toHexString())
+    let transaction = Transaction.load(txId)
+    if (transaction == null) {
+      transaction = new Transaction(txId)
+    }
+    transaction.exchangeAddress = event.address
+    transaction.block = event.block.number.toI32()
+    transaction.timestamp = event.block.timestamp.toI32()
+    transaction.user = event.params.provider
+    transaction.fee = zeroBD()
+    transaction.save()
+
     /** Create Liquidity Event */
     const eventId = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
     const addLiquidityEvent = new AddLiquidityEvent(eventId.toString().concat('-al'))
@@ -673,26 +689,8 @@ export function handleAddLiquidity(event: AddLiquidity): void {
       uniMinted = ethAmount.times(currentUniTokenAmount.div(exchange.ethBalance))
     }
     addLiquidityEvent.uniTokensMinted = uniMinted
+    addLiquidityEvent.transaction = txId
     addLiquidityEvent.save()
-
-    /****** Update Transaction ******/
-    const txId = event.transaction.hash
-      .toHexString()
-      .concat('-')
-      .concat(event.address.toHexString())
-    let transaction = Transaction.load(txId)
-    if (transaction == null) {
-      transaction = new Transaction(txId)
-    }
-    const addLiquidityEvents = transaction.addLiquidityEvents || []
-    addLiquidityEvents.push(addLiquidityEvent.id)
-    transaction.addLiquidityEvents = addLiquidityEvents
-    transaction.exchangeAddress = event.address
-    transaction.block = event.block.number.toI32()
-    transaction.timestamp = event.block.timestamp.toI32()
-    transaction.user = event.params.provider
-    transaction.fee = zeroBD()
-    transaction.save()
 
     /************************************
      * Handle the historical data below *

@@ -106,7 +106,7 @@ enum EventType {
 type Transaction @entity {
     id: ID!  # txn  hash concatenated with exchange - need this for token to token swaps
     exchangeAddress: Bytes!
-    addLiquidityEvents: [AddLiquidityEvent!]
+    addLiquidityEvents: [AddLiquidityEvent!] @derivedFrom(field: "transaction")
     removeLiquidityEvents: [RemoveLiquidityEvent!]
     tokenPurchaseEvents: [TokenPurchaseEvent!]
     ethPurchaseEvents: [EthPurchaseEvent!]
@@ -126,7 +126,7 @@ interface TransactionEvent {
 # Note - No fee to provide liqidity
 type AddLiquidityEvent implements TransactionEvent  @entity {
     id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
-    transaction: Transaction! @derivedFrom(field: "addLiquidityEvents")
+    transaction: Transaction!
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
     uniTokensMinted: BigDecimal!
