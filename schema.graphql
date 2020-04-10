@@ -109,7 +109,7 @@ type Transaction @entity {
     addLiquidityEvents: [AddLiquidityEvent!] @derivedFrom(field: "transaction")
     removeLiquidityEvents: [RemoveLiquidityEvent!] @derivedFrom(field: "transaction")
     tokenPurchaseEvents: [TokenPurchaseEvent!] @derivedFrom(field: "transaction")
-    ethPurchaseEvents: [EthPurchaseEvent!]
+    ethPurchaseEvents: [EthPurchaseEvent!] @derivedFrom(field: "transaction")
     block: Int!
     timestamp: Int!
     user: Bytes!
@@ -153,7 +153,7 @@ type TokenPurchaseEvent implements TransactionEvent @entity {
 
 type EthPurchaseEvent implements TransactionEvent @entity {
     id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
-    transaction: Transaction! @derivedFrom(field: "ethPurchaseEvents")
+    transaction: Transaction!
     # Monetary Values. Positive or negative determined by the TradeType
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!

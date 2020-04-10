@@ -450,15 +450,6 @@ export function handleEthPurchase(event: EthPurchase): void {
     uniswapDayData.txCount = uniswap.txCount
     uniswapDayData.save()
 
-    /*** Create Trade Event ******/
-    const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
-    const ethPurchaseEvent = new EthPurchaseEvent(eventID.toString().concat('-ep'))
-    ethPurchaseEvent.ethAmount = ethAmount
-    ethPurchaseEvent.tokenFee = fee
-    ethPurchaseEvent.ethFee = zeroBD()
-    ethPurchaseEvent.tokenAmount = tokenAmount
-    ethPurchaseEvent.save()
-
     /****** Update Transaction ******/
     const txId = event.transaction.hash
       .toHexString()
@@ -468,15 +459,22 @@ export function handleEthPurchase(event: EthPurchase): void {
     if (transaction == null) {
       transaction = new Transaction(txId)
     }
-    const ethPurchaseEvents = transaction.ethPurchaseEvents || []
-    ethPurchaseEvents.push(ethPurchaseEvent.id)
-    transaction.ethPurchaseEvents = ethPurchaseEvents
     transaction.exchangeAddress = event.address
     transaction.block = event.block.number.toI32()
     transaction.timestamp = event.block.timestamp.toI32()
     transaction.user = event.params.buyer
     transaction.fee = fee
     transaction.save()
+
+    /*** Create Trade Event ******/
+    const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
+    const ethPurchaseEvent = new EthPurchaseEvent(eventID.toString().concat('-ep'))
+    ethPurchaseEvent.ethAmount = ethAmount
+    ethPurchaseEvent.tokenFee = fee
+    ethPurchaseEvent.ethFee = zeroBD()
+    ethPurchaseEvent.tokenAmount = tokenAmount
+    ethPurchaseEvent.transaction = txId
+    ethPurchaseEvent.save()
 
     /************************************
      * Handle the historical data below *
