@@ -57,12 +57,7 @@ function hardcodeExchange(exchangeAddress: string, tokenAddress: Address, timest
 
   // only save for tokens with non null decimals
   if (exchange.tokenDecimals !== null) {
-    // add the exchange for the derived relationship
-    const uniswap = Uniswap.load('1')
-    const currentExchanges = uniswap.exchanges
-    currentExchanges.push(exchange.id)
-    uniswap.exchanges = currentExchanges
-    uniswap.save()
+    exchange.factory = '1'
     exchange.save()
   }
 }
@@ -74,7 +69,6 @@ export function handleNewExchange(event: NewExchange): void {
   if (factory == null) {
     factory = new Uniswap('1')
     factory.exchangeCount = 0
-    factory.exchanges = []
     factory.totalVolumeInEth = zeroBD()
     factory.totalLiquidityInEth = zeroBD()
     factory.totalVolumeUSD = zeroBD()

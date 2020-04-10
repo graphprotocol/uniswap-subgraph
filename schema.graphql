@@ -2,7 +2,7 @@
 type Uniswap @entity {
     id: ID!
     exchangeCount: Int!
-    exchanges: [Exchange!]!
+    exchanges: [Exchange!]!  @derivedFrom(field: "factory")
     totalVolumeInEth: BigDecimal!
     totalLiquidityInEth: BigDecimal!
 
@@ -60,7 +60,7 @@ type Exchange @entity {
     weightedAvgPriceUSD: BigDecimal!        # weightAvgPriceUSD = ( $1 of ETH in ETH ) / weightedAvgPrice
 
     # Fields used to help derived relationship
-    factory: Uniswap! @derivedFrom(field: "exchanges")
+    factory: Uniswap
     tokenHolders: [UserExchangeData!]       # Relationship to show all token holders on the exchange
 }
 
