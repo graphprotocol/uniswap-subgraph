@@ -854,6 +854,23 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     uniswapDayData.txCount = uniswap.txCount
     uniswapDayData.save()
 
+    /****** Update Transaction ******/
+    const txId = event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.address.toHexString())
+    let transaction = Transaction.load(txId)
+    if (transaction == null) {
+      transaction = new Transaction(txId)
+    }
+    transaction.exchangeAddress = event.address
+    transaction.block = event.block.number.toI32()
+    transaction.timestamp = event.block.timestamp.toI32()
+    transaction.user = event.params.provider
+    transaction.fee = zeroBD()
+
+    transaction.save()
+
     /** Create Liquidity Event */
     const eventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
     const removeLiquidityEvent = new RemoveLiquidityEvent(eventID.toString().concat('-rl'))
@@ -866,28 +883,8 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
       uniBurned = ethAmount.times(currentUniTokenAmount.div(exchange.ethBalance))
     }
     removeLiquidityEvent.uniTokensBurned = uniBurned
-
+    removeLiquidityEvent.transaction = txId
     removeLiquidityEvent.save()
-
-    /****** Update Transaction ******/
-    const txId = event.transaction.hash
-      .toHexString()
-      .concat('-')
-      .concat(event.address.toHexString())
-    let transaction = Transaction.load(txId)
-    if (transaction == null) {
-      transaction = new Transaction(txId)
-    }
-    const removeLiquidityEvents = transaction.removeLiquidityEvents || []
-    removeLiquidityEvents.push(removeLiquidityEvent.id)
-    transaction.removeLiquidityEvents = removeLiquidityEvents
-    transaction.exchangeAddress = event.address
-    transaction.block = event.block.number.toI32()
-    transaction.timestamp = event.block.timestamp.toI32()
-    transaction.user = event.params.provider
-    transaction.fee = zeroBD()
-
-    transaction.save()
 
     /************************************
      * Handle the historical data below *

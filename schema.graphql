@@ -107,7 +107,7 @@ type Transaction @entity {
     id: ID!  # txn  hash concatenated with exchange - need this for token to token swaps
     exchangeAddress: Bytes!
     addLiquidityEvents: [AddLiquidityEvent!] @derivedFrom(field: "transaction")
-    removeLiquidityEvents: [RemoveLiquidityEvent!]
+    removeLiquidityEvents: [RemoveLiquidityEvent!] @derivedFrom(field: "transaction")
     tokenPurchaseEvents: [TokenPurchaseEvent!]
     ethPurchaseEvents: [EthPurchaseEvent!]
     block: Int!
@@ -135,7 +135,7 @@ type AddLiquidityEvent implements TransactionEvent  @entity {
 # Note - No fee to provide liqidity
 type RemoveLiquidityEvent implements TransactionEvent @entity {
     id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
-    transaction: Transaction! @derivedFrom(field: "removeLiquidityEvents")
+    transaction: Transaction!
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
     uniTokensBurned: BigDecimal!
