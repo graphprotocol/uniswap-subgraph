@@ -949,6 +949,7 @@ export function handleTransfer(event: Transfer): void {
       .toHexString()
       .concat('-')
       .concat(event.params._from.toHex())
+    // Every UNI token is 18 decimals, so this function is okay
     const uniTokens = convertEthToDecimal(event.params._value)
 
     // Handle Minting Case
@@ -1002,9 +1003,9 @@ export function handleTransfer(event: Transfer): void {
       userTo.ethBought = userTo.ethBought.plus(ethTransferred)
       userTo.tokensBought = userTo.tokensBought.plus(tokenTransferred)
       userTo.uniTokenBalance = userTo.uniTokenBalance.plus(uniTokens)
-      userFrom.ethBought = userTo.ethBought.minus(ethTransferred)
-      userFrom.tokensBought = userTo.tokensBought.minus(tokenTransferred)
-      userFrom.uniTokenBalance = userTo.uniTokenBalance.minus(uniTokens)
+      userFrom.ethBought = userFrom.ethBought.minus(ethTransferred)
+      userFrom.tokensBought = userFrom.tokensBought.minus(tokenTransferred)
+      userFrom.uniTokenBalance = userFrom.uniTokenBalance.minus(uniTokens)
       userTo.save()
       userFrom.save()
     }

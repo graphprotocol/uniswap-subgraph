@@ -16856,5 +16856,13 @@ export const hardcodedExchanges: Array<AsExchange> = [
     tokenAddress: "0xa4e0f0bc5fe93cf8951c7dd2c276e1fc07a32bea",
     tokenDecimals: 18,
     exchangeAddress: "0x91538ff62a0504996417443fc7607f6e3a679a94"
+    exchangeAddress: "0xb8e1a547787c20231adab691dcc2f7b01efd6552"
+  },
+  {
+    symbol: "XOR",
+    name: "Sora Token",
+    tokenAddress: "0x40fd72257597aa14c7231a7b1aaa29fce868f677",
+    tokenDecimals: 18,
+    exchangeAddress: "0x43fd5530789ce64a6569d882cfdfa07c7ed33be6"
   }
 ]
