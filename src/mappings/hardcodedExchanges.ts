@@ -16592,277 +16592,276 @@ export const hardcodedExchanges: Array<AsExchange> = [
     exchangeAddress: '0x9354d836159a8277bce122c1be8d7fb9d89ef403'
   },
   {
-    symbol: "CYBR",
-    name: "CYBR - Cyber Security Ecosystem Token",
-    tokenAddress: "0xaeaabb69dcb0fe926b1979f0b032fcd17fd7b2e0",
+    symbol: 'CYBR',
+    name: 'CYBR - Cyber Security Ecosystem Token',
+    tokenAddress: '0xaeaabb69dcb0fe926b1979f0b032fcd17fd7b2e0',
     tokenDecimals: 18,
-    exchangeAddress: "0x7348bc5c6adc314020b65d73e407623f4e7e5577"
+    exchangeAddress: '0x7348bc5c6adc314020b65d73e407623f4e7e5577'
   },
   {
-    symbol: "PXT",
-    name: "Populous XBRL token",
-    tokenAddress: "0xc14830e53aa344e8c14603a91229a0b925b0b262",
+    symbol: 'PXT',
+    name: 'Populous XBRL token',
+    tokenAddress: '0xc14830e53aa344e8c14603a91229a0b925b0b262',
     tokenDecimals: 8,
-    exchangeAddress: "0xa69f6e2e981ce9f0a772485d95503ac478440dee"
+    exchangeAddress: '0xa69f6e2e981ce9f0a772485d95503ac478440dee'
   },
   {
-    symbol: "TOM",
-    name: "The Orion Mint",
-    tokenAddress: "0x731c8c257c94d938cb45931e2be4ad54e5d15611",
+    symbol: 'TOM',
+    name: 'The Orion Mint',
+    tokenAddress: '0x731c8c257c94d938cb45931e2be4ad54e5d15611',
     tokenDecimals: 18,
-    exchangeAddress: "0x0b31f410403821790a0fed543ed1fa1af35d032a"
+    exchangeAddress: '0x0b31f410403821790a0fed543ed1fa1af35d032a'
   },
   {
-    symbol: "SUBS",
-    name: "SubSudio",
-    tokenAddress: "0xd7d7e034b5a9037a88659f734bc216e7df56e6fd",
+    symbol: 'SUBS',
+    name: 'SubSudio',
+    tokenAddress: '0xd7d7e034b5a9037a88659f734bc216e7df56e6fd',
     tokenDecimals: 8,
-    exchangeAddress: "0x5b4b1c30fbad403a4b61802b3115825179c6a1ed"
+    exchangeAddress: '0x5b4b1c30fbad403a4b61802b3115825179c6a1ed'
   },
   {
-    symbol: "ECD",
-    name: "Easy Coin DF",
-    tokenAddress: "0x37b73a244bbe53ade2cc4824e34aebe8f418ba3b",
+    symbol: 'ECD',
+    name: 'Easy Coin DF',
+    tokenAddress: '0x37b73a244bbe53ade2cc4824e34aebe8f418ba3b',
     tokenDecimals: 18,
-    exchangeAddress: "0x21a52a62e1d85a4fab2c3c9db5ac7d703a97d918"
+    exchangeAddress: '0x21a52a62e1d85a4fab2c3c9db5ac7d703a97d918'
   },
   {
-    symbol: "B1P",
-    name: "B One Payment",
-    tokenAddress: "0x4b742b5bdb1d252907ae7f399a891d4a178dbc24",
+    symbol: 'B1P',
+    name: 'B One Payment',
+    tokenAddress: '0x4b742b5bdb1d252907ae7f399a891d4a178dbc24',
     tokenDecimals: 18,
-    exchangeAddress: "0x044d8d8e76ad40a27d0f34b509c6554665c069fb"
+    exchangeAddress: '0x044d8d8e76ad40a27d0f34b509c6554665c069fb'
   },
   {
-    symbol: "WEENUS",
-    name: "Weenus 💪",
-    tokenAddress: "0x2823589ae095d99bd64deea80b4690313e2fb519",
+    symbol: 'WEENUS',
+    name: 'Weenus 💪',
+    tokenAddress: '0x2823589ae095d99bd64deea80b4690313e2fb519',
     tokenDecimals: 18,
-    exchangeAddress: "0x622d56bfea4c98a9b40e6f488af043d7e48c5aaf"
+    exchangeAddress: '0x622d56bfea4c98a9b40e6f488af043d7e48c5aaf'
   },
   {
-    symbol: "ADR",
-    name: "ANDREA",
-    tokenAddress: "0x44cca682df6fbb95cbec3ddd6c40554b065980b4",
+    symbol: 'ADR',
+    name: 'ANDREA',
+    tokenAddress: '0x44cca682df6fbb95cbec3ddd6c40554b065980b4',
     tokenDecimals: 18,
-    exchangeAddress: "0x4428f22cc70b28863b7bc8e9d9fcb659c1005e7c"
+    exchangeAddress: '0x4428f22cc70b28863b7bc8e9d9fcb659c1005e7c'
   },
   {
-    symbol: "ISP",
-    name: "iShop Plus",
-    tokenAddress: "0x3db1678170418d1014012f855e2dda492f35c289",
+    symbol: 'ISP',
+    name: 'iShop Plus',
+    tokenAddress: '0x3db1678170418d1014012f855e2dda492f35c289',
     tokenDecimals: 18,
-    exchangeAddress: "0xaaa8ce8811f0f0c423df8e3d8b6466d77b07ae04"
+    exchangeAddress: '0xaaa8ce8811f0f0c423df8e3d8b6466d77b07ae04'
   },
   {
-    symbol: "IST",
-    name: "iShop Token",
-    tokenAddress: "0x7a4d70528c0b8d376c206b0fb2c9db1d26315c2d",
+    symbol: 'IST',
+    name: 'iShop Token',
+    tokenAddress: '0x7a4d70528c0b8d376c206b0fb2c9db1d26315c2d',
     tokenDecimals: 18,
-    exchangeAddress: "0x472701c91fb79c7b293db4ea3a7fee6516252731"
+    exchangeAddress: '0x472701c91fb79c7b293db4ea3a7fee6516252731'
   },
   {
-    symbol: "RVT",
-    name: "RvT",
-    tokenAddress: "0x3d1ba9be9f66b8ee101911bc36d3fb562eac2244",
+    symbol: 'RVT',
+    name: 'RvT',
+    tokenAddress: '0x3d1ba9be9f66b8ee101911bc36d3fb562eac2244',
     tokenDecimals: 18,
-    exchangeAddress: "0x99714bbe39fbcac445748f41ba5353b39b8a0def"
+    exchangeAddress: '0x99714bbe39fbcac445748f41ba5353b39b8a0def'
   },
   {
-    symbol: "BITS",
-    name: "Bitsoko Community",
-    tokenAddress: "0xb72627650f1149ea5e54834b2f468e5d430e67bf",
+    symbol: 'BITS',
+    name: 'Bitsoko Community',
+    tokenAddress: '0xb72627650f1149ea5e54834b2f468e5d430e67bf',
     tokenDecimals: 8,
-    exchangeAddress: "0xca2e92d3cc5db5248ea21704bce749f330c389ad"
+    exchangeAddress: '0xca2e92d3cc5db5248ea21704bce749f330c389ad'
   },
   {
-    symbol: "LVLY",
-    name: "LovelyBonz",
-    tokenAddress: "0xf8b8ba4bcb4f7175e35d4a74a63cf79f03d7cd26",
+    symbol: 'LVLY',
+    name: 'LovelyBonz',
+    tokenAddress: '0xf8b8ba4bcb4f7175e35d4a74a63cf79f03d7cd26',
     tokenDecimals: 4,
-    exchangeAddress: "0x45c0e4891a99953cc93e869c8e342b5f82de34ea"
+    exchangeAddress: '0x45c0e4891a99953cc93e869c8e342b5f82de34ea'
   },
   {
-    symbol: "TRENK",
-    name: "TRENK",
-    tokenAddress: "0x87328eea472bf8a3792ba3208c2ef699455ba212",
+    symbol: 'TRENK',
+    name: 'TRENK',
+    tokenAddress: '0x87328eea472bf8a3792ba3208c2ef699455ba212',
     tokenDecimals: 18,
-    exchangeAddress: "0x5c3e8b633b7400d55e0d60b0f68e62130249e78d"
+    exchangeAddress: '0x5c3e8b633b7400d55e0d60b0f68e62130249e78d'
   },
   {
-    symbol: "sXTZ",
-    name: "Synth sXTZ",
-    tokenAddress: "0xf45b14ddabf0f0e275e215b94dd24ae013a27f12",
+    symbol: 'sXTZ',
+    name: 'Synth sXTZ',
+    tokenAddress: '0xf45b14ddabf0f0e275e215b94dd24ae013a27f12',
     tokenDecimals: 18,
-    exchangeAddress: "0x512fdd40b8712336bbfd44a4c8646aaa032ef109"
+    exchangeAddress: '0x512fdd40b8712336bbfd44a4c8646aaa032ef109'
   },
   {
-    symbol: "BUZZ",
-    name: "BUZZ",
-    tokenAddress: "0x00d270d9a41886a8e6e433911ae2f7d257b60051",
+    symbol: 'BUZZ',
+    name: 'BUZZ',
+    tokenAddress: '0x00d270d9a41886a8e6e433911ae2f7d257b60051',
     tokenDecimals: 4,
-    exchangeAddress: "0x6c340363da8785d451ab2e4e6a6aa3debb93afe5"
+    exchangeAddress: '0x6c340363da8785d451ab2e4e6a6aa3debb93afe5'
   },
   {
-    symbol: "FAZR",
-    name: "Fazer",
-    tokenAddress: "0x6e4d93efc2beac20992197278ad41f8d10b3efaa",
+    symbol: 'FAZR',
+    name: 'Fazer',
+    tokenAddress: '0x6e4d93efc2beac20992197278ad41f8d10b3efaa',
     tokenDecimals: 18,
-    exchangeAddress: "0x1e7f38debc0c78298e9ce2f0f52fc5b003321002"
+    exchangeAddress: '0x1e7f38debc0c78298e9ce2f0f52fc5b003321002'
   },
   {
-    symbol: "PRIVATE",
-    name: "Buccaneer",
-    tokenAddress: "0x17540494ad5e39aefd49901774528e9ff17fe40b",
+    symbol: 'PRIVATE',
+    name: 'Buccaneer',
+    tokenAddress: '0x17540494ad5e39aefd49901774528e9ff17fe40b',
     tokenDecimals: 3,
-    exchangeAddress: "0x9ff9af11c58756c8f49a5878001bea9acbbc971d"
+    exchangeAddress: '0x9ff9af11c58756c8f49a5878001bea9acbbc971d'
   },
   {
-    symbol: "HODL",
-    name: "HodlToken",
-    tokenAddress: "0x95012835d927235d8bdfb653e2d425bffeaa7fa2",
+    symbol: 'HODL',
+    name: 'HodlToken',
+    tokenAddress: '0x95012835d927235d8bdfb653e2d425bffeaa7fa2',
     tokenDecimals: 18,
-    exchangeAddress: "0x5cbde2c854376d3db0194c44ac26a240bb457f74"
+    exchangeAddress: '0x5cbde2c854376d3db0194c44ac26a240bb457f74'
   },
   {
-    symbol: "COMP",
-    name: "Compound",
-    tokenAddress: "0xc00e94cb662c3520282e6f5717214004a7f26888",
+    symbol: 'COMP',
+    name: 'Compound',
+    tokenAddress: '0xc00e94cb662c3520282e6f5717214004a7f26888',
     tokenDecimals: 18,
-    exchangeAddress: "0xdaf005507e257d34cf5b9d52d01e7e1c0876cf5f"
+    exchangeAddress: '0xdaf005507e257d34cf5b9d52d01e7e1c0876cf5f'
   },
   {
-    symbol: "KOZ",
-    name: "KozKoin",
-    tokenAddress: "0xe9d8a9fe2966db75c98fcb3829159daa31ceae64",
+    symbol: 'KOZ',
+    name: 'KozKoin',
+    tokenAddress: '0xe9d8a9fe2966db75c98fcb3829159daa31ceae64',
     tokenDecimals: 0,
-    exchangeAddress: "0x4506d1da2e8851054c48e17017260643f76aa365"
+    exchangeAddress: '0x4506d1da2e8851054c48e17017260643f76aa365'
   },
   {
-    symbol: "ZYBE",
-    name: "Zyberos",
-    tokenAddress: "0x9e1e92a02abadc9bc71bce83a94d5c8cd3151676",
+    symbol: 'ZYBE',
+    name: 'Zyberos',
+    tokenAddress: '0x9e1e92a02abadc9bc71bce83a94d5c8cd3151676',
     tokenDecimals: 18,
-    exchangeAddress: "0xcaa217c5b6020ac9033a0b1262d445ad604cd9d8"
+    exchangeAddress: '0xcaa217c5b6020ac9033a0b1262d445ad604cd9d8'
   },
   {
-    symbol: "EPLUS",
-    name: "EuroPlus",
-    tokenAddress: "0xec78d8485a878aa677f6aea1603a43d3cc970636",
+    symbol: 'EPLUS',
+    name: 'EuroPlus',
+    tokenAddress: '0xec78d8485a878aa677f6aea1603a43d3cc970636',
     tokenDecimals: 18,
-    exchangeAddress: "0x112faf002f18dd1a4470c9241344221233a14631"
+    exchangeAddress: '0x112faf002f18dd1a4470c9241344221233a14631'
   },
   {
-    symbol: "INXT",
-    name: "Internxt",
-    tokenAddress: "0xa8006c4ca56f24d6836727d106349320db7fef82",
+    symbol: 'INXT',
+    name: 'Internxt',
+    tokenAddress: '0xa8006c4ca56f24d6836727d106349320db7fef82',
     tokenDecimals: 8,
-    exchangeAddress: "0x05c95072e94d57c0d76eed9392b7cb657b238ecc"
+    exchangeAddress: '0x05c95072e94d57c0d76eed9392b7cb657b238ecc'
   },
   {
-    symbol: "eINV",
-    name: "eINV",
-    tokenAddress: "0x09a8f2041be23e8ec3c72790c9a92089bc70fbca",
+    symbol: 'eINV',
+    name: 'eINV',
+    tokenAddress: '0x09a8f2041be23e8ec3c72790c9a92089bc70fbca',
     tokenDecimals: 18,
-    exchangeAddress: "0x009211344ee05ff3f69d9aadf0d3a0ab099c5363"
+    exchangeAddress: '0x009211344ee05ff3f69d9aadf0d3a0ab099c5363'
   },
   {
-    symbol: "BTE",
-    name: "Bit Energy",
-    tokenAddress: "0x267ba09fe3a8a16c7dc8a9b07b5f2c4ac0adf1c0",
+    symbol: 'BTE',
+    name: 'Bit Energy',
+    tokenAddress: '0x267ba09fe3a8a16c7dc8a9b07b5f2c4ac0adf1c0',
     tokenDecimals: 8,
-    exchangeAddress: "0x410e90263f06d99d5b2410b37e9a0e16c4b79d1d"
+    exchangeAddress: '0x410e90263f06d99d5b2410b37e9a0e16c4b79d1d'
   },
   {
-    symbol: "MGT",
-    name: "Meme Gift Token",
-    tokenAddress: "0xac4b0f55624e405f60c21316b6eba7a3a0c67eb2",
+    symbol: 'MGT',
+    name: 'Meme Gift Token',
+    tokenAddress: '0xac4b0f55624e405f60c21316b6eba7a3a0c67eb2',
     tokenDecimals: 18,
-    exchangeAddress: "0x72e3292732331dacc7525c484f3544a1ca393800"
+    exchangeAddress: '0x72e3292732331dacc7525c484f3544a1ca393800'
   },
   {
-    symbol: "BIFC",
-    name: "BIFcoin",
-    tokenAddress: "0xd2dfc2f9d3ab26356a05898540bb9180c6f806a5",
+    symbol: 'BIFC',
+    name: 'BIFcoin',
+    tokenAddress: '0xd2dfc2f9d3ab26356a05898540bb9180c6f806a5',
     tokenDecimals: 18,
-    exchangeAddress: "0x93eb88f2a07a601b9c8c28955f3beaa3d1c7b0c8"
+    exchangeAddress: '0x93eb88f2a07a601b9c8c28955f3beaa3d1c7b0c8'
   },
   {
-    symbol: "iXTZ",
-    name: "Synth iXTZ",
-    tokenAddress: "0x8deef89058090ac5655a99eeb451a4f9183d1678",
+    symbol: 'iXTZ',
+    name: 'Synth iXTZ',
+    tokenAddress: '0x8deef89058090ac5655a99eeb451a4f9183d1678',
     tokenDecimals: 18,
-    exchangeAddress: "0x1fbc5c961c5f9eb5ebf28fefc16e1864a12cfe47"
+    exchangeAddress: '0x1fbc5c961c5f9eb5ebf28fefc16e1864a12cfe47'
   },
   {
-    symbol: "NASA",
-    name: "OG NASA Rap",
-    tokenAddress: "0x4bdb811696ede769848d873bae7ba770fa0993d1",
+    symbol: 'NASA',
+    name: 'OG NASA Rap',
+    tokenAddress: '0x4bdb811696ede769848d873bae7ba770fa0993d1',
     tokenDecimals: 7,
-    exchangeAddress: "0x59df405a94577f4b0273f307f4699bc47fb63e36"
+    exchangeAddress: '0x59df405a94577f4b0273f307f4699bc47fb63e36'
   },
   {
-    symbol: "STK",
-    name: "STK Token",
-    tokenAddress: "0xae73b38d1c9a8b274127ec30160a4927c4d71824",
+    symbol: 'STK',
+    name: 'STK Token',
+    tokenAddress: '0xae73b38d1c9a8b274127ec30160a4927c4d71824',
     tokenDecimals: 18,
-    exchangeAddress: "0x5bbd235a4d663ee585bbada8684b822a618adc1c"
+    exchangeAddress: '0x5bbd235a4d663ee585bbada8684b822a618adc1c'
   },
   {
-    symbol: "BSC",
-    name: "Benscoin",
-    tokenAddress: "0xab418c5a8a85f9cc0fba1802a57a30bf7db34d7c",
+    symbol: 'BSC',
+    name: 'Benscoin',
+    tokenAddress: '0xab418c5a8a85f9cc0fba1802a57a30bf7db34d7c',
     tokenDecimals: 8,
-    exchangeAddress: "0x45fca98fc0e2b1d79f3f3df500185d01b548ede2"
+    exchangeAddress: '0x45fca98fc0e2b1d79f3f3df500185d01b548ede2'
   },
   {
-    symbol: "pBTC",
-    name: "pTokens BTC",
-    tokenAddress: "0x5228a22e72ccc52d415ecfd199f99d0665e7733b",
+    symbol: 'pBTC',
+    name: 'pTokens BTC',
+    tokenAddress: '0x5228a22e72ccc52d415ecfd199f99d0665e7733b',
     tokenDecimals: 18,
-    exchangeAddress: "0x5a6aefc503df1be6559d1e9850b5ce44f0aa7c4e"
+    exchangeAddress: '0x5a6aefc503df1be6559d1e9850b5ce44f0aa7c4e'
   },
   {
-    symbol: "ABTK",
-    name: "Air Basic",
-    tokenAddress: "0xd1ccc390f181a38faab2c818d19c5a68ba9251b7",
+    symbol: 'ABTK',
+    name: 'Air Basic',
+    tokenAddress: '0xd1ccc390f181a38faab2c818d19c5a68ba9251b7',
     tokenDecimals: 18,
-    exchangeAddress: "0xfe5b5534d155a1dc3930dc9a2cd31bc6848ca7a7"
+    exchangeAddress: '0xfe5b5534d155a1dc3930dc9a2cd31bc6848ca7a7'
   },
   {
-    symbol: "PODDY",
-    name: "Poddy",
-    tokenAddress: "0xafbce36c2a2401b5765a066a2e2090eb3b8413ff",
+    symbol: 'PODDY',
+    name: 'Poddy',
+    tokenAddress: '0xafbce36c2a2401b5765a066a2e2090eb3b8413ff',
     tokenDecimals: 18,
-    exchangeAddress: "0x27df97eb5f7f8a7b673af9b55bc047226efb29a9"
+    exchangeAddress: '0x27df97eb5f7f8a7b673af9b55bc047226efb29a9'
   },
   {
-    symbol: "DY",
-    name: "DouYin",
-    tokenAddress: "0x9b3502df03d20beddf429b205db26e74e62e32b3",
+    symbol: 'DY',
+    name: 'DouYin',
+    tokenAddress: '0x9b3502df03d20beddf429b205db26e74e62e32b3',
     tokenDecimals: 18,
-    exchangeAddress: "0xe935c6841748080094b187b5bde93e77204386cb"
+    exchangeAddress: '0xe935c6841748080094b187b5bde93e77204386cb'
   },
   {
-    symbol: "TIP",
-    name: "Tippi",
-    tokenAddress: "0x1aeb67a023c6dd6fca4c78a83eed6ef60fc9e837",
+    symbol: 'TIP',
+    name: 'Tippi',
+    tokenAddress: '0x1aeb67a023c6dd6fca4c78a83eed6ef60fc9e837',
     tokenDecimals: 18,
-    exchangeAddress: "0x26d01a43c46d3d75582c3a9a5aaad01198238c5e"
+    exchangeAddress: '0x26d01a43c46d3d75582c3a9a5aaad01198238c5e'
   },
   {
-    symbol: "BUZZ",
-    name: "BUZZ Token",
-    tokenAddress: "0xa4e0f0bc5fe93cf8951c7dd2c276e1fc07a32bea",
+    symbol: 'BUZZ',
+    name: 'BUZZ Token',
+    tokenAddress: '0xa4e0f0bc5fe93cf8951c7dd2c276e1fc07a32bea',
     tokenDecimals: 18,
-    exchangeAddress: "0x91538ff62a0504996417443fc7607f6e3a679a94"
-    exchangeAddress: "0xb8e1a547787c20231adab691dcc2f7b01efd6552"
+    exchangeAddress: '0x91538ff62a0504996417443fc7607f6e3a679a94'
   },
   {
-    symbol: "XOR",
-    name: "Sora Token",
-    tokenAddress: "0x40fd72257597aa14c7231a7b1aaa29fce868f677",
+    symbol: 'XOR',
+    name: 'Sora Token',
+    tokenAddress: '0x40fd72257597aa14c7231a7b1aaa29fce868f677',
     tokenDecimals: 18,
-    exchangeAddress: "0x43fd5530789ce64a6569d882cfdfa07c7ed33be6"
+    exchangeAddress: '0x43fd5530789ce64a6569d882cfdfa07c7ed33be6'
   }
 ]
