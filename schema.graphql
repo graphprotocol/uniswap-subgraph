@@ -2,7 +2,7 @@
 type Uniswap @entity {
     id: ID!
     exchangeCount: Int!
-    exchanges: [Exchange!]!
+    exchanges: [Exchange!]!  @derivedFrom(field: "factory")
     totalVolumeInEth: BigDecimal!
     totalLiquidityInEth: BigDecimal!
 
@@ -60,7 +60,7 @@ type Exchange @entity {
     weightedAvgPriceUSD: BigDecimal!        # weightAvgPriceUSD = ( $1 of ETH in ETH ) / weightedAvgPrice
 
     # Fields used to help derived relationship
-    factory: Uniswap! @derivedFrom(field: "exchanges")
+    factory: Uniswap
     tokenHolders: [UserExchangeData!]       # Relationship to show all token holders on the exchange
 }
 
@@ -69,7 +69,7 @@ type User @entity {
     exchangeBalances: [UserExchangeData!]!  @derivedFrom(field: "user")
 }
 
-# trading and liquidity data around a user and their activity on a given exchange 
+# trading and liquidity data around a user and their activity on a given exchange
 type UserExchangeData @entity {
     id: ID!                         # ID is concatenation of token and user addr. i.e. 0xahiow4-0xkashkd34....
     userAddress: Bytes!
@@ -106,10 +106,10 @@ enum EventType {
 type Transaction @entity {
     id: ID!  # txn  hash concatenated with exchange - need this for token to token swaps
     exchangeAddress: Bytes!
-    addLiquidityEvents: [AddLiquidityEvent!]
-    removeLiquidityEvents: [RemoveLiquidityEvent!]
-    tokenPurchaseEvents: [TokenPurchaseEvent!]
-    ethPurchaseEvents: [EthPurchaseEvent!]
+    addLiquidityEvents: [AddLiquidityEvent!] @derivedFrom(field: "transaction")
+    removeLiquidityEvents: [RemoveLiquidityEvent!] @derivedFrom(field: "transaction")
+    tokenPurchaseEvents: [TokenPurchaseEvent!] @derivedFrom(field: "transaction")
+    ethPurchaseEvents: [EthPurchaseEvent!] @derivedFrom(field: "transaction")
     block: Int!
     timestamp: Int!
     user: Bytes!
@@ -126,24 +126,24 @@ interface TransactionEvent {
 # Note - No fee to provide liqidity
 type AddLiquidityEvent implements TransactionEvent  @entity {
     id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
-    transaction: Transaction! @derivedFrom(field: "addLiquidityEvents")
+    transaction: Transaction!
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
-    uniTokensMinted: BigDecimal! 
+    uniTokensMinted: BigDecimal!
 }
 
 # Note - No fee to provide liqidity
 type RemoveLiquidityEvent implements TransactionEvent @entity {
     id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
-    transaction: Transaction! @derivedFrom(field: "removeLiquidityEvents")
+    transaction: Transaction!
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
-    uniTokensBurned: BigDecimal! 
+    uniTokensBurned: BigDecimal!
 }
 
 type TokenPurchaseEvent implements TransactionEvent @entity {
     id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
-    transaction: Transaction! @derivedFrom(field: "tokenPurchaseEvents")
+    transaction: Transaction!
     # Monetary Values. Positive or negative determined by the TradeType
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
@@ -153,7 +153,7 @@ type TokenPurchaseEvent implements TransactionEvent @entity {
 
 type EthPurchaseEvent implements TransactionEvent @entity {
     id: ID!                 # Incrementing ID, 1, 2, etc, as txhashes can contain multiple events
-    transaction: Transaction! @derivedFrom(field: "ethPurchaseEvents")
+    transaction: Transaction!
     # Monetary Values. Positive or negative determined by the TradeType
     ethAmount: BigDecimal!
     tokenAmount: BigDecimal!
@@ -199,7 +199,7 @@ type ExchangeDayData @entity {
     marginalEthRate: BigDecimal!            # tokenBalance / ethBalance
     ethVolume: BigDecimal!                  # Cumulative volume throughout the day
     tokenPriceUSD: BigDecimal!              # USD token price at last event within the day
-    totalEvents: BigInt!                    
+    totalEvents: BigInt!
 }
 
 # Data accumulated and condensed into day stats for all of Uniswap
@@ -240,6 +240,3 @@ type UniswapHistoricalData @entity {
 
     txCount: BigInt!
 }
-
-
-

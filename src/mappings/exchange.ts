@@ -227,15 +227,6 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     uniswapDayData.txCount = uniswap.txCount
     uniswapDayData.save()
 
-    /******** CREATE TRADE EVENT  ********/
-    const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
-    const tokenPurchaseEvent = new TokenPurchaseEvent(eventID.toString().concat('-tp'))
-    tokenPurchaseEvent.ethAmount = ethAmount
-    tokenPurchaseEvent.tokenAmount = tokenAmount
-    tokenPurchaseEvent.tokenFee = zeroBD()
-    tokenPurchaseEvent.ethFee = fee
-    tokenPurchaseEvent.save()
-
     /****** Update Transaction ******/
     const txId = event.transaction.hash
       .toHexString()
@@ -245,15 +236,22 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     if (transaction == null) {
       transaction = new Transaction(txId)
     }
-    const tokenPurchaseEvents = transaction.tokenPurchaseEvents || []
-    tokenPurchaseEvents.push(tokenPurchaseEvent.id)
-    transaction.tokenPurchaseEvents = tokenPurchaseEvents
     transaction.exchangeAddress = event.address
     transaction.block = event.block.number.toI32()
     transaction.timestamp = event.block.timestamp.toI32()
     transaction.user = event.params.buyer
     transaction.fee = fee
     transaction.save()
+
+    /******** CREATE TRADE EVENT  ********/
+    const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
+    const tokenPurchaseEvent = new TokenPurchaseEvent(eventID.toString().concat('-tp'))
+    tokenPurchaseEvent.ethAmount = ethAmount
+    tokenPurchaseEvent.tokenAmount = tokenAmount
+    tokenPurchaseEvent.tokenFee = zeroBD()
+    tokenPurchaseEvent.ethFee = fee
+    tokenPurchaseEvent.transaction = txId
+    tokenPurchaseEvent.save()
 
     /************************************
      * Handle the historical data below *
@@ -452,15 +450,6 @@ export function handleEthPurchase(event: EthPurchase): void {
     uniswapDayData.txCount = uniswap.txCount
     uniswapDayData.save()
 
-    /*** Create Trade Event ******/
-    const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
-    const ethPurchaseEvent = new EthPurchaseEvent(eventID.toString().concat('-ep'))
-    ethPurchaseEvent.ethAmount = ethAmount
-    ethPurchaseEvent.tokenFee = fee
-    ethPurchaseEvent.ethFee = zeroBD()
-    ethPurchaseEvent.tokenAmount = tokenAmount
-    ethPurchaseEvent.save()
-
     /****** Update Transaction ******/
     const txId = event.transaction.hash
       .toHexString()
@@ -470,15 +459,22 @@ export function handleEthPurchase(event: EthPurchase): void {
     if (transaction == null) {
       transaction = new Transaction(txId)
     }
-    const ethPurchaseEvents = transaction.ethPurchaseEvents || []
-    ethPurchaseEvents.push(ethPurchaseEvent.id)
-    transaction.ethPurchaseEvents = ethPurchaseEvents
     transaction.exchangeAddress = event.address
     transaction.block = event.block.number.toI32()
     transaction.timestamp = event.block.timestamp.toI32()
     transaction.user = event.params.buyer
     transaction.fee = fee
     transaction.save()
+
+    /*** Create Trade Event ******/
+    const eventID = uniswap.totalTokenBuys.plus(uniswap.totalTokenSells)
+    const ethPurchaseEvent = new EthPurchaseEvent(eventID.toString().concat('-ep'))
+    ethPurchaseEvent.ethAmount = ethAmount
+    ethPurchaseEvent.tokenFee = fee
+    ethPurchaseEvent.ethFee = zeroBD()
+    ethPurchaseEvent.tokenAmount = tokenAmount
+    ethPurchaseEvent.transaction = txId
+    ethPurchaseEvent.save()
 
     /************************************
      * Handle the historical data below *
@@ -662,6 +658,22 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     uniswapDayData.txCount = uniswap.txCount
     uniswapDayData.save()
 
+    /****** Update Transaction ******/
+    const txId = event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.address.toHexString())
+    let transaction = Transaction.load(txId)
+    if (transaction == null) {
+      transaction = new Transaction(txId)
+    }
+    transaction.exchangeAddress = event.address
+    transaction.block = event.block.number.toI32()
+    transaction.timestamp = event.block.timestamp.toI32()
+    transaction.user = event.params.provider
+    transaction.fee = zeroBD()
+    transaction.save()
+
     /** Create Liquidity Event */
     const eventId = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
     const addLiquidityEvent = new AddLiquidityEvent(eventId.toString().concat('-al'))
@@ -673,26 +685,8 @@ export function handleAddLiquidity(event: AddLiquidity): void {
       uniMinted = ethAmount.times(currentUniTokenAmount.div(exchange.ethBalance))
     }
     addLiquidityEvent.uniTokensMinted = uniMinted
+    addLiquidityEvent.transaction = txId
     addLiquidityEvent.save()
-
-    /****** Update Transaction ******/
-    const txId = event.transaction.hash
-      .toHexString()
-      .concat('-')
-      .concat(event.address.toHexString())
-    let transaction = Transaction.load(txId)
-    if (transaction == null) {
-      transaction = new Transaction(txId)
-    }
-    const addLiquidityEvents = transaction.addLiquidityEvents || []
-    addLiquidityEvents.push(addLiquidityEvent.id)
-    transaction.addLiquidityEvents = addLiquidityEvents
-    transaction.exchangeAddress = event.address
-    transaction.block = event.block.number.toI32()
-    transaction.timestamp = event.block.timestamp.toI32()
-    transaction.user = event.params.provider
-    transaction.fee = zeroBD()
-    transaction.save()
 
     /************************************
      * Handle the historical data below *
@@ -856,6 +850,23 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     uniswapDayData.txCount = uniswap.txCount
     uniswapDayData.save()
 
+    /****** Update Transaction ******/
+    const txId = event.transaction.hash
+      .toHexString()
+      .concat('-')
+      .concat(event.address.toHexString())
+    let transaction = Transaction.load(txId)
+    if (transaction == null) {
+      transaction = new Transaction(txId)
+    }
+    transaction.exchangeAddress = event.address
+    transaction.block = event.block.number.toI32()
+    transaction.timestamp = event.block.timestamp.toI32()
+    transaction.user = event.params.provider
+    transaction.fee = zeroBD()
+
+    transaction.save()
+
     /** Create Liquidity Event */
     const eventID = uniswap.totalAddLiquidity.plus(uniswap.totalRemoveLiquidity)
     const removeLiquidityEvent = new RemoveLiquidityEvent(eventID.toString().concat('-rl'))
@@ -868,28 +879,8 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
       uniBurned = ethAmount.times(currentUniTokenAmount.div(exchange.ethBalance))
     }
     removeLiquidityEvent.uniTokensBurned = uniBurned
-
+    removeLiquidityEvent.transaction = txId
     removeLiquidityEvent.save()
-
-    /****** Update Transaction ******/
-    const txId = event.transaction.hash
-      .toHexString()
-      .concat('-')
-      .concat(event.address.toHexString())
-    let transaction = Transaction.load(txId)
-    if (transaction == null) {
-      transaction = new Transaction(txId)
-    }
-    const removeLiquidityEvents = transaction.removeLiquidityEvents || []
-    removeLiquidityEvents.push(removeLiquidityEvent.id)
-    transaction.removeLiquidityEvents = removeLiquidityEvents
-    transaction.exchangeAddress = event.address
-    transaction.block = event.block.number.toI32()
-    transaction.timestamp = event.block.timestamp.toI32()
-    transaction.user = event.params.provider
-    transaction.fee = zeroBD()
-
-    transaction.save()
 
     /************************************
      * Handle the historical data below *
