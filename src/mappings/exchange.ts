@@ -87,10 +87,22 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     } else {
       tokenAmount = convertTokenToDecimal(event.params.tokens_bought, exchange.tokenDecimals)
     }
+
+    // reset total liquidity
+    const uniswap = Uniswap.load('1')
+    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(exchange.ethBalance)
+
     exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
     exchange.tokenBalance = exchange.tokenBalance.minus(tokenAmount)
     exchange.buyTokenCount = exchange.buyTokenCount.plus(oneBigInt())
     exchange.lastPrice = exchange.price
+
+    // now can adjust total liquidity
+    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(exchange.ethBalance)
+    if (!equalToZero(exchange.price) && !equalToZero(exchange.priceUSD)) {
+      uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+    }
+    uniswap.save()
 
     if (!equalToZero(exchange.ethBalance)) {
       exchange.price = exchange.tokenBalance.div(exchange.ethBalance).truncate(18)
@@ -181,7 +193,6 @@ export function handleTokenPurchase(event: TokenPurchase): void {
       .concat(BigInt.fromI32(dayID).toString())
 
     /****** Update Global Values ******/
-    const uniswap = Uniswap.load('1')
     uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
     uniswap.totalVolumeUSD = uniswap.totalVolumeUSD.plus(ethAmount.times(exchange.price.times(exchange.priceUSD)))
     uniswap.totalTokenBuys = uniswap.totalTokenBuys.plus(oneBigInt())
@@ -316,10 +327,22 @@ export function handleEthPurchase(event: EthPurchase): void {
     } else {
       tokenAmount = convertTokenToDecimal(event.params.tokens_sold, exchange.tokenDecimals)
     }
+
+    // reset total liquidity
+    const uniswap = Uniswap.load('1')
+    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(exchange.ethBalance)
+
     exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
     exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
     exchange.sellTokenCount = exchange.sellTokenCount.plus(oneBigInt())
     exchange.lastPrice = exchange.price
+
+    // now can adjust total liquidity
+    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(exchange.ethBalance)
+    if (!equalToZero(exchange.price) && !equalToZero(exchange.priceUSD)) {
+      uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
+    }
+    uniswap.save()
 
     // Here we must handle div by zero, because someone could have bought all the eth or all the tokens
     if (equalToZero(exchange.ethBalance)) {
@@ -408,7 +431,6 @@ export function handleEthPurchase(event: EthPurchase): void {
       .concat(BigInt.fromI32(dayID).toString())
 
     /****** Update Global Values ******/
-    const uniswap = Uniswap.load('1')
     uniswap.totalVolumeInEth = uniswap.totalVolumeInEth.plus(ethAmount)
     uniswap.totalVolumeUSD = uniswap.totalVolumeUSD.plus(ethAmount.times(exchange.price.times(exchange.priceUSD)))
     uniswap.totalTokenSells = uniswap.totalTokenSells.plus(oneBigInt())
