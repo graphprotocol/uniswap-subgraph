@@ -90,7 +90,9 @@ export function handleTokenPurchase(event: TokenPurchase): void {
 
     // reset total liquidity
     const uniswap = Uniswap.load('1')
-    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(exchange.ethBalance)
+    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(
+      exchange.ethBalance.times(BigDecimal.fromString('2'))
+    )
 
     exchange.ethBalance = exchange.ethBalance.plus(ethAmount)
     exchange.tokenBalance = exchange.tokenBalance.minus(tokenAmount)
@@ -98,7 +100,10 @@ export function handleTokenPurchase(event: TokenPurchase): void {
     exchange.lastPrice = exchange.price
 
     // now can adjust total liquidity
-    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(exchange.ethBalance)
+    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(
+      exchange.ethBalance.times(BigDecimal.fromString('2'))
+    )
+
     if (!equalToZero(exchange.price) && !equalToZero(exchange.priceUSD)) {
       uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
     }
@@ -330,7 +335,9 @@ export function handleEthPurchase(event: EthPurchase): void {
 
     // reset total liquidity
     const uniswap = Uniswap.load('1')
-    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(exchange.ethBalance)
+    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.minus(
+      exchange.ethBalance.times(BigDecimal.fromString('2'))
+    )
 
     exchange.ethBalance = exchange.ethBalance.minus(ethAmount)
     exchange.tokenBalance = exchange.tokenBalance.plus(tokenAmount)
@@ -338,7 +345,10 @@ export function handleEthPurchase(event: EthPurchase): void {
     exchange.lastPrice = exchange.price
 
     // now can adjust total liquidity
-    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(exchange.ethBalance)
+    uniswap.totalLiquidityInEth = uniswap.totalLiquidityInEth.plus(
+      exchange.ethBalance.times(BigDecimal.fromString('2'))
+    )
+
     if (!equalToZero(exchange.price) && !equalToZero(exchange.priceUSD)) {
       uniswap.totalLiquidityUSD = uniswap.totalLiquidityInEth.times(exchange.price).times(exchange.priceUSD)
     }
